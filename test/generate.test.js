@@ -1,7 +1,7 @@
 import test from 'node:test';
 import assert from 'node:assert/strict';
 import { readFileSync, statSync, unlinkSync, existsSync, readdirSync, writeFileSync } from 'node:fs';
-import { join, dirname } from 'node:path';
+import { join, dirname, basename } from 'node:path';
 import { fileURLToPath, pathToFileURL } from 'node:url';
 import { Worker } from 'node:worker_threads';
 import {
@@ -207,26 +207,32 @@ test('publicação atômica com worker_threads: leitura concorrente nunca observ
 test('writeJsonAtomic remove somente o temporário próprio em falha e não toca preexistentes', () => {
   const tmp = tempPath('cleanup');
   const dir = dirname(tmp);
-  const base = tmp.split('/').pop().replace(/\.json$/, '');
+  const prefix = `.${basename(tmp)}.`;
   // Arquivo temporário "alheio" preexistente com nome que a implementação
   // antiga (pid+ms) poderia reusar — não pode ser apagado por engano.
-  const foreign = join(dir, `.${base}.foreign-preexisting.tmp`);
-  writeFileSync(foreign, 'nao-apagar', 'utf8');
-  let threw = false;
+  const foreign = join(dir, `${prefix}foreign-preexisting.tmp`);
   try {
-    writeJsonAtomic(tmp, undefined);
-  } catch {
-    threw = true;
+    writeFileSync(foreign, 'nao-apagar', 'utf8');
+    let threw = false;
+    try {
+      writeJsonAtomic(tmp, undefined);
+    } catch {
+      threw = true;
+    }
+    assert.ok(threw, 'esperava falha no corpo inválido');
+    assert.equal(existsSync(tmp), false, 'arquivo final não deve existir');
+    assert.equal(existsSync(foreign), true, 'temporário preexistente deve preservar');
+    assert.equal(readFileSync(foreign, 'utf8'), 'nao-apagar');
+    // Nenhum .tmp órfão com o prefixo completo desta chamada além do preexistente conhecido.
+    const leftovers = readdirSync(dir).filter(
+      (n) => n.startsWith(prefix) && n.endsWith('.tmp') && n !== basename(foreign),
+    );
+    assert.deepEqual(leftovers, [], 'temporário próprio deve ser removido');
+  } finally {
+    for (const name of readdirSync(dir)) {
+      if (name.startsWith(prefix) && name.endsWith('.tmp')) removeIfExists(join(dir, name));
+    }
+    removeIfExists(foreign);
+    removeIfExists(tmp);
   }
-  assert.ok(threw, 'esperava falha no corpo inválido');
-  assert.equal(existsSync(tmp), false, 'arquivo final não deve existir');
-  assert.equal(existsSync(foreign), true, 'temporário preexistente deve preservar');
-  assert.equal(readFileSync(foreign, 'utf8'), 'nao-apagar');
-  // Nenhum .tmp órfão do rótulo deste teste além do preexistente conhecido.
-  const leftovers = readdirSync(dir).filter(
-    (n) => n.includes('cleanup') && n.endsWith('.tmp') && n !== `.${base}.foreign-preexisting.tmp`,
-  );
-  assert.deepEqual(leftovers, [], 'temporário próprio deve ser removido');
-  removeIfExists(foreign);
-  removeIfExists(tmp);
 });

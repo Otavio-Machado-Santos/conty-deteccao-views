@@ -159,7 +159,7 @@ Mesmo parecendo "um pico", não vira `suspeito` sem combinação de sinais. Os 5
 
 ## Nota sobre IA
 
-Implementação e correções principais geradas pelo **MiMo CLI**. **Codex** coordenou, conferiu e ajustou a escrita integral pelo descritor exclusivo antes do rename. Duas revisões independentes finais estão pendentes. **Nenhuma revisão humana é alegada.**
+Implementação e correções principais geradas pelo **MiMo CLI**. **Codex** coordenou, conferiu e ajustou a escrita integral pelo descritor exclusivo antes do rename e o isolamento dos arquivos temporários do teste de limpeza. Duas revisões independentes finais estão pendentes. **Nenhuma revisão humana é alegada.**
 
 ## Evidências
 
