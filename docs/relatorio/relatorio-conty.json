@@ -1,5 +1,5 @@
 {
-  "generated_at": "2026-10-09T19:10:23.132035-03:00",
+  "generated_at": "2026-10-09T19:39:13.132721-03:00",
   "github": "Otavio-Machado-Santos",
   "deliveries": [
     {
@@ -26,10 +26,19 @@
       "titulo": "Repasses que não fecham",
       "entrada": "docs/solucao.md",
       "codigo": "src/app.ts",
+      "demanda": "A Conty precisava corrigir uma API de repasses que já existia. Aprovar uma entrega deveria pagar o criador uma única vez, pelo valor combinado e dentro do último dia da campanha. O incidente trouxe quatro reclamações: prazo encerrando cedo, valor menor que o contratado, crédito duplicado após uma repetição da chamada e pagamento pendente aparecendo como quitado.\nA entrega exigia uma correção localizada em um fork, com PR aberto, os testes originais passando e uma explicação do defeito. As rotas e o comportamento contratado precisavam ser preservados.",
+      "como_chegamos": [
+        "Partimos dos logs do incidente e reproduzimos a falha nos testes da base: quatro dos nove testes originais falhavam. Isso separou os problemas de prazo, dinheiro, repetição e status, em vez de tratar tudo como um único defeito.",
+        "O diagnóstico encontrou o dia sendo lido em UTC, duas divisões por 100, um caractere invisível na chave de repetição e PENDING entrando no ramo de pagamento concluído. Cada sintoma foi ligado à função que aplicava a regra incorreta.",
+        "A exigência de pagar uma vez precisava resistir também a chamadas simultâneas ou a uma chave nova para a mesma missão. Por isso, a verificação e as gravações de crédito, repasse e missão ficaram na mesma transação do banco.",
+        "As revisões independentes encontraram ainda datas inexistentes aceitas por Date e anos fora da faixa suportada. Corrigimos a validação, preservamos os testes originais e conferimos os limites de horário e as respostas HTTP antes de publicar."
+      ],
+      "exemplo": "No fluxo real gravado, 15.000 centavos geraram R$150. A aprovação no último milissegundo do dia em São Paulo foi aceita; no primeiro milissegundo seguinte, foi recusada. Repetir a chave com espaço e U+200B devolveu o mesmo lançamento. PENDING manteve o repasse pendente e CONFIRMED o marcou como pago, com um único crédito.",
       "como": "A correção usa o dia civil em America/Sao_Paulo, converte centavos uma vez, normaliza espaços externos e o U+200B do incidente e mapeia cada status do provedor. Ledger, repasse e estado da missão são gravados numa transação SQLite; a missão não recebe novo crédito por uma chave diferente.",
       "por_que": "Os nove testes originais continuam intactos. Regressões cobrem o último milissegundo e o seguinte, calendário inválido, horário de verão, centavos, retry Unicode, concorrência, rollback e callbacks. A gravação mostra R$150, o mesmo lançamento no retry e PENDING permanecendo pendente antes de CONFIRMED.",
       "iteracao": "A revisão encontrou normalização silenciosa de dias inexistentes e anos ISO expandidos. A entrada passou a validar calendário e faixa de anos, antes de qualquer efeito; o delta foi aprovado pelos dois revisores.",
       "limites": "Protege chamadas novas; não reconcilia créditos ou valores históricos. O contrato do callback não informa a ordem dos eventos. Avisos de desenvolvimento herdados estão documentados no PR; auditoria das dependências de execução retornou zero.",
+      "contract_url": "https://challenge.appconty.com/desafios/debug-repasses",
       "receipt_observed_at": "2026-10-09T19:41:34.578Z",
       "http_steps": 6,
       "verification_url": "https://github.com/Otavio-Machado-Santos/conty-challenge-debug/blob/1b0702e9c6b9c7dbcaed6c574cfcebd7abf0d1e8/docs/verificacao-final.md",
@@ -147,10 +156,19 @@
       "titulo": "Descoberta lenta",
       "entrada": "docs/solucao.md",
       "codigo": "src/list-creators.ts",
+      "demanda": "A busca de criadores compatíveis com uma campanha já devolvia a resposta correta, mas demorava demais conforme o banco crescia. Era necessário entregar uma página de 20 criadores usando no máximo oito consultas, sem mudar o JSON de referência, a pontuação, os desempates ou a paginação.\nA Conty também exigia uma medição com o benchmark fornecido: quantidade de consultas e p95 antes e depois. O acesso ao banco deveria continuar passando por src/db.ts, e a solução precisava funcionar com volumes maiores que o seed e páginas além do fim.",
+      "como_chegamos": [
+        "Medimos a implementação original antes de alterar: o benchmark de 2.000 criadores usava 3.943 consultas para uma página. A função buscava contas, métricas e entregas dentro dos laços de criadores, o padrão conhecido como N+1.",
+        "Como o resultado já estava correto, preservamos as regras de pontuação, soma de alcance, ordenação e paginação. A mudança ficou na forma de obter os dados: reunir leituras em lote e buscar somente as colunas necessárias.",
+        "Índices passaram a atender a última métrica de cada conta e o intervalo de 90 dias das entregas. A lista de IDs foi passada em um único parâmetro JSON, evitando que milhares de criadores esgotassem o limite de parâmetros do SQLite.",
+        "Comparamos a resposta inteira com a função original congelada, incluindo empates, múltiplas contas e páginas vazias. As revisões ampliaram os bancos para 30.000 e 35.000 criadores; depois repetimos o benchmark original no mesmo ambiente."
+      ],
+      "exemplo": "No benchmark original, as consultas caíram de 3.943 para quatro e o p95 passou de 3.549 ms para 7,8 ms. A página continuou obedecendo ao mesmo contrato de resposta. Os percentis são dessa medição local com SQLite em memória; não representam uma promessa de latência em produção.",
       "como": "Quatro leituras em lote substituem as consultas por criador, conta e métrica. Projeções pequenas e índices recuperam a última métrica de cada conta e as entregas no corte de 90 dias. O cálculo e os desempates continuam no caminho original, antes da paginação.",
       "por_que": "Os oito testes originais, a fixture e o benchmark foram preservados. Duas revisões fizeram comparação diferencial e testaram 30.000 e 35.000 criadores. O número de consultas permaneceu quatro, inclusive com páginas vazias, empates e múltiplas contas.",
       "iteracao": "A versão original falhava nos dois testes de orçamento. O código final passou em 14 testes e typecheck, e as duas revisões independentes não deixaram bloqueadores.",
       "limites": "A leitura tem número constante de consultas; seleção, memória e ordenação ainda crescem com o volume. O benchmark usa SQLite em memória, Node 22, dados sintéticos e cinco amostras; não mede latência de produção.",
+      "contract_url": "https://challenge.appconty.com/desafios/otimizar-descoberta",
       "receipt_observed_at": "2026-10-09T19:29:05.388Z",
       "http_steps": 3,
       "verification_url": "https://github.com/Otavio-Machado-Santos/conty-challenge-optimize/blob/b2a204f792f8d0ef535b148830800bf811e5d776/docs/verificacao-final.md",
@@ -242,10 +260,19 @@
       "titulo": "Revisão de roteiro",
       "entrada": "README.md",
       "codigo": "src/review.js",
+      "demanda": "A Conty queria organizar a revisão de roteiro entre criador e marca: enviar uma versão, pedir alterações com motivo e prazo, reenviar e aprovar. O problema era a conversa perder o histórico e deixar pouco claro o que ainda precisava acontecer.\nA API deveria conservar as versões, expor o estado da revisão, recusar pedido sem motivo ou prazo e considerar o último instante do dia em America/Sao_Paulo. Uma aprovação encerraria o fluxo definitivamente. Não era necessário implementar upload, vídeo ou uma interface completa.",
+      "como_chegamos": [
+        "Transformamos o fluxo do enunciado em três estados explícitos: aguardando revisão, alteração solicitada e aprovado. Cada operação passou a verificar o estado e a versão atual, para impedir decisões sobre conteúdo que já havia sido substituído.",
+        "O prazo era um dia da marca, e não uma data UTC. O cálculo usa o calendário IANA de São Paulo e relógio injetado; os testes puderam percorrer o último milissegundo válido e o primeiro seguinte, inclusive em datas com horário de verão histórico.",
+        "Versões e pedidos foram guardados como histórico, com motivo, prazo, autor e instante. A persistência de um processo local permitiu conferir reinício e falha de gravação sem exigir infraestrutura externa para executar o desafio.",
+        "O Opus encontrou um caminho sem saída: depois de vencer o prazo, o criador não podia reenviar e a marca não podia emitir outro pedido. Permitimos renovar somente o pedido expirado da versão atual, preservando o anterior. Duas novas revisões e a reavaliação do Opus confirmaram o fluxo corrigido."
+      ],
+      "exemplo": "A captura percorre um pedido ativo, sua expiração, a renovação pela mesma marca, o envio da versão 2 e a aprovação. Tentar sobrescrever um pedido ainda ativo falha; consultar um pedido vencido mostra expired sem gravar nada. Depois da aprovação, novas versões ou novos pedidos são recusados. O histórico continua contendo o roteiro e os pedidos anteriores.",
       "como": "Um agregado conserva versões, pedidos de alteração, motivos, prazos e histórico. A marca pode renovar um pedido expirado da versão atual sem apagar os anteriores. GET informa active, expired ou null sem gravar; o criador reenvia após um pedido válido. expected_version protege a versão atual; a aprovação fecha a revisão. O prazo usa o calendário IANA de São Paulo.",
       "por_que": "33 testes em checkout isolado e sondagens independentes confirmaram fronteiras inclusive dia bissexto, virada do ano e horário de verão histórico, concorrência, persistência e erros sem gravação. A captura nova usa relógio controlado declarado e 21 etapas HTTP reais: 18 chamadas à API e 3 à fixture externa que controla o relógio. O fluxo recusa sobrescrita ativa, mostra a expiração, renova, reenvia e aprova com histórico preservado.",
       "iteracao": "As primeiras revisões corrigiram uma chave extra vazia que escapava da validação. O Opus identificou depois que um pedido vencido deixava o roteiro sem saída. A renovação foi implementada, passou por duas novas revisões independentes e por 33 testes; o Opus reavaliou o commit publicado e aprovou, sem P0–P2 aberto.",
       "limites": "Snapshot JSON de um processo, sem lock entre processos ou garantia de durabilidade diante de falha de energia. IDs de ator enviados no corpo não são autenticação. A nota da Conty usa src/review-service.js; a entrada correta já vinculada no README é src/review.js. A plataforma não oferece edição da nota após o envio.",
+      "contract_url": "https://challenge.appconty.com/desafios/revisao-roteiro",
       "receipt_observed_at": "2026-10-09T19:43:52.671Z",
       "http_steps": 21,
       "verification_url": "https://github.com/Otavio-Machado-Santos/conty-revisao-roteiro/blob/61f47b56f86cb593e2a453069e9e176267759753/docs/verificacao-final.md",
@@ -367,10 +394,19 @@
       "titulo": "Métricas das redes do criador",
       "entrada": "README.md",
       "codigo": "src/service.js",
+      "demanda": "A Conty precisava atualizar views, curtidas e comentários de posts em Instagram, TikTok, YouTube e X sem inflar o alcance da campanha. Uma mesma resposta pode chegar de novo, duas buscas podem ter janelas sobrepostas e o provedor pode falhar ou limitar a taxa.\nA entrega deveria receber uma conexão já autorizada, com token fictício permitido, e usar um provedor simulado. Precisava ter repetição limitada de tentativas, tratar 429 respeitando Retry-After, evitar duplicação e mostrar quando a informação foi buscada. OAuth real não fazia parte da exigência.",
+      "como_chegamos": [
+        "A primeira decisão foi tratar os números recebidos como fotografias do total de cada post naquele instante, e não como incrementos para somar a cada busca. Assim, repetir uma resposta não inventa novas views.",
+        "Definimos a identidade da medição por rede, conta, post e instante observado. O maior instante determina a medição atual, mesmo que uma resposta antiga chegue depois; os totais usam somente a medição atual de cada post.",
+        "Separamos o adaptador do provedor, a política de tentativas e o armazenamento. As chamadas de uma conta são serializadas, e tentativas, timeout e espera têm limites. O teste de 429 usa relógio controlado para verificar a espera exigida pelo provedor.",
+        "As sondagens independentes exercitaram respostas repetidas, sobreposição, concorrência e limites de espera. O fluxo HTTP confirmou que uma nova janela acrescenta apenas medições novas e que uma espera acima do orçamento adia a busca sem gravar efeitos."
+      ],
+      "exemplo": "No exemplo executado, a primeira sincronização recebeu 429, esperou um segundo e terminou na segunda tentativa. A janela seguinte trouxe medições novas e repetidas, com total de 210 views. Repetir essa janela não criou snapshots e manteve as mesmas 210 views: o alcance não aumentou só porque a API foi consultada novamente.",
       "como": "Um adaptador separa o provedor simulado do sync. Snapshots absolutos são identificados por conta, post e instante observado; os totais vêm da medição mais recente, sem somar replays. Cada busca registra fetched_at. Timeout, retry e cooldown têm limites explícitos.",
       "por_que": "75 testes cobrem duplicação, sobreposição, concorrência, timeout e Retry-After em segundos ou data. O fluxo real mostra retry após 429, três snapshots após sobreposição e nenhum novo registro no replay; um Retry-After de 120 segundos acima do teto de dois segundos adia a busca sem gravar efeitos.",
       "iteracao": "Dois revisores independentes aprovaram o commit depois de sondagens próprias de idempotência, relógio, limites de espera e HTTP. Não ficaram correções bloqueadoras.",
       "limites": "Token fictício e provedor simulado, como permitido no enunciado; sem OAuth nem chamadas a redes sociais reais. Armazenamento em memória. Não há deploy de produção.",
+      "contract_url": "https://challenge.appconty.com/desafios/rastreio-redes",
       "receipt_observed_at": "2026-10-09T19:46:24.360Z",
       "http_steps": 9,
       "verification_url": "https://github.com/Otavio-Machado-Santos/conty-metricas-redes/blob/d1499c693fc363b9fbef24bc108ec6c48173bfcd/docs/verificacao-final.md",
@@ -465,10 +501,19 @@
       "titulo": "Vendas atribuídas ao criador",
       "entrada": "README.md",
       "codigo": "src/sales-service.js",
+      "demanda": "A Conty queria identificar qual criador gerou uma venda a partir de um webhook de loja, usando cupom ou UTM. O mesmo pedido pode ser enviado mais de uma vez, e estornos podem ser parciais, repetidos ou chegar antes do pedido.\nA regra precisava atribuir cada venda a no máximo um criador, explicar o desempate entre cupom e UTM, preservar o histórico e impedir que estornos ultrapassassem o valor vendido. Uma loja Shopify real não era necessária: a entrega era a API e os testes desse comportamento.",
+      "como_chegamos": [
+        "Centralizamos a decisão de atribuição em uma política: cupom reconhecido vence UTM conhecida; sem ambos, a venda fica orgânica. A resposta conserva os candidatos e o motivo, permitindo explicar por que o outro criador não recebeu a venda.",
+        "Pedidos e estornos passaram a ser eventos identificados e imutáveis. Repetir o mesmo ID com o mesmo conteúdo devolve o estado existente; reutilizar o ID com dados diferentes é conflito, em vez de alterar silenciosamente uma venda já contabilizada.",
+        "Modelamos o estorno anterior ao pedido como pendência, aplicada quando a venda chega. Guardamos o valor solicitado, o aplicado e o excedente de cada estorno; o saldo nunca fica negativo por descontar além do pedido.",
+        "Uma revisão reproduziu perda de centavo em um número JSON muito grande. O dinheiro passou a ter conversão exata para centavos e um limite explícito para números decimais JSON; acima dele, exige string decimal ou centavos seguros. O delta foi revalidado com a requisição literal que revelava o erro."
+      ],
+      "exemplo": "No fluxo gravado, um estorno de R$30,10 chegou antes da venda de R$150 e ficou pendente. Quando o pedido chegou, o cupom de Ana prevaleceu sobre a UTM de Bruno e o estorno foi aplicado, deixando R$119,90. Um novo estorno zerou esse saldo; repetir os eventos não gerou venda adicional nem um segundo desconto.",
       "como": "A regra central atribui no máximo um criador: cupom reconhecido prevalece sobre UTM. Pedidos e estornos têm IDs imutáveis e replay idempotente. Estorno anterior ao pedido fica pendente, depois é aplicado por ordem de chegada. Cada estorno conserva valor pedido, aplicado e não aplicado; o desconto é limitado à venda.",
       "por_que": "28 testes e probes independentes cobrem precisão monetária, persistência, concorrência, ordem invertida de eventos e limites. As 13 etapas HTTP mostram R$30,10 pendentes antes da venda de R$150, cupom Ana vencendo UTM Bruno, estorno do saldo de R$119,90 e receita final zero, sem descontar replays.",
       "iteracao": "A revisão reproduziu perda de centavo em um literal JSON numérico grande. Acima do limite documentado a API exige string decimal ou centavos seguros; os dois revisores revalidaram o delta com HTTP literal e conversões independentes.",
       "limites": "Eventos fictícios, sem uma loja Shopify conectada. Snapshot de um processo; valores e totais grandes têm representação exata documentada. IDs de eventos não substituem assinatura de webhook de uma integração real.",
+      "contract_url": "https://challenge.appconty.com/desafios/vendas-shopify",
       "receipt_observed_at": "2026-10-09T19:46:28.596Z",
       "http_steps": 13,
       "verification_url": "https://github.com/Otavio-Machado-Santos/conty-vendas-shopify/blob/db5add1f9416442ea5623e499f5969e67fc00d4a/docs/verificacao-final.md",
@@ -558,10 +603,19 @@
       "titulo": "Origem do cadastro no app",
       "entrada": "README.md",
       "codigo": "src/attribution.js",
+      "demanda": "A Conty precisava saber se o cadastro veio de campanha, indicação, comunidade ou tráfego orgânico, mesmo quando o link abre em um navegador interno que não envia referrer. A origem não poderia depender de um cabeçalho que pode desaparecer.\nEra necessário definir o que viaja no link, o que fica registrado na primeira abertura e como o cadastro escolhe a origem. Cliques repetidos, dois links antes do cadastro, empate de horário e fim da janela deveriam ter uma regra explícita e uma explicação auditável.",
+      "como_chegamos": [
+        "Colocamos um link_id no link e mantivemos a definição da origem no servidor. O contrato do app inclui installationId estável e clickId por clique intencional; uma repetição de transporte reutiliza o clickId. Isso permite recuperar a origem sem referrer.",
+        "A primeira abertura aceita pelo servidor fixa uma janela inclusiva de sete dias, inclusive se essa abertura for orgânica. Reabrir não renova a janela. O relógio do servidor evita que um timestamp inventado pelo cliente retroceda um toque.",
+        "Escolhemos o último toque elegível antes do cadastro. Se dois ocorrerem no mesmo milissegundo, vence o menor clickId em ordem ASCII, independentemente da ordem de chegada ou do tipo de origem. O cadastro consome a decisão uma vez e conserva todos os motivos.",
+        "Conferimos o empate nas duas ordens, a fronteira dos sete dias, clique repetido, reinício e toque posterior ao cadastro. As revisões verificaram que nenhum desses casos troca uma atribuição já consumida ou renova sua janela."
+      ],
+      "exemplo": "Na captura, a indicação com clickId a- venceu a campanha com clickId z- em um empate de horário. A vitória veio do desempate pelo ID, não de uma prioridade geral da indicação. Um toque depois do cadastro ficou registrado, mas não mudou a origem. Sem toque elegível, o cadastro fica orgânico com o motivo gravado.",
       "como": "Links carregam fonte explícita de campanha, indicação ou comunidade. A primeira abertura aceita pelo servidor fixa uma janela inclusiva de sete dias. A atribuição é last-touch; no mesmo milissegundo vence o menor clickId lexical. O cadastro conserva sua decisão, e todos os toques continuam auditáveis com motivo de vitória ou descarte.",
       "por_que": "34 testes cobrem janela exata, +1 ms, ausência de referrer, empate em ambas as ordens, replay, cadastro imutável, toque posterior e reinício. A captura de 12 etapas usa o clock injetado declarado: indicação a- vence campanha z- no empate e toque tardio não troca a origem já consumida.",
       "iteracao": "Dois revisores independentes aprovaram o commit. Sondagens próprias verificaram centenas de sequências, concorrência, falha de escrita e decisão após reinício.",
       "limites": "A captura usa memória e relógio controlado; o servidor padrão persiste snapshot local de um processo. Não foi integrada a um app ou serviço real de deep links. Cadastro sem toque válido recebe origem orgânica e motivo gravado. O servidor registra a hora de chegada; não reconstrói cronologia de abertura offline informada pelo cliente.",
+      "contract_url": "https://challenge.appconty.com/desafios/origem-cadastros",
       "receipt_observed_at": "2026-10-09T19:46:32.822Z",
       "http_steps": 12,
       "verification_url": "https://github.com/Otavio-Machado-Santos/conty-origem-cadastros/blob/9abcbfcc8a8bbaa34c1443a6713c4d2d531ccccc/docs/verificacao-final.md",
@@ -656,10 +710,19 @@
       "titulo": "Rastreio do produto enviado ao criador",
       "entrada": "README.md",
       "codigo": "src/domain/tracking-service.js",
+      "demanda": "A Conty precisava acompanhar o produto físico enviado ao criador, porque o prazo para produzir conteúdo depende de o pacote chegar. Os estados de cada transportadora deveriam virar um conjunto estável: postado, em trânsito, saiu para entrega, entregue ou exceção.\nA API deveria cadastrar e consultar códigos por um agregador fictício acessado por HTTP, suportar eventos repetidos ou fora de ordem e avisar quando o tempo em trânsito ultrapassasse um limite configurável. Um estado desconhecido não poderia ser confundido com entrega concluída.",
+      "como_chegamos": [
+        "Isolamos o formato do agregador em um cliente com duas operações: registrar o código e obter eventos. O domínio recebe eventos normalizados; trocar a transportadora exige outro adaptador, sem espalhar o vocabulário dela pela regra de negócio.",
+        "Ordenamos pelo instante em que o evento aconteceu, e não pela ordem em que chegou. Eventos iguais são reconhecidos pelo ID e pela ocorrência normalizada; consultar novamente não acrescenta um novo histórico da mesma passagem.",
+        "Tratamos entregue como terminal para o pacote e desconhecido como informação explícita. O alerta usa um limiar configurável com relógio controlado e deixa de apontar atraso quando o produto é entregue.",
+        "Uma revisão encontrou uma data com offset que atravessava o limite de ano e quebrava a ordenação textual. O comparador foi corrigido para usar o instante numérico. Ambos os revisores reproduziram e aprovaram a correção, além de validar o adaptador por HTTP."
+      ],
+      "exemplo": "No fluxo gravado, CTY123 manteve cinco eventos únicos mesmo após nova consulta e terminou entregue, sem alerta de atraso. CTYLATE apresentou atraso pelo limite configurado. CTYUNKNOWN expôs o estado não reconhecido sem inventar uma entrega. Eventos antigos recebidos depois não fizeram o pacote entregue voltar ao trânsito.",
       "como": "Um cliente HTTP conversa com agregador fictício em servidor separado. O domínio ordena eventos por instante, normaliza os estados e deduplica por ID e ocorrência semântica. Entrega é terminal; status inventado continua desconhecido. O atraso usa limiar configurável e é encerrado quando a entrega termina.",
       "por_que": "28 testes e dois pareceres independentes cobrem contratos do adaptador, repetições e ordenação. O fluxo de oito chamadas preserva cinco eventos únicos de CTY123, entrega sem alerta, CTYLATE atrasado e CTYUNKNOWN sem inventar entrega. Há exemplo bruto e normalizado.",
       "iteracao": "A revisão encontrou ordenação lexical incorreta quando um offset atravessava o limite de ano ISO. O comparador passou a usar instantes numéricos; o caso foi reproduzido antes, corrigido e aprovado por ambos os revisores.",
       "limites": "Agregador HTTP simulado, dados fictícios e armazenamento em memória, perdido ao reiniciar; não houve validação com transportadora real. O limiar de atraso é uma decisão explícita de produto, não uma previsão universal.",
+      "contract_url": "https://challenge.appconty.com/desafios/integracao-rastreio",
       "receipt_observed_at": "2026-10-09T19:46:38.003Z",
       "http_steps": 8,
       "verification_url": "https://github.com/Otavio-Machado-Santos/conty-rastreio-produto/blob/d520664f7a48bf4943853af64339b97f43fa39b0/docs/verificacao-final.md",
@@ -761,10 +824,19 @@
       "titulo": "Revisão de vídeo por versão",
       "entrada": "README.md",
       "codigo": "src/domain.js",
+      "demanda": "A Conty precisava impedir a aprovação de uma missão enquanto faltasse o que a campanha contratou. Uma campanha pode exigir roteiro, vídeo, capa e legenda; uma peça não exigida não pode bloquear. Cada aprovação vale para a versão atual da peça, e uma nova versão obrigatória suspende a aprovação da entrega até ser revisada.\nTambém era necessário manter comentários ancorados em um segundo de uma versão específica do vídeo. Upload real podia ser substituído por arquivo fictício ou URL, mas as regras de aprovação, substituição e histórico precisavam funcionar de verdade.",
+      "como_chegamos": [
+        "Transformamos a lista requiredPieces em dado da campanha. A regra de aprovação percorre essa lista e a versão atual de cada peça; assim, uma campanha só de vídeo não ganha uma exigência implícita de roteiro, capa ou legenda.",
+        "Cada versão recebeu sua própria aprovação e seus próprios comentários. Substituir uma versão não copia a aprovação anterior nem desloca o comentário para outro vídeo; aprovar uma versão que já ficou antiga é recusado.",
+        "A interpretação inicial exigia rever opcionais depois da primeira aprovação e havia passado pelas revisões Codex. O Opus apontou que isso contrariava a cláusula de peça opcional não bloquear. A solução final aplica a suspensão apenas às exigências da campanha, sem um conjunto histórico adicional de opcionais.",
+        "As novas regressões falharam oito vezes contra o domínio anterior e passaram no código corrigido. Revalidamos as 15 combinações de peças exigidas, a ordem das substituições e várias obrigatórias pendentes; duas revisões novas, a gravação HTTP e o Opus aprovaram o resultado."
+      ],
+      "exemplo": "Se a campanha exige vídeo e legenda, aprovar apenas o vídeo não basta. Depois de aprovar ambos, substituir uma peça obrigatória suspende a entrega até a versão atual estar aprovada; havendo duas substituições obrigatórias, revisar só uma ainda não libera a missão. Acrescentar uma capa opcional não bloqueia. Um comentário da versão 1 continua na versão 1.",
       "como": "A campanha declara requiredPieces, e a aprovação considera exclusivamente as versões atuais dessas peças. Inclusão/substituição opcionais não bloqueiam antes/depois nem durante suspensão. Nova versão obrigatória invalida até todas as versões atuais obrigatórias serem aprovadas. Comentários em segundo permanecem na versão de origem.",
       "por_que": "27 testes no checkout isolado cobrem as 15 combinações de exigências, opcionais antes/depois da aprovação, primeira inclusão, substituição, ordens equivalentes, várias obrigatórias pendentes, versão obsoleta e comentários por versão. As 29 etapas HTTP gravadas têm 91 invariantes: roteiro/capa opcionais livres, duas obrigatórias substituídas, recusa de aprovação antiga e comentário antigo sem migrar.",
       "iteracao": "Os dois pareceres iniciais aceitaram uma interpretação documentada que exigia rever opcionais após a primeira aprovação. O Opus apontou que isso contradizia a cláusula de opcionais não bloquearem. Codex removeu o conjunto histórico reviewRequiredAfterApproval e aplicou as duas cláusulas ao conjunto obrigatório da campanha. As regressões produziram 8 falhas antes da correção e 27/27 aprovações depois. Duas novas revisões independentes aprovaram o candidato e foram publicadas junto com o fluxo novo. O Opus reavaliou o commit corrigido e aprovou, sem P0–P2 aberto.",
       "limites": "URLs fictícias, duração informada pelo cliente e estado em memória. Sem upload, autenticação ou leitura de metadados de vídeo reais. O recibo preserva a nota original que descrevia a interpretação anterior; o README e a nota da correção explicam o comportamento final.",
+      "contract_url": "https://challenge.appconty.com/desafios/revisao-video",
       "receipt_observed_at": "2026-10-09T19:46:42.120Z",
       "http_steps": 29,
       "verification_url": "https://github.com/Otavio-Machado-Santos/conty-revisao-video/blob/45533e29c2cb47493c8440dbbe5c6bfddf29926d/docs/verificacao-final.md",
@@ -883,7 +955,7 @@
       "codigo_sha": "829b1bc9cf4df285c8f867cdd6166799fd862659",
       "testes": 53,
       "porta_evidencia": 3009,
-      "publicacao_sha": "9e75ab29689e9965af1995bed7d025495e873784",
+      "publicacao_sha": "b71a5507f234e00d408f1f8cb821be5010e13880",
       "url_entrega": "https://github.com/Otavio-Machado-Santos/conty-deteccao-views",
       "midias_acessiveis": true,
       "recibo": "evidencias/2026-10-09/recibos/09.json",
@@ -892,13 +964,23 @@
       "titulo": "Views que não parecem humanas",
       "entrada": "README.md",
       "codigo": "src/classify.js",
+      "demanda": "A Conty queria analisar uma série de views por hora e apontar padrões suspeitos de forma explicável. Era preciso distinguir um pico abrupto ou uma repetição mecânica de um viral orgânico plausível, porque acusar um criador legítimo também seria um erro relevante.\nA entrega exigia API, dataset sintético reproduzível, sinais e motivo legível, um caso em que o classificador prefere não acusar e uma taxa de falso positivo calculada por comando. Um teste deveria falhar se o número informado no README divergisse do resultado medido. Não era necessário usar uma rede social real nem um modelo opaco.",
+      "como_chegamos": [
+        "O MiMo CLI implementou um classificador por regras e um gerador com seed fixa. A decisão combina volume, pico em relação à base, concentração, subida e queda, repetição e formato da rampa. Os sinais ficam na resposta para que o resultado possa ser conferido.",
+        "Incluímos perfis legítimos e suspeitos no conjunto: tráfego diurno, viral gradual, campanha sustentada, baixo volume, evento rápido, compra abrupta e repetição mecânica. Para séries curtas, pequenas ou ambíguas, a decisão pode ser inconclusiva; um pico alto isolado não basta para acusar.",
+        "As revisões encontraram um viral com fundo estável classificado como mecânico. O MiMo corrigiu a regra para considerar se a repetição é elevada e representativa, protegendo a repetição baixa longe do pico. Também corrigiu validações de calendário, precisão e transporte HTTP apontadas pelas sondagens.",
+        "A avaliação usa o mesmo comando para gerar os dados e medir os resultados, e um teste compara a taxa medida com a declarada. Reproduzimos 102 séries e ampliamos a sensibilidade para outros seeds; esse segundo ensaio encontrou dois falsos positivos entre 19.224 séries legítimas, deixando o limite visível.",
+        "Testes em paralelo revelaram uma corrida na gravação dos arquivos da avaliação. A publicação passou a escrever em temporário exclusivo e renomear depois da escrita integral, com conferência dos bytes. Codex ajustou pontualmente a escrita integral e o isolamento da limpeza do teste; o resultado final passou por duas revisões e pelo Opus."
+      ],
+      "exemplo": "O viral orgânico seed25, com subida e queda graduais e fundo estável, não foi acusado. Um pico abrupto com concentração alta foi marcado suspeito, com motivo e sinais; casos de pouca informação puderam ficar inconclusivos. No conjunto canônico de 102 séries, houve zero falsos positivos entre 72 legítimas e detecção de 30 das 30 suspeitas. Isso valida os exemplos sintéticos, não prova fraude nem estima precisão de produção.",
       "como": "O classificador explica a decisão com volume, razão pico/base, concentração, subida/queda, repetição e formato da rampa. Repetição baixa de fundo durante um viral suave não acusa compra. A API valida timestamps UTC e calendário, séries horárias contíguas, inteiros e soma seguros; devolve plausivel, suspeito ou inconclusivo. Um gerador com seed fixa reproduz os dados sem depender de redes sociais.",
       "por_que": "53 testes passaram no checkout isolado. O comando reproduziu 102 séries: nenhum falso positivo entre 72 legítimas, 30/30 suspeitas detectadas e 17 abstenções. Adulterar numerador, denominador ou percentual do README faz o teste falhar, sem autoeditar a documentação. As dez etapas HTTP gravadas têm 41 verificações, incluindo o viral seed25, o pico suspeito e as entradas recusadas.",
       "iteracao": "As revisões iniciais encontraram falso positivo em baseline estável de viral orgânico e falhas de contrato HTTP, calendário, precisão da soma, limite de corpo e Host. O MiMo corrigiu esses caminhos. A revisão final reproduziu ainda uma corrida: testes paralelos liam o dataset enquanto outra avaliação o truncava. A avaliação passou a ser realmente de leitura quando solicitado, os testes usam caminhos próprios, e a publicação usa temporário exclusivo com renomeação atômica e conferência dos bytes. O teste de concorrência usa threads reais; os deltas finais ficam registrados nos pareceres. Duas suítes simultâneas expuseram depois um filtro de limpeza genérico no próprio teste; o prefixo passou a identificar o basename completo da chamada e a limpeza ficou em finally. Os ajustes pontuais de escrita integral e isolamento desse teste foram feitos por Codex, com atribuição explícita.",
       "limites": "FPR e recall descrevem o conjunto sintético, usado no desenvolvimento. Na sensibilidade ampliada, os revisores encontraram 2 falsos positivos em 19.224 séries legítimas (267 seeds); os casos são runs diurnas repetidas que ativam o critério mecânico. Essa avaliação também é de desenvolvimento, não cega, e não deve ser confundida com o FPR canônico 0/72. Views por hora não distinguem humanos, bots, tráfego pago legítimo ou séries idênticas com certeza. O retorno é triagem explicável, sem acusação factual de fraude. Não houve integração com rede social nem deploy de produção.",
+      "contract_url": "https://challenge.appconty.com/desafios/bots-visualizacao",
       "receipt_observed_at": "2026-10-09T21:09:49.561Z",
       "http_steps": 10,
-      "verification_url": "https://github.com/Otavio-Machado-Santos/conty-deteccao-views/blob/9e75ab29689e9965af1995bed7d025495e873784/docs/verificacao-final.md",
+      "verification_url": "https://github.com/Otavio-Machado-Santos/conty-deteccao-views/blob/b71a5507f234e00d408f1f8cb821be5010e13880/docs/verificacao-final.md",
       "claude_review": {
         "id": 9,
         "reviewed_sha": "829b1bc9cf4df285c8f867cdd6166799fd862659",
@@ -989,7 +1071,7 @@
           "previous_adjustment": null
         }
       },
-      "claude_review_url": "https://github.com/Otavio-Machado-Santos/conty-deteccao-views/blob/9e75ab29689e9965af1995bed7d025495e873784/docs/reviews/claude-opus55.json",
+      "claude_review_url": "https://github.com/Otavio-Machado-Santos/conty-deteccao-views/blob/b71a5507f234e00d408f1f8cb821be5010e13880/docs/reviews/claude-opus55.json",
       "claude_documentation_followup": null
     }
   ],
@@ -1110,5 +1192,13 @@
     "limits": "Não foi possível atribuir cada encerramento ao comando. A consulta foi restrita às portas das APIs de demonstração deste desafio; não comprova o estado de serviços alheios.",
     "mitigation": "Rodadas posteriores proíbem pkill/killall/encerramento por padrão/porta; apenas PID criado e registrado pelo próprio revisor, porta efêmera quando necessário."
   },
+  "explanatory_sections": [
+    "A demanda da Conty",
+    "Como chegamos à solução",
+    "Como foi resolvido",
+    "Exemplo do resultado",
+    "Por que as evidências sustentam a solução"
+  ],
+  "explanation_scope": "Síntese dos enunciados, diagnóstico, decisões de implementação e iterações registradas nos artefatos. Os pareceres vinculados são sobre os commits de código indicados.",
   "overview_observed_at": "2026-10-09T21:10:20.186Z"
 }

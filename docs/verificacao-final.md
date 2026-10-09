@@ -41,7 +41,7 @@ O modelo foi conferido nos eventos reais da CLI. O coordenador conferiu os hashe
 
 ## Relatório das nove entregas
 
-- [Relatório HTML independente, com recibos reais incorporados](relatorio/relatorio-conty.html).
+- [Relatório HTML independente, com demanda, caminho de investigação, solução e exemplo em cada atividade](relatorio/relatorio-conty.html).
 - [Manifesto com links, hashes, contagens e limites](relatorio/relatorio-conty.json).
 - [Captura real do relatório](relatorio/evidence/screen.jpg) e [GIF da navegação e abertura do recibo](relatorio/evidence/flow.gif).
 - [Auditoria remota das entregas](relatorio/auditoria-publicacao.json) e [conferência dos pareceres Opus publicados](relatorio/auditoria-pareceres-claude.json).

@@ -1,79 +1,445 @@
 {
   "kind": "actual-browser-screencast",
   "url": "http://127.0.0.1:3100/relatorio-conty.html",
+  "content_revision": "Demanda, investigação, solução e exemplo por atividade",
+  "started_at": "2026-10-09T22:42:36.845Z",
+  "finished_at": "2026-10-09T22:42:40.543Z",
   "frames": [
     {
-      "file": "frame-0000.jpg",
-      "timestamp": 1791584020.857277
+      "file": "frames-demanda/frame-0000.jpg",
+      "timestamp": 1791585756.883577
     },
     {
-      "file": "frame-0001.jpg",
-      "timestamp": 1791584020.877792
+      "file": "frames-demanda/frame-0001.jpg",
+      "timestamp": 1791585756.891549
     },
     {
-      "file": "frame-0002.jpg",
-      "timestamp": 1791584020.920374
+      "file": "frames-demanda/frame-0002.jpg",
+      "timestamp": 1791585756.918579
     },
     {
-      "file": "frame-0003.jpg",
-      "timestamp": 1791584020.924506
+      "file": "frames-demanda/frame-0003.jpg",
+      "timestamp": 1791585756.951373
     },
     {
-      "file": "frame-0004.jpg",
-      "timestamp": 1791584020.949774
+      "file": "frames-demanda/frame-0004.jpg",
+      "timestamp": 1791585756.950786
     },
     {
-      "file": "frame-0005.jpg",
-      "timestamp": 1791584021.091121
+      "file": "frames-demanda/frame-0005.jpg",
+      "timestamp": 1791585757.14663
     },
     {
-      "file": "frame-0006.jpg",
-      "timestamp": 1791584021.103139
+      "file": "frames-demanda/frame-0006.jpg",
+      "timestamp": 1791585757.162127
     },
     {
-      "file": "frame-0007.jpg",
-      "timestamp": 1791584021.111421
+      "file": "frames-demanda/frame-0007.jpg",
+      "timestamp": 1791585757.166838
     },
     {
-      "file": "frame-0008.jpg",
-      "timestamp": 1791584021.125455
+      "file": "frames-demanda/frame-0008.jpg",
+      "timestamp": 1791585757.225106
     },
     {
-      "file": "frame-0009.jpg",
-      "timestamp": 1791584021.136043
+      "file": "frames-demanda/frame-0009.jpg",
+      "timestamp": 1791585757.225412
     },
     {
-      "file": "frame-0010.jpg",
-      "timestamp": 1791584021.556193
+      "file": "frames-demanda/frame-0010.jpg",
+      "timestamp": 1791585757.225644
     },
     {
-      "file": "frame-0011.jpg",
-      "timestamp": 1791584021.589786
+      "file": "frames-demanda/frame-0011.jpg",
+      "timestamp": 1791585757.416098
     },
     {
-      "file": "frame-0012.jpg",
-      "timestamp": 1791584021.611648
+      "file": "frames-demanda/frame-0012.jpg",
+      "timestamp": 1791585757.423766
     },
     {
-      "file": "frame-0013.jpg",
-      "timestamp": 1791584022.128847
+      "file": "frames-demanda/frame-0013.jpg",
+      "timestamp": 1791585757.432252
     },
     {
-      "file": "frame-0014.jpg",
-      "timestamp": 1791584022.129446
+      "file": "frames-demanda/frame-0014.jpg",
+      "timestamp": 1791585757.484348
     },
     {
-      "file": "frame-0015.jpg",
-      "timestamp": 1791584022.133213
+      "file": "frames-demanda/frame-0015.jpg",
+      "timestamp": 1791585757.484678
     },
     {
-      "file": "frame-0016.jpg",
-      "timestamp": 1791584022.236192
+      "file": "frames-demanda/frame-0016.jpg",
+      "timestamp": 1791585757.527381
+    },
+    {
+      "file": "frames-demanda/frame-0017.jpg",
+      "timestamp": 1791585757.646621
+    },
+    {
+      "file": "frames-demanda/frame-0018.jpg",
+      "timestamp": 1791585757.660478
+    },
+    {
+      "file": "frames-demanda/frame-0019.jpg",
+      "timestamp": 1791585757.696691
+    },
+    {
+      "file": "frames-demanda/frame-0020.jpg",
+      "timestamp": 1791585757.724475
+    },
+    {
+      "file": "frames-demanda/frame-0021.jpg",
+      "timestamp": 1791585757.72485
+    },
+    {
+      "file": "frames-demanda/frame-0022.jpg",
+      "timestamp": 1791585757.83666
+    },
+    {
+      "file": "frames-demanda/frame-0023.jpg",
+      "timestamp": 1791585757.973755
+    },
+    {
+      "file": "frames-demanda/frame-0024.jpg",
+      "timestamp": 1791585758.027864
+    },
+    {
+      "file": "frames-demanda/frame-0025.jpg",
+      "timestamp": 1791585758.028179
+    },
+    {
+      "file": "frames-demanda/frame-0026.jpg",
+      "timestamp": 1791585758.028413
+    },
+    {
+      "file": "frames-demanda/frame-0027.jpg",
+      "timestamp": 1791585758.127348
+    },
+    {
+      "file": "frames-demanda/frame-0028.jpg",
+      "timestamp": 1791585758.250201
+    },
+    {
+      "file": "frames-demanda/frame-0029.jpg",
+      "timestamp": 1791585758.2577
+    },
+    {
+      "file": "frames-demanda/frame-0030.jpg",
+      "timestamp": 1791585758.263853
+    },
+    {
+      "file": "frames-demanda/frame-0031.jpg",
+      "timestamp": 1791585758.320868
+    },
+    {
+      "file": "frames-demanda/frame-0032.jpg",
+      "timestamp": 1791585758.321261
+    },
+    {
+      "file": "frames-demanda/frame-0033.jpg",
+      "timestamp": 1791585758.321483
+    },
+    {
+      "file": "frames-demanda/frame-0034.jpg",
+      "timestamp": 1791585758.473826
+    },
+    {
+      "file": "frames-demanda/frame-0035.jpg",
+      "timestamp": 1791585758.487733
+    },
+    {
+      "file": "frames-demanda/frame-0036.jpg",
+      "timestamp": 1791585758.494844
+    },
+    {
+      "file": "frames-demanda/frame-0037.jpg",
+      "timestamp": 1791585758.58919
+    },
+    {
+      "file": "frames-demanda/frame-0038.jpg",
+      "timestamp": 1791585758.589629
+    },
+    {
+      "file": "frames-demanda/frame-0039.jpg",
+      "timestamp": 1791585758.58992
+    },
+    {
+      "file": "frames-demanda/frame-0040.jpg",
+      "timestamp": 1791585758.632019
+    },
+    {
+      "file": "frames-demanda/frame-0041.jpg",
+      "timestamp": 1791585758.763906
+    },
+    {
+      "file": "frames-demanda/frame-0042.jpg",
+      "timestamp": 1791585758.792976
+    },
+    {
+      "file": "frames-demanda/frame-0043.jpg",
+      "timestamp": 1791585758.821307
+    },
+    {
+      "file": "frames-demanda/frame-0044.jpg",
+      "timestamp": 1791585758.821619
+    },
+    {
+      "file": "frames-demanda/frame-0045.jpg",
+      "timestamp": 1791585758.861223
+    },
+    {
+      "file": "frames-demanda/frame-0046.jpg",
+      "timestamp": 1791585758.995061
+    },
+    {
+      "file": "frames-demanda/frame-0047.jpg",
+      "timestamp": 1791585758.999987
+    },
+    {
+      "file": "frames-demanda/frame-0048.jpg",
+      "timestamp": 1791585759.048821
+    },
+    {
+      "file": "frames-demanda/frame-0049.jpg",
+      "timestamp": 1791585759.076741
+    },
+    {
+      "file": "frames-demanda/frame-0050.jpg",
+      "timestamp": 1791585759.115556
+    },
+    {
+      "file": "frames-demanda/frame-0051.jpg",
+      "timestamp": 1791585759.230147
+    },
+    {
+      "file": "frames-demanda/frame-0052.jpg",
+      "timestamp": 1791585759.245313
+    },
+    {
+      "file": "frames-demanda/frame-0053.jpg",
+      "timestamp": 1791585759.249053
+    },
+    {
+      "file": "frames-demanda/frame-0054.jpg",
+      "timestamp": 1791585759.25877
+    },
+    {
+      "file": "frames-demanda/frame-0055.jpg",
+      "timestamp": 1791585759.278935
+    },
+    {
+      "file": "frames-demanda/frame-0056.jpg",
+      "timestamp": 1791585759.576497
+    },
+    {
+      "file": "frames-demanda/frame-0057.jpg",
+      "timestamp": 1791585759.744861
+    },
+    {
+      "file": "frames-demanda/frame-0058.jpg",
+      "timestamp": 1791585759.772227
+    },
+    {
+      "file": "frames-demanda/frame-0059.jpg",
+      "timestamp": 1791585759.786593
+    },
+    {
+      "file": "frames-demanda/frame-0060.jpg",
+      "timestamp": 1791585759.793215
+    },
+    {
+      "file": "frames-demanda/frame-0061.jpg",
+      "timestamp": 1791585759.821065
+    },
+    {
+      "file": "frames-demanda/frame-0062.jpg",
+      "timestamp": 1791585760.242483
+    },
+    {
+      "file": "frames-demanda/frame-0063.jpg",
+      "timestamp": 1791585760.339032
+    },
+    {
+      "file": "frames-demanda/frame-0064.jpg",
+      "timestamp": 1791585760.339515
+    },
+    {
+      "file": "frames-demanda/frame-0065.jpg",
+      "timestamp": 1791585760.342605
     }
   ],
   "steps": [
-    "Abrir entrega9 pela tabela",
-    "Expandir o recibo real incorporado",
-    "Fechar recibo e voltar ao cabeçalho"
-  ]
+    "Abrir atividade 1 pela tabela e conferir demanda, investigação, solução, exemplo e evidências",
+    "Abrir atividade 2 pela tabela e conferir demanda, investigação, solução, exemplo e evidências",
+    "Abrir atividade 3 pela tabela e conferir demanda, investigação, solução, exemplo e evidências",
+    "Abrir atividade 4 pela tabela e conferir demanda, investigação, solução, exemplo e evidências",
+    "Abrir atividade 5 pela tabela e conferir demanda, investigação, solução, exemplo e evidências",
+    "Abrir atividade 6 pela tabela e conferir demanda, investigação, solução, exemplo e evidências",
+    "Abrir atividade 7 pela tabela e conferir demanda, investigação, solução, exemplo e evidências",
+    "Abrir atividade 8 pela tabela e conferir demanda, investigação, solução, exemplo e evidências",
+    "Abrir atividade 9 pela tabela e conferir demanda, investigação, solução, exemplo e evidências",
+    "Expandir o recibo real incorporado da atividade 9",
+    "Fechar recibo e voltar à atividade 1"
+  ],
+  "activity_checks": [
+    {
+      "id": 1,
+      "title": "Repasses que não fecham",
+      "url": "http://127.0.0.1:3100/relatorio-conty.html#desafio-1",
+      "headings": [
+        "A demanda da Conty",
+        "Como chegamos à solução",
+        "Como foi resolvido",
+        "Exemplo do resultado",
+        "Por que as evidências sustentam a solução",
+        "O que a revisão mudou",
+        "Parecer final do Claude Opus 5.5",
+        "Limites da entrega"
+      ],
+      "investigation_steps": 4,
+      "passed": true
+    },
+    {
+      "id": 2,
+      "title": "Descoberta lenta",
+      "url": "http://127.0.0.1:3100/relatorio-conty.html#desafio-2",
+      "headings": [
+        "A demanda da Conty",
+        "Como chegamos à solução",
+        "Como foi resolvido",
+        "Exemplo do resultado",
+        "Por que as evidências sustentam a solução",
+        "Benchmark original, 2.000 criadores",
+        "O que a revisão mudou",
+        "Parecer final do Claude Opus 5.5",
+        "Limites da entrega"
+      ],
+      "investigation_steps": 4,
+      "passed": true
+    },
+    {
+      "id": 3,
+      "title": "Revisão de roteiro",
+      "url": "http://127.0.0.1:3100/relatorio-conty.html#desafio-3",
+      "headings": [
+        "A demanda da Conty",
+        "Como chegamos à solução",
+        "Como foi resolvido",
+        "Exemplo do resultado",
+        "Por que as evidências sustentam a solução",
+        "O que a revisão mudou",
+        "Parecer final do Claude Opus 5.5",
+        "Limites da entrega"
+      ],
+      "investigation_steps": 4,
+      "passed": true
+    },
+    {
+      "id": 4,
+      "title": "Métricas das redes do criador",
+      "url": "http://127.0.0.1:3100/relatorio-conty.html#desafio-4",
+      "headings": [
+        "A demanda da Conty",
+        "Como chegamos à solução",
+        "Como foi resolvido",
+        "Exemplo do resultado",
+        "Por que as evidências sustentam a solução",
+        "O que a revisão mudou",
+        "Parecer final do Claude Opus 5.5",
+        "Limites da entrega"
+      ],
+      "investigation_steps": 4,
+      "passed": true
+    },
+    {
+      "id": 5,
+      "title": "Vendas atribuídas ao criador",
+      "url": "http://127.0.0.1:3100/relatorio-conty.html#desafio-5",
+      "headings": [
+        "A demanda da Conty",
+        "Como chegamos à solução",
+        "Como foi resolvido",
+        "Exemplo do resultado",
+        "Por que as evidências sustentam a solução",
+        "O que a revisão mudou",
+        "Parecer final do Claude Opus 5.5",
+        "Limites da entrega"
+      ],
+      "investigation_steps": 4,
+      "passed": true
+    },
+    {
+      "id": 6,
+      "title": "Origem do cadastro no app",
+      "url": "http://127.0.0.1:3100/relatorio-conty.html#desafio-6",
+      "headings": [
+        "A demanda da Conty",
+        "Como chegamos à solução",
+        "Como foi resolvido",
+        "Exemplo do resultado",
+        "Por que as evidências sustentam a solução",
+        "O que a revisão mudou",
+        "Parecer final do Claude Opus 5.5",
+        "Limites da entrega"
+      ],
+      "investigation_steps": 4,
+      "passed": true
+    },
+    {
+      "id": 7,
+      "title": "Rastreio do produto enviado ao criador",
+      "url": "http://127.0.0.1:3100/relatorio-conty.html#desafio-7",
+      "headings": [
+        "A demanda da Conty",
+        "Como chegamos à solução",
+        "Como foi resolvido",
+        "Exemplo do resultado",
+        "Por que as evidências sustentam a solução",
+        "O que a revisão mudou",
+        "Parecer final do Claude Opus 5.5",
+        "Limites da entrega"
+      ],
+      "investigation_steps": 4,
+      "passed": true
+    },
+    {
+      "id": 8,
+      "title": "Revisão de vídeo por versão",
+      "url": "http://127.0.0.1:3100/relatorio-conty.html#desafio-8",
+      "headings": [
+        "A demanda da Conty",
+        "Como chegamos à solução",
+        "Como foi resolvido",
+        "Exemplo do resultado",
+        "Por que as evidências sustentam a solução",
+        "O que a revisão mudou",
+        "Parecer final do Claude Opus 5.5",
+        "Limites da entrega"
+      ],
+      "investigation_steps": 4,
+      "passed": true
+    },
+    {
+      "id": 9,
+      "title": "Views que não parecem humanas",
+      "url": "http://127.0.0.1:3100/relatorio-conty.html#desafio-9",
+      "headings": [
+        "A demanda da Conty",
+        "Como chegamos à solução",
+        "Como foi resolvido",
+        "Exemplo do resultado",
+        "Por que as evidências sustentam a solução",
+        "Resultado no conjunto sintético reproduzível",
+        "O que a revisão mudou",
+        "Parecer final do Claude Opus 5.5",
+        "Limites da entrega"
+      ],
+      "investigation_steps": 5,
+      "passed": true
+    }
+  ],
+  "passed": true,
+  "report_sha256": "d875d24ed8fcaf47b1abea0a1d90e289c8d8b042dc7ca6202161a6c10f3aaf54"
 }
