@@ -1,0 +1,93 @@
+{
+  "id": 9,
+  "reviewed_sha": "829b1bc9cf4df285c8f867cdd6166799fd862659",
+  "publication_sha": "2243e18b1b108e242fa133d73701bf2015c9ffa0",
+  "verdict": "approved",
+  "summary": "bots-visualizacao (MiMo CLI + ajustes Codex): POST /classify devolve classificação, motivo em português e sinais com limiares. O dataset sintético usa seed fixa e não depende de rede. O generate:evaluate reproduz o dataset byte a byte. README, evaluation.json, API e uma varredura de 100 seeds batem: FPR 0/72, recall 30/30, 17 inconclusivos, matriz 55/0/17 e 0/30/0. test/readme-metrics.test.js detecta adulteração e deriva do classificador. Os ajustes Codex foram conferidos: writeJsonAtomic escreve tudo pelo descritor 'wx', fecha e só então faz rename (generate.js:305-338); a limpeza do teste remove só arquivos com prefixo único (generate.test.js:207-238).",
+  "tests": [
+    {
+      "command": "npm test x3",
+      "exit_code": 0,
+      "result": "53/53 em cada rodada; nenhum .tmp residual"
+    },
+    {
+      "command": "4x npm test concorrentes, 2 rodadas",
+      "exit_code": 0,
+      "result": "8/8 exit 0; dataset inalterado"
+    },
+    {
+      "command": "npm run generate:evaluate",
+      "exit_code": 0,
+      "result": "102 séries; FPR 0/72; recall 30/30; inconclusivos 17; matriz 55/0/17 e 0/30/0"
+    },
+    {
+      "command": "shasum -a 256 dataset/series.json antes e depois",
+      "exit_code": 0,
+      "result": "f7b7ad869c3b82f77e7f3d35dbd2508129678e626c953bc4db7243d5d39ac3f4 nos dois; cmp idêntico"
+    },
+    {
+      "command": "evaluation.json sem generatedAt, antes e depois",
+      "exit_code": 0,
+      "result": "Métricas idênticas; só generatedAt mudou (20:47:46Z para 21:36:32Z)"
+    },
+    {
+      "command": "SHA-256 dos 125 arquivos antes e depois",
+      "exit_code": 0,
+      "result": "Só docs/evidence/evaluation.json mudou (timestamp autorizado)"
+    },
+    {
+      "command": "README adulterado / limiares alterados em scratch + readme-metrics.test.js",
+      "exit_code": 1,
+      "result": "Falha como esperado (numerador, denominador, percentual, linha ausente, deriva 0 contra 14)"
+    },
+    {
+      "command": "3x npm test + generate:evaluate simultâneos",
+      "exit_code": 1,
+      "result": "Teste de inode (generate.test.js:90-110) falha porque o rename é legítimo; cenário artificial, sem defeito"
+    },
+    {
+      "command": "npm start (3009) + http-probes/limits/replay",
+      "exit_code": 0,
+      "result": "Viral dá plausivel e comprado dá suspeito; 26 entradas inválidas dão 422; 413 nos limites; replay de coordenador-http.json 10/10"
+    }
+  ],
+  "findings": [
+    {
+      "priority": "P3",
+      "file": "README.md",
+      "line": 61,
+      "title": "O 'Exemplo real' do README não reproduz os números de concentração exibidos",
+      "details": "A request de 16 pontos soma 5196 views. Os valores exibidos (33,4%, 65,1%, 0.3336, 0.6509) correspondem a uma série mais longa. Classificação e shape coincidem.",
+      "reproduction": "POST /classify com o JSON de README:39-58",
+      "expected": "hora do pico 33.4%, top-3 65.1%",
+      "actual": "hora do pico 38.5%, top-3 75.1%, concentration.value 0.3849"
+    },
+    {
+      "priority": "P3",
+      "file": "src/classify.js",
+      "line": 293,
+      "title": "Série truncada no lançamento vira 'suspeito' com motivo que cita uma queda inexistente",
+      "details": "[0,0,0,0,0,200] dispara narrowSpike porque o pico está na borda (signals.js:67-73), e o motivo fixo em classify.js:299 cita uma queda que não ocorreu (abruptDrop=false). Coberto só pelo aviso genérico do README:5.",
+      "reproduction": "POST /classify com 5 zeros horários seguidos de 200 views",
+      "expected": "inconclusivo, ou motivo sem queda",
+      "actual": "suspeito/pico_abrupto, 'subida = 0h; descida = 0h… compatíveis com compra'"
+    }
+  ],
+  "limits": [
+    "Reprodutibilidade byte a byte verificada só em macOS com Node 22.23.3.",
+    "Sem git e sem rede: SHA por blobs; recibo local consistente (53 testes, FPR 0/72).",
+    "Evento ao vivo legítimo de 1h a cerca de 20x a base vira suspeito; é limitação documentada (README:5,137).",
+    "GIFs não foram inspecionados quadro a quadro."
+  ],
+  "approval_basis": "Todos os itens do contrato foram verificados por execução própria: dataset idêntico após o comando oficial, métricas do README iguais às medidas, teste anti-deriva funcional, caso de abstenção, critério documentado e nota de IA. Só há P3.",
+  "review_provenance": {
+    "round": 1,
+    "session_id": "86ab9e40-d8b8-4b16-b157-bacf36407c05",
+    "review_file": "revisoes/claude-opus55/parecer-primeira-rodada.json",
+    "review_sha256": "ac93c4aacab182c9a54f6e9c37293083de93e033af03f98e762648d629d8dead",
+    "previous_adjustment": null
+  },
+  "model": "claude-opus-5-5",
+  "review_kind": "independent_subagent_review",
+  "reviewed_after_conty_registration": true
+}
