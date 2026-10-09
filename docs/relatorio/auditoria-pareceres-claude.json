@@ -1,0 +1,169 @@
+{
+  "passed": true,
+  "unique_subagents": 9,
+  "actual_dispatches": 11,
+  "deliveries": [
+    {
+      "id": 1,
+      "passed": true,
+      "files": [
+        {
+          "file": "docs/reviews/claude-opus55.json",
+          "url": "https://raw.githubusercontent.com/Otavio-Machado-Santos/conty-challenge-debug/1b0702e9c6b9c7dbcaed6c574cfcebd7abf0d1e8/docs/reviews/claude-opus55.json",
+          "status": 200,
+          "sha256": "d138520083e5bceaa71e59e27f3aa21c842eb3cb70f3a8e8a8fcabb7d6a60681"
+        },
+        {
+          "file": "docs/reviews/claude-modelo.json",
+          "url": "https://raw.githubusercontent.com/Otavio-Machado-Santos/conty-challenge-debug/1b0702e9c6b9c7dbcaed6c574cfcebd7abf0d1e8/docs/reviews/claude-modelo.json",
+          "status": 200,
+          "sha256": "0b3b6bf8aac4e2ae9942321fa282662356a2e651dd00d136dfe5143ece6b3133"
+        }
+      ]
+    },
+    {
+      "id": 2,
+      "passed": true,
+      "files": [
+        {
+          "file": "docs/reviews/claude-opus55.json",
+          "url": "https://raw.githubusercontent.com/Otavio-Machado-Santos/conty-challenge-optimize/b2a204f792f8d0ef535b148830800bf811e5d776/docs/reviews/claude-opus55.json",
+          "status": 200,
+          "sha256": "d5c2a8b9c57c4cf78edc33c41193c8ebb947c3d6a3194473dc3cdeb7dde0fb47"
+        },
+        {
+          "file": "docs/reviews/claude-modelo.json",
+          "url": "https://raw.githubusercontent.com/Otavio-Machado-Santos/conty-challenge-optimize/b2a204f792f8d0ef535b148830800bf811e5d776/docs/reviews/claude-modelo.json",
+          "status": 200,
+          "sha256": "0b3b6bf8aac4e2ae9942321fa282662356a2e651dd00d136dfe5143ece6b3133"
+        }
+      ]
+    },
+    {
+      "id": 3,
+      "passed": true,
+      "files": [
+        {
+          "file": "docs/reviews/claude-opus55.json",
+          "url": "https://raw.githubusercontent.com/Otavio-Machado-Santos/conty-revisao-roteiro/61f47b56f86cb593e2a453069e9e176267759753/docs/reviews/claude-opus55.json",
+          "status": 200,
+          "sha256": "689e84055d607ab0139c459d73f66aa437746149d01f785d8d4dd78a4694639f"
+        },
+        {
+          "file": "docs/reviews/claude-modelo.json",
+          "url": "https://raw.githubusercontent.com/Otavio-Machado-Santos/conty-revisao-roteiro/61f47b56f86cb593e2a453069e9e176267759753/docs/reviews/claude-modelo.json",
+          "status": 200,
+          "sha256": "0b3b6bf8aac4e2ae9942321fa282662356a2e651dd00d136dfe5143ece6b3133"
+        }
+      ]
+    },
+    {
+      "id": 4,
+      "passed": true,
+      "files": [
+        {
+          "file": "docs/reviews/claude-opus55.json",
+          "url": "https://raw.githubusercontent.com/Otavio-Machado-Santos/conty-metricas-redes/d1499c693fc363b9fbef24bc108ec6c48173bfcd/docs/reviews/claude-opus55.json",
+          "status": 200,
+          "sha256": "338d15a44adfe10da64b8b41c224a9d6b34a6f371601dbdde870bf21aaeb0db2"
+        },
+        {
+          "file": "docs/reviews/claude-modelo.json",
+          "url": "https://raw.githubusercontent.com/Otavio-Machado-Santos/conty-metricas-redes/d1499c693fc363b9fbef24bc108ec6c48173bfcd/docs/reviews/claude-modelo.json",
+          "status": 200,
+          "sha256": "0b3b6bf8aac4e2ae9942321fa282662356a2e651dd00d136dfe5143ece6b3133"
+        }
+      ]
+    },
+    {
+      "id": 5,
+      "passed": true,
+      "files": [
+        {
+          "file": "docs/reviews/claude-opus55.json",
+          "url": "https://raw.githubusercontent.com/Otavio-Machado-Santos/conty-vendas-shopify/db5add1f9416442ea5623e499f5969e67fc00d4a/docs/reviews/claude-opus55.json",
+          "status": 200,
+          "sha256": "b1a6d5edcbbfc5747b6baa8efabbc57a77339f5190920d5b994dbbbb97fd2995"
+        },
+        {
+          "file": "docs/reviews/claude-modelo.json",
+          "url": "https://raw.githubusercontent.com/Otavio-Machado-Santos/conty-vendas-shopify/db5add1f9416442ea5623e499f5969e67fc00d4a/docs/reviews/claude-modelo.json",
+          "status": 200,
+          "sha256": "0b3b6bf8aac4e2ae9942321fa282662356a2e651dd00d136dfe5143ece6b3133"
+        }
+      ]
+    },
+    {
+      "id": 6,
+      "passed": true,
+      "files": [
+        {
+          "file": "docs/reviews/claude-opus55.json",
+          "url": "https://raw.githubusercontent.com/Otavio-Machado-Santos/conty-origem-cadastros/9abcbfcc8a8bbaa34c1443a6713c4d2d531ccccc/docs/reviews/claude-opus55.json",
+          "status": 200,
+          "sha256": "aa20af930f6ecc4aaf73bd255df528f891ffa4e33703bb63e83610377b4919e8"
+        },
+        {
+          "file": "docs/reviews/claude-modelo.json",
+          "url": "https://raw.githubusercontent.com/Otavio-Machado-Santos/conty-origem-cadastros/9abcbfcc8a8bbaa34c1443a6713c4d2d531ccccc/docs/reviews/claude-modelo.json",
+          "status": 200,
+          "sha256": "0b3b6bf8aac4e2ae9942321fa282662356a2e651dd00d136dfe5143ece6b3133"
+        }
+      ]
+    },
+    {
+      "id": 7,
+      "passed": true,
+      "files": [
+        {
+          "file": "docs/reviews/claude-opus55.json",
+          "url": "https://raw.githubusercontent.com/Otavio-Machado-Santos/conty-rastreio-produto/d520664f7a48bf4943853af64339b97f43fa39b0/docs/reviews/claude-opus55.json",
+          "status": 200,
+          "sha256": "cdef083e6a74d4ba1483e6b5f8b697ec2c152b4547520f5e8247384a646d36ec"
+        },
+        {
+          "file": "docs/reviews/claude-modelo.json",
+          "url": "https://raw.githubusercontent.com/Otavio-Machado-Santos/conty-rastreio-produto/d520664f7a48bf4943853af64339b97f43fa39b0/docs/reviews/claude-modelo.json",
+          "status": 200,
+          "sha256": "0b3b6bf8aac4e2ae9942321fa282662356a2e651dd00d136dfe5143ece6b3133"
+        }
+      ]
+    },
+    {
+      "id": 8,
+      "passed": true,
+      "files": [
+        {
+          "file": "docs/reviews/claude-opus55.json",
+          "url": "https://raw.githubusercontent.com/Otavio-Machado-Santos/conty-revisao-video/45533e29c2cb47493c8440dbbe5c6bfddf29926d/docs/reviews/claude-opus55.json",
+          "status": 200,
+          "sha256": "02f39796af630744d1cb7a9a69d4410a9fe6f209820f937aaa029ccdef2a6431"
+        },
+        {
+          "file": "docs/reviews/claude-modelo.json",
+          "url": "https://raw.githubusercontent.com/Otavio-Machado-Santos/conty-revisao-video/45533e29c2cb47493c8440dbbe5c6bfddf29926d/docs/reviews/claude-modelo.json",
+          "status": 200,
+          "sha256": "0b3b6bf8aac4e2ae9942321fa282662356a2e651dd00d136dfe5143ece6b3133"
+        }
+      ]
+    },
+    {
+      "id": 9,
+      "passed": true,
+      "files": [
+        {
+          "file": "docs/reviews/claude-opus55.json",
+          "url": "https://raw.githubusercontent.com/Otavio-Machado-Santos/conty-deteccao-views/9e75ab29689e9965af1995bed7d025495e873784/docs/reviews/claude-opus55.json",
+          "status": 200,
+          "sha256": "f646c695e2cfdd140546b5f0fe4d381bb278833b86bfc4ffadded0587949dffa"
+        },
+        {
+          "file": "docs/reviews/claude-modelo.json",
+          "url": "https://raw.githubusercontent.com/Otavio-Machado-Santos/conty-deteccao-views/9e75ab29689e9965af1995bed7d025495e873784/docs/reviews/claude-modelo.json",
+          "status": 200,
+          "sha256": "0b3b6bf8aac4e2ae9942321fa282662356a2e651dd00d136dfe5143ece6b3133"
+        }
+      ]
+    }
+  ]
+}

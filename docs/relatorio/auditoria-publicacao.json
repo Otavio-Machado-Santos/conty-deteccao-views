@@ -1,0 +1,401 @@
+{
+  "checked_at": "2026-10-09T22:10:30.786724+00:00",
+  "verified_count": 9,
+  "deliveries": [
+    {
+      "id": 1,
+      "checked_at": "2026-10-09T22:10:27.125807+00:00",
+      "code_sha": "b0b8034bb393ac05dde45ad8d11f618da31ac725",
+      "publication_sha": "1b0702e9c6b9c7dbcaed6c574cfcebd7abf0d1e8",
+      "url": "https://github.com/Otavio-Machado-Santos/conty-challenge-debug/pull/1",
+      "github_owner": "Otavio-Machado-Santos",
+      "public": true,
+      "review_gate": true,
+      "code_unchanged_after_review": true,
+      "working_tree_clean": true,
+      "receipt_status": "Entrega registrada",
+      "http_steps": 6,
+      "files": [
+        {
+          "path": "docs/evidence/screen.jpg",
+          "status": 200,
+          "bytes": 73532,
+          "sha256": "6fe7a14ebc15ca3ccef75d272e1673319634393d32bc8764ba641909d1d95fba"
+        },
+        {
+          "path": "docs/evidence/flow.gif",
+          "status": 200,
+          "bytes": 1483586,
+          "sha256": "93f60c5cf150bdb8c61cf86e67e8ea8d7b807e1e437e5a8b14649dce76e43059"
+        },
+        {
+          "path": "docs/evidence/conty-recibo.jpg",
+          "status": 200,
+          "bytes": 174995,
+          "sha256": "542e428e675995bf2c14d984811c9f8a2d188356fbfc9688af18226fccf85a86"
+        },
+        {
+          "path": "docs/evidence/conty-recibo.json",
+          "status": 200,
+          "bytes": 2713,
+          "sha256": "bf9d16e1a2ec1c029ad60c9e92034375c98379e7b5f5f55efca85fd059868bc8"
+        }
+      ],
+      "pull_request": {
+        "author": {
+          "id": "MDQ6VXNlcjYwODAxMjY1",
+          "is_bot": false,
+          "login": "Otavio-Machado-Santos",
+          "name": "Otavio Machado"
+        },
+        "baseRefName": "main",
+        "headRefName": "fix/repasses",
+        "headRefOid": "1b0702e9c6b9c7dbcaed6c574cfcebd7abf0d1e8",
+        "isDraft": false,
+        "state": "OPEN",
+        "url": "https://github.com/Otavio-Machado-Santos/conty-challenge-debug/pull/1"
+      }
+    },
+    {
+      "id": 2,
+      "checked_at": "2026-10-09T22:10:26.968503+00:00",
+      "code_sha": "c474b676e8f4665d34a2785a9ef07cc0a6d00d5e",
+      "publication_sha": "b2a204f792f8d0ef535b148830800bf811e5d776",
+      "url": "https://github.com/Otavio-Machado-Santos/conty-challenge-optimize/pull/1",
+      "github_owner": "Otavio-Machado-Santos",
+      "public": true,
+      "review_gate": true,
+      "code_unchanged_after_review": true,
+      "working_tree_clean": true,
+      "receipt_status": "Entrega registrada",
+      "http_steps": 3,
+      "files": [
+        {
+          "path": "docs/evidence/screen.jpg",
+          "status": 200,
+          "bytes": 75691,
+          "sha256": "1805129a955a3bdd7f66f116dc867b06113f01d4fd170701f42ad68247c931f8"
+        },
+        {
+          "path": "docs/evidence/flow.gif",
+          "status": 200,
+          "bytes": 1401444,
+          "sha256": "98ea15f88346b6b66e021dbc021089f5a82dfe67de593ac22c02fa022aa0789b"
+        },
+        {
+          "path": "docs/evidence/conty-recibo.jpg",
+          "status": 200,
+          "bytes": 161771,
+          "sha256": "17a7da32c9d29ebe923c50891d3b963b9139bdce019d2e110f342cec03a658d4"
+        },
+        {
+          "path": "docs/evidence/conty-recibo.json",
+          "status": 200,
+          "bytes": 2649,
+          "sha256": "4fe3091a3f1be05328ff73896d6a6d043e0b429420df41c61b1ccad41268e972"
+        }
+      ],
+      "pull_request": {
+        "author": {
+          "id": "MDQ6VXNlcjYwODAxMjY1",
+          "is_bot": false,
+          "login": "Otavio-Machado-Santos",
+          "name": "Otavio Machado"
+        },
+        "baseRefName": "main",
+        "headRefName": "perf/descoberta",
+        "headRefOid": "b2a204f792f8d0ef535b148830800bf811e5d776",
+        "isDraft": false,
+        "state": "OPEN",
+        "url": "https://github.com/Otavio-Machado-Santos/conty-challenge-optimize/pull/1"
+      }
+    },
+    {
+      "id": 3,
+      "checked_at": "2026-10-09T22:10:26.363130+00:00",
+      "code_sha": "db12564279a7ab18d3c7e99759f24c69a6a78227",
+      "publication_sha": "61f47b56f86cb593e2a453069e9e176267759753",
+      "url": "https://github.com/Otavio-Machado-Santos/conty-revisao-roteiro",
+      "github_owner": "Otavio-Machado-Santos",
+      "public": true,
+      "review_gate": true,
+      "code_unchanged_after_review": true,
+      "working_tree_clean": true,
+      "receipt_status": "Entrega registrada",
+      "http_steps": 21,
+      "files": [
+        {
+          "path": "docs/evidence/screen.jpg",
+          "status": 200,
+          "bytes": 78685,
+          "sha256": "08e811d857e78c72dd6e42412d8aafb379f2cc687163e7ba50cc6f9b570d6265"
+        },
+        {
+          "path": "docs/evidence/flow.gif",
+          "status": 200,
+          "bytes": 2104315,
+          "sha256": "9e6ad847bddc4d5c23d0c1c3fb363fe61c51959f3072c3001dff5b9cfbf7c7f7"
+        },
+        {
+          "path": "docs/evidence/conty-recibo.jpg",
+          "status": 200,
+          "bytes": 184962,
+          "sha256": "792710bf06b3354a043e66e6dbf46e4746ff625de900b7f5c997126b741bb1ee"
+        },
+        {
+          "path": "docs/evidence/conty-recibo.json",
+          "status": 200,
+          "bytes": 2870,
+          "sha256": "009300674d990868e148d1e009bb9cd6b1698d6e9096840552a3bf820f779a35"
+        }
+      ],
+      "pull_request": null
+    },
+    {
+      "id": 4,
+      "checked_at": "2026-10-09T22:10:25.824733+00:00",
+      "code_sha": "ebcbf1fbf8f3e9dc206f6a1312ce7e0db283b15c",
+      "publication_sha": "d1499c693fc363b9fbef24bc108ec6c48173bfcd",
+      "url": "https://github.com/Otavio-Machado-Santos/conty-metricas-redes",
+      "github_owner": "Otavio-Machado-Santos",
+      "public": true,
+      "review_gate": true,
+      "code_unchanged_after_review": true,
+      "working_tree_clean": true,
+      "receipt_status": "Entrega registrada",
+      "http_steps": 9,
+      "files": [
+        {
+          "path": "docs/evidence/screen.jpg",
+          "status": 200,
+          "bytes": 83131,
+          "sha256": "d6d908d6e97482b2a871abbb3abef6d6827462b49b778425327cf592001e1025"
+        },
+        {
+          "path": "docs/evidence/flow.gif",
+          "status": 200,
+          "bytes": 1424067,
+          "sha256": "3bb2e067ac1b8e4171508d565d89c4b5ce931a0f9d005fca83131672550f3371"
+        },
+        {
+          "path": "docs/evidence/conty-recibo.jpg",
+          "status": 200,
+          "bytes": 187531,
+          "sha256": "038fed3dba96b17a6501d9d3fa11d364464118d6efd3f7897b4bd5905927ff72"
+        },
+        {
+          "path": "docs/evidence/conty-recibo.json",
+          "status": 200,
+          "bytes": 2830,
+          "sha256": "d84ab4cb1ee0e2f7eebc230bd111ea04c5ce262c90eea5f80934f005d4899307"
+        }
+      ],
+      "pull_request": null
+    },
+    {
+      "id": 5,
+      "checked_at": "2026-10-09T22:10:28.313137+00:00",
+      "code_sha": "efb062a3f54d27eaa2bcbf742418692c298d50e5",
+      "publication_sha": "db5add1f9416442ea5623e499f5969e67fc00d4a",
+      "url": "https://github.com/Otavio-Machado-Santos/conty-vendas-shopify",
+      "github_owner": "Otavio-Machado-Santos",
+      "public": true,
+      "review_gate": true,
+      "code_unchanged_after_review": true,
+      "working_tree_clean": true,
+      "receipt_status": "Entrega registrada",
+      "http_steps": 13,
+      "files": [
+        {
+          "path": "docs/evidence/screen.jpg",
+          "status": 200,
+          "bytes": 74387,
+          "sha256": "657ff0d7f5887cb94bab290636de5dde66d8a66c82d7e1cb7caeb164d9509939"
+        },
+        {
+          "path": "docs/evidence/flow.gif",
+          "status": 200,
+          "bytes": 1472813,
+          "sha256": "6ca6befd498f23ecacf171ebd811bd027077c3b115afc74f10e46dec7ecffcce"
+        },
+        {
+          "path": "docs/evidence/conty-recibo.jpg",
+          "status": 200,
+          "bytes": 182404,
+          "sha256": "f4a6f1da2665e7b0475d3c19b0fada811674e2933ca63622227848f8156d8991"
+        },
+        {
+          "path": "docs/evidence/conty-recibo.json",
+          "status": 200,
+          "bytes": 2760,
+          "sha256": "3d80abc52124e8839725805b5b5ed95364fdb1a6ec28a6905fd0ace657e3563d"
+        }
+      ],
+      "pull_request": null
+    },
+    {
+      "id": 6,
+      "checked_at": "2026-10-09T22:10:28.652793+00:00",
+      "code_sha": "3566be13b595e0b9480840d6aab6045db7cef39c",
+      "publication_sha": "9abcbfcc8a8bbaa34c1443a6713c4d2d531ccccc",
+      "url": "https://github.com/Otavio-Machado-Santos/conty-origem-cadastros",
+      "github_owner": "Otavio-Machado-Santos",
+      "public": true,
+      "review_gate": true,
+      "code_unchanged_after_review": true,
+      "working_tree_clean": true,
+      "receipt_status": "Entrega registrada",
+      "http_steps": 12,
+      "files": [
+        {
+          "path": "docs/evidence/screen.jpg",
+          "status": 200,
+          "bytes": 88973,
+          "sha256": "00291123bd006bc958c76b6c79da6bf40bd05931668cf7efca2b4d6b5ef69fe9"
+        },
+        {
+          "path": "docs/evidence/flow.gif",
+          "status": 200,
+          "bytes": 1806125,
+          "sha256": "b501ba2c4059e97796213f85095e6e841dd90839075a09bd81a5cd733d8f8a09"
+        },
+        {
+          "path": "docs/evidence/conty-recibo.jpg",
+          "status": 200,
+          "bytes": 187389,
+          "sha256": "2a7b654eb89ed956624fd8226400ee675eab34140e43894c650edbfad33b619f"
+        },
+        {
+          "path": "docs/evidence/conty-recibo.json",
+          "status": 200,
+          "bytes": 2869,
+          "sha256": "65e6433561c22a76060dc2f0aa5f9af713ae8c694526521d1d6e7d3f3abc53bf"
+        }
+      ],
+      "pull_request": null
+    },
+    {
+      "id": 7,
+      "checked_at": "2026-10-09T22:10:29.162328+00:00",
+      "code_sha": "b95a0badf514f927d3d349892f7d85c923cda8c9",
+      "publication_sha": "d520664f7a48bf4943853af64339b97f43fa39b0",
+      "url": "https://github.com/Otavio-Machado-Santos/conty-rastreio-produto",
+      "github_owner": "Otavio-Machado-Santos",
+      "public": true,
+      "review_gate": true,
+      "code_unchanged_after_review": true,
+      "working_tree_clean": true,
+      "receipt_status": "Entrega registrada",
+      "http_steps": 8,
+      "files": [
+        {
+          "path": "docs/evidence/screen.jpg",
+          "status": 200,
+          "bytes": 88627,
+          "sha256": "52f44230e1eb1c3c1dff2e287f749546ba90dd6a3ab2114337c6927f4d29b493"
+        },
+        {
+          "path": "docs/evidence/flow.gif",
+          "status": 200,
+          "bytes": 1880137,
+          "sha256": "106a283d95b8b8b38f832125b332c38334a22ccdec94f6c46eca91afa99ee7b7"
+        },
+        {
+          "path": "docs/evidence/conty-recibo.jpg",
+          "status": 200,
+          "bytes": 191660,
+          "sha256": "19c9d49d36b9110671c228ae72ab0da5cf21b4763236980726292328daaa9b90"
+        },
+        {
+          "path": "docs/evidence/conty-recibo.json",
+          "status": 200,
+          "bytes": 2885,
+          "sha256": "935598b2e33d90bafa94709636d5b7b8c229dfedb39da68ffd212a6a4941d244"
+        }
+      ],
+      "pull_request": null
+    },
+    {
+      "id": 8,
+      "checked_at": "2026-10-09T22:10:29.712104+00:00",
+      "code_sha": "7cf5c6343987f501f45f760984dbc2e126adb06e",
+      "publication_sha": "45533e29c2cb47493c8440dbbe5c6bfddf29926d",
+      "url": "https://github.com/Otavio-Machado-Santos/conty-revisao-video",
+      "github_owner": "Otavio-Machado-Santos",
+      "public": true,
+      "review_gate": true,
+      "code_unchanged_after_review": true,
+      "working_tree_clean": true,
+      "receipt_status": "Entrega registrada",
+      "http_steps": 29,
+      "files": [
+        {
+          "path": "docs/evidence/screen.jpg",
+          "status": 200,
+          "bytes": 89734,
+          "sha256": "2e96841f788ff7d6a609d9260fb2110eab5d41f8f53e41c743740076d34e94e0"
+        },
+        {
+          "path": "docs/evidence/flow.gif",
+          "status": 200,
+          "bytes": 1986447,
+          "sha256": "f7646a4086cc5a1471c2e8f549f1c3a6c893aace9fbb0cfff0ea78f72fa1bfc7"
+        },
+        {
+          "path": "docs/evidence/conty-recibo.jpg",
+          "status": 200,
+          "bytes": 190304,
+          "sha256": "c9c461cccfe50f1b506572eef4e6f7c03a892190377bfabc5d9c9f12ef4b40c3"
+        },
+        {
+          "path": "docs/evidence/conty-recibo.json",
+          "status": 200,
+          "bytes": 2961,
+          "sha256": "542dd05e76177d28954e4fc365189181919eb5263adfc2e77434c08a7cb541c2"
+        }
+      ],
+      "pull_request": null
+    },
+    {
+      "id": 9,
+      "checked_at": "2026-10-09T22:10:30.785595+00:00",
+      "code_sha": "829b1bc9cf4df285c8f867cdd6166799fd862659",
+      "publication_sha": "9e75ab29689e9965af1995bed7d025495e873784",
+      "url": "https://github.com/Otavio-Machado-Santos/conty-deteccao-views",
+      "github_owner": "Otavio-Machado-Santos",
+      "public": true,
+      "review_gate": true,
+      "code_unchanged_after_review": true,
+      "working_tree_clean": true,
+      "receipt_status": "Entrega registrada",
+      "http_steps": 10,
+      "files": [
+        {
+          "path": "docs/evidence/screen.jpg",
+          "status": 200,
+          "bytes": 85865,
+          "sha256": "643f4258c9c2f483e57da76ec599989f9b86b94c101cea4a5050108c79312ccd"
+        },
+        {
+          "path": "docs/evidence/flow.gif",
+          "status": 200,
+          "bytes": 1966838,
+          "sha256": "1c5e595b2651824cce53d377ead37fa9636f40fd2a37b2e6fac1583a71e498d0"
+        },
+        {
+          "path": "docs/evidence/conty-recibo.jpg",
+          "status": 200,
+          "bytes": 208128,
+          "sha256": "b575fa063882301a5d77ab8384cd78a40bc566f20540110664d695b2f2d5c3aa"
+        },
+        {
+          "path": "docs/evidence/conty-recibo.json",
+          "status": 200,
+          "bytes": 3240,
+          "sha256": "796c52f0c8b6bec2d5ea1e90a8738785a6f9725ab46dca5c7026258f6c1c4f8c"
+        }
+      ],
+      "pull_request": null
+    }
+  ]
+}

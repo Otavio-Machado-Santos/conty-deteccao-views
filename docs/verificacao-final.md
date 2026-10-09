@@ -38,3 +38,12 @@ Após as nove entregas terem sido publicadas e registradas, Claude Code executou
 
 
 O modelo foi conferido nos eventos reais da CLI. O coordenador conferiu os hashes e consolidou o parecer final efetivamente emitido para cada commit; os arquivos de prova distinguem a rodada dos nove e as reavaliações. A revisão é assistida por IA, sem revisão humana; a avaliação oficial da Conty continua pendente.
+
+## Relatório das nove entregas
+
+- [Relatório HTML independente, com recibos reais incorporados](relatorio/relatorio-conty.html).
+- [Manifesto com links, hashes, contagens e limites](relatorio/relatorio-conty.json).
+- [Captura real do relatório](relatorio/evidence/screen.jpg) e [GIF da navegação e abertura do recibo](relatorio/evidence/flow.gif).
+- [Auditoria remota das entregas](relatorio/auditoria-publicacao.json) e [conferência dos pareceres Opus publicados](relatorio/auditoria-pareceres-claude.json).
+
+O relatório registra um snapshot dos commits publicados no momento da geração. Seus links estão fixados a esses commits e continuam válidos após esta publicação documental. Baixe o HTML e abra-o no navegador para navegar e expandir os recibos incorporados, inclusive offline. Nenhum código executável foi alterado nesta publicação.
