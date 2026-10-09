@@ -1,6 +1,6 @@
 import test from 'node:test';
 import assert from 'node:assert/strict';
-import { readFileSync, existsSync } from 'node:fs';
+import { readFileSync, existsSync, statSync } from 'node:fs';
 import { join, dirname } from 'node:path';
 import { fileURLToPath } from 'node:url';
 import { runEvaluation } from '../scripts/evaluate.js';
@@ -61,4 +61,44 @@ test('reprodução byte a byte é confirmada na avaliação', () => {
   const { report } = runEvaluation({ writeEvidence: false });
   assert.equal(report.reproduction.identicalAcrossRuns, true);
   assert.equal(report.reproduction.diskMatchesCanonical, true);
+});
+
+test('runEvaluation(writeEvidence:false) é somente leitura: não altera dataset nem grava evidence/README', () => {
+  const datasetPath = join(ROOT, 'dataset', 'series.json');
+  const evaluationPath = join(ROOT, 'docs', 'evidence', 'evaluation.json');
+  const readmePath = join(ROOT, 'README.md');
+
+  const dsBefore = statSync(datasetPath);
+  const dsBytesBefore = readFileSync(datasetPath);
+  const evalBytesBefore = existsSync(evaluationPath) ? readFileSync(evaluationPath) : null;
+  const readmeBefore = statSync(readmePath);
+  const readmeBytesBefore = readFileSync(readmePath);
+
+  const { report } = runEvaluation({ writeEvidence: false });
+  assert.ok(report.metrics.series > 0);
+
+  const dsAfter = statSync(datasetPath);
+  const dsBytesAfter = readFileSync(datasetPath);
+  assert.equal(dsBefore.ino, dsAfter.ino, 'inode do dataset não deve mudar');
+  assert.equal(dsBefore.mtimeMs, dsAfter.mtimeMs, 'mtime do dataset não deve mudar');
+  assert.equal(
+    Buffer.compare(dsBytesBefore, dsBytesAfter),
+    0,
+    'bytes do dataset não devem mudar',
+  );
+
+  const evalBytesAfter = existsSync(evaluationPath) ? readFileSync(evaluationPath) : null;
+  if (evalBytesBefore === null) {
+    assert.equal(evalBytesAfter, null, 'não deve criar evaluation.json');
+  } else {
+    assert.equal(
+      Buffer.compare(evalBytesBefore, evalBytesAfter),
+      0,
+      'evaluation.json não deve mudar',
+    );
+  }
+
+  const readmeAfter = statSync(readmePath);
+  assert.equal(readmeBefore.mtimeMs, readmeAfter.mtimeMs, 'README não deve ser tocado');
+  assert.equal(Buffer.compare(readmeBytesBefore, readFileSync(readmePath)), 0);
 });

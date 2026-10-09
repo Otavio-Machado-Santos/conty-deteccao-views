@@ -10,13 +10,13 @@
  * As métricas impressas são as medidas agora — não estimativas manuais.
  */
 
-import { mkdirSync, writeFileSync, readFileSync } from 'node:fs';
+import { mkdirSync, readFileSync, existsSync } from 'node:fs';
 import { dirname, join } from 'node:path';
 import { fileURLToPath } from 'node:url';
 import {
   buildDataset,
   serializeDataset,
-  generateDatasetFile,
+  writeJsonAtomic,
   DEFAULT_DATASET_PATH,
   expandDatasetSeries,
 } from '../src/generate.js';
@@ -135,14 +135,17 @@ export function runEvaluation({ writeEvidence = true } = {}) {
     throw new Error('Dataset não é reproduzível byte a byte — abortando avaliação.');
   }
 
-  const { dataset, body, path } = generateDatasetFile(DEFAULT_DATASET_PATH, {
-    seed: 20261009,
-    clock: () => new Date(),
-  });
+  // Constrói o dataset em memória — não toca em disco até writeEvidence.
+  const dataset = buildDataset({ seed: 20261009, clock: () => new Date() });
+  const body = serializeDataset(dataset);
+  const path = DEFAULT_DATASET_PATH;
 
-  // Confere que o arquivo em disco é idêntico ao payload canônico regenerado.
-  const onDisk = readFileSync(path, 'utf8');
-  const diskMatch = onDisk === body;
+  // Compara com o disco SEM gravar (somente leitura).
+  let diskMatch = false;
+  if (existsSync(path)) {
+    const onDisk = readFileSync(path, 'utf8');
+    diskMatch = onDisk === body;
+  }
 
   const metrics = evaluateDataset(dataset);
 
@@ -175,12 +178,11 @@ export function runEvaluation({ writeEvidence = true } = {}) {
   };
 
   if (writeEvidence) {
+    // Publica o dataset canônico (atômico) e confere os bytes em disco.
+    writeJsonAtomic(path, body);
+    report.reproduction.diskMatchesCanonical = readFileSync(path, 'utf8') === body;
     mkdirSync(EVIDENCE_DIR, { recursive: true });
-    writeFileSync(
-      EVALUATION_PATH,
-      `${JSON.stringify(report, null, 2)}\n`,
-      'utf8',
-    );
+    writeJsonAtomic(EVALUATION_PATH, `${JSON.stringify(report, null, 2)}\n`);
     report.evaluationPath = 'docs/evidence/evaluation.json';
   }
 

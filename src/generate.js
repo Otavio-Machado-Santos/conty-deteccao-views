@@ -1,5 +1,15 @@
-import { writeFileSync, mkdirSync, readFileSync, existsSync } from 'node:fs';
-import { dirname, join } from 'node:path';
+import {
+  writeFileSync,
+  mkdirSync,
+  readFileSync,
+  existsSync,
+  renameSync,
+  unlinkSync,
+  openSync,
+  closeSync,
+} from 'node:fs';
+import { dirname, join, basename } from 'node:path';
+import { randomUUID } from 'node:crypto';
 import { fileURLToPath } from 'node:url';
 import { createPrng, randomInt, gaussian } from './prng.js';
 import { expandCompact, validateSeries } from './validate.js';
@@ -285,11 +295,52 @@ export function serializeDataset(dataset) {
   return `${JSON.stringify(canonicalizeDataset(dataset), null, 2)}\n`;
 }
 
+/**
+ * Publicação atômica: cria arquivo temporário realmente exclusivo
+ * (randomUUID + openSync 'wx') na MESMA pasta, escreve pelo fd que esta
+ * chamada abriu, fecha e faz rename. Leitores concorrentes nunca veem
+ * JSON parcial, mesmo com worker_threads compartilhando PID e clock.
+ * Em falha, remove SOMENTE o temporário que esta chamada criou.
+ */
+export function writeJsonAtomic(path, body) {
+  const dir = dirname(path);
+  mkdirSync(dir, { recursive: true });
+  const tmp = join(dir, `.${basename(path)}.${randomUUID()}.tmp`);
+  let fd = null;
+  let owned = false;
+  try {
+    // 'wx' = criação exclusiva. Ownership de ESTA chamada só existe se o
+    // openSync passar; em EEXIST o arquivo é preexistente e não é nosso.
+    fd = openSync(tmp, 'wx');
+    owned = true;
+    writeFileSync(fd, body, 'utf8');
+    closeSync(fd);
+    fd = null;
+    renameSync(tmp, path);
+  } catch (err) {
+    if (fd !== null) {
+      try {
+        closeSync(fd);
+      } catch {
+        // fd já fechado
+      }
+    }
+    // Remove somente o temporário que ESTA chamada criou.
+    if (owned) {
+      try {
+        unlinkSync(tmp);
+      } catch {
+        // já ausente
+      }
+    }
+    throw err;
+  }
+}
+
 export function generateDatasetFile(path = DEFAULT_DATASET_PATH, options = {}) {
   const dataset = buildDataset(options);
-  mkdirSync(dirname(path), { recursive: true });
   const body = serializeDataset(dataset);
-  writeFileSync(path, body, 'utf8');
+  writeJsonAtomic(path, body);
   return { dataset, body, path };
 }
 

@@ -1,0 +1,38 @@
+{
+  "verified_at": "2026-10-09T20:48:47.260223+00:00",
+  "previous_candidate_sha": "21c55d52d5e51f39ee8a06607c5c2e6d4da37afc",
+  "previous_race_reproduced_in_default_suite": true,
+  "previous_failure_run": 26,
+  "fix": "readonly evaluation; generation tests use isolated files; atomic publication through exclusive UUID temp, complete fd write, close, rename",
+  "suite": {
+    "tests": 53,
+    "passed": 53,
+    "failed": 0,
+    "default_concurrency": true
+  },
+  "actual_worker_probes": {
+    "fixed_clock": {
+      "worker_threads": 4,
+      "shared_pid": true,
+      "writes": 400,
+      "errors": 0,
+      "final_json_valid": true,
+      "frozen_clock": true
+    },
+    "real_clock": {
+      "worker_threads": 4,
+      "shared_pid": true,
+      "writes": 400,
+      "errors": 0,
+      "final_json_valid": true,
+      "frozen_clock": false
+    }
+  },
+  "readme_mismatch_variants": 3,
+  "readme_not_autoedited": true,
+  "classifier_thresholds_profiles_labels_unchanged": true,
+  "authorship": {
+    "implementation_and_major_corrections": "MiMo CLI",
+    "coordination_verification_and_complete_fd_write_guard": "Codex"
+  }
+}

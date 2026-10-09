@@ -1,0 +1,50 @@
+=== Publicação atômica exclusiva — ajuste coordenador/pai ===
+data: 2026-10-09 | Node v22.23.3
+candidato suspenso: 21c55d52d5e51f39ee8a06607c5c2e6d4da37afc
+
+Achado confirmado (não hipótese):
+- Nome de temporário process.pid+Date.now() colide em worker_threads
+  (mesmo PID/milissegundo) e writeFileSync sem wx abre/trunca a mesma path.
+- Probe do coordenador: 4 worker_threads × 400 publicações → 189 erros com
+  Date.now real, 232 erros com clock fixo no mesmo ms.
+
+Correções:
+1. src/generate.js writeJsonAtomic:
+   - nome realmente único: randomUUID (node:crypto)
+   - criação exclusiva: openSync(tmp,'wx') estabelece ownership
+   - writeSync(fd, body, null, 'utf8') + closeSync + renameSync
+   - cleanup SOMENTE do temporário que esta chamada criou (flag owned)
+   - EEXIST não remove temporário preexistente alheio
+   - geração/perfis/serialize intactos
+2. scripts/evaluate.js: diskMatchesCanonical medido por
+   readFileSync(path,'utf8')===body após writeEvidence:true;
+   writeEvidence:false continua sem writes.
+3. Teste de concorrência substituído: worker_threads reais (4 escritores +
+   2 leitores), PID compartilhado e clock fixo idêntico (Date.now = constante)
+   para cobrir a colisão; 400 publicações + 200 leituras com JSON.parse e
+   checagem de documento completo/canônico; timeout + terminate dos workers;
+   destino próprio do teste (não toca dataset compartilhado).
+4. Teste de falha: remove só o temporário próprio e preserva arquivo
+   temporário preexistente (prova de ownership).
+
+Prova da colisão (nome antigo vs novo):
+- 4 nomes com pid+clock fixo → 1 nome distinto (colidia)
+- 400 nomes com randomUUID → 400 distintos
+
+Verificações:
+- npm test: 53/53 pass (inclui teste worker_threads real)
+- npm run generate:evaluate: FPR 0/72 (0%), recall 30/30 (100%), 17 abstenções
+  diskMatchesCanonical: true (medido, não atribuído)
+- node --check src/scripts/test: OK
+- dataset/series.json sha256: f7b7ad869c3b82f77e7f3d35dbd2508129678e626c953bc4db7243d5d39ac3f4 (idêntico)
+- src/generate.js sha256: fee439af073b60a06464b0bacf59a60381c1d999295b63ded221575a3b701f04 (mudou: publicação)
+- nenhum .tmp residual em dataset/
+
+Fora de escopo desta etapa (não tocado):
+- Classificador/limiares/perfis/labels/seed/dataset canônico intactos.
+- 2 FP diurnos em 19224 legítimos (267 seeds, sensibilidade dos revisores)
+  são limitação P3 já documentada pelo coordenador — não retunado.
+
+Conferência final Codex: writeFileSync(fd) garante escrita integral no descritor exclusivo antes do rename.
+npm test: 53/53, workers padrão. Probes próprios com 4 threads: 400 escritas com clock fixo + 400 com clock real, 0 erros; JSON final válido.
+README adulterado em num/den/%: 3 falhas esperadas sem autoedição.

@@ -2,11 +2,13 @@
   "initial_commit": "eebbf112c1c89eb6f26afa477fad70424c28b4c4",
   "passed": true,
   "labels_and_dataset_byte_identical": true,
+  "note": "O dataset canônico permanece byte a byte idêntico ao candidato inicial. O fonte src/generate.js mudou na publicação do arquivo (writeJsonAtomic com nome exclusivo randomUUID + openSync wx + rename), após o candidato 21c55d5. Lógica de geração, perfis, labels e seed não mudaram. O hash do fonte NÃO é idêntico ao inicial.",
   "files": {
     "src/generate.js": {
       "initial_sha256": "1a1506a8e8f8b0f6ab004fdf676da2e2d86785d2d052b911243d4f4c52c1a36f",
-      "candidate_sha256": "1a1506a8e8f8b0f6ab004fdf676da2e2d86785d2d052b911243d4f4c52c1a36f",
-      "identical": true
+      "candidate_sha256": "4a3aa2322c8317ecf0cab7d6aeaa2077c70b8079d392c12badb1f4b11e4c920c",
+      "identical": false,
+      "change_scope": "somente publicação do arquivo (randomUUID + wx + escrita integral por fd + rename atômico); geração/perfis/labels/seed intactos"
     },
     "dataset/series.json": {
       "initial_sha256": "f7b7ad869c3b82f77e7f3d35dbd2508129678e626c953bc4db7243d5d39ac3f4",

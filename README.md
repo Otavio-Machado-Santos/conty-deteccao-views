@@ -159,15 +159,15 @@ Mesmo parecendo "um pico", não vira `suspeito` sem combinação de sinais. Os 5
 
 ## Nota sobre IA
 
-Implementação e correções geradas pelo **MiMo CLI**. **Codex** coordenou e conferiu. Duas revisões independentes finais estão pendentes. **Nenhuma revisão humana é alegada.**
+Implementação e correções principais geradas pelo **MiMo CLI**. **Codex** coordenou, conferiu e ajustou a escrita integral pelo descritor exclusivo antes do rename. Duas revisões independentes finais estão pendentes. **Nenhuma revisão humana é alegada.**
 
 ## Evidências
 
-- `docs/evidence/test.txt` — saída real de `npm test` (50 testes).
+- `docs/evidence/test.txt` — saída real de `npm test` (53 testes).
 - `docs/evidence/syntax-check.txt` — checagem de sintaxe dos 12 arquivos JavaScript.
 - `docs/evidence/evaluation.json` — saída estruturada de `npm run generate:evaluate`.
 - `docs/evidence/evaluate.txt` — saída legível de `npm run generate:evaluate`.
 - `docs/evidence/http-regressions.txt` — regressões HTTP reais: contrato, calendário, soma, body limit (Content-Length e chunked) e host malformado.
 - `docs/evidence/coordinator-probes.json` — conferência Codex de 25 requests HTTP, calendário e sensibilidade sintética de desenvolvimento.
 - `docs/evidence/readme-divergences.json` — prova de falha para numerador, denominador e percentual adulterados, sem autoeditar o README.
-- `docs/evidence/dataset-integrity.json` — hashes do dataset e gerador iguais aos do candidato inicial.
+- `docs/evidence/dataset-integrity.json` — o dataset canônico permanece byte a byte idêntico ao candidato inicial; o fonte do gerador mudou somente na publicação do arquivo (publicação atômica).
