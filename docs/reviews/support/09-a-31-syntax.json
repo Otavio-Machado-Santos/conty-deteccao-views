@@ -1,0 +1,54 @@
+{
+  "node": "v22.23.3",
+  "syntax_files": 12,
+  "results": [
+    {
+      "file": "scripts/evaluate.js",
+      "exit_code": 0
+    },
+    {
+      "file": "src/classify.js",
+      "exit_code": 0
+    },
+    {
+      "file": "src/generate.js",
+      "exit_code": 0
+    },
+    {
+      "file": "src/prng.js",
+      "exit_code": 0
+    },
+    {
+      "file": "src/server.js",
+      "exit_code": 0
+    },
+    {
+      "file": "src/signals.js",
+      "exit_code": 0
+    },
+    {
+      "file": "src/validate.js",
+      "exit_code": 0
+    },
+    {
+      "file": "test/api.test.js",
+      "exit_code": 0
+    },
+    {
+      "file": "test/classify.test.js",
+      "exit_code": 0
+    },
+    {
+      "file": "test/generate.test.js",
+      "exit_code": 0
+    },
+    {
+      "file": "test/readme-metrics.test.js",
+      "exit_code": 0
+    },
+    {
+      "file": "test/validate.test.js",
+      "exit_code": 0
+    }
+  ]
+}

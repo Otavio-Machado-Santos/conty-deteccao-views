@@ -1,0 +1,397 @@
+{
+  "reviewed_sha": "31bb2150d1758c9c2efbbfc73e506f4973597ca7",
+  "base_sha": "f489f871f45f27022ea7791bcd7cbfe447edc4c2",
+  "delta_base_sha": "21c55d52d5e51f39ee8a06607c5c2e6d4da37afc",
+  "previous_review": "revisoes/09-b-21-anterior.json",
+  "original_review": "revisoes/09-b-anterior.json",
+  "reviewer": "implementar_metricas; revisão B independente final/delta",
+  "reviewed_at": "2026-10-09T20:59:41.739850+00:00",
+  "scope": "Commitfixo31 por git archive; código candidato não editado. Nova avaliação readonly/writer/cleanup/isolamento e README reexecutados; sondagensHTTP/classificador21 herdadas somente após hashes e região de geração literalconferidos. Conteúdo untracked do checkout ignorado.",
+  "environment": {
+    "node": "v22.23.3",
+    "os": "macOS"
+  },
+  "commands": [
+    {
+      "command": "git archive31bb215 em pasta descartável; git diff --check21...31; hashes21/31 e node --check src/scripts/test",
+      "exit_code": 0,
+      "result": "6arquivos críticos byteidênticos; região perfis/buildDataset/serialização literalinalterada;12checks sintaxe verdes",
+      "evidence": "revisoes/09-b-31-source-integrity.json"
+    },
+    {
+      "command": "npm test com Node22 no archive31 ANTES de generate:evaluate",
+      "exit_code": 0,
+      "result": "53/53; bytes+inode+mtime de dataset/evaluation/README preservados",
+      "evidence": "revisoes/09-b-31-tests.txt; revisoes/09-b-31-tests.json"
+    },
+    {
+      "command": "20× node --test test/*.test.js; workers padrão, antes de geração",
+      "exit_code": 0,
+      "result": "20suítes53/53; arquivo compartilhado intacto; zero tmp",
+      "evidence": "revisoes/09-b-31-default-workers.json"
+    },
+    {
+      "command": "node revisoes/09-b-31-publication.mjs <archive31> revisoes/09-b-31-publication.json",
+      "exit_code": 0,
+      "result": "300publicações/360leituras7threads combarreira e3JSONsUnicode405047/490547/576047bytes; hashes/parse íntegros; colisãoUUIDwx/invalidbody/renamefail;4estados readonly confirmados",
+      "evidence": "revisoes/09-b-31-publication.json"
+    },
+    {
+      "command": "2× node --test test/*.test.js simultâneas no mesmo archive, repetidas atéfalha",
+      "result": {
+        "runs": 10,
+        "failure_pair": 5,
+        "failure_count": 2,
+        "failure": "test/generate.test.js229 acusa foreign temporário da outra suíte; filtro227 usa contains cleanup"
+      },
+      "evidence": "revisoes/09-b-31-concurrent-suites.json; revisoes/09-b-31-concurrent-suites-5-A-failure.txt; revisoes/09-b-31-concurrent-suites-5-B-failure.txt"
+    },
+    {
+      "command": "node --test --test-name-pattern=\"writeJsonAtomic remove\" test/generate.test.js após duas suítes falharem",
+      "exit_code": 1,
+      "result": "Falha repetida pelos resíduos deixados pelas assertions antes de limpeza; sem outra suíte ativa",
+      "evidence": "revisoes/09-b-31-cleanup-residual.txt"
+    },
+    {
+      "command": "Mutação readonly no archive do numerador/denominador/percentual do README, depois node --test test/readme-metrics.test.js",
+      "expected_exit": 1,
+      "result": [
+        {
+          "field": "numerator",
+          "exit_code": 1,
+          "expected_exit": 1,
+          "expected_message_found": true,
+          "readme_unchanged_after_test": true,
+          "mtime_unchanged": true,
+          "evidence": "revisoes/09-b-31-readme-numerator.txt"
+        },
+        {
+          "field": "denominator",
+          "exit_code": 1,
+          "expected_exit": 1,
+          "expected_message_found": true,
+          "readme_unchanged_after_test": true,
+          "mtime_unchanged": true,
+          "evidence": "revisoes/09-b-31-readme-denominator.txt"
+        },
+        {
+          "field": "percent",
+          "exit_code": 1,
+          "expected_exit": 1,
+          "expected_message_found": true,
+          "readme_unchanged_after_test": true,
+          "mtime_unchanged": true,
+          "evidence": "revisoes/09-b-31-readme-percent.txt"
+        }
+      ],
+      "positive_restore_exit": 0,
+      "evidence": "revisoes/09-b-31-readme.json"
+    },
+    {
+      "command": "npm run generate:evaluate, após testes padrão, stress e negativos",
+      "exit_code": 0,
+      "result": "102séries;FPR0/72;recall30/30;17abstenções; dataset76624bytes iguais ao commit; zero tmp",
+      "evidence": "revisoes/09-b-31-evaluation.txt; revisoes/09-b-31-evaluation.json"
+    },
+    {
+      "command": "Herdar probesHTTP12matrizes e267seeds21 sob hashes byteidênticos; sem fingir repetição",
+      "result": "API/schema/classificador permanecem iguais; sensibilidadeextra2FP/19224legit registrada abaixo e interpretada como desenvolvimento sintético",
+      "evidence": "revisoes/09-b-http-final.json; revisoes/09-b-final-probes.json; revisoes/09-b-31-source-integrity.json"
+    }
+  ],
+  "source_integrity": {
+    "reviewed_sha": "31bb2150d1758c9c2efbbfc73e506f4973597ca7",
+    "inherited_review_sha": "21c55d52d5e51f39ee8a06607c5c2e6d4da37afc",
+    "unchanged_files": [
+      {
+        "file": "src/server.js",
+        "original_blob": "523c834a4dcc47d29646366c460343806681948d",
+        "candidate_blob": "523c834a4dcc47d29646366c460343806681948d",
+        "original_sha256": "259a2bd7aa3f61f193528aa7530b8ae04c75126874d8904b6a5d1e6f7e126636",
+        "candidate_sha256": "259a2bd7aa3f61f193528aa7530b8ae04c75126874d8904b6a5d1e6f7e126636",
+        "identical": true,
+        "snapshot_matches_commit": true
+      },
+      {
+        "file": "src/validate.js",
+        "original_blob": "32abf906c7e5bc545e9a117b9cbb949c9e9dcef6",
+        "candidate_blob": "32abf906c7e5bc545e9a117b9cbb949c9e9dcef6",
+        "original_sha256": "7516b7a8bbc6c2349f5e657ef4e310eb95f9819ca1f21bc5f4caed4c4dd5fe05",
+        "candidate_sha256": "7516b7a8bbc6c2349f5e657ef4e310eb95f9819ca1f21bc5f4caed4c4dd5fe05",
+        "identical": true,
+        "snapshot_matches_commit": true
+      },
+      {
+        "file": "src/classify.js",
+        "original_blob": "c0e73ce6d44e755994af5d6415a357d29d5bdeac",
+        "candidate_blob": "c0e73ce6d44e755994af5d6415a357d29d5bdeac",
+        "original_sha256": "8f6a5473cce82dcb00bab52a7ed6b5d607c0d7cf288559bba384e408333b4655",
+        "candidate_sha256": "8f6a5473cce82dcb00bab52a7ed6b5d607c0d7cf288559bba384e408333b4655",
+        "identical": true,
+        "snapshot_matches_commit": true
+      },
+      {
+        "file": "src/signals.js",
+        "original_blob": "ccf354faf9ce1a5dfcb54da5cc3184a8938bbd71",
+        "candidate_blob": "ccf354faf9ce1a5dfcb54da5cc3184a8938bbd71",
+        "original_sha256": "5f10115c0c8e15afea935953d7633c4c398204997cfab80436bc235f06602a4f",
+        "candidate_sha256": "5f10115c0c8e15afea935953d7633c4c398204997cfab80436bc235f06602a4f",
+        "identical": true,
+        "snapshot_matches_commit": true
+      },
+      {
+        "file": "src/prng.js",
+        "original_blob": "a295465fc6a495c8396590460cfc357490837396",
+        "candidate_blob": "a295465fc6a495c8396590460cfc357490837396",
+        "original_sha256": "0f2c8480804c106d6a9c17a44030fb1c3fd24e764abfd4099516848df8c4623a",
+        "candidate_sha256": "0f2c8480804c106d6a9c17a44030fb1c3fd24e764abfd4099516848df8c4623a",
+        "identical": true,
+        "snapshot_matches_commit": true
+      },
+      {
+        "file": "dataset/series.json",
+        "original_blob": "2dc156d66713f5a013d7ffcf54f69ccfe83172d2",
+        "candidate_blob": "2dc156d66713f5a013d7ffcf54f69ccfe83172d2",
+        "original_sha256": "f7b7ad869c3b82f77e7f3d35dbd2508129678e626c953bc4db7243d5d39ac3f4",
+        "candidate_sha256": "f7b7ad869c3b82f77e7f3d35dbd2508129678e626c953bc4db7243d5d39ac3f4",
+        "identical": true,
+        "snapshot_matches_commit": true
+      }
+    ],
+    "profiles_generation_and_canonical_serialization_literal_unchanged": true,
+    "syntax": [
+      {
+        "file": "scripts/evaluate.js",
+        "exit_code": 0,
+        "output": ""
+      },
+      {
+        "file": "src/classify.js",
+        "exit_code": 0,
+        "output": ""
+      },
+      {
+        "file": "src/generate.js",
+        "exit_code": 0,
+        "output": ""
+      },
+      {
+        "file": "src/prng.js",
+        "exit_code": 0,
+        "output": ""
+      },
+      {
+        "file": "src/server.js",
+        "exit_code": 0,
+        "output": ""
+      },
+      {
+        "file": "src/signals.js",
+        "exit_code": 0,
+        "output": ""
+      },
+      {
+        "file": "src/validate.js",
+        "exit_code": 0,
+        "output": ""
+      },
+      {
+        "file": "test/api.test.js",
+        "exit_code": 0,
+        "output": ""
+      },
+      {
+        "file": "test/classify.test.js",
+        "exit_code": 0,
+        "output": ""
+      },
+      {
+        "file": "test/generate.test.js",
+        "exit_code": 0,
+        "output": ""
+      },
+      {
+        "file": "test/readme-metrics.test.js",
+        "exit_code": 0,
+        "output": ""
+      },
+      {
+        "file": "test/validate.test.js",
+        "exit_code": 0,
+        "output": ""
+      }
+    ]
+  },
+  "resolutions": [
+    {
+      "id": "09-b-calendar",
+      "status": "resolved",
+      "original_reviewed_sha": "eebbf112c1c89eb6f26afa477fad70424c28b4c4",
+      "source": "src/validate.js:27,35",
+      "evidence": "validation do probe final: calendários impossíveis/nonISO rejeitados, UTC válido aceito, anos0000/0001/0099/0100 sem remapeamento e séculos bissextos corretos; HTTP invalid calendar422.",
+      "validation_on_new_candidate": "Fontes de API/validação/classificação/sinais permanecem byte a byte iguais ao21; sondagens reais21 herdadas com escopo explícito, vide source_integrity."
+    },
+    {
+      "id": "09-b-api-validation",
+      "status": "resolved",
+      "original_reviewed_sha": "eebbf112c1c89eb6f26afa477fad70424c28b4c4",
+      "source": "src/server.js:117,194",
+      "evidence": "Probes HTTP agora422 para numeric bypass/negativo/missing/empty/string; JSONvazio/só espaços/truncado400 nos requests reais.",
+      "validation_on_new_candidate": "Fontes de API/validação/classificação/sinais permanecem byte a byte iguais ao21; sondagens reais21 herdadas com escopo explícito, vide source_integrity."
+    },
+    {
+      "id": "09-b-aggregate-precision",
+      "status": "resolved",
+      "original_reviewed_sha": "eebbf112c1c89eb6f26afa477fad70424c28b4c4",
+      "source": "src/validate.js:128; src/classify.js:114",
+      "evidence": "Unsafe total rejeitado antes dos sinais; HTTP422; biblioteca retorna invalida, sem publicar total inexato.",
+      "validation_on_new_candidate": "Fontes de API/validação/classificação/sinais permanecem byte a byte iguais ao21; sondagens reais21 herdadas com escopo explícito, vide source_integrity."
+    },
+    {
+      "id": "09-b-body-limit",
+      "status": "resolved",
+      "original_reviewed_sha": "eebbf112c1c89eb6f26afa477fad70424c28b4c4",
+      "source": "src/server.js:35,62",
+      "evidence": "12matrizes CL/chunked, keepAlive/agent:false e3tamanhos;413JSON em todos, health200+POSTválido200; reusedSocket=true no keepAlive; zeroerros sockets.",
+      "validation_on_new_candidate": "Fontes de API/validação/classificação/sinais permanecem byte a byte iguais ao21; sondagens reais21 herdadas com escopo explícito, vide source_integrity."
+    },
+    {
+      "id": "09-b-malformed-host",
+      "status": "resolved",
+      "original_reviewed_sha": "eebbf112c1c89eb6f26afa477fad70424c28b4c4",
+      "source": "src/server.js:104,135",
+      "evidence": "Subprocesso Host:[bad agoraexit0/HTTP200; health no mesmo socket disponível; base fixa e tratamento externo de erro.",
+      "validation_on_new_candidate": "Fontes de API/validação/classificação/sinais permanecem byte a byte iguais ao21; sondagens reais21 herdadas com escopo explícito, vide source_integrity."
+    },
+    {
+      "id": "09-b-organic-repetition",
+      "status": "resolved",
+      "original_reviewed_sha": "eebbf112c1c89eb6f26afa477fad70424c28b4c4",
+      "source": "src/classify.js:163,190,257",
+      "evidence": "A rampa48h com baselineconstante vira plausivel, mechanical=false, smoothRamp=true; viral seed25 deixou de gerarFP; suspeitos sintéticos foram preservados.",
+      "validation_on_new_candidate": "Fontes de API/validação/classificação/sinais permanecem byte a byte iguais ao21; sondagens reais21 herdadas com escopo explícito, vide source_integrity."
+    },
+    {
+      "id": "09-b-concurrent-dataset-write",
+      "status": "resolved",
+      "original_reviewed_sha": "21c55d52d5e51f39ee8a06607c5c2e6d4da37afc",
+      "source": "scripts/evaluate.js:138-185; src/generate.js:305-343; test/generate.test.js:90-109",
+      "evidence": "npmtest53/53+20repetições com workers padrão antes de generate:evaluate, dataset/evaluation/README preservados byte/inode/mtime; readonly também com dataset corrupto/ausente e evidence ausente. Writer próprio sob barreira7threads,300publicações/360leituras3corposUnicode405–576KB íntegros; EEXIST/invalidbody/renamefail preservam target/tempalheio e limpam próprio."
+    }
+  ],
+  "findings": [
+    {
+      "id": "09-b-test-cleanup-isolation",
+      "priority": 2,
+      "title": "Filtro de cleanup do teste captura temporários de outra suíte e deixa resíduos após falhar",
+      "file": "test/generate.test.js",
+      "line": 227,
+      "end_line": 230,
+      "reproduction": "No git archive31, executar simultaneamente duas invocações node --test test/*.test.js com workers padrão, repetir os pares. O5º par desta revisão falhou nos dois processos; log e JSON preservados. Depois executar só o teste de cleanup: continua falhando pelos foreign tmp deixados pelas duas assertions. Também reproduzível com um arquivo temporário alheio contendo cleanup no nome.",
+      "expected": "Cada teste deve conferir e remover apenas seus temporários exclusivos, preservando arquivos alheios. Suítes simultâneas no mesmo checkout não devem classificar o artefato da outra execução como órfão próprio.",
+      "actual": "O filtro n.includes(\"cleanup\") considera o foreign sentinel da outra execução em leftovers. AssertdeepEqual229falha apesar de writeJsonAtomic ter preservado corretamente arquivos alheios; as linhas230–231não executam após assertion, deixando foreign tmp que contaminam a próxima execução sem concorrência.",
+      "impact": "A implementação de publicação está correta, mas o gate de testes volta a falhar por concorrência/resíduo e não demonstra isolamento de arquivos próprio como promete o novo teste. Não é regressão de API/classificador.",
+      "evidence": [
+        "revisoes/09-b-31-concurrent-suites.json",
+        "revisoes/09-b-31-concurrent-suites-5-A-failure.txt",
+        "revisoes/09-b-31-concurrent-suites-5-B-failure.txt",
+        "revisoes/09-b-31-cleanup-residual.txt"
+      ],
+      "suggestion": "Filtrar por prefixo completo e exclusivo .${basename(tmp)}. usado nos temporários UUID desta chamada; proteger a limpeza do foreign/target com finally. Preservar asserts e workers padrão."
+    }
+  ],
+  "statistics": {
+    "canonical": {
+      "seed": 20261009,
+      "false_positives": 0,
+      "legitimate": 72,
+      "true_positives": 30,
+      "suspicious": 30,
+      "inconclusive": 17,
+      "matrix": {
+        "legitimo": {
+          "plausivel": 55,
+          "suspeito": 0,
+          "inconclusivo": 17
+        },
+        "suspeito": {
+          "plausivel": 0,
+          "suspeito": 30,
+          "inconclusivo": 0
+        }
+      },
+      "matrix_counted_independently": "Medição31confirmada; contagem independente21 herdada sob hashes iguais de classificador/dataset/geração/métricas.",
+      "measured_on_sha": "31bb2150d1758c9c2efbbfc73e506f4973597ca7",
+      "evidence": "revisoes/09-b-31-evaluation.json"
+    },
+    "additional_synthetic_sensitivity": {
+      "seed_count": 267,
+      "seed_ranges": [
+        "0–63",
+        "1000–1199"
+      ],
+      "other_seeds": [
+        20261010,
+        123456789,
+        4294967295
+      ],
+      "series": 27234,
+      "false_positives": 2,
+      "legitimate": 19224,
+      "fpr": 0.00010403662089055348,
+      "true_positives": 8010,
+      "suspicious": 8010,
+      "inconclusive": 4790,
+      "all_reproductions_identical": true,
+      "false_positive_cases": [
+        {
+          "seed": 1079,
+          "cases": [
+            {
+              "id": "diurno-001",
+              "profile": "diurno",
+              "label": "legitimo",
+              "classification": "suspeito",
+              "shape": "mecanica",
+              "reason": "Ritmo mecânico: maior sequência de valores idênticos = 4 horas com 141 views (10.4% do total). Séries orgânicas têm ruído hora a hora; 4 horas com exatamente 141 views, em série com 5399 views no total, combinam repetição exata elevada e volume — indício de padrão automatizado, não prova de fraude."
+            }
+          ]
+        },
+        {
+          "seed": 1164,
+          "cases": [
+            {
+              "id": "diurno-010",
+              "profile": "diurno",
+              "label": "legitimo",
+              "classification": "suspeito",
+              "shape": "mecanica",
+              "reason": "Ritmo mecânico: maior sequência de valores idênticos = 4 horas com 75 views (5.9% do total). Séries orgânicas têm ruído hora a hora; 4 horas com exatamente 75 views, em série com 5081 views no total, combinam repetição exata elevada e volume — indício de padrão automatizado, não prova de fraude."
+            }
+          ]
+        }
+      ],
+      "interpretation": "Avaliação sintética de desenvolvimento; não é holdout cego nem FPR de produção. Dois FP diurnos pela regra mecânica documentada:1079/diurno-001 run4@141 e1164/diurno-010 run4@75. Não são a regressão viral/baseline original; critério50%peak permite repetição75 compeak147 mesmoabaixomediana113. Nenhuma calibração foi alterada para zerar estesFP.",
+      "measured_on_sha": "21c55d52d5e51f39ee8a06607c5c2e6d4da37afc",
+      "inherited_on_sha": "31bb2150d1758c9c2efbbfc73e506f4973597ca7",
+      "inheritance_basis": "Classificador/sinais/validação/PRNG/dataset blobs idênticos21→31; região literal perfis/buildDataset/serialização intacta. Não repetida como novo holdout."
+    }
+  },
+  "harness_note": "EPIPE no primeiro harness foi isolado como teardown prematuro: ele fazia closeAllConnections antes do uploadfinish. O harness corrigido aguarda finish e fechamento gracioso;12matrizes HTTP completas não tiveram EPIPE/ECONNRESET/erro de socket. Não é achado pendente do produto.",
+  "review_axes": {
+    "Standards": "Sem violação documentada de Node22/ESM/semdeps ou smell adicional; leitura estática detectou filtro genérico de cleanup, reproduzido depois sob suítes simultâneas comuns. Um P2 de isolamento de testes.",
+    "Spec": "Sem achados contratuais no novo domínio/writer/API; FPR/README/canonicidade/notaIA preservados. Corrida anterior fechada com provas. P3 opcional de barreira no stress do próprio teste."
+  },
+  "out_of_contract_suggestions": [
+    {
+      "priority": 3,
+      "file": "test/generate.test.js",
+      "line": 159,
+      "title": "Sincronizar ready de todos os workers antes do go para fortalecer prova de sobreposição",
+      "note": "Cada worker começa assim que anuncia ready. Barreira conjunta melhora evidência concorrente, sem indicar defeito no writer; sondagem própria desta revisão já usou barreira real."
+    }
+  ],
+  "verdict": "changes_required",
+  "release_authorized": false,
+  "note": "Não liberar31 até corrigir o novo P2 de isolamento do teste. A corrida anterior de escrita compartilhada foi resolvida; achados originais estão somente em resolutions, não duplicados como pendentes."
+}

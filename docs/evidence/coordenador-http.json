@@ -1,0 +1,1813 @@
+{
+  "challenge": 9,
+  "started_at": "2026-10-09T20:51:01.851Z",
+  "finished_at": "2026-10-09T20:51:01.900Z",
+  "environment": "macOS, Node22, HTTP loopback, dados sintéticos",
+  "passed": true,
+  "steps": [
+    {
+      "label": "API local responde com nome do serviço e limite da análise",
+      "method": "GET",
+      "path": "/health",
+      "http_status": 200,
+      "response": {
+        "ok": true,
+        "service": "conty-deteccao-views",
+        "receivedAt": "2026-10-09T20:51:01.857Z",
+        "disclaimer": "Resultado analítico, não prova de fraude: séries horárias de views não permitem afirmar humanos ou bots com certeza. Tráfego pago legítimo, campanhas agendadas e picos orgânicos reais podem se parecer com compra. Séries idênticas são indistinguíveis por este método."
+      },
+      "checks": [
+        {
+          "field": "ok",
+          "expected": true,
+          "actual": true,
+          "passed": true
+        },
+        {
+          "field": "service",
+          "expected": "conty-deteccao-views",
+          "actual": "conty-deteccao-views",
+          "passed": true
+        }
+      ],
+      "passed": true,
+      "duration_ms": 9
+    },
+    {
+      "label": "Viral com fundo estável: repetição de base não vira compra",
+      "method": "POST",
+      "path": "/classify",
+      "request": {
+        "series": [
+          {
+            "timestamp": "2026-01-05T00:00:00.000Z",
+            "views": 200
+          },
+          {
+            "timestamp": "2026-01-05T01:00:00.000Z",
+            "views": 200
+          },
+          {
+            "timestamp": "2026-01-05T02:00:00.000Z",
+            "views": 200
+          },
+          {
+            "timestamp": "2026-01-05T03:00:00.000Z",
+            "views": 200
+          },
+          {
+            "timestamp": "2026-01-05T04:00:00.000Z",
+            "views": 200
+          },
+          {
+            "timestamp": "2026-01-05T05:00:00.000Z",
+            "views": 200
+          },
+          {
+            "timestamp": "2026-01-05T06:00:00.000Z",
+            "views": 200
+          },
+          {
+            "timestamp": "2026-01-05T07:00:00.000Z",
+            "views": 200
+          },
+          {
+            "timestamp": "2026-01-05T08:00:00.000Z",
+            "views": 200
+          },
+          {
+            "timestamp": "2026-01-05T09:00:00.000Z",
+            "views": 200
+          },
+          {
+            "timestamp": "2026-01-05T10:00:00.000Z",
+            "views": 200
+          },
+          {
+            "timestamp": "2026-01-05T11:00:00.000Z",
+            "views": 295
+          },
+          {
+            "timestamp": "2026-01-05T12:00:00.000Z",
+            "views": 544
+          },
+          {
+            "timestamp": "2026-01-05T13:00:00.000Z",
+            "views": 896
+          },
+          {
+            "timestamp": "2026-01-05T14:00:00.000Z",
+            "views": 1300
+          },
+          {
+            "timestamp": "2026-01-05T15:00:00.000Z",
+            "views": 1704
+          },
+          {
+            "timestamp": "2026-01-05T16:00:00.000Z",
+            "views": 2056
+          },
+          {
+            "timestamp": "2026-01-05T17:00:00.000Z",
+            "views": 2305
+          },
+          {
+            "timestamp": "2026-01-05T18:00:00.000Z",
+            "views": 2400
+          },
+          {
+            "timestamp": "2026-01-05T19:00:00.000Z",
+            "views": 2368
+          },
+          {
+            "timestamp": "2026-01-05T20:00:00.000Z",
+            "views": 2278
+          },
+          {
+            "timestamp": "2026-01-05T21:00:00.000Z",
+            "views": 2140
+          },
+          {
+            "timestamp": "2026-01-05T22:00:00.000Z",
+            "views": 1964
+          },
+          {
+            "timestamp": "2026-01-05T23:00:00.000Z",
+            "views": 1759
+          },
+          {
+            "timestamp": "2026-01-06T00:00:00.000Z",
+            "views": 1534
+          },
+          {
+            "timestamp": "2026-01-06T01:00:00.000Z",
+            "views": 1300
+          },
+          {
+            "timestamp": "2026-01-06T02:00:00.000Z",
+            "views": 1066
+          },
+          {
+            "timestamp": "2026-01-06T03:00:00.000Z",
+            "views": 841
+          },
+          {
+            "timestamp": "2026-01-06T04:00:00.000Z",
+            "views": 636
+          },
+          {
+            "timestamp": "2026-01-06T05:00:00.000Z",
+            "views": 460
+          },
+          {
+            "timestamp": "2026-01-06T06:00:00.000Z",
+            "views": 322
+          },
+          {
+            "timestamp": "2026-01-06T07:00:00.000Z",
+            "views": 232
+          },
+          {
+            "timestamp": "2026-01-06T08:00:00.000Z",
+            "views": 200
+          },
+          {
+            "timestamp": "2026-01-06T09:00:00.000Z",
+            "views": 200
+          },
+          {
+            "timestamp": "2026-01-06T10:00:00.000Z",
+            "views": 200
+          },
+          {
+            "timestamp": "2026-01-06T11:00:00.000Z",
+            "views": 200
+          },
+          {
+            "timestamp": "2026-01-06T12:00:00.000Z",
+            "views": 200
+          },
+          {
+            "timestamp": "2026-01-06T13:00:00.000Z",
+            "views": 200
+          },
+          {
+            "timestamp": "2026-01-06T14:00:00.000Z",
+            "views": 200
+          },
+          {
+            "timestamp": "2026-01-06T15:00:00.000Z",
+            "views": 200
+          },
+          {
+            "timestamp": "2026-01-06T16:00:00.000Z",
+            "views": 200
+          },
+          {
+            "timestamp": "2026-01-06T17:00:00.000Z",
+            "views": 200
+          },
+          {
+            "timestamp": "2026-01-06T18:00:00.000Z",
+            "views": 200
+          },
+          {
+            "timestamp": "2026-01-06T19:00:00.000Z",
+            "views": 200
+          },
+          {
+            "timestamp": "2026-01-06T20:00:00.000Z",
+            "views": 200
+          },
+          {
+            "timestamp": "2026-01-06T21:00:00.000Z",
+            "views": 200
+          },
+          {
+            "timestamp": "2026-01-06T22:00:00.000Z",
+            "views": 200
+          },
+          {
+            "timestamp": "2026-01-06T23:00:00.000Z",
+            "views": 200
+          }
+        ]
+      },
+      "http_status": 200,
+      "response": {
+        "classification": "plausivel",
+        "reason": "Subida e descida graduais (largura do pico = 12h; subida = 4h; descida = 7h; maior degrau na rampa = 1.844×) com razão pico/base de 12×. A sequência de 16h com 200 views está no nível de base (9.5% do total), compatível com fundo estável durante propagação orgânica — não é ritmo de entrega mecânica. Pico alto sozinho não caracteriza compra.",
+        "shape": "rampa_suave",
+        "signals": {
+          "peakToBase": {
+            "value": 12,
+            "threshold": 8,
+            "triggered": true,
+            "detail": "pico 2400 vs mediana 200 → razão 12×"
+          },
+          "abruptJump": {
+            "value": 1.844,
+            "threshold": 4,
+            "triggered": false,
+            "detail": "maior fator de subida hora a hora = 1.844× no índice 12"
+          },
+          "abruptDrop": {
+            "value": 1.429,
+            "threshold": 4,
+            "triggered": false,
+            "detail": "maior fator de queda hora a hora = 1.429× no índice 30"
+          },
+          "concentration": {
+            "value": 0.071,
+            "top3Share": 0.2093,
+            "window3Share": 0.2093,
+            "threshold": 0.35,
+            "triggered": false,
+            "detail": "hora do pico = 7.1% do total; top-3 horas = 20.9%; melhor janela de 3h = 20.9%"
+          },
+          "exactRepetition": {
+            "value": 16,
+            "runValue": 200,
+            "runShare": 0.0947,
+            "threshold": 4,
+            "triggered": false,
+            "detail": "maior sequência de valores idênticos = 16 horas com 200 views (9.5% do total)"
+          },
+          "rampShape": {
+            "value": {
+              "spikeWidth": 12,
+              "riseHours": 4,
+              "fallHours": 7,
+              "maxRampStep": 1.844
+            },
+            "threshold": {
+              "wideWidth": 4,
+              "smoothMaxStep": 3.2
+            },
+            "triggered": true,
+            "detail": "largura do pico = 12h; subida = 4h; descida = 7h; maior degrau na rampa = 1.844×"
+          }
+        },
+        "rawMetrics": {
+          "n": 48,
+          "total": 33800,
+          "peak": 2400,
+          "peakIdx": 18,
+          "median": 200,
+          "peakToBase": 12,
+          "peakShare": 0.071,
+          "top3Share": 0.2093,
+          "maxRiseRatio": 1.844,
+          "maxRiseIdx": 12,
+          "maxDropRatio": 1.429,
+          "maxDropIdx": 30,
+          "spikeWidth": 12,
+          "riseHours": 4,
+          "fallHours": 7,
+          "maxRampStep": 1.844,
+          "maxIdenticalRun": 16,
+          "runValue": 200,
+          "runShare": 0.0947,
+          "window3Share": 0.2093,
+          "diurnalAmplitude": 1.562
+        },
+        "flags": {
+          "abruptJump": false,
+          "abruptDrop": false,
+          "highPeakToBase": true,
+          "highConcentration": false,
+          "narrowSpike": false,
+          "mechanical": false,
+          "smoothRamp": true
+        },
+        "thresholds": {
+          "MIN_POINTS": 6,
+          "MIN_TOTAL_VIEWS": 80,
+          "MIN_PEAK_FOR_MAGNITUDE": 15,
+          "HIGH_PEAK_TO_BASE": 8,
+          "HIGH_PEAK_SHARE": 0.35,
+          "HIGH_TOP3_SHARE": 0.72,
+          "HIGH_WINDOW3_SHARE": 0.65,
+          "ABRUPT_JUMP_RATIO": 4,
+          "ABRUPT_DROP_RATIO": 4,
+          "NARROW_SPIKE_WIDTH": 2,
+          "NARROW_SPIKE_MIN_PEAK_TO_BASE": 4,
+          "WIDE_RAMP_WIDTH": 4,
+          "SMOOTH_MAX_RAMP_STEP": 3.2,
+          "MECHANICAL_RUN": 4,
+          "MECHANICAL_VALUE_MIN": 40,
+          "MECHANICAL_SHARE": 0.25,
+          "MECHANICAL_PEAK_FRACTION": 0.5,
+          "ORGANIC_MIN_PEAK_TO_BASE": 3
+        },
+        "disclaimer": "Resultado analítico, não prova de fraude: séries horárias de views não permitem afirmar humanos ou bots com certeza. Tráfego pago legítimo, campanhas agendadas e picos orgânicos reais podem se parecer com compra. Séries idênticas são indistinguíveis por este método.",
+        "receivedAt": "2026-10-09T20:51:01.863Z",
+        "note": "Séries horárias não separam humanos de bots com certeza; tráfego pago legítimo e campanhas agendadas podem se parecer com pico comprado."
+      },
+      "checks": [
+        {
+          "field": "classification",
+          "expected": "plausivel",
+          "actual": "plausivel",
+          "passed": true
+        },
+        {
+          "field": "shape",
+          "expected": "rampa_suave",
+          "actual": "rampa_suave",
+          "passed": true
+        },
+        {
+          "field": "flags.mechanical",
+          "expected": false,
+          "actual": false,
+          "passed": true
+        },
+        {
+          "field": "flags.smoothRamp",
+          "expected": true,
+          "actual": true,
+          "passed": true
+        },
+        {
+          "field": "signals.exactRepetition.triggered",
+          "expected": false,
+          "actual": false,
+          "passed": true
+        },
+        {
+          "field": "rawMetrics.maxIdenticalRun",
+          "expected": 16,
+          "actual": 16,
+          "passed": true
+        },
+        {
+          "field": "rawMetrics.runValue",
+          "expected": 200,
+          "actual": 200,
+          "passed": true
+        },
+        {
+          "field": "rawMetrics.n",
+          "expected": 48,
+          "actual": 48,
+          "passed": true
+        }
+      ],
+      "passed": true,
+      "duration_ms": 6
+    },
+    {
+      "label": "Regressão seed25: cinco horas com 99 views não acusam o viral",
+      "method": "POST",
+      "path": "/classify",
+      "request": {
+        "series": [
+          {
+            "timestamp": "2026-01-05T16:00:00.000Z",
+            "views": 87
+          },
+          {
+            "timestamp": "2026-01-05T17:00:00.000Z",
+            "views": 88
+          },
+          {
+            "timestamp": "2026-01-05T18:00:00.000Z",
+            "views": 96
+          },
+          {
+            "timestamp": "2026-01-05T19:00:00.000Z",
+            "views": 98
+          },
+          {
+            "timestamp": "2026-01-05T20:00:00.000Z",
+            "views": 112
+          },
+          {
+            "timestamp": "2026-01-05T21:00:00.000Z",
+            "views": 96
+          },
+          {
+            "timestamp": "2026-01-05T22:00:00.000Z",
+            "views": 102
+          },
+          {
+            "timestamp": "2026-01-05T23:00:00.000Z",
+            "views": 93
+          },
+          {
+            "timestamp": "2026-01-06T00:00:00.000Z",
+            "views": 99
+          },
+          {
+            "timestamp": "2026-01-06T01:00:00.000Z",
+            "views": 101
+          },
+          {
+            "timestamp": "2026-01-06T02:00:00.000Z",
+            "views": 99
+          },
+          {
+            "timestamp": "2026-01-06T03:00:00.000Z",
+            "views": 89
+          },
+          {
+            "timestamp": "2026-01-06T04:00:00.000Z",
+            "views": 100
+          },
+          {
+            "timestamp": "2026-01-06T05:00:00.000Z",
+            "views": 95
+          },
+          {
+            "timestamp": "2026-01-06T06:00:00.000Z",
+            "views": 105
+          },
+          {
+            "timestamp": "2026-01-06T07:00:00.000Z",
+            "views": 97
+          },
+          {
+            "timestamp": "2026-01-06T08:00:00.000Z",
+            "views": 91
+          },
+          {
+            "timestamp": "2026-01-06T09:00:00.000Z",
+            "views": 137
+          },
+          {
+            "timestamp": "2026-01-06T10:00:00.000Z",
+            "views": 206
+          },
+          {
+            "timestamp": "2026-01-06T11:00:00.000Z",
+            "views": 331
+          },
+          {
+            "timestamp": "2026-01-06T12:00:00.000Z",
+            "views": 400
+          },
+          {
+            "timestamp": "2026-01-06T13:00:00.000Z",
+            "views": 572
+          },
+          {
+            "timestamp": "2026-01-06T14:00:00.000Z",
+            "views": 745
+          },
+          {
+            "timestamp": "2026-01-06T15:00:00.000Z",
+            "views": 816
+          },
+          {
+            "timestamp": "2026-01-06T16:00:00.000Z",
+            "views": 944
+          },
+          {
+            "timestamp": "2026-01-06T17:00:00.000Z",
+            "views": 1001
+          },
+          {
+            "timestamp": "2026-01-06T18:00:00.000Z",
+            "views": 1012
+          },
+          {
+            "timestamp": "2026-01-06T19:00:00.000Z",
+            "views": 769
+          },
+          {
+            "timestamp": "2026-01-06T20:00:00.000Z",
+            "views": 834
+          },
+          {
+            "timestamp": "2026-01-06T21:00:00.000Z",
+            "views": 858
+          },
+          {
+            "timestamp": "2026-01-06T22:00:00.000Z",
+            "views": 831
+          },
+          {
+            "timestamp": "2026-01-06T23:00:00.000Z",
+            "views": 675
+          },
+          {
+            "timestamp": "2026-01-07T00:00:00.000Z",
+            "views": 685
+          },
+          {
+            "timestamp": "2026-01-07T01:00:00.000Z",
+            "views": 626
+          },
+          {
+            "timestamp": "2026-01-07T02:00:00.000Z",
+            "views": 476
+          },
+          {
+            "timestamp": "2026-01-07T03:00:00.000Z",
+            "views": 440
+          },
+          {
+            "timestamp": "2026-01-07T04:00:00.000Z",
+            "views": 354
+          },
+          {
+            "timestamp": "2026-01-07T05:00:00.000Z",
+            "views": 279
+          },
+          {
+            "timestamp": "2026-01-07T06:00:00.000Z",
+            "views": 214
+          },
+          {
+            "timestamp": "2026-01-07T07:00:00.000Z",
+            "views": 173
+          },
+          {
+            "timestamp": "2026-01-07T08:00:00.000Z",
+            "views": 139
+          },
+          {
+            "timestamp": "2026-01-07T09:00:00.000Z",
+            "views": 99
+          },
+          {
+            "timestamp": "2026-01-07T10:00:00.000Z",
+            "views": 99
+          },
+          {
+            "timestamp": "2026-01-07T11:00:00.000Z",
+            "views": 99
+          },
+          {
+            "timestamp": "2026-01-07T12:00:00.000Z",
+            "views": 99
+          },
+          {
+            "timestamp": "2026-01-07T13:00:00.000Z",
+            "views": 99
+          },
+          {
+            "timestamp": "2026-01-07T14:00:00.000Z",
+            "views": 101
+          },
+          {
+            "timestamp": "2026-01-07T15:00:00.000Z",
+            "views": 102
+          }
+        ]
+      },
+      "http_status": 200,
+      "response": {
+        "classification": "plausivel",
+        "reason": "Subida e descida graduais (largura do pico = 13h; subida = 5h; descida = 7h; maior degrau na rampa = 1.607×) com razão pico/base de 8.129×. A sequência de 5h com 99 views está no nível de base (3.1% do total), compatível com fundo estável durante propagação orgânica — não é ritmo de entrega mecânica. Pico alto sozinho não caracteriza compra.",
+        "shape": "rampa_suave",
+        "signals": {
+          "peakToBase": {
+            "value": 8.129,
+            "threshold": 8,
+            "triggered": true,
+            "detail": "pico 1012 vs mediana 124.5 → razão 8.129×"
+          },
+          "abruptJump": {
+            "value": 1.607,
+            "threshold": 4,
+            "triggered": false,
+            "detail": "maior fator de subida hora a hora = 1.607× no índice 19"
+          },
+          "abruptDrop": {
+            "value": 1.404,
+            "threshold": 4,
+            "triggered": false,
+            "detail": "maior fator de queda hora a hora = 1.404× no índice 41"
+          },
+          "concentration": {
+            "value": 0.0638,
+            "top3Share": 0.1864,
+            "window3Share": 0.1864,
+            "threshold": 0.35,
+            "triggered": false,
+            "detail": "hora do pico = 6.4% do total; top-3 horas = 18.6%; melhor janela de 3h = 18.6%"
+          },
+          "exactRepetition": {
+            "value": 5,
+            "runValue": 99,
+            "runShare": 0.0312,
+            "threshold": 4,
+            "triggered": false,
+            "detail": "maior sequência de valores idênticos = 5 horas com 99 views (3.1% do total)"
+          },
+          "rampShape": {
+            "value": {
+              "spikeWidth": 13,
+              "riseHours": 5,
+              "fallHours": 7,
+              "maxRampStep": 1.607
+            },
+            "threshold": {
+              "wideWidth": 4,
+              "smoothMaxStep": 3.2
+            },
+            "triggered": true,
+            "detail": "largura do pico = 13h; subida = 5h; descida = 7h; maior degrau na rampa = 1.607×"
+          }
+        },
+        "rawMetrics": {
+          "n": 48,
+          "total": 15863,
+          "peak": 1012,
+          "peakIdx": 26,
+          "median": 124.5,
+          "peakToBase": 8.129,
+          "peakShare": 0.0638,
+          "top3Share": 0.1864,
+          "maxRiseRatio": 1.607,
+          "maxRiseIdx": 19,
+          "maxDropRatio": 1.404,
+          "maxDropIdx": 41,
+          "spikeWidth": 13,
+          "riseHours": 5,
+          "fallHours": 7,
+          "maxRampStep": 1.607,
+          "maxIdenticalRun": 5,
+          "runValue": 99,
+          "runShare": 0.0312,
+          "window3Share": 0.1864,
+          "diurnalAmplitude": 1.328
+        },
+        "flags": {
+          "abruptJump": false,
+          "abruptDrop": false,
+          "highPeakToBase": true,
+          "highConcentration": false,
+          "narrowSpike": false,
+          "mechanical": false,
+          "smoothRamp": true
+        },
+        "thresholds": {
+          "MIN_POINTS": 6,
+          "MIN_TOTAL_VIEWS": 80,
+          "MIN_PEAK_FOR_MAGNITUDE": 15,
+          "HIGH_PEAK_TO_BASE": 8,
+          "HIGH_PEAK_SHARE": 0.35,
+          "HIGH_TOP3_SHARE": 0.72,
+          "HIGH_WINDOW3_SHARE": 0.65,
+          "ABRUPT_JUMP_RATIO": 4,
+          "ABRUPT_DROP_RATIO": 4,
+          "NARROW_SPIKE_WIDTH": 2,
+          "NARROW_SPIKE_MIN_PEAK_TO_BASE": 4,
+          "WIDE_RAMP_WIDTH": 4,
+          "SMOOTH_MAX_RAMP_STEP": 3.2,
+          "MECHANICAL_RUN": 4,
+          "MECHANICAL_VALUE_MIN": 40,
+          "MECHANICAL_SHARE": 0.25,
+          "MECHANICAL_PEAK_FRACTION": 0.5,
+          "ORGANIC_MIN_PEAK_TO_BASE": 3
+        },
+        "disclaimer": "Resultado analítico, não prova de fraude: séries horárias de views não permitem afirmar humanos ou bots com certeza. Tráfego pago legítimo, campanhas agendadas e picos orgânicos reais podem se parecer com compra. Séries idênticas são indistinguíveis por este método.",
+        "receivedAt": "2026-10-09T20:51:01.870Z",
+        "note": "Séries horárias não separam humanos de bots com certeza; tráfego pago legítimo e campanhas agendadas podem se parecer com pico comprado."
+      },
+      "checks": [
+        {
+          "field": "classification",
+          "expected": "plausivel",
+          "actual": "plausivel",
+          "passed": true
+        },
+        {
+          "field": "shape",
+          "expected": "rampa_suave",
+          "actual": "rampa_suave",
+          "passed": true
+        },
+        {
+          "field": "flags.mechanical",
+          "expected": false,
+          "actual": false,
+          "passed": true
+        },
+        {
+          "field": "flags.smoothRamp",
+          "expected": true,
+          "actual": true,
+          "passed": true
+        },
+        {
+          "field": "rawMetrics.maxIdenticalRun",
+          "expected": 5,
+          "actual": 5,
+          "passed": true
+        },
+        {
+          "field": "rawMetrics.runValue",
+          "expected": 99,
+          "actual": 99,
+          "passed": true
+        },
+        {
+          "field": "rawMetrics.total",
+          "expected": 15863,
+          "actual": 15863,
+          "passed": true
+        },
+        {
+          "field": "rawMetrics.runShare",
+          "expected": 0.0312,
+          "actual": 0.0312,
+          "passed": true
+        }
+      ],
+      "passed": true,
+      "duration_ms": 5
+    },
+    {
+      "label": "Pico abrupto de 25 vezes em duas horas: suspeita com sinais combinados",
+      "method": "POST",
+      "path": "/classify",
+      "request": {
+        "series": [
+          {
+            "timestamp": "2026-01-05T00:00:00.000Z",
+            "views": 100
+          },
+          {
+            "timestamp": "2026-01-05T01:00:00.000Z",
+            "views": 100
+          },
+          {
+            "timestamp": "2026-01-05T02:00:00.000Z",
+            "views": 100
+          },
+          {
+            "timestamp": "2026-01-05T03:00:00.000Z",
+            "views": 100
+          },
+          {
+            "timestamp": "2026-01-05T04:00:00.000Z",
+            "views": 100
+          },
+          {
+            "timestamp": "2026-01-05T05:00:00.000Z",
+            "views": 100
+          },
+          {
+            "timestamp": "2026-01-05T06:00:00.000Z",
+            "views": 100
+          },
+          {
+            "timestamp": "2026-01-05T07:00:00.000Z",
+            "views": 100
+          },
+          {
+            "timestamp": "2026-01-05T08:00:00.000Z",
+            "views": 100
+          },
+          {
+            "timestamp": "2026-01-05T09:00:00.000Z",
+            "views": 100
+          },
+          {
+            "timestamp": "2026-01-05T10:00:00.000Z",
+            "views": 100
+          },
+          {
+            "timestamp": "2026-01-05T11:00:00.000Z",
+            "views": 100
+          },
+          {
+            "timestamp": "2026-01-05T12:00:00.000Z",
+            "views": 100
+          },
+          {
+            "timestamp": "2026-01-05T13:00:00.000Z",
+            "views": 100
+          },
+          {
+            "timestamp": "2026-01-05T14:00:00.000Z",
+            "views": 100
+          },
+          {
+            "timestamp": "2026-01-05T15:00:00.000Z",
+            "views": 100
+          },
+          {
+            "timestamp": "2026-01-05T16:00:00.000Z",
+            "views": 100
+          },
+          {
+            "timestamp": "2026-01-05T17:00:00.000Z",
+            "views": 100
+          },
+          {
+            "timestamp": "2026-01-05T18:00:00.000Z",
+            "views": 100
+          },
+          {
+            "timestamp": "2026-01-05T19:00:00.000Z",
+            "views": 100
+          },
+          {
+            "timestamp": "2026-01-05T20:00:00.000Z",
+            "views": 2500
+          },
+          {
+            "timestamp": "2026-01-05T21:00:00.000Z",
+            "views": 2500
+          },
+          {
+            "timestamp": "2026-01-05T22:00:00.000Z",
+            "views": 100
+          },
+          {
+            "timestamp": "2026-01-05T23:00:00.000Z",
+            "views": 100
+          },
+          {
+            "timestamp": "2026-01-06T00:00:00.000Z",
+            "views": 100
+          },
+          {
+            "timestamp": "2026-01-06T01:00:00.000Z",
+            "views": 100
+          },
+          {
+            "timestamp": "2026-01-06T02:00:00.000Z",
+            "views": 100
+          },
+          {
+            "timestamp": "2026-01-06T03:00:00.000Z",
+            "views": 100
+          },
+          {
+            "timestamp": "2026-01-06T04:00:00.000Z",
+            "views": 100
+          },
+          {
+            "timestamp": "2026-01-06T05:00:00.000Z",
+            "views": 100
+          },
+          {
+            "timestamp": "2026-01-06T06:00:00.000Z",
+            "views": 100
+          },
+          {
+            "timestamp": "2026-01-06T07:00:00.000Z",
+            "views": 100
+          },
+          {
+            "timestamp": "2026-01-06T08:00:00.000Z",
+            "views": 100
+          },
+          {
+            "timestamp": "2026-01-06T09:00:00.000Z",
+            "views": 100
+          },
+          {
+            "timestamp": "2026-01-06T10:00:00.000Z",
+            "views": 100
+          },
+          {
+            "timestamp": "2026-01-06T11:00:00.000Z",
+            "views": 100
+          },
+          {
+            "timestamp": "2026-01-06T12:00:00.000Z",
+            "views": 100
+          },
+          {
+            "timestamp": "2026-01-06T13:00:00.000Z",
+            "views": 100
+          },
+          {
+            "timestamp": "2026-01-06T14:00:00.000Z",
+            "views": 100
+          },
+          {
+            "timestamp": "2026-01-06T15:00:00.000Z",
+            "views": 100
+          },
+          {
+            "timestamp": "2026-01-06T16:00:00.000Z",
+            "views": 100
+          },
+          {
+            "timestamp": "2026-01-06T17:00:00.000Z",
+            "views": 100
+          },
+          {
+            "timestamp": "2026-01-06T18:00:00.000Z",
+            "views": 100
+          },
+          {
+            "timestamp": "2026-01-06T19:00:00.000Z",
+            "views": 100
+          },
+          {
+            "timestamp": "2026-01-06T20:00:00.000Z",
+            "views": 100
+          },
+          {
+            "timestamp": "2026-01-06T21:00:00.000Z",
+            "views": 100
+          },
+          {
+            "timestamp": "2026-01-06T22:00:00.000Z",
+            "views": 100
+          },
+          {
+            "timestamp": "2026-01-06T23:00:00.000Z",
+            "views": 100
+          }
+        ]
+      },
+      "http_status": 200,
+      "response": {
+        "classification": "suspeito",
+        "reason": "Pico abrupto com magnitude concentrada: largura do pico = 2h; subida = 0h; descida = 1h; maior degrau na rampa = 25×; pico 2500 vs mediana 100 → razão 25×; hora do pico = 26.0% do total; top-3 horas = 53.1%; melhor janela de 3h = 53.1%. Subida/queda curtas e concentração alta combinadas são compatíveis com compra de views — indício, não prova.",
+        "shape": "pico_abrupto",
+        "signals": {
+          "peakToBase": {
+            "value": 25,
+            "threshold": 8,
+            "triggered": true,
+            "detail": "pico 2500 vs mediana 100 → razão 25×"
+          },
+          "abruptJump": {
+            "value": 25,
+            "threshold": 4,
+            "triggered": true,
+            "detail": "maior fator de subida hora a hora = 25× no índice 20"
+          },
+          "abruptDrop": {
+            "value": 25,
+            "threshold": 4,
+            "triggered": true,
+            "detail": "maior fator de queda hora a hora = 25× no índice 22"
+          },
+          "concentration": {
+            "value": 0.2604,
+            "top3Share": 0.5313,
+            "window3Share": 0.5313,
+            "threshold": 0.35,
+            "triggered": false,
+            "detail": "hora do pico = 26.0% do total; top-3 horas = 53.1%; melhor janela de 3h = 53.1%"
+          },
+          "exactRepetition": {
+            "value": 26,
+            "runValue": 100,
+            "runShare": 0.2708,
+            "threshold": 4,
+            "triggered": false,
+            "detail": "maior sequência de valores idênticos = 26 horas com 100 views (27.1% do total)"
+          },
+          "rampShape": {
+            "value": {
+              "spikeWidth": 2,
+              "riseHours": 0,
+              "fallHours": 1,
+              "maxRampStep": 25
+            },
+            "threshold": {
+              "wideWidth": 4,
+              "smoothMaxStep": 3.2
+            },
+            "triggered": false,
+            "detail": "largura do pico = 2h; subida = 0h; descida = 1h; maior degrau na rampa = 25×"
+          }
+        },
+        "rawMetrics": {
+          "n": 48,
+          "total": 9600,
+          "peak": 2500,
+          "peakIdx": 20,
+          "median": 100,
+          "peakToBase": 25,
+          "peakShare": 0.2604,
+          "top3Share": 0.5313,
+          "maxRiseRatio": 25,
+          "maxRiseIdx": 20,
+          "maxDropRatio": 25,
+          "maxDropIdx": 22,
+          "spikeWidth": 2,
+          "riseHours": 0,
+          "fallHours": 1,
+          "maxRampStep": 25,
+          "maxIdenticalRun": 26,
+          "runValue": 100,
+          "runShare": 0.2708,
+          "window3Share": 0.5313,
+          "diurnalAmplitude": 6
+        },
+        "flags": {
+          "abruptJump": true,
+          "abruptDrop": true,
+          "highPeakToBase": true,
+          "highConcentration": false,
+          "narrowSpike": true,
+          "mechanical": false,
+          "smoothRamp": false
+        },
+        "thresholds": {
+          "MIN_POINTS": 6,
+          "MIN_TOTAL_VIEWS": 80,
+          "MIN_PEAK_FOR_MAGNITUDE": 15,
+          "HIGH_PEAK_TO_BASE": 8,
+          "HIGH_PEAK_SHARE": 0.35,
+          "HIGH_TOP3_SHARE": 0.72,
+          "HIGH_WINDOW3_SHARE": 0.65,
+          "ABRUPT_JUMP_RATIO": 4,
+          "ABRUPT_DROP_RATIO": 4,
+          "NARROW_SPIKE_WIDTH": 2,
+          "NARROW_SPIKE_MIN_PEAK_TO_BASE": 4,
+          "WIDE_RAMP_WIDTH": 4,
+          "SMOOTH_MAX_RAMP_STEP": 3.2,
+          "MECHANICAL_RUN": 4,
+          "MECHANICAL_VALUE_MIN": 40,
+          "MECHANICAL_SHARE": 0.25,
+          "MECHANICAL_PEAK_FRACTION": 0.5,
+          "ORGANIC_MIN_PEAK_TO_BASE": 3
+        },
+        "disclaimer": "Resultado analítico, não prova de fraude: séries horárias de views não permitem afirmar humanos ou bots com certeza. Tráfego pago legítimo, campanhas agendadas e picos orgânicos reais podem se parecer com compra. Séries idênticas são indistinguíveis por este método.",
+        "receivedAt": "2026-10-09T20:51:01.875Z",
+        "note": "Classificação de risco para triagem humana. Não é prova de fraude nem atribuição de autoria."
+      },
+      "checks": [
+        {
+          "field": "classification",
+          "expected": "suspeito",
+          "actual": "suspeito",
+          "passed": true
+        },
+        {
+          "field": "shape",
+          "expected": "pico_abrupto",
+          "actual": "pico_abrupto",
+          "passed": true
+        },
+        {
+          "field": "flags.abruptJump",
+          "expected": true,
+          "actual": true,
+          "passed": true
+        },
+        {
+          "field": "flags.abruptDrop",
+          "expected": true,
+          "actual": true,
+          "passed": true
+        },
+        {
+          "field": "flags.highPeakToBase",
+          "expected": true,
+          "actual": true,
+          "passed": true
+        },
+        {
+          "field": "flags.smoothRamp",
+          "expected": false,
+          "actual": false,
+          "passed": true
+        },
+        {
+          "field": "rawMetrics.peak",
+          "expected": 2500,
+          "actual": 2500,
+          "passed": true
+        },
+        {
+          "field": "rawMetrics.peakToBase",
+          "expected": 25,
+          "actual": 25,
+          "passed": true
+        }
+      ],
+      "passed": true,
+      "duration_ms": 4
+    },
+    {
+      "label": "Evento moderado com sinal isolado: o classificador prefere não acusar",
+      "method": "POST",
+      "path": "/classify",
+      "request": {
+        "series": [
+          {
+            "timestamp": "2026-01-05T00:00:00.000Z",
+            "views": 148
+          },
+          {
+            "timestamp": "2026-01-05T01:00:00.000Z",
+            "views": 150
+          },
+          {
+            "timestamp": "2026-01-05T02:00:00.000Z",
+            "views": 152
+          },
+          {
+            "timestamp": "2026-01-05T03:00:00.000Z",
+            "views": 149
+          },
+          {
+            "timestamp": "2026-01-05T04:00:00.000Z",
+            "views": 151
+          },
+          {
+            "timestamp": "2026-01-05T05:00:00.000Z",
+            "views": 148
+          },
+          {
+            "timestamp": "2026-01-05T06:00:00.000Z",
+            "views": 150
+          },
+          {
+            "timestamp": "2026-01-05T07:00:00.000Z",
+            "views": 152
+          },
+          {
+            "timestamp": "2026-01-05T08:00:00.000Z",
+            "views": 149
+          },
+          {
+            "timestamp": "2026-01-05T09:00:00.000Z",
+            "views": 151
+          },
+          {
+            "timestamp": "2026-01-05T10:00:00.000Z",
+            "views": 148
+          },
+          {
+            "timestamp": "2026-01-05T11:00:00.000Z",
+            "views": 150
+          },
+          {
+            "timestamp": "2026-01-05T12:00:00.000Z",
+            "views": 152
+          },
+          {
+            "timestamp": "2026-01-05T13:00:00.000Z",
+            "views": 149
+          },
+          {
+            "timestamp": "2026-01-05T14:00:00.000Z",
+            "views": 751
+          },
+          {
+            "timestamp": "2026-01-05T15:00:00.000Z",
+            "views": 748
+          },
+          {
+            "timestamp": "2026-01-05T16:00:00.000Z",
+            "views": 750
+          },
+          {
+            "timestamp": "2026-01-05T17:00:00.000Z",
+            "views": 652
+          },
+          {
+            "timestamp": "2026-01-05T18:00:00.000Z",
+            "views": 549
+          },
+          {
+            "timestamp": "2026-01-05T19:00:00.000Z",
+            "views": 451
+          },
+          {
+            "timestamp": "2026-01-05T20:00:00.000Z",
+            "views": 348
+          },
+          {
+            "timestamp": "2026-01-05T21:00:00.000Z",
+            "views": 250
+          },
+          {
+            "timestamp": "2026-01-05T22:00:00.000Z",
+            "views": 152
+          },
+          {
+            "timestamp": "2026-01-05T23:00:00.000Z",
+            "views": 149
+          },
+          {
+            "timestamp": "2026-01-06T00:00:00.000Z",
+            "views": 151
+          },
+          {
+            "timestamp": "2026-01-06T01:00:00.000Z",
+            "views": 148
+          },
+          {
+            "timestamp": "2026-01-06T02:00:00.000Z",
+            "views": 150
+          },
+          {
+            "timestamp": "2026-01-06T03:00:00.000Z",
+            "views": 152
+          },
+          {
+            "timestamp": "2026-01-06T04:00:00.000Z",
+            "views": 149
+          },
+          {
+            "timestamp": "2026-01-06T05:00:00.000Z",
+            "views": 151
+          },
+          {
+            "timestamp": "2026-01-06T06:00:00.000Z",
+            "views": 148
+          },
+          {
+            "timestamp": "2026-01-06T07:00:00.000Z",
+            "views": 150
+          },
+          {
+            "timestamp": "2026-01-06T08:00:00.000Z",
+            "views": 152
+          },
+          {
+            "timestamp": "2026-01-06T09:00:00.000Z",
+            "views": 149
+          },
+          {
+            "timestamp": "2026-01-06T10:00:00.000Z",
+            "views": 151
+          },
+          {
+            "timestamp": "2026-01-06T11:00:00.000Z",
+            "views": 148
+          }
+        ]
+      },
+      "http_status": 200,
+      "response": {
+        "classification": "inconclusivo",
+        "reason": "Sinal isolado sem combinação (largura do pico = 6h; subida = 0h; descida = 5h; maior degrau na rampa = 5.04×; hora do pico = 8.6% do total; top-3 horas = 25.9%; melhor janela de 3h = 25.9%). Um único indicador não sustenta classificação; preferimos não acusar.",
+        "shape": "sinal_isolado",
+        "signals": {
+          "peakToBase": {
+            "value": 4.974,
+            "threshold": 8,
+            "triggered": false,
+            "detail": "pico 751 vs mediana 151 → razão 4.974×"
+          },
+          "abruptJump": {
+            "value": 5.04,
+            "threshold": 4,
+            "triggered": true,
+            "detail": "maior fator de subida hora a hora = 5.04× no índice 14"
+          },
+          "abruptDrop": {
+            "value": 1.645,
+            "threshold": 4,
+            "triggered": false,
+            "detail": "maior fator de queda hora a hora = 1.645× no índice 22"
+          },
+          "concentration": {
+            "value": 0.0863,
+            "top3Share": 0.2586,
+            "window3Share": 0.2586,
+            "threshold": 0.35,
+            "triggered": false,
+            "detail": "hora do pico = 8.6% do total; top-3 horas = 25.9%; melhor janela de 3h = 25.9%"
+          },
+          "exactRepetition": {
+            "value": 1,
+            "runValue": 148,
+            "runShare": 0.017,
+            "threshold": 4,
+            "triggered": false,
+            "detail": "maior sequência de valores idênticos = 1 horas com 148 views (1.7% do total)"
+          },
+          "rampShape": {
+            "value": {
+              "spikeWidth": 6,
+              "riseHours": 0,
+              "fallHours": 5,
+              "maxRampStep": 5.04
+            },
+            "threshold": {
+              "wideWidth": 4,
+              "smoothMaxStep": 3.2
+            },
+            "triggered": false,
+            "detail": "largura do pico = 6h; subida = 0h; descida = 5h; maior degrau na rampa = 5.04×"
+          }
+        },
+        "rawMetrics": {
+          "n": 36,
+          "total": 8698,
+          "peak": 751,
+          "peakIdx": 14,
+          "median": 151,
+          "peakToBase": 4.974,
+          "peakShare": 0.0863,
+          "top3Share": 0.2586,
+          "maxRiseRatio": 5.04,
+          "maxRiseIdx": 14,
+          "maxDropRatio": 1.645,
+          "maxDropIdx": 22,
+          "spikeWidth": 6,
+          "riseHours": 0,
+          "fallHours": 5,
+          "maxRampStep": 5.04,
+          "maxIdenticalRun": 1,
+          "runValue": 148,
+          "runShare": 0.017,
+          "window3Share": 0.2586,
+          "diurnalAmplitude": 2.094
+        },
+        "flags": {
+          "abruptJump": true,
+          "abruptDrop": false,
+          "highPeakToBase": false,
+          "highConcentration": false,
+          "narrowSpike": false,
+          "mechanical": false,
+          "smoothRamp": false
+        },
+        "thresholds": {
+          "MIN_POINTS": 6,
+          "MIN_TOTAL_VIEWS": 80,
+          "MIN_PEAK_FOR_MAGNITUDE": 15,
+          "HIGH_PEAK_TO_BASE": 8,
+          "HIGH_PEAK_SHARE": 0.35,
+          "HIGH_TOP3_SHARE": 0.72,
+          "HIGH_WINDOW3_SHARE": 0.65,
+          "ABRUPT_JUMP_RATIO": 4,
+          "ABRUPT_DROP_RATIO": 4,
+          "NARROW_SPIKE_WIDTH": 2,
+          "NARROW_SPIKE_MIN_PEAK_TO_BASE": 4,
+          "WIDE_RAMP_WIDTH": 4,
+          "SMOOTH_MAX_RAMP_STEP": 3.2,
+          "MECHANICAL_RUN": 4,
+          "MECHANICAL_VALUE_MIN": 40,
+          "MECHANICAL_SHARE": 0.25,
+          "MECHANICAL_PEAK_FRACTION": 0.5,
+          "ORGANIC_MIN_PEAK_TO_BASE": 3
+        },
+        "disclaimer": "Resultado analítico, não prova de fraude: séries horárias de views não permitem afirmar humanos ou bots com certeza. Tráfego pago legítimo, campanhas agendadas e picos orgânicos reais podem se parecer com compra. Séries idênticas são indistinguíveis por este método.",
+        "receivedAt": "2026-10-09T20:51:01.878Z",
+        "note": "Séries horárias não separam humanos de bots com certeza; tráfego pago legítimo e campanhas agendadas podem se parecer com pico comprado."
+      },
+      "checks": [
+        {
+          "field": "classification",
+          "expected": "inconclusivo",
+          "actual": "inconclusivo",
+          "passed": true
+        },
+        {
+          "field": "shape",
+          "expected": "sinal_isolado",
+          "actual": "sinal_isolado",
+          "passed": true
+        },
+        {
+          "field": "flags.abruptJump",
+          "expected": true,
+          "actual": true,
+          "passed": true
+        },
+        {
+          "field": "flags.highPeakToBase",
+          "expected": false,
+          "actual": false,
+          "passed": true
+        },
+        {
+          "field": "flags.highConcentration",
+          "expected": false,
+          "actual": false,
+          "passed": true
+        },
+        {
+          "field": "flags.mechanical",
+          "expected": false,
+          "actual": false,
+          "passed": true
+        },
+        {
+          "field": "rawMetrics.n",
+          "expected": 36,
+          "actual": 36,
+          "passed": true
+        }
+      ],
+      "passed": true,
+      "duration_ms": 3
+    },
+    {
+      "label": "30 de fevereiro é recusado; calendário não pode normalizar silenciosamente",
+      "method": "POST",
+      "path": "/classify",
+      "request": {
+        "series": [
+          {
+            "timestamp": "2026-02-30T00:00:00.000Z",
+            "views": 100
+          }
+        ]
+      },
+      "http_status": 422,
+      "response": {
+        "error": "timestamp[0] não corresponde a uma data civil existente: 2026-02-30T00:00:00.000Z",
+        "code": "invalid_series",
+        "contract": {
+          "description": "série cronológica contígua em timestamps UTC horários; views = inteiros seguros não negativos (incrementais por hora)",
+          "example": [
+            {
+              "timestamp": "2026-01-05T00:00:00.000Z",
+              "views": 120
+            },
+            {
+              "timestamp": "2026-01-05T01:00:00.000Z",
+              "views": 130
+            }
+          ],
+          "shape": {
+            "series": [
+              {
+                "timestamp": "ISO UTC",
+                "views": "inteiro >= 0"
+              }
+            ]
+          }
+        }
+      },
+      "checks": [
+        {
+          "field": "code",
+          "expected": "invalid_series",
+          "actual": "invalid_series",
+          "passed": true
+        }
+      ],
+      "passed": true,
+      "duration_ms": 2
+    },
+    {
+      "label": "Array numérico sem timestamps é recusado pelo contrato público",
+      "method": "POST",
+      "path": "/classify",
+      "request": {
+        "series": [
+          100,
+          101,
+          102,
+          103,
+          104,
+          105
+        ]
+      },
+      "http_status": 422,
+      "response": {
+        "error": "series[0] deve ser objeto",
+        "code": "invalid_series",
+        "contract": {
+          "description": "série cronológica contígua em timestamps UTC horários; views = inteiros seguros não negativos (incrementais por hora)",
+          "example": [
+            {
+              "timestamp": "2026-01-05T00:00:00.000Z",
+              "views": 120
+            },
+            {
+              "timestamp": "2026-01-05T01:00:00.000Z",
+              "views": 130
+            }
+          ],
+          "shape": {
+            "series": [
+              {
+                "timestamp": "ISO UTC",
+                "views": "inteiro >= 0"
+              }
+            ]
+          }
+        }
+      },
+      "checks": [
+        {
+          "field": "code",
+          "expected": "invalid_series",
+          "actual": "invalid_series",
+          "passed": true
+        },
+        {
+          "field": "contract.shape.series.0.timestamp",
+          "expected": "ISO UTC",
+          "actual": "ISO UTC",
+          "passed": true
+        }
+      ],
+      "passed": true,
+      "duration_ms": 4
+    },
+    {
+      "label": "Pontos seguros com soma acima do limite exato são recusados",
+      "method": "POST",
+      "path": "/classify",
+      "request": {
+        "series": [
+          {
+            "timestamp": "2026-01-05T00:00:00.000Z",
+            "views": 9007199254740991
+          },
+          {
+            "timestamp": "2026-01-05T01:00:00.000Z",
+            "views": 1
+          }
+        ]
+      },
+      "http_status": 422,
+      "response": {
+        "error": "soma das views excede o total seguro (Number.MAX_SAFE_INTEGER = 9007199254740991); limite documentado no README",
+        "code": "unsafe_total",
+        "contract": {
+          "description": "série cronológica contígua em timestamps UTC horários; views = inteiros seguros não negativos (incrementais por hora)",
+          "example": [
+            {
+              "timestamp": "2026-01-05T00:00:00.000Z",
+              "views": 120
+            },
+            {
+              "timestamp": "2026-01-05T01:00:00.000Z",
+              "views": 130
+            }
+          ],
+          "shape": {
+            "series": [
+              {
+                "timestamp": "ISO UTC",
+                "views": "inteiro >= 0"
+              }
+            ]
+          }
+        }
+      },
+      "checks": [
+        {
+          "field": "code",
+          "expected": "unsafe_total",
+          "actual": "unsafe_total",
+          "passed": true
+        }
+      ],
+      "passed": true,
+      "duration_ms": 5
+    },
+    {
+      "label": "Ano civil 0099 é aceito sem remapear para 1999",
+      "method": "POST",
+      "path": "/classify",
+      "request": {
+        "series": [
+          {
+            "timestamp": "0099-01-05T00:00:00.000Z",
+            "views": 100
+          },
+          {
+            "timestamp": "0099-01-05T01:00:00.000Z",
+            "views": 103
+          },
+          {
+            "timestamp": "0099-01-05T02:00:00.000Z",
+            "views": 98
+          },
+          {
+            "timestamp": "0099-01-05T03:00:00.000Z",
+            "views": 105
+          },
+          {
+            "timestamp": "0099-01-05T04:00:00.000Z",
+            "views": 101
+          },
+          {
+            "timestamp": "0099-01-05T05:00:00.000Z",
+            "views": 99
+          }
+        ]
+      },
+      "http_status": 200,
+      "response": {
+        "classification": "plausivel",
+        "reason": "Série sem combinação de sinais de compra (variação moderada sem configuração de pico comprado). Razão pico/base 1.045×, concentração 17.3% na hora do pico, sem saltos extremos. Compatível com tráfego legítimo.",
+        "shape": "legitimo_estavel",
+        "signals": {
+          "peakToBase": {
+            "value": 1.045,
+            "threshold": 8,
+            "triggered": false,
+            "detail": "pico 105 vs mediana 100.5 → razão 1.045×"
+          },
+          "abruptJump": {
+            "value": 1.071,
+            "threshold": 4,
+            "triggered": false,
+            "detail": "maior fator de subida hora a hora = 1.071× no índice 3"
+          },
+          "abruptDrop": {
+            "value": 1.051,
+            "threshold": 4,
+            "triggered": false,
+            "detail": "maior fator de queda hora a hora = 1.051× no índice 2"
+          },
+          "concentration": {
+            "value": 0.1733,
+            "top3Share": 0.5099,
+            "window3Share": 0.505,
+            "threshold": 0.35,
+            "triggered": false,
+            "detail": "hora do pico = 17.3% do total; top-3 horas = 51.0%; melhor janela de 3h = 50.5%"
+          },
+          "exactRepetition": {
+            "value": 1,
+            "runValue": 100,
+            "runShare": 0.165,
+            "threshold": 4,
+            "triggered": false,
+            "detail": "maior sequência de valores idênticos = 1 horas com 100 views (16.5% do total)"
+          },
+          "rampShape": {
+            "value": {
+              "spikeWidth": 1,
+              "riseHours": 0,
+              "fallHours": 0,
+              "maxRampStep": 1.071
+            },
+            "threshold": {
+              "wideWidth": 4,
+              "smoothMaxStep": 3.2
+            },
+            "triggered": false,
+            "detail": "largura do pico = 1h; subida = 0h; descida = 0h; maior degrau na rampa = 1.071×"
+          }
+        },
+        "rawMetrics": {
+          "n": 6,
+          "total": 606,
+          "peak": 105,
+          "peakIdx": 3,
+          "median": 100.5,
+          "peakToBase": 1.045,
+          "peakShare": 0.1733,
+          "top3Share": 0.5099,
+          "maxRiseRatio": 1.071,
+          "maxRiseIdx": 3,
+          "maxDropRatio": 1.051,
+          "maxDropIdx": 2,
+          "spikeWidth": 1,
+          "riseHours": 0,
+          "fallHours": 0,
+          "maxRampStep": 1.071,
+          "maxIdenticalRun": 1,
+          "runValue": 100,
+          "runShare": 0.165,
+          "window3Share": 0.505,
+          "diurnalAmplitude": 0
+        },
+        "flags": {
+          "abruptJump": false,
+          "abruptDrop": false,
+          "highPeakToBase": false,
+          "highConcentration": false,
+          "narrowSpike": false,
+          "mechanical": false,
+          "smoothRamp": false
+        },
+        "thresholds": {
+          "MIN_POINTS": 6,
+          "MIN_TOTAL_VIEWS": 80,
+          "MIN_PEAK_FOR_MAGNITUDE": 15,
+          "HIGH_PEAK_TO_BASE": 8,
+          "HIGH_PEAK_SHARE": 0.35,
+          "HIGH_TOP3_SHARE": 0.72,
+          "HIGH_WINDOW3_SHARE": 0.65,
+          "ABRUPT_JUMP_RATIO": 4,
+          "ABRUPT_DROP_RATIO": 4,
+          "NARROW_SPIKE_WIDTH": 2,
+          "NARROW_SPIKE_MIN_PEAK_TO_BASE": 4,
+          "WIDE_RAMP_WIDTH": 4,
+          "SMOOTH_MAX_RAMP_STEP": 3.2,
+          "MECHANICAL_RUN": 4,
+          "MECHANICAL_VALUE_MIN": 40,
+          "MECHANICAL_SHARE": 0.25,
+          "MECHANICAL_PEAK_FRACTION": 0.5,
+          "ORGANIC_MIN_PEAK_TO_BASE": 3
+        },
+        "disclaimer": "Resultado analítico, não prova de fraude: séries horárias de views não permitem afirmar humanos ou bots com certeza. Tráfego pago legítimo, campanhas agendadas e picos orgânicos reais podem se parecer com compra. Séries idênticas são indistinguíveis por este método.",
+        "receivedAt": "2026-10-09T20:51:01.893Z",
+        "note": "Séries horárias não separam humanos de bots com certeza; tráfego pago legítimo e campanhas agendadas podem se parecer com pico comprado."
+      },
+      "checks": [
+        {
+          "field": "classification",
+          "expected": "plausivel",
+          "actual": "plausivel",
+          "passed": true
+        },
+        {
+          "field": "rawMetrics.n",
+          "expected": 6,
+          "actual": 6,
+          "passed": true
+        },
+        {
+          "field": "rawMetrics.total",
+          "expected": 606,
+          "actual": 606,
+          "passed": true
+        }
+      ],
+      "passed": true,
+      "duration_ms": 5
+    },
+    {
+      "label": "Timestamp com espaços é recusado; ISO estrito não faz trim silencioso",
+      "method": "POST",
+      "path": "/classify",
+      "request": {
+        "series": [
+          {
+            "timestamp": " 2026-01-05T00:00:00.000Z ",
+            "views": 100
+          }
+        ]
+      },
+      "http_status": 422,
+      "response": {
+        "error": "timestamp[0] deve ser ISO UTC estrito (YYYY-MM-DDTHH:mm:ss(.sss)?Z ou +00:00), recebido  2026-01-05T00:00:00.000Z ",
+        "code": "invalid_series",
+        "contract": {
+          "description": "série cronológica contígua em timestamps UTC horários; views = inteiros seguros não negativos (incrementais por hora)",
+          "example": [
+            {
+              "timestamp": "2026-01-05T00:00:00.000Z",
+              "views": 120
+            },
+            {
+              "timestamp": "2026-01-05T01:00:00.000Z",
+              "views": 130
+            }
+          ],
+          "shape": {
+            "series": [
+              {
+                "timestamp": "ISO UTC",
+                "views": "inteiro >= 0"
+              }
+            ]
+          }
+        }
+      },
+      "checks": [
+        {
+          "field": "code",
+          "expected": "invalid_series",
+          "actual": "invalid_series",
+          "passed": true
+        }
+      ],
+      "passed": true,
+      "duration_ms": 5
+    }
+  ]
+}

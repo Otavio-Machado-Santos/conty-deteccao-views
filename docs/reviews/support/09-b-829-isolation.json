@@ -1,0 +1,428 @@
+{
+  "reviewed_sha": "829b1bc9cf4df285c8f867cdd6166799fd862659",
+  "archive": "git archive isolado",
+  "generation_command_run": false,
+  "first_npm_test_exit": 0,
+  "first_npm_test_count": 53,
+  "pairs": 10,
+  "workers": "padrão; duas invocações simultâneas sem serializar testes",
+  "foreign_sentinel_present_for_all_runs": true,
+  "runs": [
+    {
+      "pair": 1,
+      "side": "A",
+      "exit_code": 0,
+      "seconds": 0.4844,
+      "tail": [
+        "  ...",
+        "1..53",
+        "# tests 53",
+        "# suites 0",
+        "# pass 53",
+        "# fail 0",
+        "# cancelled 0",
+        "# skipped 0",
+        "# todo 0",
+        "# duration_ms 450.753916"
+      ]
+    },
+    {
+      "pair": 1,
+      "side": "B",
+      "exit_code": 0,
+      "seconds": 0.5041,
+      "tail": [
+        "  ...",
+        "1..53",
+        "# tests 53",
+        "# suites 0",
+        "# pass 53",
+        "# fail 0",
+        "# cancelled 0",
+        "# skipped 0",
+        "# todo 0",
+        "# duration_ms 470.759541"
+      ]
+    },
+    {
+      "pair": 2,
+      "side": "A",
+      "exit_code": 0,
+      "seconds": 0.4946,
+      "tail": [
+        "  ...",
+        "1..53",
+        "# tests 53",
+        "# suites 0",
+        "# pass 53",
+        "# fail 0",
+        "# cancelled 0",
+        "# skipped 0",
+        "# todo 0",
+        "# duration_ms 460.432791"
+      ]
+    },
+    {
+      "pair": 2,
+      "side": "B",
+      "exit_code": 0,
+      "seconds": 0.4908,
+      "tail": [
+        "  ...",
+        "1..53",
+        "# tests 53",
+        "# suites 0",
+        "# pass 53",
+        "# fail 0",
+        "# cancelled 0",
+        "# skipped 0",
+        "# todo 0",
+        "# duration_ms 451.784958"
+      ]
+    },
+    {
+      "pair": 3,
+      "side": "A",
+      "exit_code": 0,
+      "seconds": 0.8778,
+      "tail": [
+        "  ...",
+        "1..53",
+        "# tests 53",
+        "# suites 0",
+        "# pass 53",
+        "# fail 0",
+        "# cancelled 0",
+        "# skipped 0",
+        "# todo 0",
+        "# duration_ms 823.966417"
+      ]
+    },
+    {
+      "pair": 3,
+      "side": "B",
+      "exit_code": 0,
+      "seconds": 0.9022,
+      "tail": [
+        "  ...",
+        "1..53",
+        "# tests 53",
+        "# suites 0",
+        "# pass 53",
+        "# fail 0",
+        "# cancelled 0",
+        "# skipped 0",
+        "# todo 0",
+        "# duration_ms 851.743917"
+      ]
+    },
+    {
+      "pair": 4,
+      "side": "A",
+      "exit_code": 0,
+      "seconds": 0.656,
+      "tail": [
+        "  ...",
+        "1..53",
+        "# tests 53",
+        "# suites 0",
+        "# pass 53",
+        "# fail 0",
+        "# cancelled 0",
+        "# skipped 0",
+        "# todo 0",
+        "# duration_ms 604.686792"
+      ]
+    },
+    {
+      "pair": 4,
+      "side": "B",
+      "exit_code": 0,
+      "seconds": 0.6544,
+      "tail": [
+        "  ...",
+        "1..53",
+        "# tests 53",
+        "# suites 0",
+        "# pass 53",
+        "# fail 0",
+        "# cancelled 0",
+        "# skipped 0",
+        "# todo 0",
+        "# duration_ms 607.723667"
+      ]
+    },
+    {
+      "pair": 5,
+      "side": "A",
+      "exit_code": 0,
+      "seconds": 0.5581,
+      "tail": [
+        "  ...",
+        "1..53",
+        "# tests 53",
+        "# suites 0",
+        "# pass 53",
+        "# fail 0",
+        "# cancelled 0",
+        "# skipped 0",
+        "# todo 0",
+        "# duration_ms 519.088584"
+      ]
+    },
+    {
+      "pair": 5,
+      "side": "B",
+      "exit_code": 0,
+      "seconds": 0.5593,
+      "tail": [
+        "  ...",
+        "1..53",
+        "# tests 53",
+        "# suites 0",
+        "# pass 53",
+        "# fail 0",
+        "# cancelled 0",
+        "# skipped 0",
+        "# todo 0",
+        "# duration_ms 520.365958"
+      ]
+    },
+    {
+      "pair": 6,
+      "side": "A",
+      "exit_code": 0,
+      "seconds": 0.5524,
+      "tail": [
+        "  ...",
+        "1..53",
+        "# tests 53",
+        "# suites 0",
+        "# pass 53",
+        "# fail 0",
+        "# cancelled 0",
+        "# skipped 0",
+        "# todo 0",
+        "# duration_ms 515.380375"
+      ]
+    },
+    {
+      "pair": 6,
+      "side": "B",
+      "exit_code": 0,
+      "seconds": 0.5772,
+      "tail": [
+        "  ...",
+        "1..53",
+        "# tests 53",
+        "# suites 0",
+        "# pass 53",
+        "# fail 0",
+        "# cancelled 0",
+        "# skipped 0",
+        "# todo 0",
+        "# duration_ms 538.730292"
+      ]
+    },
+    {
+      "pair": 7,
+      "side": "A",
+      "exit_code": 0,
+      "seconds": 0.523,
+      "tail": [
+        "  ...",
+        "1..53",
+        "# tests 53",
+        "# suites 0",
+        "# pass 53",
+        "# fail 0",
+        "# cancelled 0",
+        "# skipped 0",
+        "# todo 0",
+        "# duration_ms 485.747667"
+      ]
+    },
+    {
+      "pair": 7,
+      "side": "B",
+      "exit_code": 0,
+      "seconds": 0.5339,
+      "tail": [
+        "  ...",
+        "1..53",
+        "# tests 53",
+        "# suites 0",
+        "# pass 53",
+        "# fail 0",
+        "# cancelled 0",
+        "# skipped 0",
+        "# todo 0",
+        "# duration_ms 497.939375"
+      ]
+    },
+    {
+      "pair": 8,
+      "side": "A",
+      "exit_code": 0,
+      "seconds": 0.6119,
+      "tail": [
+        "  ...",
+        "1..53",
+        "# tests 53",
+        "# suites 0",
+        "# pass 53",
+        "# fail 0",
+        "# cancelled 0",
+        "# skipped 0",
+        "# todo 0",
+        "# duration_ms 575.785"
+      ]
+    },
+    {
+      "pair": 8,
+      "side": "B",
+      "exit_code": 0,
+      "seconds": 0.5989,
+      "tail": [
+        "  ...",
+        "1..53",
+        "# tests 53",
+        "# suites 0",
+        "# pass 53",
+        "# fail 0",
+        "# cancelled 0",
+        "# skipped 0",
+        "# todo 0",
+        "# duration_ms 564.215208"
+      ]
+    },
+    {
+      "pair": 9,
+      "side": "A",
+      "exit_code": 0,
+      "seconds": 0.5997,
+      "tail": [
+        "  ...",
+        "1..53",
+        "# tests 53",
+        "# suites 0",
+        "# pass 53",
+        "# fail 0",
+        "# cancelled 0",
+        "# skipped 0",
+        "# todo 0",
+        "# duration_ms 555.965708"
+      ]
+    },
+    {
+      "pair": 9,
+      "side": "B",
+      "exit_code": 0,
+      "seconds": 0.5985,
+      "tail": [
+        "  ...",
+        "1..53",
+        "# tests 53",
+        "# suites 0",
+        "# pass 53",
+        "# fail 0",
+        "# cancelled 0",
+        "# skipped 0",
+        "# todo 0",
+        "# duration_ms 553.951042"
+      ]
+    },
+    {
+      "pair": 10,
+      "side": "A",
+      "exit_code": 0,
+      "seconds": 0.5576,
+      "tail": [
+        "  ...",
+        "1..53",
+        "# tests 53",
+        "# suites 0",
+        "# pass 53",
+        "# fail 0",
+        "# cancelled 0",
+        "# skipped 0",
+        "# todo 0",
+        "# duration_ms 514.409375"
+      ]
+    },
+    {
+      "pair": 10,
+      "side": "B",
+      "exit_code": 0,
+      "seconds": 0.5704,
+      "tail": [
+        "  ...",
+        "1..53",
+        "# tests 53",
+        "# suites 0",
+        "# pass 53",
+        "# fail 0",
+        "# cancelled 0",
+        "# skipped 0",
+        "# todo 0",
+        "# duration_ms 529.875333"
+      ]
+    }
+  ],
+  "before": {
+    "dataset/series.json": {
+      "size": 76624,
+      "inode": 108526413,
+      "mtime_ns": 1791579853000000000,
+      "sha256": "f7b7ad869c3b82f77e7f3d35dbd2508129678e626c953bc4db7243d5d39ac3f4"
+    },
+    "docs/evidence/evaluation.json": {
+      "size": 1481,
+      "inode": 108526422,
+      "mtime_ns": 1791579853000000000,
+      "sha256": "78b98b5daa2b1cfa0aad9662adf413218fb90d1db31f3eae7d831ce673bf0faf"
+    },
+    "README.md": {
+      "size": 13231,
+      "inode": 108526411,
+      "mtime_ns": 1791579853000000000,
+      "sha256": "4b46c4fe32417b7dd1df7f5b1c9a857f1b33df00c5c659d680bdd42768e543ae"
+    },
+    "dataset/.unrelated-review-cleanup-sentinel.tmp": {
+      "size": 42,
+      "inode": 108527580,
+      "mtime_ns": 1791579976793290265,
+      "sha256": "b793c58e19c4d3db1229f39ea790d45bf760b55debe00375432a83fab52e95cd"
+    }
+  },
+  "after": {
+    "dataset/series.json": {
+      "size": 76624,
+      "inode": 108526413,
+      "mtime_ns": 1791579853000000000,
+      "sha256": "f7b7ad869c3b82f77e7f3d35dbd2508129678e626c953bc4db7243d5d39ac3f4"
+    },
+    "docs/evidence/evaluation.json": {
+      "size": 1481,
+      "inode": 108526422,
+      "mtime_ns": 1791579853000000000,
+      "sha256": "78b98b5daa2b1cfa0aad9662adf413218fb90d1db31f3eae7d831ce673bf0faf"
+    },
+    "README.md": {
+      "size": 13231,
+      "inode": 108526411,
+      "mtime_ns": 1791579853000000000,
+      "sha256": "4b46c4fe32417b7dd1df7f5b1c9a857f1b33df00c5c659d680bdd42768e543ae"
+    },
+    "dataset/.unrelated-review-cleanup-sentinel.tmp": {
+      "size": 42,
+      "inode": 108527580,
+      "mtime_ns": 1791579976793290265,
+      "sha256": "b793c58e19c4d3db1229f39ea790d45bf760b55debe00375432a83fab52e95cd"
+    }
+  },
+  "bytes_inode_mtime_unchanged": true,
+  "remaining_tmp_only_foreign": [
+    ".unrelated-review-cleanup-sentinel.tmp"
+  ]
+}

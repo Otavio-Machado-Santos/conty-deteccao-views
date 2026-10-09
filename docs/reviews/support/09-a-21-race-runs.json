@@ -1,0 +1,93 @@
+{
+  "default_repeated_runs": [
+    {
+      "run": 1,
+      "exit_code": 0,
+      "proof": [
+        "# pass 50",
+        "# fail 0"
+      ]
+    },
+    {
+      "run": 2,
+      "exit_code": 0,
+      "proof": [
+        "# pass 50",
+        "# fail 0"
+      ]
+    },
+    {
+      "run": 3,
+      "exit_code": 0,
+      "proof": [
+        "# pass 50",
+        "# fail 0"
+      ]
+    },
+    {
+      "run": 4,
+      "exit_code": 0,
+      "proof": [
+        "# pass 50",
+        "# fail 0"
+      ]
+    },
+    {
+      "run": 5,
+      "exit_code": 0,
+      "proof": [
+        "# pass 50",
+        "# fail 0"
+      ]
+    },
+    {
+      "run": 6,
+      "exit_code": 0,
+      "proof": [
+        "# pass 50",
+        "# fail 0"
+      ]
+    },
+    {
+      "run": 7,
+      "exit_code": 0,
+      "proof": [
+        "# pass 50",
+        "# fail 0"
+      ]
+    },
+    {
+      "run": 8,
+      "exit_code": 0,
+      "proof": [
+        "# pass 50",
+        "# fail 0"
+      ]
+    },
+    {
+      "run": 9,
+      "exit_code": 0,
+      "proof": [
+        "# pass 50",
+        "# fail 0"
+      ]
+    },
+    {
+      "run": 10,
+      "exit_code": 0,
+      "proof": [
+        "# pass 50",
+        "# fail 0"
+      ]
+    }
+  ],
+  "default_failed": 0,
+  "serial_diagnostic": {
+    "exit_code": 0,
+    "proof": [
+      "# pass 50",
+      "# fail 0"
+    ]
+  },
+  "note": "Serialização usada só como diagnóstico; nenhum arquivo do repo ou comando npm test alterado."
+}

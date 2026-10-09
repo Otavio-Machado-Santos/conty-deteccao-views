@@ -1,0 +1,458 @@
+{
+  "challenge": "bots-visualizacao",
+  "reviewer": "/root/implementar_repasses (Codex; revisão independente da implementação MiMo)",
+  "axis": "spec, metodologia e delta das correções",
+  "reviewed_sha": "21c55d52d5e51f39ee8a06607c5c2e6d4da37afc",
+  "base_sha": "f489f871f45f27022ea7791bcd7cbfe447edc4c2",
+  "previous_review": "revisoes/09-a-anterior.json",
+  "previous_reviewed_sha": "eebbf112c1c89eb6f26afa477fad70424c28b4c4",
+  "environment": {
+    "node": "v22.23.3",
+    "copy": "/var/folders/1h/dnd2dd992cq41yhypgy46_bc0000gn/T/conty-review-09-a-final-5nig8cbc",
+    "note": "Cópia de todos os arquivos rastreados extraída com git show do SHA fixo; testes/probes executados fora do repo. Nenhuma edição de código pelo revisor."
+  },
+  "commands_results": [
+    {
+      "command": "npm test",
+      "where": "cópia exata do SHA; avaliação externa ainda não havia sido executada",
+      "exit_code": 1,
+      "result": "49/50; falha no test/generate.test.js:59 ao carregar JSON truncado; Unexpected end of JSON input",
+      "evidence": "revisoes/support/09-a-21-tests-first-failure.txt"
+    },
+    {
+      "command": "npm test, 10 repetições posteriores com concorrência padrão",
+      "exit_code": 0,
+      "result": [
+        {
+          "run": 1,
+          "exit_code": 0,
+          "proof": [
+            "# pass 50",
+            "# fail 0"
+          ]
+        },
+        {
+          "run": 2,
+          "exit_code": 0,
+          "proof": [
+            "# pass 50",
+            "# fail 0"
+          ]
+        },
+        {
+          "run": 3,
+          "exit_code": 0,
+          "proof": [
+            "# pass 50",
+            "# fail 0"
+          ]
+        },
+        {
+          "run": 4,
+          "exit_code": 0,
+          "proof": [
+            "# pass 50",
+            "# fail 0"
+          ]
+        },
+        {
+          "run": 5,
+          "exit_code": 0,
+          "proof": [
+            "# pass 50",
+            "# fail 0"
+          ]
+        },
+        {
+          "run": 6,
+          "exit_code": 0,
+          "proof": [
+            "# pass 50",
+            "# fail 0"
+          ]
+        },
+        {
+          "run": 7,
+          "exit_code": 0,
+          "proof": [
+            "# pass 50",
+            "# fail 0"
+          ]
+        },
+        {
+          "run": 8,
+          "exit_code": 0,
+          "proof": [
+            "# pass 50",
+            "# fail 0"
+          ]
+        },
+        {
+          "run": 9,
+          "exit_code": 0,
+          "proof": [
+            "# pass 50",
+            "# fail 0"
+          ]
+        },
+        {
+          "run": 10,
+          "exit_code": 0,
+          "proof": [
+            "# pass 50",
+            "# fail 0"
+          ]
+        }
+      ],
+      "interpretation": "Falha intermitente: uma falha em 11 execuções padrão observadas; não uma falha determinística em todas as rodadas.",
+      "evidence": "revisoes/support/09-a-21-race-runs.json"
+    },
+    {
+      "command": "node --test --test-concurrency=1 test/*.test.js",
+      "exit_code": 0,
+      "result": {
+        "exit_code": 0,
+        "proof": [
+          "# pass 50",
+          "# fail 0"
+        ]
+      },
+      "note": "Somente diagnóstico em cópia externa. Serialização não foi aceita como correção, e npm test não foi alterado."
+    },
+    {
+      "command": "npm run generate:evaluate (depois de npm test, sequencial)",
+      "exit_code": 0,
+      "result": {
+        "series": 102,
+        "bytes": 76624,
+        "false_positives": 0,
+        "legitimate": 72,
+        "recall_numerator": 30,
+        "recall_denominator": 30,
+        "inconclusives": 17
+      },
+      "evidence": "revisoes/support/09-a-21-evaluation.txt"
+    },
+    {
+      "command": "node --input-type=module; runEvaluation({writeEvidence:false}) com mtime do dataset fixado em zero",
+      "result": {
+        "writeEvidence": false,
+        "before_mtime_ms": 0,
+        "after_mtime_ms": 1791577779099.78,
+        "dataset_written": true,
+        "body_still_identical": true
+      },
+      "evidence": "revisoes/support/09-a-21-readonly-probe.json"
+    },
+    {
+      "command": "node revisoes/support/09-a-final-probe.mjs <cópia> <09-a-probes.json> <output>",
+      "exit_code": 0,
+      "result": {
+        "passed": true,
+        "reproduction": {
+          "identical": true,
+          "sha256": "f7b7ad869c3b82f77e7f3d35dbd2508129678e626c953bc4db7243d5d39ac3f4"
+        },
+        "counterexamples": [
+          {
+            "name": "viral_stable_baseline",
+            "classification": "plausivel"
+          },
+          {
+            "name": "same_viral_small_noise",
+            "classification": "plausivel"
+          },
+          {
+            "name": "legitimate_scheduled_plateau",
+            "classification": "suspeito"
+          }
+        ],
+        "same_seed_range": {
+          "seeds": 100,
+          "seed_range": [
+            1,
+            100
+          ],
+          "false_positives": 0,
+          "legitimate": 7200,
+          "detected": 3000,
+          "suspicious": 3000,
+          "abstentions": 1809,
+          "false_positive_cases": []
+        },
+        "additional_seed_range": {
+          "seeds": 100,
+          "seed_range": [
+            1000,
+            1099
+          ],
+          "false_positives": 1,
+          "legitimate": 7200,
+          "detected": 3000,
+          "suspicious": 3000,
+          "abstentions": 1810,
+          "false_positive_cases": [
+            {
+              "seed": 1079,
+              "id": "diurno-001",
+              "profile": "diurno",
+              "label": "legitimo",
+              "classification": "suspeito",
+              "shape": "mecanica",
+              "reason": "Ritmo mecânico: maior sequência de valores idênticos = 4 horas com 141 views (10.4% do total). Séries orgânicas têm ruído hora a hora; 4 horas com exatamente 141 views, em série com 5399 views no total, combinam repetição exata elevada e volume — indício de padrão automatizado, não prova de fraude."
+            }
+          ]
+        },
+        "seed25": {
+          "classification": "plausivel",
+          "shape": "rampa_suave",
+          "reason": "Subida e descida graduais (largura do pico = 13h; subida = 5h; descida = 7h; maior degrau na rampa = 1.607×) com razão pico/base de 8.129×. A sequência de 5h com 99 views está no nível de base (3.1% do total), compatível com fundo estável durante propagação orgânica — não é ritmo de entrega mecânica. Pico alto sozinho não caracteriza compra."
+        },
+        "api": [
+          {
+            "name": "empty_series",
+            "status": 422
+          },
+          {
+            "name": "negative_array",
+            "status": 422
+          },
+          {
+            "name": "missing_series",
+            "status": 422
+          },
+          {
+            "name": "bare_array",
+            "status": 422
+          },
+          {
+            "name": "numeric_series",
+            "status": 422
+          },
+          {
+            "name": "overflow_total",
+            "status": 422
+          },
+          {
+            "name": "impossible_calendar",
+            "status": 422
+          },
+          {
+            "name": "century_not_leap",
+            "status": 422
+          },
+          {
+            "name": "safe_sum_limit",
+            "status": 200
+          },
+          {
+            "name": "valid_low_volume_abstention",
+            "status": 200
+          },
+          {
+            "name": "valid_leap_century",
+            "status": 200
+          },
+          {
+            "name": "invalid_json:{not json",
+            "status": 400
+          },
+          {
+            "name": "invalid_json:",
+            "status": 400
+          },
+          {
+            "name": "invalid_json:   ",
+            "status": 400
+          },
+          {
+            "name": "oversize_content_length",
+            "status": 413
+          },
+          {
+            "name": "oversize_chunked",
+            "status": 413
+          },
+          {
+            "name": "malformed_host_health",
+            "status": 200
+          },
+          {
+            "name": "health_after_adversarial_requests",
+            "status": 200
+          }
+        ]
+      },
+      "evidence": "revisoes/support/09-a-21-probes.json"
+    },
+    {
+      "command": "node --test test/readme-metrics.test.js após alterar só a linha FPR em cópia externa",
+      "result": {
+        "all_divergences_failed": true,
+        "variants": [
+          {
+            "tamper": "FPR: 1/72 (1.39%)",
+            "exit_code": 1,
+            "readme_not_self_repaired": true,
+            "proof": [
+              "not ok 1 - FPR do README bate com a medição do generate:evaluate",
+              "    numerador do README (1) diverge do medido (0)",
+              "# pass 2",
+              "# fail 1"
+            ]
+          },
+          {
+            "tamper": "FPR: 0/73 (0%)",
+            "exit_code": 1,
+            "readme_not_self_repaired": true,
+            "proof": [
+              "not ok 1 - FPR do README bate com a medição do generate:evaluate",
+              "    denominador do README (73) diverge do medido (72)",
+              "# pass 2",
+              "# fail 1"
+            ]
+          },
+          {
+            "tamper": "FPR: 0/72 (1%)",
+            "exit_code": 1,
+            "readme_not_self_repaired": true,
+            "proof": [
+              "not ok 1 - FPR do README bate com a medição do generate:evaluate",
+              "    percentual do README (1%) diverge do medido (0%)",
+              "# pass 2",
+              "# fail 1"
+            ]
+          }
+        ]
+      },
+      "evidence": "revisoes/support/09-a-21-readme-divergence.json"
+    },
+    {
+      "command": "git diff --exit-code eebbf112c1c89eb6f26afa477fad70424c28b4c4 21c55d52d5e51f39ee8a06607c5c2e6d4da37afc -- dataset/series.json src/generate.js src/prng.js src/signals.js scripts/evaluate.js test/generate.test.js test/readme-metrics.test.js",
+      "exit_code": 0,
+      "result": "Dataset, gerador, PRNG, métricas de sinal, avaliação e testes de reprodução/FPR preservados nesse delta."
+    }
+  ],
+  "findings": [
+    {
+      "id": "09-A-05",
+      "priority": "P2",
+      "kind": "verification_reliability",
+      "requires_fix_for_challenge": true,
+      "file": "src/generate.js",
+      "line": 292,
+      "related_locations": [
+        {
+          "file": "scripts/evaluate.js",
+          "line": 138
+        },
+        {
+          "file": "test/generate.test.js",
+          "line": 59
+        },
+        {
+          "file": "test/generate.test.js",
+          "line": 70
+        },
+        {
+          "file": "test/readme-metrics.test.js",
+          "line": 28
+        }
+      ],
+      "title": "A avaliação de leitura e os testes reescrevem um dataset compartilhado e tornam npm test intermitente",
+      "details": "A primeira execução padrão na cópia exata falhou 49/50 com Unexpected end of JSON input em loadDataset, sem avaliação externa concorrente. O node --test executa arquivos de teste em processos concorrentes; test/readme-metrics chama runEvaluation({writeEvidence:false}), que mesmo assim chama generateDatasetFile(DEFAULT_DATASET_PATH), cujo writeFileSync trunca/publica diretamente o arquivo compartilhado. Outro teste lê esse arquivo no intervalo. O teste de clock também gera no mesmo caminho. Além da corrida, a verificação diskMatchesCanonical compara o arquivo após regenerá-lo, podendo reparar o artefato antes de verificá-lo. A mudança de mtime foi comprovada com writeEvidence:false. Dez execuções padrão posteriores passaram; isso confirma o caráter intermitente e não invalida a falha observada.",
+      "reproduction": {
+        "first_command": "npm test",
+        "failed_test": "viral orgânico do dataset não é acusado; compra abrupta é",
+        "error": "Unexpected end of JSON input",
+        "stack": "src/generate.js:300 -> test/generate.test.js:59",
+        "first_result": "49 pass, 1 fail",
+        "subsequent_default": "10/10 passaram, 50 testes cada",
+        "read_only_mtime_probe": {
+          "writeEvidence": false,
+          "before_mtime_ms": 0,
+          "after_mtime_ms": 1791577779099.78,
+          "dataset_written": true,
+          "body_still_identical": true
+        },
+        "artifacts": [
+          "revisoes/support/09-a-21-tests-first-failure.txt",
+          "revisoes/support/09-a-21-race-runs.json",
+          "revisoes/support/09-a-21-readonly-probe.json"
+        ]
+      },
+      "recommendation": "Tornar a avaliação writeEvidence:false realmente somente leitura e comparar o dataset existente com a regeneração em memória antes de publicar. Isolar arquivos gerados por testes em diretórios temporários; publicar arquivos persistidos com rename atômico e temporário exclusivo. Preservar concorrência e asserts, e repetir os testes padrão após corrigir."
+    },
+    {
+      "id": "09-A-04",
+      "priority": "P3",
+      "kind": "methodology_suggestion",
+      "requires_fix_for_challenge": false,
+      "file": "src/generate.js",
+      "line": 134,
+      "related_file": "README.md",
+      "related_line": 137,
+      "title": "Ampliar hard negatives para quantificação da sensibilidade à repetição legítima",
+      "details": "O limite conhecido continua corretamente declarado: a campanha legítima sintetizada pelo revisor com 12 horas de 400 views é suspeito/mecanica. Na nova faixa de seeds 1000–1099, ocorreu 1 FP/7200 legítimos: seed1079, diurno-001, por 4 horas de 141 views (10,4% do total). O 0/72 oficial permanece correto, e a entrega não promete FPR zero fora desse dataset. Isto é sugestão de metodologia, sem requisito de eliminar todo falso positivo ou de ajustar limiar a esse seed.",
+      "reproduction": {
+        "artifact": "revisoes/support/09-a-21-probes.json",
+        "cases": [
+          "legitimate_scheduled_plateau",
+          "additional_seed_range.false_positive_cases"
+        ],
+        "additional_seed_range": [
+          1000,
+          1099
+        ],
+        "fp": 1,
+        "legitimate": 7200
+      },
+      "recommendation": "Publicar sensibilidade a exemplos legítimos repetidos/quantizados e considerar abstenção nas regiões ambíguas. Evitar usar estes novos seeds como alegação de holdout cego após terem sido inspecionados."
+    }
+  ],
+  "resolved_findings": [
+    {
+      "id": "09-A-01",
+      "previous_priority": "P2",
+      "status": "resolved_verified",
+      "proof": "Baseline200/pico2400/rampa suave passou para plausivel com mechanical=false. Variante com ruído continua plausivel; seed25 viral_organico-000 passou para plausivel. Seeds1–100:0/7200FP e3000/3000recall. Regras agora consideram elevação/representatividade da repetição e protegem baseline orgânico durante rampa suave."
+    },
+    {
+      "id": "09-A-02",
+      "previous_priority": "P2",
+      "status": "resolved_verified",
+      "proof": "HTTP real retorna422 para series vazia, negativa, ausente, array público direto e array numérico. Série válida de baixo volume retorna200/inconclusivo."
+    },
+    {
+      "id": "09-A-03",
+      "previous_priority": "P2",
+      "status": "resolved_verified",
+      "proof": "HTTP real retorna422 para2026-02-30 e1900-02-29;200 para2000-02-29 com+00:00. Validador verifica componentes civis por roundtrip sem normalizar datas inexistentes."
+    }
+  ],
+  "positive_checks": [
+    "Regeneração byte a byte preservada: SHA256 f7b7ad869c3b82f77e7f3d35dbd2508129678e626c953bc4db7243d5d39ac3f4;76624bytes.",
+    "FPR oficial medido0/72;recall30/30;17abstenções. README divergente em numerador, denominador ou percentual falhou sem autoedição.",
+    "18 requisições HTTP reais confirmaram schema, calendário, limite exato/overflow da soma, JSON400, body413 com Content-Length e chunked, Host inválido e serviço saudável depois.",
+    "Dataset/gerador/labels/perfis e sinais básicos preservados. Classificação opera nos valores/timestamps; labels e perfil são usados só na avaliação.",
+    "README distingue sensibilidade sintética de desenvolvimento e produção, e registra impossibilidade de diferenciar tráfego idêntico só por views."
+  ],
+  "methodology_limits": [
+    "Os 200 seeds do revisor cobrem famílias do próprio gerador; não estimam FPR de produção. Seeds inspecionados deixam de ser holdout cego.",
+    "Séries de origem diferente mas iguais em views/hora podem receber a mesma classificação; razão e disclaimer comunicam indício, não prova.",
+    "Não há aprovação deste candidato enquanto o P2 da avaliação/concorrência estiver aberto; novas correções exigem revisão do SHA seguinte."
+  ],
+  "verdict": "changes_requested",
+  "repository_mutated_by_reviewer": false,
+  "evidence_artifacts": [
+    "revisoes/09-a-anterior.json",
+    "revisoes/support/09-a-21-tests-first-failure.txt",
+    "revisoes/support/09-a-21-race-runs.json",
+    "revisoes/support/09-a-21-evaluation.txt",
+    "revisoes/support/09-a-21-readonly-probe.json",
+    "revisoes/support/09-a-21-probes.json",
+    "revisoes/support/09-a-final-probe.mjs",
+    "revisoes/support/09-a-21-readme-divergence.json"
+  ],
+  "reviewed_at": "2026-10-09 20:33:21 UTC"
+}

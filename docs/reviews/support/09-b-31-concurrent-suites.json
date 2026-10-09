@@ -1,0 +1,93 @@
+{
+  "reviewed_sha": "31bb2150d1758c9c2efbbfc73e506f4973597ca7",
+  "command": [
+    "/Users/flowbix_redfinger/XiaomiMiMoProjects/conty challenge/ferramentas/node22/node_modules/node/bin/node",
+    "--test",
+    "test/api.test.js",
+    "test/classify.test.js",
+    "test/generate.test.js",
+    "test/readme-metrics.test.js",
+    "test/validate.test.js"
+  ],
+  "shared_clean_archive": true,
+  "workers": "padr\u00e3o de duas invoca\u00e7\u00f5es simult\u00e2neas",
+  "runs": [
+    {
+      "pair": 1,
+      "side": "A",
+      "exit_code": 0,
+      "seconds": 0.7053,
+      "mentions_cleanup": false
+    },
+    {
+      "pair": 1,
+      "side": "B",
+      "exit_code": 0,
+      "seconds": 0.7048,
+      "mentions_cleanup": false
+    },
+    {
+      "pair": 2,
+      "side": "A",
+      "exit_code": 0,
+      "seconds": 0.8799,
+      "mentions_cleanup": false
+    },
+    {
+      "pair": 2,
+      "side": "B",
+      "exit_code": 0,
+      "seconds": 0.8974,
+      "mentions_cleanup": false
+    },
+    {
+      "pair": 3,
+      "side": "A",
+      "exit_code": 0,
+      "seconds": 0.4848,
+      "mentions_cleanup": false
+    },
+    {
+      "pair": 3,
+      "side": "B",
+      "exit_code": 0,
+      "seconds": 0.4784,
+      "mentions_cleanup": false
+    },
+    {
+      "pair": 4,
+      "side": "A",
+      "exit_code": 0,
+      "seconds": 0.4781,
+      "mentions_cleanup": false
+    },
+    {
+      "pair": 4,
+      "side": "B",
+      "exit_code": 0,
+      "seconds": 0.4941,
+      "mentions_cleanup": false
+    },
+    {
+      "pair": 5,
+      "side": "A",
+      "exit_code": 1,
+      "seconds": 0.548,
+      "mentions_cleanup": true,
+      "evidence": "revisoes/09-b-31-concurrent-suites-5-A-failure.txt"
+    },
+    {
+      "pair": 5,
+      "side": "B",
+      "exit_code": 1,
+      "seconds": 0.5184,
+      "mentions_cleanup": true,
+      "evidence": "revisoes/09-b-31-concurrent-suites-5-B-failure.txt"
+    }
+  ],
+  "failure_count": 2,
+  "cleanup_temps_remaining": [
+    "..test-tmp-cleanup-11385-1791579456551-7hh4uzow4v.foreign-preexisting.tmp",
+    "..test-tmp-cleanup-11384-1791579456552-24uqhaf4pw7.foreign-preexisting.tmp"
+  ]
+}

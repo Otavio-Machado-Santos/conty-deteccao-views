@@ -1,0 +1,30 @@
+
+> conty-deteccao-views@1.0.0 generate:evaluate
+> node scripts/evaluate.js
+
+=== generate:evaluate ===
+seed: 20261009
+séries: 102
+reprodução byte a byte: OK
+bytes do dataset: 76624
+
+FPR: 0/72 (0%)
+  numerador (FP)   = 0 legítimos classificados como suspeitos
+  denominador (N)  = 72 séries com rótulo sintético legítimo
+Recall suspeito: 30/30 (100%)
+Inconclusivos: 17
+
+Matriz de confusão (verdade sintética × predição):
+  legitimo → plausivel=55 suspeito=0 inconclusivo=17
+  suspeito → plausivel=0 suspeito=30 inconclusivo=0
+
+Por perfil (contagem por predição):
+  diurno [legitimo]: plausivel=16 suspeito=0 inconclusivo=0
+  viral_organico [legitimo]: plausivel=16 suspeito=0 inconclusivo=0
+  campanha_sustentada [legitimo]: plausivel=14 suspeito=0 inconclusivo=0
+  baixo_volume [legitimo]: plausivel=0 suspeito=0 inconclusivo=12
+  evento_rapido [legitimo]: plausivel=9 suspeito=0 inconclusivo=5
+  compra_abrupta [suspeito]: plausivel=0 suspeito=16 inconclusivo=0
+  repeticao_mecanica [suspeito]: plausivel=0 suspeito=14 inconclusivo=0
+
+Atenção: rótulos sintéticos; métricas valem só para este dataset.

@@ -1,0 +1,200 @@
+{
+  "reviewed_sha": "eebbf112c1c89eb6f26afa477fad70424c28b4c4",
+  "base_sha": "f489f871f45f27022ea7791bcd7cbfe447edc4c2",
+  "reviewer": "implementar_metricas; revisão B independente do MiMo/autor do desafio 9",
+  "reviewed_at": "2026-10-09T19:33:15.407870+00:00",
+  "repository": "/Users/flowbix_redfinger/XiaomiMiMoProjects/conty challenge/projetos/conty-deteccao-views",
+  "execution_scope": "git archive do SHA fixo em diretório temporário; testes/geração/mutação negativa de README ocorreram só nessa cópia. Código candidato não foi editado.",
+  "environment": {
+    "node": "v22.23.3",
+    "os": "macOS",
+    "http": "requisições reais em loopback; subprocesso isolado para probe de crash"
+  },
+  "commands": [
+    {
+      "command": "git diff --check f489f871f45f27022ea7791bcd7cbfe447edc4c2...eebbf112c1c89eb6f26afa477fad70424c28b4c4",
+      "exit_code": 0,
+      "result": "sem erros de whitespace"
+    },
+    {
+      "command": "npm test, com Node22 e cwd=cópia git archive do SHA",
+      "exit_code": 0,
+      "result": "29/29 passaram",
+      "evidence": "revisoes/09-b-tests.txt"
+    },
+    {
+      "command": "npm run generate:evaluate, com Node22 e cwd=cópia git archive do SHA",
+      "exit_code": 0,
+      "result": "102 séries; FPR0/72; recall30/30;17 abstenções; reprodução byte a byte; matriz55/0/17 vs0/30/0",
+      "evidence": "revisoes/09-b-evaluation.txt"
+    },
+    {
+      "command": "node revisoes/09-b-probes.mjs <cópia-do-SHA> revisoes/09-b-probes.json",
+      "exit_code": 0,
+      "result": "Diagnóstico independente concluiu; 6 achados abaixo. Exit0 significa probes concluídos, não aprovação do candidato.",
+      "evidence": "revisoes/09-b-probes.json"
+    },
+    {
+      "command": "Na cópia descartável, mudar FPR0/72(0%) para1/72(1.39%), executar node --test test/readme-metrics.test.js e restaurar README",
+      "exit_code": 1,
+      "expected_exit": 1,
+      "result": "Negativo PASSOU: numerador do README (1) diverge do medido (0)",
+      "evidence": "revisoes/09-b-readme-mutation.txt"
+    }
+  ],
+  "statistics": {
+    "default_seed": {
+      "seed": 20261009,
+      "false_positives": 0,
+      "legitimate": 72,
+      "detected_suspicious": 30,
+      "suspicious": 30,
+      "inconclusive": 17,
+      "reported_matrix_matches_independent_count": true
+    },
+    "holdout_seeds": {
+      "count": 67,
+      "series": 6834,
+      "false_positives": 1,
+      "legitimate": 4824,
+      "fpr": 0.00020729684908789387,
+      "detected_suspicious": 2010,
+      "suspicious": 2010,
+      "inconclusive": 1215,
+      "all_seeds_byte_reproducible": true,
+      "false_positive_example": "seed25/viral_organico-000: repetição de fundo5h@99 tem3,1% do total, mas prevalece e vira suspeito."
+    },
+    "interpretation": "A taxa0/72 no README está correta para a seed fixa, sem fraude numérica. Holdout permanece sintético e não estima produção; não foi usado para alterar parâmetros ou gerador."
+  },
+  "passed_requirements": [
+    "Dataset gerado localmente e reprodutível por seed, independente do clock canônico.",
+    "Medição FPR/recall/matriz é feita pelo comando e coincide com contagem independente.",
+    "Teste de divergência README falha realmente quando a métrica declarada é alterada.",
+    "Motivos em português e sinais quantitativos claros nos casos normais.",
+    "Abstenção para série válida curta/baixo volume/caso ambíguo existe.",
+    "Séries com lacunas, ordem inversa, horário não cheio, fuso não UTC e views negativas/fracionárias/não finitas são rejeitadas por validateSeries.",
+    "Métodos desconhecidos e 404 de rota não causaram erro no fluxo HTTP."
+  ],
+  "findings": [
+    {
+      "id": "09-b-calendar",
+      "priority": 2,
+      "title": "Calendário impossível e strings não ISO são aceitos como timestamps válidos",
+      "file": "src/validate.js",
+      "line": 40,
+      "end_line": 44,
+      "reproduction": "node revisoes/09-b-probes.mjs <cópia-do-SHA> <output>; validation.impossible_calendar/non_leap_day/non_iso_date e http.impossible_calendar",
+      "input": {
+        "series": [
+          {
+            "timestamp": "2026-02-30T00:00:00Z",
+            "views": 100
+          },
+          {
+            "timestamp": "2026-02-30T01:00:00Z",
+            "views": 100
+          }
+        ]
+      },
+      "expected": "Erro de contrato 422; 30 de fevereiro não existe. ISO UTC deve ser reconhecido estritamente, não pela linguagem ampla de Date.parse.",
+      "actual": "validateSeries aceita e normaliza implicitamente para 2 de março; API responde 200. 29/02/2026 e formato RFC \"Mon, 05 Jan 2026 00:00:00 Z\" também são aceitos.",
+      "impact": "A API declara validada uma série cujo calendário não corresponde ao input; quebra o contrato documentado e a confiabilidade dos instantes.",
+      "suggestion": "Validar formato ISO UTC e componentes de calendário antes/ao redor do parse; verificar round-trip sem aceitar normalização silenciosa. Acrescentar testes de calendário e formato."
+    },
+    {
+      "id": "09-b-api-validation",
+      "priority": 2,
+      "title": "A condição do primeiro elemento permite contornar toda a validação HTTP",
+      "file": "src/server.js",
+      "line": 73,
+      "end_line": 79,
+      "reproduction": "Mesmo script; http.numeric_bypass, numeric_invalid_bypass, missing_series, empty_series, string_series",
+      "input_examples": [
+        {
+          "series": [
+            100,
+            101,
+            99,
+            102,
+            98,
+            103
+          ]
+        },
+        {
+          "series": [
+            -1
+          ]
+        },
+        {},
+        {
+          "series": []
+        },
+        {
+          "series": "not-an-array"
+        }
+      ],
+      "expected": "422 para payloads fora do contrato de pontos horários contíguos UTC; a abstenção deve ser para série válida com evidência insuficiente.",
+      "actual": "Todos respondem 200. O array numérico válido até recebe classificação plausível apesar de não ter timestamps; os demais viram inconclusivo/invalida.",
+      "impact": "O consumidor não distingue entrada inválida de uma análise legítima inconclusiva; a promessa do README de 422 é falsa para esses corpos.",
+      "suggestion": "Validar o schema/série em todas as requisições HTTP, independentemente do primeiro elemento. Se arrays numéricos forem conveniência da biblioteca, mantê-los fora do contrato HTTP declarado."
+    },
+    {
+      "id": "09-b-aggregate-precision",
+      "priority": 2,
+      "title": "Inteiros seguros individuais produzem um total incorreto por overflow de precisão",
+      "file": "src/signals.js",
+      "line": 23,
+      "end_line": 23,
+      "reproduction": "Mesmo script; overflow e http.sum_overflow. Série contígua com views [9007199254740991,1,1,1,1,1].",
+      "expected": "Total exato 9007199254740996 ou rejeição explícita por ultrapassar precisão suportada.",
+      "actual": "API 200 e rawMetrics.total=9007199254740992. validateSeries protege cada ponto, mas não a soma; sinais de concentração/volume derivam do total inexato.",
+      "impact": "Valores que a API aceita pelo próprio limite de Number.MAX_SAFE_INTEGER retornam métricas numericamente erradas.",
+      "suggestion": "Limitar também o total antes dos cálculos ou calcular acumuladores com representação exata e definir sua serialização. Testar soma e estatísticas derivadas nas fronteiras."
+    },
+    {
+      "id": "09-b-body-limit",
+      "priority": 2,
+      "title": "Corpo acima do limite derruba o socket antes da resposta 413",
+      "file": "src/server.js",
+      "line": 23,
+      "end_line": 25,
+      "reproduction": "Mesmo script; http.oversized_body envia 2.000.101 bytes via node:http ao /classify.",
+      "expected": "HTTP 413 com erro JSON consistente.",
+      "actual": "Cliente recebe ECONNRESET/socket hang up e nenhum status HTTP; req.destroy ocorre antes do catch que tenta sendJson(413).",
+      "impact": "O cliente só vê falha de rede e pode repetir payload que sempre excederá o limite; não recebe a resposta que o próprio handler pretende enviar.",
+      "suggestion": "Responder 413 antes de encerrar/concluir a leitura e descartar o restante sem guardar novos chunks; cobrir Content-Length e corpo chunked com teste HTTP real."
+    },
+    {
+      "id": "09-b-malformed-host",
+      "priority": 2,
+      "title": "Host inválido causa exceção fora do handler e encerra todo o processo",
+      "file": "src/server.js",
+      "line": 39,
+      "end_line": 42,
+      "reproduction": "Mesmo script; malformedHost abre servidor em subprocesso e faz GET /health com Host: [bad.",
+      "expected": "Erro HTTP de entrada e servidor disponível para a próxima requisição.",
+      "actual": "Subprocesso termina com exit code 1 e TypeError ERR_INVALID_URL; o new URL baseado no Host está fora dos blocos try.",
+      "impact": "Uma única requisição inválida interrompe a API inteira, em vez de falhar isoladamente.",
+      "suggestion": "Usar base fixa local para caminhos e envolver parsing/clock/roteamento no limite de tratamento de erro do handler. Acrescentar teste que confirme saúde após header inválido."
+    },
+    {
+      "id": "09-b-organic-repetition",
+      "priority": 2,
+      "title": "Repetição de base mínima prevalece sobre rampa orgânica e gera acusação indevida",
+      "file": "src/classify.js",
+      "line": 156,
+      "end_line": 161,
+      "related_lines": [
+        "src/classify.js:226-235",
+        "src/classify.js:256-265"
+      ],
+      "reproduction": "Mesmo script; organicRepeatedBaseline cria exatamente a curva suave dos testes com 48 horas, removendo apenas o jitter. Holdout buildDataset({seed:25})/viral_organico-000 confirma em dado do gerador.",
+      "expected": "Rampa orgânica ampla sem degraus deve ser plausível ou inconclusiva se a repetição de fundo conflitar com ela; não cair automaticamente no balde de compra.",
+      "actual": "smoothRamp=true, largura=12h, maior degrau=1,85x, mas classificação suspeito/mecanica por 16h de baseline100, apenas9,47% do total. Na seed25, viral legítimo é acusado por5h@99, apenas3,1% do total, porque maxIdenticalRun>=5 ignora os critérios de representatividade.",
+      "impact": "Viola a distinção principal do desafio em um pico orgânico plausível e evidencia FP fora da única seed publicada. A documentação afirma exigir valor representativo, mas o OR>=5 o dispensa.",
+      "suggestion": "Tratar conflito entre rampa orgânica e repetição com abstenção; não tornar toda run>=5 suspeita independentemente de sua relevância/posição. Acrescentar regressões de baseline repetida e do viral seed25 sem mascarar os casos mecânicos elevados."
+    }
+  ],
+  "out_of_contract_suggestions": [],
+  "verdict": "changes_required"
+}

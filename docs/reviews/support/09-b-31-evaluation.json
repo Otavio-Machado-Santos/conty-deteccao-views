@@ -1,0 +1,58 @@
+{
+  "command": "npm run generate:evaluate",
+  "exit_code": 0,
+  "first_generate_after_default_worker_tests": true,
+  "canonical_dataset_byte_unchanged": true,
+  "dataset_bytes": 76624,
+  "dataset_sha256": "f7b7ad869c3b82f77e7f3d35dbd2508129678e626c953bc4db7243d5d39ac3f4",
+  "report": {
+    "generatedAt": "2026-10-09T20:58:28.966Z",
+    "seed": 20261009,
+    "datasetPath": "dataset/series.json",
+    "reproduction": {
+      "identicalAcrossRuns": true,
+      "identicalIgnoringClock": true,
+      "bytes": 76624,
+      "diskMatchesCanonical": true
+    },
+    "metrics": {
+      "series": 102,
+      "falsePositives": 0,
+      "legitimateTotal": 72,
+      "fpr": 0,
+      "fprPercent": 0,
+      "fprDisplay": "0/72",
+      "recallSuspiciousNumerator": 30,
+      "recallSuspiciousDenominator": 30,
+      "recallSuspicious": 1,
+      "recallSuspiciousPercent": 100,
+      "inconclusives": 17,
+      "confusionMatrix": {
+        "legitimo": {
+          "plausivel": 55,
+          "suspeito": 0,
+          "inconclusivo": 17
+        },
+        "suspeito": {
+          "plausivel": 0,
+          "suspeito": 30,
+          "inconclusivo": 0
+        }
+      },
+      "counts": {
+        "series": 102,
+        "legitimateTotal": 72,
+        "suspiciousTotal": 30,
+        "inconclusives": 17,
+        "falsePositives": 0,
+        "trueNegatives": 72,
+        "truePositives": 30,
+        "falseNegatives": 0
+      }
+    },
+    "fprNote": "FPR = leg\u00edtimos classificados como suspeitos / total de leg\u00edtimos. Inconclusivo n\u00e3o \u00e9 falso positivo (abstin\u00eancia).",
+    "recallNote": "Recall da classe suspeita = suspeitos detectados / total de suspeitos sint\u00e9ticos. Inconclusivo conta como n\u00e3o detectado.",
+    "labelNote": "R\u00f3tulos sint\u00e9ticos gerados por regras deste script. A taxa de falso positivo vale apenas para este conjunto; n\u00e3o estima produ\u00e7\u00e3o real."
+  },
+  "temporary_files_remaining": []
+}

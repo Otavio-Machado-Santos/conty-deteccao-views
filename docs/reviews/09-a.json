@@ -1,0 +1,298 @@
+{
+  "challenge": "bots-visualizacao",
+  "reviewer": "/root/implementar_repasses (Codex; revisão A independente do delta de isolamento feito pelo coordenador)",
+  "axis": "delta do isolamento do teste, preservação do produto e evidências herdadas",
+  "reviewed_sha": "829b1bc9cf4df285c8f867cdd6166799fd862659",
+  "base_sha": "f489f871f45f27022ea7791bcd7cbfe447edc4c2",
+  "delta_base_sha": "31bb2150d1758c9c2efbbfc73e506f4973597ca7",
+  "previous_reviews": [
+    "revisoes/09-a-anterior.json",
+    "revisoes/09-a-21-anterior.json",
+    "revisoes/09-a-31-anterior.json"
+  ],
+  "environment": {
+    "node": "v22.23.3",
+    "copy": "/var/folders/1h/dnd2dd992cq41yhypgy46_bc0000gn/T/conty-review-09-a-829-tjky3jb5",
+    "note": "git archive do SHA fixo. Testes e instrumentação apenas em cópias externas; não houve geração, edição no repo ou publicação. O controle negativo usa a cópia anterior do SHA 31."
+  },
+  "delta_scope": {
+    "changed_files": [
+      "README.md",
+      "docs/evidence/test-isolation.json",
+      "docs/evidence/test.txt",
+      "test/generate.test.js"
+    ],
+    "product_unchanged": true,
+    "protected_files": 13,
+    "description": "Filtro de temporários usa o prefixo completo desta chamada; remoção dos próprios temporários fica em finally; cinco assertions são idênticas ao candidato anterior. README atribui o isolamento ao Codex. Classificador/API/validação/gerador/avaliação/dataset/perfis/limiares não mudaram."
+  },
+  "commands_results": [
+    {
+      "command": "npm test",
+      "where": "git archive do SHA 829, workers padrão",
+      "exit_code": 0,
+      "result": "53/53 passaram",
+      "evidence": "revisoes/support/09-a-829-tests.txt"
+    },
+    {
+      "command": "python3 revisoes/support/09-a-829-isolation-probe.py <archive829> <archive31> <output>",
+      "exit_code": 0,
+      "result": {
+        "reviewed_sha": "829b1bc9cf4df285c8f867cdd6166799fd862659",
+        "passed": true,
+        "foreign_temporary_ignored": {
+          "exit_code": 0,
+          "proof": [
+            "# Subtest: writeJsonAtomic remove somente o temporário próprio em falha e não toca preexistentes",
+            "ok 1 - writeJsonAtomic remove somente o temporário próprio em falha e não toca preexistentes",
+            "# tests 1",
+            "# pass 1",
+            "# fail 0"
+          ],
+          "foreign_preserved": true
+        },
+        "old31_negative_control": {
+          "exit_code": 1,
+          "proof": [
+            "# Subtest: writeJsonAtomic remove somente o temporário próprio em falha e não toca preexistentes",
+            "not ok 1 - writeJsonAtomic remove somente o temporário próprio em falha e não toca preexistentes",
+            "    temporário próprio deve ser removido",
+            "# tests 1",
+            "# pass 0",
+            "# fail 1"
+          ],
+          "foreign_preserved": true,
+          "left_own_temp_after_assertion": true
+        },
+        "simultaneous_default_suites": {
+          "runs": [
+            {
+              "exit_code": 0,
+              "proof": [
+                "# tests 53",
+                "# pass 53",
+                "# fail 0"
+              ]
+            },
+            {
+              "exit_code": 0,
+              "proof": [
+                "# tests 53",
+                "# pass 53",
+                "# fail 0"
+              ]
+            }
+          ],
+          "foreign_preserved": true,
+          "same_copy": true,
+          "default_workers": true
+        },
+        "assertion_failure_finally": {
+          "exit_code": 1,
+          "proof": [
+            "# Subtest: writeJsonAtomic remove somente o temporário próprio em falha e não toca preexistentes",
+            "not ok 1 - writeJsonAtomic remove somente o temporário próprio em falha e não toca preexistentes",
+            "    temporário próprio deve ser removido",
+            "# tests 1",
+            "# pass 0",
+            "# fail 1"
+          ],
+          "assertion_not_relaxed": true,
+          "own_foreign_removed": true,
+          "own_injected_orphan_removed": true,
+          "other_suite_preserved": true
+        },
+        "owned_leftovers": []
+      },
+      "evidence": "revisoes/support/09-a-829-isolation-probes.json"
+    },
+    {
+      "command": "git diff --exit-code 31bb215 829b1bc -- src scripts dataset test/api.test.js test/classify.test.js test/readme-metrics.test.js test/validate.test.js; comparação de hashes; comparação das assertions",
+      "exit_code": 0,
+      "result": {
+        "delta_base_sha": "31bb2150d1758c9c2efbbfc73e506f4973597ca7",
+        "reviewed_sha": "829b1bc9cf4df285c8f867cdd6166799fd862659",
+        "protected_files": 13,
+        "identical_hashes": {
+          "dataset/series.json": "f7b7ad869c3b82f77e7f3d35dbd2508129678e626c953bc4db7243d5d39ac3f4",
+          "package.json": "e241c58f4800484ffe3dccb061791cab6d498428bc8d1fb9c742fbba096332a1",
+          "scripts/evaluate.js": "5e64f6ea94f4dd7d993e353bdd9c3236d67fb1014ff1d5579c52fc0fba145cd2",
+          "src/classify.js": "8f6a5473cce82dcb00bab52a7ed6b5d607c0d7cf288559bba384e408333b4655",
+          "src/generate.js": "4a3aa2322c8317ecf0cab7d6aeaa2077c70b8079d392c12badb1f4b11e4c920c",
+          "src/prng.js": "0f2c8480804c106d6a9c17a44030fb1c3fd24e764abfd4099516848df8c4623a",
+          "src/server.js": "259a2bd7aa3f61f193528aa7530b8ae04c75126874d8904b6a5d1e6f7e126636",
+          "src/signals.js": "5f10115c0c8e15afea935953d7633c4c398204997cfab80436bc235f06602a4f",
+          "src/validate.js": "7516b7a8bbc6c2349f5e657ef4e310eb95f9819ca1f21bc5f4caed4c4dd5fe05",
+          "test/api.test.js": "0fcf1b3ff4a81708e0c664003797cab460a253d637de02c7c6036e0bed90f3da",
+          "test/classify.test.js": "063a9d4464fc8dee8d530da9ed5281d0a9c89ff67089d588222d55a91003952a",
+          "test/readme-metrics.test.js": "a121c164fe5a673e4b5e283802cb9f3a681553d715227b81bcf2c9a44c1ac3e0",
+          "test/validate.test.js": "e09fa69f5ae81af11439ae16e867e4f633cc9d9eba66f02da20408ee921278dc"
+        },
+        "cleanup_assertions_preserved": [
+          "assert.ok(threw, 'esperava falha no corpo inválido');",
+          "assert.equal(existsSync(tmp), false, 'arquivo final não deve existir');",
+          "assert.equal(existsSync(foreign), true, 'temporário preexistente deve preservar');",
+          "assert.equal(readFileSync(foreign, 'utf8'), 'nao-apagar');",
+          "assert.deepEqual(leftovers, [], 'temporário próprio deve ser removido');"
+        ],
+        "copy_all_tracked_bytes_unchanged": true
+      },
+      "evidence": "revisoes/support/09-a-829-integrity.json"
+    }
+  ],
+  "inherited_evidence": {
+    "from_reviewed_sha": "31bb2150d1758c9c2efbbfc73e506f4973597ca7",
+    "report": "revisoes/09-a-31-anterior.json",
+    "justification": "Os 13 arquivos protegidos são byte a byte iguais, incluindo todo src/, scripts/evaluate.js, dataset/series.json e os testes de produto/README. O delta só afeta o teste de limpeza, a nota de IA e evidências. Por isso os probes de produto não foram repetidos por rotina.",
+    "retained_results": [
+      {
+        "scope": "Publicação e readonly",
+        "artifact": "revisoes/support/09-a-31-io-probes.json",
+        "result": "480 publicações/6.000 leituras integrais; wx/UUID/ownership/cleanup/rename comprovados; avaliação readonly preserva bytes/inode/mtime e acusa arquivo adulterado/ausente sem reparar."
+      },
+      {
+        "scope": "README e reprodução negativos",
+        "artifact": "revisoes/support/09-a-31-readme-divergence.json",
+        "result": "Numerador, denominador e percentual divergentes falham sem autoedit; dataset corrompido falha na verificação dos bytes reais."
+      },
+      {
+        "scope": "API, classificador e metodologia",
+        "artifact": "revisoes/support/09-a-31-domain-probes.json",
+        "result": "18 probes HTTP passaram; viral de baseline estável e seed 25 plausíveis; 200 seeds: 0/7200 FP e 1/7200 FP, recall 3000/3000 em cada faixa. Resultados sintéticos limitados."
+      },
+      {
+        "scope": "Avaliação oficial",
+        "artifact": "revisoes/support/09-a-31-evaluation.txt",
+        "result": "Dataset com 102 séries/76624 bytes; FPR 0/72, recall 30/30, 17 abstenções; dataset SHA256 preservado."
+      }
+    ]
+  },
+  "findings": [
+    {
+      "id": "09-A-04",
+      "priority": "P3",
+      "kind": "methodology_suggestion",
+      "requires_fix_for_challenge": false,
+      "file": "src/generate.js",
+      "line": 134,
+      "related_file": "README.md",
+      "related_line": 137,
+      "title": "Ampliar hard negatives para quantificação da sensibilidade à repetição legítima",
+      "details": "O limite conhecido continua corretamente declarado: a campanha legítima sintetizada pelo revisor com 12 horas de 400 views é suspeito/mecanica. Na nova faixa de seeds 1000–1099, ocorreu 1 FP/7200 legítimos: seed 1079, diurno-001, por 4 horas de 141 views (10,4% do total). O 0/72 oficial permanece correto, e a entrega não promete FPR zero fora desse dataset. Os mesmos casos foram reexecutados no candidato 31, com resultados idênticos. Isto é sugestão de metodologia, sem requisito de eliminar todo falso positivo ou de ajustar limiar a esse seed.",
+      "reproduction": {
+        "artifact": "revisoes/support/09-a-31-domain-probes.json",
+        "cases": [
+          "legitimate_scheduled_plateau",
+          "additional_seed_range.false_positive_cases"
+        ],
+        "additional_seed_range": [
+          1000,
+          1099
+        ],
+        "fp": 1,
+        "legitimate": 7200
+      },
+      "recommendation": "Publicar sensibilidade a exemplos legítimos repetidos/quantizados e considerar abstenção nas regiões ambíguas. Evitar usar estes novos seeds como alegação de holdout cego após terem sido inspecionados."
+    }
+  ],
+  "resolved_findings": [
+    {
+      "id": "09-A-01",
+      "previous_priority": "P2",
+      "status": "resolved_verified",
+      "proof": "Viral com baseline 200, pico 2400 e rampa suave retorna plausivel com mechanical=false; variante com ruído e viral_organico-000 da seed 25 seguem plausivel. Reexecutado no SHA 31; ver revisoes/support/09-a-31-domain-probes.json.",
+      "verification_inheritance": "Implementação e testes relevantes do produto imutáveis por hashes no SHA 829."
+    },
+    {
+      "id": "09-A-02",
+      "previous_priority": "P2",
+      "status": "resolved_verified",
+      "proof": "HTTP real retorna 422 para série vazia, negativa, ausente, array público direto e array numérico. Série válida de baixo volume retorna 200/inconclusivo. Reexecutado no SHA 31; ver revisoes/support/09-a-31-domain-probes.json.",
+      "verification_inheritance": "Implementação e testes relevantes do produto imutáveis por hashes no SHA 829."
+    },
+    {
+      "id": "09-A-03",
+      "previous_priority": "P2",
+      "status": "resolved_verified",
+      "proof": "HTTP real retorna 422 para 2026-02-30 e 1900-02-29; 200 para 2000-02-29 com +00:00. Reexecutado no SHA 31; ver revisoes/support/09-a-31-domain-probes.json.",
+      "verification_inheritance": "Implementação e testes relevantes do produto imutáveis por hashes no SHA 829."
+    },
+    {
+      "id": "09-A-05",
+      "previous_priority": "P2",
+      "status": "resolved_verified",
+      "file": "src/generate.js",
+      "line": 305,
+      "related_locations": [
+        {
+          "file": "src/generate.js",
+          "line": 314
+        },
+        {
+          "file": "src/generate.js",
+          "line": 316
+        },
+        {
+          "file": "src/generate.js",
+          "line": 319
+        },
+        {
+          "file": "scripts/evaluate.js",
+          "line": 145
+        },
+        {
+          "file": "scripts/evaluate.js",
+          "line": 180
+        }
+      ],
+      "proof": "runEvaluation(writeEvidence:false) constrói em memória e compara bytes reais sem gravação: bytes/inode/mtime do dataset, evidence e README ficaram iguais. Dataset adulterado ou ausente retorna diskMatchesCanonical=false sem reparar/criar; o teste de reprodução falha para bytes corrompidos. Teste de clock usa caminho isolado. As 16 execuções com workers padrão passaram 53/53 antes de generate:evaluate. Publicação com UUID + openSync wx no mesmo diretório escreve integralmente pelo fd exclusivo, fecha e faz rename. Probe independente com barreira, mesmo PID/clock, 4 escritores × 120 e 3 leitores totalizou 480 publicações e 6.000 leituras de quatro corpos UTF8 diferentes (276026–384026 bytes), todas integrais. Colisão UUID forçada produz EEXIST e preserva temporário alheio; falha EIO após escrita parcial fecha fd/remove só temporário próprio/preserva final anterior; falha no rename EISDIR limpa temporário e preserva diretório destino. Nenhum temporário órfão.",
+      "verification_inheritance": "Implementação e testes relevantes do produto imutáveis por hashes no SHA 829."
+    },
+    {
+      "id": "cleanup-isolation-from-review-B",
+      "previous_priority": "P2",
+      "status": "resolved_verified",
+      "origin": "Reporte do parecer B sobre o SHA 31; contraprova própria reproduzida nesta revisão A",
+      "file": "test/generate.test.js",
+      "line": 210,
+      "related_lines": [
+        228,
+        233,
+        235
+      ],
+      "proof": "A mesma sonda coloca um temporário alheio que contém cleanup: o teste selecionado do SHA 31 falha e deixa seu arquivo após assertion, enquanto SHA 829 passa e preserva o alheio. Duas suítes npm test simultâneas no mesmo archive 829, com o arquivo alheio presente, passaram 53/53 cada. Injetei um órfão do prefixo próprio para provocar a assertion real preservada: o teste falhou como esperado, e finally removeu o temporário do próprio teste e o órfão injetado, preservando o arquivo da outra suíte. Nenhum órfão próprio após o probe. Cinco assertions originais idênticas foram verificadas textualmente.",
+      "evidence": "revisoes/support/09-a-829-isolation-probes.json"
+    }
+  ],
+  "positive_checks": [
+    "Suíte padrão passou 53/53; duas execuções simultâneas adicionais passaram 53/53 cada no mesmo diretório com temporário alheio presente.",
+    "O prefixo completo diferencia os temporários desta chamada dos arquivos de outra suíte; controle negativo no SHA 31 comprovou que a sonda detecta o defeito antigo.",
+    "Assertion de órfão continua ativa: a injeção deliberada faz o teste falhar; finally executa e remove só os temporários próprios.",
+    "Todas as assertions da limpeza foram preservadas; não houve serialização, relaxamento dos asserts ou mudança no produto.",
+    "13 arquivos protegidos e todos os arquivos rastreados da cópia permaneceram iguais aos bytes do commit após os testes.",
+    "Nota de IA inclui o ajuste Codex do isolamento; nenhuma revisão humana é alegada."
+  ],
+  "methodology_limits": [
+    "FPR oficial 0/72 mede o dataset sintético fixo; as faixas 1–100 e 1000–1099 usam as mesmas famílias paramétricas. Elas são sensibilidade de desenvolvimento, não estimativa de produção nem holdout cego após inspeção.",
+    "Nas duas faixas de 100 seeds houve 0/7200 FP e 1/7200 FP, respectivamente; recall 3000/3000 em ambas. A campanha legítima repetida e diurno-001 da seed 1079 ainda demonstram sensibilidade à repetição elevada, coerente com a limitação declarada. Sugestão P3 permanece sem requisito de eliminar todos os falsos positivos.",
+    "Os probes de API/classificador/avaliação/publicação são herdados do SHA 31, com evidência explícita de bytes imutáveis. Somente a suíte e o delta de isolamento foram executados no SHA 829.",
+    "Esta é a aprovação da revisão A sobre o SHA 829; não significa publicação, revisão humana ou conclusão dos demais gates coordenados."
+  ],
+  "verdict": "approved",
+  "approval_scope": "Entrega 9 no SHA 829b1bc9cf4df285c8f867cdd6166799fd862659; nenhum P0/P1/P2 aberto",
+  "repository_mutated_by_reviewer": false,
+  "evidence_artifacts": [
+    "revisoes/09-a-anterior.json",
+    "revisoes/09-a-21-anterior.json",
+    "revisoes/09-a-31-anterior.json",
+    "revisoes/support/09-a-829-tests.txt",
+    "revisoes/support/09-a-829-isolation-probe.py",
+    "revisoes/support/09-a-829-isolation-probes.json",
+    "revisoes/support/09-a-829-integrity.json",
+    "revisoes/support/09-a-31-io-probes.json",
+    "revisoes/support/09-a-31-readme-divergence.json",
+    "revisoes/support/09-a-31-domain-probes.json",
+    "revisoes/support/09-a-31-evaluation.txt"
+  ],
+  "reviewed_at": "2026-10-09 21:08:25 UTC"
+}

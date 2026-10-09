@@ -1,0 +1,398 @@
+{
+  "reviewed_sha": "31bb2150d1758c9c2efbbfc73e506f4973597ca7",
+  "command": [
+    "node",
+    "--test",
+    "test/api.test.js",
+    "test/classify.test.js",
+    "test/generate.test.js",
+    "test/readme-metrics.test.js",
+    "test/validate.test.js"
+  ],
+  "workers": "padr\u00e3o, sem flags de serializa\u00e7\u00e3o",
+  "generation_run_before_tests": false,
+  "runs": [
+    {
+      "run": 1,
+      "exit_code": 0,
+      "seconds": 0.3919,
+      "summary": [
+        "  ...",
+        "1..53",
+        "# tests 53",
+        "# suites 0",
+        "# pass 53",
+        "# fail 0",
+        "# cancelled 0",
+        "# skipped 0",
+        "# todo 0",
+        "# duration_ms 356.782833"
+      ]
+    },
+    {
+      "run": 2,
+      "exit_code": 0,
+      "seconds": 0.4154,
+      "summary": [
+        "  ...",
+        "1..53",
+        "# tests 53",
+        "# suites 0",
+        "# pass 53",
+        "# fail 0",
+        "# cancelled 0",
+        "# skipped 0",
+        "# todo 0",
+        "# duration_ms 377.554583"
+      ]
+    },
+    {
+      "run": 3,
+      "exit_code": 0,
+      "seconds": 0.343,
+      "summary": [
+        "  ...",
+        "1..53",
+        "# tests 53",
+        "# suites 0",
+        "# pass 53",
+        "# fail 0",
+        "# cancelled 0",
+        "# skipped 0",
+        "# todo 0",
+        "# duration_ms 306.265625"
+      ]
+    },
+    {
+      "run": 4,
+      "exit_code": 0,
+      "seconds": 0.3089,
+      "summary": [
+        "  ...",
+        "1..53",
+        "# tests 53",
+        "# suites 0",
+        "# pass 53",
+        "# fail 0",
+        "# cancelled 0",
+        "# skipped 0",
+        "# todo 0",
+        "# duration_ms 273.736"
+      ]
+    },
+    {
+      "run": 5,
+      "exit_code": 0,
+      "seconds": 0.2958,
+      "summary": [
+        "  ...",
+        "1..53",
+        "# tests 53",
+        "# suites 0",
+        "# pass 53",
+        "# fail 0",
+        "# cancelled 0",
+        "# skipped 0",
+        "# todo 0",
+        "# duration_ms 262.738959"
+      ]
+    },
+    {
+      "run": 6,
+      "exit_code": 0,
+      "seconds": 0.4134,
+      "summary": [
+        "  ...",
+        "1..53",
+        "# tests 53",
+        "# suites 0",
+        "# pass 53",
+        "# fail 0",
+        "# cancelled 0",
+        "# skipped 0",
+        "# todo 0",
+        "# duration_ms 377.111792"
+      ]
+    },
+    {
+      "run": 7,
+      "exit_code": 0,
+      "seconds": 0.3479,
+      "summary": [
+        "  ...",
+        "1..53",
+        "# tests 53",
+        "# suites 0",
+        "# pass 53",
+        "# fail 0",
+        "# cancelled 0",
+        "# skipped 0",
+        "# todo 0",
+        "# duration_ms 307.572459"
+      ]
+    },
+    {
+      "run": 8,
+      "exit_code": 0,
+      "seconds": 0.3896,
+      "summary": [
+        "  ...",
+        "1..53",
+        "# tests 53",
+        "# suites 0",
+        "# pass 53",
+        "# fail 0",
+        "# cancelled 0",
+        "# skipped 0",
+        "# todo 0",
+        "# duration_ms 351.102667"
+      ]
+    },
+    {
+      "run": 9,
+      "exit_code": 0,
+      "seconds": 0.4443,
+      "summary": [
+        "  ...",
+        "1..53",
+        "# tests 53",
+        "# suites 0",
+        "# pass 53",
+        "# fail 0",
+        "# cancelled 0",
+        "# skipped 0",
+        "# todo 0",
+        "# duration_ms 397.113"
+      ]
+    },
+    {
+      "run": 10,
+      "exit_code": 0,
+      "seconds": 0.3689,
+      "summary": [
+        "  ...",
+        "1..53",
+        "# tests 53",
+        "# suites 0",
+        "# pass 53",
+        "# fail 0",
+        "# cancelled 0",
+        "# skipped 0",
+        "# todo 0",
+        "# duration_ms 329.364458"
+      ]
+    },
+    {
+      "run": 11,
+      "exit_code": 0,
+      "seconds": 0.3806,
+      "summary": [
+        "  ...",
+        "1..53",
+        "# tests 53",
+        "# suites 0",
+        "# pass 53",
+        "# fail 0",
+        "# cancelled 0",
+        "# skipped 0",
+        "# todo 0",
+        "# duration_ms 345.773041"
+      ]
+    },
+    {
+      "run": 12,
+      "exit_code": 0,
+      "seconds": 0.3362,
+      "summary": [
+        "  ...",
+        "1..53",
+        "# tests 53",
+        "# suites 0",
+        "# pass 53",
+        "# fail 0",
+        "# cancelled 0",
+        "# skipped 0",
+        "# todo 0",
+        "# duration_ms 302.964625"
+      ]
+    },
+    {
+      "run": 13,
+      "exit_code": 0,
+      "seconds": 0.3445,
+      "summary": [
+        "  ...",
+        "1..53",
+        "# tests 53",
+        "# suites 0",
+        "# pass 53",
+        "# fail 0",
+        "# cancelled 0",
+        "# skipped 0",
+        "# todo 0",
+        "# duration_ms 305.889458"
+      ]
+    },
+    {
+      "run": 14,
+      "exit_code": 0,
+      "seconds": 0.4291,
+      "summary": [
+        "  ...",
+        "1..53",
+        "# tests 53",
+        "# suites 0",
+        "# pass 53",
+        "# fail 0",
+        "# cancelled 0",
+        "# skipped 0",
+        "# todo 0",
+        "# duration_ms 381.032916"
+      ]
+    },
+    {
+      "run": 15,
+      "exit_code": 0,
+      "seconds": 0.4497,
+      "summary": [
+        "  ...",
+        "1..53",
+        "# tests 53",
+        "# suites 0",
+        "# pass 53",
+        "# fail 0",
+        "# cancelled 0",
+        "# skipped 0",
+        "# todo 0",
+        "# duration_ms 406.908125"
+      ]
+    },
+    {
+      "run": 16,
+      "exit_code": 0,
+      "seconds": 0.4038,
+      "summary": [
+        "  ...",
+        "1..53",
+        "# tests 53",
+        "# suites 0",
+        "# pass 53",
+        "# fail 0",
+        "# cancelled 0",
+        "# skipped 0",
+        "# todo 0",
+        "# duration_ms 360.429"
+      ]
+    },
+    {
+      "run": 17,
+      "exit_code": 0,
+      "seconds": 0.3883,
+      "summary": [
+        "  ...",
+        "1..53",
+        "# tests 53",
+        "# suites 0",
+        "# pass 53",
+        "# fail 0",
+        "# cancelled 0",
+        "# skipped 0",
+        "# todo 0",
+        "# duration_ms 348.398334"
+      ]
+    },
+    {
+      "run": 18,
+      "exit_code": 0,
+      "seconds": 0.3877,
+      "summary": [
+        "  ...",
+        "1..53",
+        "# tests 53",
+        "# suites 0",
+        "# pass 53",
+        "# fail 0",
+        "# cancelled 0",
+        "# skipped 0",
+        "# todo 0",
+        "# duration_ms 347.716084"
+      ]
+    },
+    {
+      "run": 19,
+      "exit_code": 0,
+      "seconds": 0.3957,
+      "summary": [
+        "  ...",
+        "1..53",
+        "# tests 53",
+        "# suites 0",
+        "# pass 53",
+        "# fail 0",
+        "# cancelled 0",
+        "# skipped 0",
+        "# todo 0",
+        "# duration_ms 354.151875"
+      ]
+    },
+    {
+      "run": 20,
+      "exit_code": 0,
+      "seconds": 0.3433,
+      "summary": [
+        "  ...",
+        "1..53",
+        "# tests 53",
+        "# suites 0",
+        "# pass 53",
+        "# fail 0",
+        "# cancelled 0",
+        "# skipped 0",
+        "# todo 0",
+        "# duration_ms 308.194292"
+      ]
+    }
+  ],
+  "before": {
+    "dataset/series.json": {
+      "size": 76624,
+      "inode": 108488420,
+      "mtime_ns": 1791578967000000000,
+      "sha256": "f7b7ad869c3b82f77e7f3d35dbd2508129678e626c953bc4db7243d5d39ac3f4"
+    },
+    "docs/evidence/evaluation.json": {
+      "size": 1481,
+      "inode": 108488429,
+      "mtime_ns": 1791578967000000000,
+      "sha256": "78b98b5daa2b1cfa0aad9662adf413218fb90d1db31f3eae7d831ce673bf0faf"
+    },
+    "README.md": {
+      "size": 13170,
+      "inode": 108488418,
+      "mtime_ns": 1791578967000000000,
+      "sha256": "8438c75f80a94eaf7f4f8f7c5f7d9c4eb1b221572dc7dde9e227cd3877d522b3"
+    }
+  },
+  "after": {
+    "dataset/series.json": {
+      "size": 76624,
+      "inode": 108488420,
+      "mtime_ns": 1791578967000000000,
+      "sha256": "f7b7ad869c3b82f77e7f3d35dbd2508129678e626c953bc4db7243d5d39ac3f4"
+    },
+    "docs/evidence/evaluation.json": {
+      "size": 1481,
+      "inode": 108488429,
+      "mtime_ns": 1791578967000000000,
+      "sha256": "78b98b5daa2b1cfa0aad9662adf413218fb90d1db31f3eae7d831ce673bf0faf"
+    },
+    "README.md": {
+      "size": 13170,
+      "inode": 108488418,
+      "mtime_ns": 1791578967000000000,
+      "sha256": "8438c75f80a94eaf7f4f8f7c5f7d9c4eb1b221572dc7dde9e227cd3877d522b3"
+    }
+  },
+  "shared_files_unchanged": true,
+  "tmp_files_remaining": []
+}

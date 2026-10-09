@@ -1,0 +1,67 @@
+{
+  "reviewed_sha": "829b1bc9cf4df285c8f867cdd6166799fd862659",
+  "passed": true,
+  "foreign_temporary_ignored": {
+    "exit_code": 0,
+    "proof": [
+      "# Subtest: writeJsonAtomic remove somente o temporário próprio em falha e não toca preexistentes",
+      "ok 1 - writeJsonAtomic remove somente o temporário próprio em falha e não toca preexistentes",
+      "# tests 1",
+      "# pass 1",
+      "# fail 0"
+    ],
+    "foreign_preserved": true
+  },
+  "old31_negative_control": {
+    "exit_code": 1,
+    "proof": [
+      "# Subtest: writeJsonAtomic remove somente o temporário próprio em falha e não toca preexistentes",
+      "not ok 1 - writeJsonAtomic remove somente o temporário próprio em falha e não toca preexistentes",
+      "    temporário próprio deve ser removido",
+      "# tests 1",
+      "# pass 0",
+      "# fail 1"
+    ],
+    "foreign_preserved": true,
+    "left_own_temp_after_assertion": true
+  },
+  "simultaneous_default_suites": {
+    "runs": [
+      {
+        "exit_code": 0,
+        "proof": [
+          "# tests 53",
+          "# pass 53",
+          "# fail 0"
+        ]
+      },
+      {
+        "exit_code": 0,
+        "proof": [
+          "# tests 53",
+          "# pass 53",
+          "# fail 0"
+        ]
+      }
+    ],
+    "foreign_preserved": true,
+    "same_copy": true,
+    "default_workers": true
+  },
+  "assertion_failure_finally": {
+    "exit_code": 1,
+    "proof": [
+      "# Subtest: writeJsonAtomic remove somente o temporário próprio em falha e não toca preexistentes",
+      "not ok 1 - writeJsonAtomic remove somente o temporário próprio em falha e não toca preexistentes",
+      "    temporário próprio deve ser removido",
+      "# tests 1",
+      "# pass 0",
+      "# fail 1"
+    ],
+    "assertion_not_relaxed": true,
+    "own_foreign_removed": true,
+    "own_injected_orphan_removed": true,
+    "other_suite_preserved": true
+  },
+  "owned_leftovers": []
+}

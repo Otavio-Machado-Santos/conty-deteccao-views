@@ -159,7 +159,7 @@ Mesmo parecendo "um pico", não vira `suspeito` sem combinação de sinais. Os 5
 
 ## Nota sobre IA
 
-Implementação e correções principais geradas pelo **MiMo CLI**. **Codex** coordenou, conferiu e ajustou a escrita integral pelo descritor exclusivo antes do rename e o isolamento dos arquivos temporários do teste de limpeza. Duas revisões independentes finais estão pendentes. **Nenhuma revisão humana é alegada.**
+Implementação, testes e documentação: MiMo CLI (mimo-v2.6-pro), com ajustes pontuais Codex na escrita integral antes do rename e no isolamento da limpeza do teste. Dois agentes Codex independentes do implementador revisaram o commit `829b1bc9cf4df285c8f867cdd6166799fd862659` e liberaram a entrega após testes e sondagens próprias. Os pareceres completos estão em `docs/reviews/`. O coordenador conferiu a instalação e os testes em checkout isolado e registrou o fluxo HTTP real. Não foi realizada revisão humana do código. A validação usa dados sintéticos e ambiente local; limites e interpretações do contrato estão documentados.
 
 ## Evidências
 
@@ -171,3 +171,6 @@ Implementação e correções principais geradas pelo **MiMo CLI**. **Codex** co
 - `docs/evidence/coordinator-probes.json` — conferência Codex de 25 requests HTTP, calendário e sensibilidade sintética de desenvolvimento.
 - `docs/evidence/readme-divergences.json` — prova de falha para numerador, denominador e percentual adulterados, sem autoeditar o README.
 - `docs/evidence/dataset-integrity.json` — o dataset canônico permanece byte a byte idêntico ao candidato inicial; o fonte do gerador mudou somente na publicação do arquivo (publicação atômica).
+
+
+[Verificação final, revisões independentes e captura do fluxo real](docs/verificacao-final.md).

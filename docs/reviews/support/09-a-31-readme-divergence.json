@@ -1,0 +1,53 @@
+{
+  "all_fpr_divergences_failed": true,
+  "variants": [
+    {
+      "tamper": "FPR: 1/72 (1.39%)",
+      "exit_code": 1,
+      "readme_not_self_repaired": true,
+      "dataset_unchanged": true,
+      "evaluation_unchanged": true,
+      "proof": [
+        "not ok 1 - FPR do README bate com a medição do generate:evaluate",
+        "    numerador do README (1) diverge do medido (0)",
+        "# pass 3",
+        "# fail 1"
+      ]
+    },
+    {
+      "tamper": "FPR: 0/73 (0%)",
+      "exit_code": 1,
+      "readme_not_self_repaired": true,
+      "dataset_unchanged": true,
+      "evaluation_unchanged": true,
+      "proof": [
+        "not ok 1 - FPR do README bate com a medição do generate:evaluate",
+        "    denominador do README (73) diverge do medido (72)",
+        "# pass 3",
+        "# fail 1"
+      ]
+    },
+    {
+      "tamper": "FPR: 0/72 (1%)",
+      "exit_code": 1,
+      "readme_not_self_repaired": true,
+      "dataset_unchanged": true,
+      "evaluation_unchanged": true,
+      "proof": [
+        "not ok 1 - FPR do README bate com a medição do generate:evaluate",
+        "    percentual do README (1%) diverge do medido (0%)",
+        "# pass 3",
+        "# fail 1"
+      ]
+    }
+  ],
+  "negative_disk_reproduction": {
+    "exit_code": 1,
+    "corrupt_dataset_not_repaired": true,
+    "proof": [
+      "not ok 3 - reprodução byte a byte é confirmada na avaliação",
+      "# pass 3",
+      "# fail 1"
+    ]
+  }
+}

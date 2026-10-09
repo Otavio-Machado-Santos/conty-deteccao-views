@@ -1,0 +1,227 @@
+{
+  "reviewed_sha": "21c55d52d5e51f39ee8a06607c5c2e6d4da37afc",
+  "base_sha": "f489f871f45f27022ea7791bcd7cbfe447edc4c2",
+  "previous_review": "revisoes/09-b-anterior.json",
+  "previous_reviewed_sha": "eebbf112c1c89eb6f26afa477fad70424c28b4c4",
+  "reviewer": "implementar_metricas; revisão B independente final/delta",
+  "reviewed_at": "2026-10-09T20:32:39.129001+00:00",
+  "scope": "Commitfixo por git archive descartável; código candidato não editado. Achados anteriores reexecutados, negativos API/calendário/soma/corpo/Host; gerador/métricas/README; concorrência padrão de testes.",
+  "environment": {
+    "node": "v22.23.3",
+    "os": "macOS"
+  },
+  "commands": [
+    {
+      "command": "git diff --check eebbf112...21c55d52",
+      "exit_code": 0,
+      "result": "sem whitespace errors"
+    },
+    {
+      "command": "npm test com Node22, cwd=cópia do git archive21c55d52",
+      "exit_code": 0,
+      "result": "primeira execução50/50 verde",
+      "evidence": "revisoes/09-b-tests.txt"
+    },
+    {
+      "command": "npm run generate:evaluate com Node22, cwd=cópia do git archive21c55d52",
+      "exit_code": 0,
+      "result": "102séries;FPR0/72;recall30/30;17abstenções;bytes76624 reproduzíveis",
+      "evidence": "revisoes/09-b-evaluation.txt"
+    },
+    {
+      "command": "node revisoes/09-b-final-probes.mjs <archive21> revisoes/09-b-final-probes.json",
+      "exit_code": 0,
+      "result": "Todas as6 sondagens anteriores agora passam;267seeds avaliadas; matriz consistente",
+      "evidence": "revisoes/09-b-final-probes.json"
+    },
+    {
+      "command": "node revisoes/09-b-http-final.mjs <archive21> revisoes/09-b-http-final.json",
+      "exit_code": 0,
+      "result": "12bodycases CL/chunked/keepAlive/agent:false/3tamanhos, reuse→health→POSTválido; JSON vazio400; Host permanece disponível; zeroerro sockets",
+      "evidence": "revisoes/09-b-http-final.json"
+    },
+    {
+      "command": "Mutação negativa na cópia: numerador,denominador,percentual do FPR, node --test test/readme-metrics.test.js; README restaurado",
+      "expected_exit": 1,
+      "result": [
+        {
+          "field": "numerator",
+          "exit_code": 1,
+          "expected_exit": 1,
+          "expected_message_found": true
+        },
+        {
+          "field": "denominator",
+          "exit_code": 1,
+          "expected_exit": 1,
+          "expected_message_found": true
+        },
+        {
+          "field": "percent",
+          "exit_code": 1,
+          "expected_exit": 1,
+          "expected_message_found": true
+        }
+      ],
+      "evidence": "revisoes/09-b-final-readme.json"
+    },
+    {
+      "command": "Repetir node --test test/*.test.js com workers padrão, mesmo archive, sem serialização",
+      "result": {
+        "runs": 4,
+        "failure_run": 4,
+        "failure": "test/generate.test.js:25 compara dataset e lê string vazia durante escrita concorrente"
+      },
+      "evidence": "revisoes/09-b-final-race.json; revisoes/09-b-final-race-failure.txt"
+    }
+  ],
+  "source_integrity": {
+    "generator_git_blob_original": "249c8f1bb1fc50a951b9622e0bc117efb547ec94",
+    "generator_git_blob_candidate": "249c8f1bb1fc50a951b9622e0bc117efb547ec94",
+    "dataset_git_blob_original": "2dc156d66713f5a013d7ffcf54f69ccfe83172d2",
+    "dataset_git_blob_candidate": "2dc156d66713f5a013d7ffcf54f69ccfe83172d2",
+    "identical": true,
+    "note": "Hashes do commit fixo; arquivos em edição na árvore de trabalho foram ignorados pela execução isolada."
+  },
+  "resolutions": [
+    {
+      "id": "09-b-calendar",
+      "status": "resolved",
+      "original_reviewed_sha": "eebbf112c1c89eb6f26afa477fad70424c28b4c4",
+      "source": "src/validate.js:27,35",
+      "evidence": "validation do probe final: calendários impossíveis/nonISO rejeitados, UTC válido aceito, anos0000/0001/0099/0100 sem remapeamento e séculos bissextos corretos; HTTP invalid calendar422."
+    },
+    {
+      "id": "09-b-api-validation",
+      "status": "resolved",
+      "original_reviewed_sha": "eebbf112c1c89eb6f26afa477fad70424c28b4c4",
+      "source": "src/server.js:117,194",
+      "evidence": "Probes HTTP agora422 para numeric bypass/negativo/missing/empty/string; JSONvazio/só espaços/truncado400 nos requests reais."
+    },
+    {
+      "id": "09-b-aggregate-precision",
+      "status": "resolved",
+      "original_reviewed_sha": "eebbf112c1c89eb6f26afa477fad70424c28b4c4",
+      "source": "src/validate.js:128; src/classify.js:114",
+      "evidence": "Unsafe total rejeitado antes dos sinais; HTTP422; biblioteca retorna invalida, sem publicar total inexato."
+    },
+    {
+      "id": "09-b-body-limit",
+      "status": "resolved",
+      "original_reviewed_sha": "eebbf112c1c89eb6f26afa477fad70424c28b4c4",
+      "source": "src/server.js:35,62",
+      "evidence": "12matrizes CL/chunked, keepAlive/agent:false e3tamanhos;413JSON em todos, health200+POSTválido200; reusedSocket=true no keepAlive; zeroerros sockets."
+    },
+    {
+      "id": "09-b-malformed-host",
+      "status": "resolved",
+      "original_reviewed_sha": "eebbf112c1c89eb6f26afa477fad70424c28b4c4",
+      "source": "src/server.js:104,135",
+      "evidence": "Subprocesso Host:[bad agoraexit0/HTTP200; health no mesmo socket disponível; base fixa e tratamento externo de erro."
+    },
+    {
+      "id": "09-b-organic-repetition",
+      "status": "resolved",
+      "original_reviewed_sha": "eebbf112c1c89eb6f26afa477fad70424c28b4c4",
+      "source": "src/classify.js:163,190,257",
+      "evidence": "A rampa48h com baselineconstante vira plausivel, mechanical=false, smoothRamp=true; viral seed25 deixou de gerarFP; suspeitos sintéticos foram preservados."
+    }
+  ],
+  "findings": [
+    {
+      "id": "09-b-concurrent-dataset-write",
+      "priority": 2,
+      "title": "Testes padrão concorrem sobre o dataset compartilhado e falham intermitentemente",
+      "file": "scripts/evaluate.js",
+      "line": 138,
+      "end_line": 141,
+      "related_lines": [
+        "test/generate.test.js:25-28",
+        "test/generate.test.js:69-78",
+        "test/readme-metrics.test.js:26-29"
+      ],
+      "reproduction": "No git archive21, execute node --test test/*.test.js repetidamente com configuração padrão; a4ª execução nesta revisão falhou em generate.test25. FullTAP preservado.",
+      "expected": "Todos os workers devem ler dados completos e cada teste deve escrever somente artefatos isolados; repetir teste sem mudança de código permanece confiável.",
+      "actual": "runEvaluation({writeEvidence:false}) ainda chama generateDatasetFile(DEFAULT_DATASET_PATH), truncando/regravando o mesmo arquivo que outros workers leem. A4ª execução leu string vazia na comparação canônica; teste falhou.",
+      "impact": "Uma única suíte verde não confirma entrega reproduzível; a checagem dataset/README depende de timing e pode ler JSON/bytes parciais.",
+      "suggestion": "Avaliar em memória quando a escrita está desabilitada; usar temporários exclusivos nos testes de escrita e/ou publicação atômica. Manter workers padrão e asserts de integridade, sem serializar a suíte para esconder a corrida."
+    }
+  ],
+  "statistics": {
+    "canonical": {
+      "seed": 20261009,
+      "false_positives": 0,
+      "legitimate": 72,
+      "true_positives": 30,
+      "suspicious": 30,
+      "inconclusive": 17,
+      "matrix": {
+        "legitimo": {
+          "plausivel": 55,
+          "suspeito": 0,
+          "inconclusivo": 17
+        },
+        "suspeito": {
+          "plausivel": 0,
+          "suspeito": 30,
+          "inconclusivo": 0
+        }
+      },
+      "matrix_counted_independently": true
+    },
+    "additional_synthetic_sensitivity": {
+      "seed_count": 267,
+      "seed_ranges": [
+        "0–63",
+        "1000–1199"
+      ],
+      "other_seeds": [
+        20261010,
+        123456789,
+        4294967295
+      ],
+      "series": 27234,
+      "false_positives": 2,
+      "legitimate": 19224,
+      "fpr": 0.00010403662089055348,
+      "true_positives": 8010,
+      "suspicious": 8010,
+      "inconclusive": 4790,
+      "all_reproductions_identical": true,
+      "false_positive_cases": [
+        {
+          "seed": 1079,
+          "cases": [
+            {
+              "id": "diurno-001",
+              "profile": "diurno",
+              "label": "legitimo",
+              "classification": "suspeito",
+              "shape": "mecanica",
+              "reason": "Ritmo mecânico: maior sequência de valores idênticos = 4 horas com 141 views (10.4% do total). Séries orgânicas têm ruído hora a hora; 4 horas com exatamente 141 views, em série com 5399 views no total, combinam repetição exata elevada e volume — indício de padrão automatizado, não prova de fraude."
+            }
+          ]
+        },
+        {
+          "seed": 1164,
+          "cases": [
+            {
+              "id": "diurno-010",
+              "profile": "diurno",
+              "label": "legitimo",
+              "classification": "suspeito",
+              "shape": "mecanica",
+              "reason": "Ritmo mecânico: maior sequência de valores idênticos = 4 horas com 75 views (5.9% do total). Séries orgânicas têm ruído hora a hora; 4 horas com exatamente 75 views, em série com 5081 views no total, combinam repetição exata elevada e volume — indício de padrão automatizado, não prova de fraude."
+            }
+          ]
+        }
+      ],
+      "interpretation": "Avaliação sintética de desenvolvimento; não é holdout cego nem FPR de produção. Dois FP diurnos pela regra mecânica documentada:1079/diurno-001 run4@141 e1164/diurno-010 run4@75. Não são a regressão viral/baseline original; critério50%peak permite repetição75 compeak147 mesmoabaixomediana113. Nenhuma calibração foi alterada para zerar estesFP."
+    }
+  },
+  "harness_note": "EPIPE no primeiro harness foi isolado como teardown prematuro: ele fazia closeAllConnections antes do uploadfinish. O harness corrigido aguarda finish e fechamento gracioso;12matrizes HTTP completas não tiveram EPIPE/ECONNRESET/erro de socket. Não é achado pendente do produto.",
+  "out_of_contract_suggestions": [],
+  "verdict": "changes_required",
+  "release_authorized": false,
+  "note": "Não liberar21 para envio; aguardando novo SHA com correção da corrida, solicitado pelo coordenador."
+}

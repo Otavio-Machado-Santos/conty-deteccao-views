@@ -1,0 +1,144 @@
+{
+  "command": "npm test",
+  "default_workers": true,
+  "before_generate_evaluate": true,
+  "runs": [
+    {
+      "run": 1,
+      "exit_code": 0,
+      "proof": [
+        "# tests 53",
+        "# pass 53",
+        "# fail 0"
+      ]
+    },
+    {
+      "run": 2,
+      "exit_code": 0,
+      "proof": [
+        "# tests 53",
+        "# pass 53",
+        "# fail 0"
+      ]
+    },
+    {
+      "run": 3,
+      "exit_code": 0,
+      "proof": [
+        "# tests 53",
+        "# pass 53",
+        "# fail 0"
+      ]
+    },
+    {
+      "run": 4,
+      "exit_code": 0,
+      "proof": [
+        "# tests 53",
+        "# pass 53",
+        "# fail 0"
+      ]
+    },
+    {
+      "run": 5,
+      "exit_code": 0,
+      "proof": [
+        "# tests 53",
+        "# pass 53",
+        "# fail 0"
+      ]
+    },
+    {
+      "run": 6,
+      "exit_code": 0,
+      "proof": [
+        "# tests 53",
+        "# pass 53",
+        "# fail 0"
+      ]
+    },
+    {
+      "run": 7,
+      "exit_code": 0,
+      "proof": [
+        "# tests 53",
+        "# pass 53",
+        "# fail 0"
+      ]
+    },
+    {
+      "run": 8,
+      "exit_code": 0,
+      "proof": [
+        "# tests 53",
+        "# pass 53",
+        "# fail 0"
+      ]
+    },
+    {
+      "run": 9,
+      "exit_code": 0,
+      "proof": [
+        "# tests 53",
+        "# pass 53",
+        "# fail 0"
+      ]
+    },
+    {
+      "run": 10,
+      "exit_code": 0,
+      "proof": [
+        "# tests 53",
+        "# pass 53",
+        "# fail 0"
+      ]
+    },
+    {
+      "run": 11,
+      "exit_code": 0,
+      "proof": [
+        "# tests 53",
+        "# pass 53",
+        "# fail 0"
+      ]
+    },
+    {
+      "run": 12,
+      "exit_code": 0,
+      "proof": [
+        "# tests 53",
+        "# pass 53",
+        "# fail 0"
+      ]
+    },
+    {
+      "run": 13,
+      "exit_code": 0,
+      "proof": [
+        "# tests 53",
+        "# pass 53",
+        "# fail 0"
+      ]
+    },
+    {
+      "run": 14,
+      "exit_code": 0,
+      "proof": [
+        "# tests 53",
+        "# pass 53",
+        "# fail 0"
+      ]
+    },
+    {
+      "run": 15,
+      "exit_code": 0,
+      "proof": [
+        "# tests 53",
+        "# pass 53",
+        "# fail 0"
+      ]
+    }
+  ],
+  "passed": true,
+  "count": 15
+}

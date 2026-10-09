@@ -1,0 +1,918 @@
+{
+  "passed": true,
+  "reproduction": {
+    "identical": true,
+    "sha256": "f7b7ad869c3b82f77e7f3d35dbd2508129678e626c953bc4db7243d5d39ac3f4"
+  },
+  "counterexamples": [
+    {
+      "name": "viral_stable_baseline",
+      "classification": "plausivel",
+      "reason": "Subida e descida graduais (largura do pico = 12h; subida = 4h; descida = 7h; maior degrau na rampa = 1.844×) com razão pico/base de 12×. A sequência de 16h com 200 views está no nível de base (9.5% do total), compatível com fundo estável durante propagação orgânica — não é ritmo de entrega mecânica. Pico alto sozinho não caracteriza compra.",
+      "shape": "rampa_suave",
+      "signals": {
+        "peakToBase": {
+          "value": 12,
+          "threshold": 8,
+          "triggered": true,
+          "detail": "pico 2400 vs mediana 200 → razão 12×"
+        },
+        "abruptJump": {
+          "value": 1.844,
+          "threshold": 4,
+          "triggered": false,
+          "detail": "maior fator de subida hora a hora = 1.844× no índice 12"
+        },
+        "abruptDrop": {
+          "value": 1.429,
+          "threshold": 4,
+          "triggered": false,
+          "detail": "maior fator de queda hora a hora = 1.429× no índice 30"
+        },
+        "concentration": {
+          "value": 0.071,
+          "top3Share": 0.2093,
+          "window3Share": 0.2093,
+          "threshold": 0.35,
+          "triggered": false,
+          "detail": "hora do pico = 7.1% do total; top-3 horas = 20.9%; melhor janela de 3h = 20.9%"
+        },
+        "exactRepetition": {
+          "value": 16,
+          "runValue": 200,
+          "runShare": 0.0947,
+          "threshold": 4,
+          "triggered": false,
+          "detail": "maior sequência de valores idênticos = 16 horas com 200 views (9.5% do total)"
+        },
+        "rampShape": {
+          "value": {
+            "spikeWidth": 12,
+            "riseHours": 4,
+            "fallHours": 7,
+            "maxRampStep": 1.844
+          },
+          "threshold": {
+            "wideWidth": 4,
+            "smoothMaxStep": 3.2
+          },
+          "triggered": true,
+          "detail": "largura do pico = 12h; subida = 4h; descida = 7h; maior degrau na rampa = 1.844×"
+        }
+      },
+      "rawMetrics": {
+        "n": 48,
+        "total": 33800,
+        "peak": 2400,
+        "peakIdx": 18,
+        "median": 200,
+        "peakToBase": 12,
+        "peakShare": 0.071,
+        "top3Share": 0.2093,
+        "maxRiseRatio": 1.844,
+        "maxRiseIdx": 12,
+        "maxDropRatio": 1.429,
+        "maxDropIdx": 30,
+        "spikeWidth": 12,
+        "riseHours": 4,
+        "fallHours": 7,
+        "maxRampStep": 1.844,
+        "maxIdenticalRun": 16,
+        "runValue": 200,
+        "runShare": 0.0947,
+        "window3Share": 0.2093,
+        "diurnalAmplitude": 1.562
+      },
+      "flags": {
+        "abruptJump": false,
+        "abruptDrop": false,
+        "highPeakToBase": true,
+        "highConcentration": false,
+        "narrowSpike": false,
+        "mechanical": false,
+        "smoothRamp": true
+      },
+      "thresholds": {
+        "MIN_POINTS": 6,
+        "MIN_TOTAL_VIEWS": 80,
+        "MIN_PEAK_FOR_MAGNITUDE": 15,
+        "HIGH_PEAK_TO_BASE": 8,
+        "HIGH_PEAK_SHARE": 0.35,
+        "HIGH_TOP3_SHARE": 0.72,
+        "HIGH_WINDOW3_SHARE": 0.65,
+        "ABRUPT_JUMP_RATIO": 4,
+        "ABRUPT_DROP_RATIO": 4,
+        "NARROW_SPIKE_WIDTH": 2,
+        "NARROW_SPIKE_MIN_PEAK_TO_BASE": 4,
+        "WIDE_RAMP_WIDTH": 4,
+        "SMOOTH_MAX_RAMP_STEP": 3.2,
+        "MECHANICAL_RUN": 4,
+        "MECHANICAL_VALUE_MIN": 40,
+        "MECHANICAL_SHARE": 0.25,
+        "MECHANICAL_PEAK_FRACTION": 0.5,
+        "ORGANIC_MIN_PEAK_TO_BASE": 3
+      },
+      "disclaimer": "Resultado analítico, não prova de fraude: séries horárias de views não permitem afirmar humanos ou bots com certeza. Tráfego pago legítimo, campanhas agendadas e picos orgânicos reais podem se parecer com compra. Séries idênticas são indistinguíveis por este método."
+    },
+    {
+      "name": "same_viral_small_noise",
+      "classification": "plausivel",
+      "reason": "Subida e descida graduais (largura do pico = 11h; subida = 4h; descida = 6h; maior degrau na rampa = 1.851×) com razão pico/base de 11.876×. Forma de rampa suave é compatível com viral orgânico ou evento legítimo com propagação; pico alto sozinho não caracteriza compra.",
+      "shape": "rampa_suave",
+      "signals": {
+        "peakToBase": {
+          "value": 11.876,
+          "threshold": 8,
+          "triggered": true,
+          "detail": "pico 2399 vs mediana 202 → razão 11.876×"
+        },
+        "abruptJump": {
+          "value": 1.851,
+          "threshold": 4,
+          "triggered": false,
+          "detail": "maior fator de subida hora a hora = 1.851× no índice 12"
+        },
+        "abruptDrop": {
+          "value": 1.441,
+          "threshold": 4,
+          "triggered": false,
+          "detail": "maior fator de queda hora a hora = 1.441× no índice 30"
+        },
+        "concentration": {
+          "value": 0.071,
+          "top3Share": 0.2093,
+          "window3Share": 0.2093,
+          "threshold": 0.35,
+          "triggered": false,
+          "detail": "hora do pico = 7.1% do total; top-3 horas = 20.9%; melhor janela de 3h = 20.9%"
+        },
+        "exactRepetition": {
+          "value": 1,
+          "runValue": 198,
+          "runShare": 0.0059,
+          "threshold": 4,
+          "triggered": false,
+          "detail": "maior sequência de valores idênticos = 1 horas com 198 views (0.6% do total)"
+        },
+        "rampShape": {
+          "value": {
+            "spikeWidth": 11,
+            "riseHours": 4,
+            "fallHours": 6,
+            "maxRampStep": 1.851
+          },
+          "threshold": {
+            "wideWidth": 4,
+            "smoothMaxStep": 3.2
+          },
+          "triggered": true,
+          "detail": "largura do pico = 11h; subida = 4h; descida = 6h; maior degrau na rampa = 1.851×"
+        }
+      },
+      "rawMetrics": {
+        "n": 48,
+        "total": 33800,
+        "peak": 2399,
+        "peakIdx": 18,
+        "median": 202,
+        "peakToBase": 11.876,
+        "peakShare": 0.071,
+        "top3Share": 0.2093,
+        "maxRiseRatio": 1.851,
+        "maxRiseIdx": 12,
+        "maxDropRatio": 1.441,
+        "maxDropIdx": 30,
+        "spikeWidth": 11,
+        "riseHours": 4,
+        "fallHours": 6,
+        "maxRampStep": 1.851,
+        "maxIdenticalRun": 1,
+        "runValue": 198,
+        "runShare": 0.0059,
+        "window3Share": 0.2093,
+        "diurnalAmplitude": 1.564
+      },
+      "flags": {
+        "abruptJump": false,
+        "abruptDrop": false,
+        "highPeakToBase": true,
+        "highConcentration": false,
+        "narrowSpike": false,
+        "mechanical": false,
+        "smoothRamp": true
+      },
+      "thresholds": {
+        "MIN_POINTS": 6,
+        "MIN_TOTAL_VIEWS": 80,
+        "MIN_PEAK_FOR_MAGNITUDE": 15,
+        "HIGH_PEAK_TO_BASE": 8,
+        "HIGH_PEAK_SHARE": 0.35,
+        "HIGH_TOP3_SHARE": 0.72,
+        "HIGH_WINDOW3_SHARE": 0.65,
+        "ABRUPT_JUMP_RATIO": 4,
+        "ABRUPT_DROP_RATIO": 4,
+        "NARROW_SPIKE_WIDTH": 2,
+        "NARROW_SPIKE_MIN_PEAK_TO_BASE": 4,
+        "WIDE_RAMP_WIDTH": 4,
+        "SMOOTH_MAX_RAMP_STEP": 3.2,
+        "MECHANICAL_RUN": 4,
+        "MECHANICAL_VALUE_MIN": 40,
+        "MECHANICAL_SHARE": 0.25,
+        "MECHANICAL_PEAK_FRACTION": 0.5,
+        "ORGANIC_MIN_PEAK_TO_BASE": 3
+      },
+      "disclaimer": "Resultado analítico, não prova de fraude: séries horárias de views não permitem afirmar humanos ou bots com certeza. Tráfego pago legítimo, campanhas agendadas e picos orgânicos reais podem se parecer com compra. Séries idênticas são indistinguíveis por este método."
+    },
+    {
+      "name": "legitimate_scheduled_plateau",
+      "classification": "suspeito",
+      "reason": "Ritmo mecânico: maior sequência de valores idênticos = 12 horas com 400 views (56.9% do total). Séries orgânicas têm ruído hora a hora; 12 horas com exatamente 400 views, em série com 8436 views no total, combinam repetição exata elevada e volume — indício de padrão automatizado, não prova de fraude.",
+      "shape": "mecanica",
+      "signals": {
+        "peakToBase": {
+          "value": 3.941,
+          "threshold": 8,
+          "triggered": false,
+          "detail": "pico 400 vs mediana 101.5 → razão 3.941×"
+        },
+        "abruptJump": {
+          "value": 3.922,
+          "threshold": 4,
+          "triggered": false,
+          "detail": "maior fator de subida hora a hora = 3.922× no índice 12"
+        },
+        "abruptDrop": {
+          "value": 4,
+          "threshold": 4,
+          "triggered": true,
+          "detail": "maior fator de queda hora a hora = 4× no índice 24"
+        },
+        "concentration": {
+          "value": 0.0474,
+          "top3Share": 0.1422,
+          "window3Share": 0.1422,
+          "threshold": 0.35,
+          "triggered": false,
+          "detail": "hora do pico = 4.7% do total; top-3 horas = 14.2%; melhor janela de 3h = 14.2%"
+        },
+        "exactRepetition": {
+          "value": 12,
+          "runValue": 400,
+          "runShare": 0.569,
+          "threshold": 4,
+          "triggered": true,
+          "detail": "maior sequência de valores idênticos = 12 horas com 400 views (56.9% do total)"
+        },
+        "rampShape": {
+          "value": {
+            "spikeWidth": 12,
+            "riseHours": 0,
+            "fallHours": 11,
+            "maxRampStep": 4
+          },
+          "threshold": {
+            "wideWidth": 4,
+            "smoothMaxStep": 3.2
+          },
+          "triggered": false,
+          "detail": "largura do pico = 12h; subida = 0h; descida = 11h; maior degrau na rampa = 4×"
+        }
+      },
+      "rawMetrics": {
+        "n": 48,
+        "total": 8436,
+        "peak": 400,
+        "peakIdx": 12,
+        "median": 101.5,
+        "peakToBase": 3.941,
+        "peakShare": 0.0474,
+        "top3Share": 0.1422,
+        "maxRiseRatio": 3.922,
+        "maxRiseIdx": 12,
+        "maxDropRatio": 4,
+        "maxDropIdx": 24,
+        "spikeWidth": 12,
+        "riseHours": 0,
+        "fallHours": 11,
+        "maxRampStep": 4,
+        "maxIdenticalRun": 12,
+        "runValue": 400,
+        "runShare": 0.569,
+        "window3Share": 0.1422,
+        "diurnalAmplitude": 0.859
+      },
+      "flags": {
+        "abruptJump": false,
+        "abruptDrop": true,
+        "highPeakToBase": false,
+        "highConcentration": false,
+        "narrowSpike": false,
+        "mechanical": true,
+        "smoothRamp": false
+      },
+      "thresholds": {
+        "MIN_POINTS": 6,
+        "MIN_TOTAL_VIEWS": 80,
+        "MIN_PEAK_FOR_MAGNITUDE": 15,
+        "HIGH_PEAK_TO_BASE": 8,
+        "HIGH_PEAK_SHARE": 0.35,
+        "HIGH_TOP3_SHARE": 0.72,
+        "HIGH_WINDOW3_SHARE": 0.65,
+        "ABRUPT_JUMP_RATIO": 4,
+        "ABRUPT_DROP_RATIO": 4,
+        "NARROW_SPIKE_WIDTH": 2,
+        "NARROW_SPIKE_MIN_PEAK_TO_BASE": 4,
+        "WIDE_RAMP_WIDTH": 4,
+        "SMOOTH_MAX_RAMP_STEP": 3.2,
+        "MECHANICAL_RUN": 4,
+        "MECHANICAL_VALUE_MIN": 40,
+        "MECHANICAL_SHARE": 0.25,
+        "MECHANICAL_PEAK_FRACTION": 0.5,
+        "ORGANIC_MIN_PEAK_TO_BASE": 3
+      },
+      "disclaimer": "Resultado analítico, não prova de fraude: séries horárias de views não permitem afirmar humanos ou bots com certeza. Tráfego pago legítimo, campanhas agendadas e picos orgânicos reais podem se parecer com compra. Séries idênticas são indistinguíveis por este método."
+    }
+  ],
+  "same_seed_range": {
+    "seeds": 100,
+    "seed_range": [
+      1,
+      100
+    ],
+    "false_positives": 0,
+    "legitimate": 7200,
+    "detected": 3000,
+    "suspicious": 3000,
+    "abstentions": 1809,
+    "false_positive_cases": []
+  },
+  "additional_seed_range": {
+    "seeds": 100,
+    "seed_range": [
+      1000,
+      1099
+    ],
+    "false_positives": 1,
+    "legitimate": 7200,
+    "detected": 3000,
+    "suspicious": 3000,
+    "abstentions": 1810,
+    "false_positive_cases": [
+      {
+        "seed": 1079,
+        "id": "diurno-001",
+        "profile": "diurno",
+        "label": "legitimo",
+        "classification": "suspeito",
+        "shape": "mecanica",
+        "reason": "Ritmo mecânico: maior sequência de valores idênticos = 4 horas com 141 views (10.4% do total). Séries orgânicas têm ruído hora a hora; 4 horas com exatamente 141 views, em série com 5399 views no total, combinam repetição exata elevada e volume — indício de padrão automatizado, não prova de fraude."
+      }
+    ]
+  },
+  "seed25": {
+    "classification": "plausivel",
+    "shape": "rampa_suave",
+    "reason": "Subida e descida graduais (largura do pico = 13h; subida = 5h; descida = 7h; maior degrau na rampa = 1.607×) com razão pico/base de 8.129×. A sequência de 5h com 99 views está no nível de base (3.1% do total), compatível com fundo estável durante propagação orgânica — não é ritmo de entrega mecânica. Pico alto sozinho não caracteriza compra."
+  },
+  "api": [
+    {
+      "name": "empty_series",
+      "status": 422,
+      "response": {
+        "error": "series não pode ser vazia",
+        "code": "invalid_series",
+        "contract": {
+          "description": "série cronológica contígua em timestamps UTC horários; views = inteiros seguros não negativos (incrementais por hora)",
+          "example": [
+            {
+              "timestamp": "2026-01-05T00:00:00.000Z",
+              "views": 120
+            },
+            {
+              "timestamp": "2026-01-05T01:00:00.000Z",
+              "views": 130
+            }
+          ],
+          "shape": {
+            "series": [
+              {
+                "timestamp": "ISO UTC",
+                "views": "inteiro >= 0"
+              }
+            ]
+          }
+        }
+      }
+    },
+    {
+      "name": "negative_array",
+      "status": 422,
+      "response": {
+        "error": "series[0] deve ser objeto",
+        "code": "invalid_series",
+        "contract": {
+          "description": "série cronológica contígua em timestamps UTC horários; views = inteiros seguros não negativos (incrementais por hora)",
+          "example": [
+            {
+              "timestamp": "2026-01-05T00:00:00.000Z",
+              "views": 120
+            },
+            {
+              "timestamp": "2026-01-05T01:00:00.000Z",
+              "views": 130
+            }
+          ],
+          "shape": {
+            "series": [
+              {
+                "timestamp": "ISO UTC",
+                "views": "inteiro >= 0"
+              }
+            ]
+          }
+        }
+      }
+    },
+    {
+      "name": "missing_series",
+      "status": 422,
+      "response": {
+        "error": "campo obrigatório \"series\" ausente",
+        "code": "invalid_body",
+        "contract": {
+          "description": "série cronológica contígua em timestamps UTC horários; views = inteiros seguros não negativos (incrementais por hora)",
+          "example": [
+            {
+              "timestamp": "2026-01-05T00:00:00.000Z",
+              "views": 120
+            },
+            {
+              "timestamp": "2026-01-05T01:00:00.000Z",
+              "views": 130
+            }
+          ],
+          "shape": {
+            "series": [
+              {
+                "timestamp": "ISO UTC",
+                "views": "inteiro >= 0"
+              }
+            ]
+          }
+        }
+      }
+    },
+    {
+      "name": "bare_array",
+      "status": 422,
+      "response": {
+        "error": "corpo deve ser um objeto JSON no formato { series: [{ timestamp, views }, ...] }",
+        "code": "invalid_body",
+        "contract": {
+          "description": "série cronológica contígua em timestamps UTC horários; views = inteiros seguros não negativos (incrementais por hora)",
+          "example": [
+            {
+              "timestamp": "2026-01-05T00:00:00.000Z",
+              "views": 120
+            },
+            {
+              "timestamp": "2026-01-05T01:00:00.000Z",
+              "views": 130
+            }
+          ],
+          "shape": {
+            "series": [
+              {
+                "timestamp": "ISO UTC",
+                "views": "inteiro >= 0"
+              }
+            ]
+          }
+        }
+      }
+    },
+    {
+      "name": "numeric_series",
+      "status": 422,
+      "response": {
+        "error": "series[0] deve ser objeto",
+        "code": "invalid_series",
+        "contract": {
+          "description": "série cronológica contígua em timestamps UTC horários; views = inteiros seguros não negativos (incrementais por hora)",
+          "example": [
+            {
+              "timestamp": "2026-01-05T00:00:00.000Z",
+              "views": 120
+            },
+            {
+              "timestamp": "2026-01-05T01:00:00.000Z",
+              "views": 130
+            }
+          ],
+          "shape": {
+            "series": [
+              {
+                "timestamp": "ISO UTC",
+                "views": "inteiro >= 0"
+              }
+            ]
+          }
+        }
+      }
+    },
+    {
+      "name": "overflow_total",
+      "status": 422,
+      "response": {
+        "error": "soma das views excede o total seguro (Number.MAX_SAFE_INTEGER = 9007199254740991); limite documentado no README",
+        "code": "unsafe_total",
+        "contract": {
+          "description": "série cronológica contígua em timestamps UTC horários; views = inteiros seguros não negativos (incrementais por hora)",
+          "example": [
+            {
+              "timestamp": "2026-01-05T00:00:00.000Z",
+              "views": 120
+            },
+            {
+              "timestamp": "2026-01-05T01:00:00.000Z",
+              "views": 130
+            }
+          ],
+          "shape": {
+            "series": [
+              {
+                "timestamp": "ISO UTC",
+                "views": "inteiro >= 0"
+              }
+            ]
+          }
+        }
+      }
+    },
+    {
+      "name": "impossible_calendar",
+      "status": 422,
+      "response": {
+        "error": "timestamp[0] não corresponde a uma data civil existente: 2026-02-30T00:00:00.000Z",
+        "code": "invalid_series",
+        "contract": {
+          "description": "série cronológica contígua em timestamps UTC horários; views = inteiros seguros não negativos (incrementais por hora)",
+          "example": [
+            {
+              "timestamp": "2026-01-05T00:00:00.000Z",
+              "views": 120
+            },
+            {
+              "timestamp": "2026-01-05T01:00:00.000Z",
+              "views": 130
+            }
+          ],
+          "shape": {
+            "series": [
+              {
+                "timestamp": "ISO UTC",
+                "views": "inteiro >= 0"
+              }
+            ]
+          }
+        }
+      }
+    },
+    {
+      "name": "century_not_leap",
+      "status": 422,
+      "response": {
+        "error": "timestamp[0] não corresponde a uma data civil existente: 1900-02-29T00:00:00Z",
+        "code": "invalid_series",
+        "contract": {
+          "description": "série cronológica contígua em timestamps UTC horários; views = inteiros seguros não negativos (incrementais por hora)",
+          "example": [
+            {
+              "timestamp": "2026-01-05T00:00:00.000Z",
+              "views": 120
+            },
+            {
+              "timestamp": "2026-01-05T01:00:00.000Z",
+              "views": 130
+            }
+          ],
+          "shape": {
+            "series": [
+              {
+                "timestamp": "ISO UTC",
+                "views": "inteiro >= 0"
+              }
+            ]
+          }
+        }
+      }
+    },
+    {
+      "name": "safe_sum_limit",
+      "status": 200,
+      "response": {
+        "classification": "suspeito",
+        "reason": "Pico abrupto com magnitude concentrada: largura do pico = 1h; subida = 0h; descida = 0h; maior degrau na rampa = 9007199254740986×; pico 9007199254740986 vs mediana 1 → razão 9007199254740986×; hora do pico = 100.0% do total; top-3 horas = 100.0%; melhor janela de 3h = 100.0%. Subida/queda curtas e concentração alta combinadas são compatíveis com compra de views — indício, não prova.",
+        "shape": "pico_abrupto",
+        "signals": {
+          "peakToBase": {
+            "value": 9007199254740986,
+            "threshold": 8,
+            "triggered": true,
+            "detail": "pico 9007199254740986 vs mediana 1 → razão 9007199254740986×"
+          },
+          "abruptJump": {
+            "value": 1,
+            "threshold": 4,
+            "triggered": false,
+            "detail": "maior fator de subida hora a hora = 1× no índice 2"
+          },
+          "abruptDrop": {
+            "value": 9007199254740986,
+            "threshold": 4,
+            "triggered": true,
+            "detail": "maior fator de queda hora a hora = 9007199254740986× no índice 1"
+          },
+          "concentration": {
+            "value": 1,
+            "top3Share": 1,
+            "window3Share": 1,
+            "threshold": 0.35,
+            "triggered": true,
+            "detail": "hora do pico = 100.0% do total; top-3 horas = 100.0%; melhor janela de 3h = 100.0%"
+          },
+          "exactRepetition": {
+            "value": 5,
+            "runValue": 1,
+            "runShare": 0,
+            "threshold": 4,
+            "triggered": false,
+            "detail": "maior sequência de valores idênticos = 5 horas com 1 views (0.0% do total)"
+          },
+          "rampShape": {
+            "value": {
+              "spikeWidth": 1,
+              "riseHours": 0,
+              "fallHours": 0,
+              "maxRampStep": 9007199254740986
+            },
+            "threshold": {
+              "wideWidth": 4,
+              "smoothMaxStep": 3.2
+            },
+            "triggered": false,
+            "detail": "largura do pico = 1h; subida = 0h; descida = 0h; maior degrau na rampa = 9007199254740986×"
+          }
+        },
+        "rawMetrics": {
+          "n": 6,
+          "total": 9007199254740991,
+          "peak": 9007199254740986,
+          "peakIdx": 0,
+          "median": 1,
+          "peakToBase": 9007199254740986,
+          "peakShare": 1,
+          "top3Share": 1,
+          "maxRiseRatio": 1,
+          "maxRiseIdx": 2,
+          "maxDropRatio": 9007199254740986,
+          "maxDropIdx": 1,
+          "spikeWidth": 1,
+          "riseHours": 0,
+          "fallHours": 0,
+          "maxRampStep": 9007199254740986,
+          "maxIdenticalRun": 5,
+          "runValue": 1,
+          "runShare": 0,
+          "window3Share": 1,
+          "diurnalAmplitude": 0
+        },
+        "flags": {
+          "abruptJump": false,
+          "abruptDrop": true,
+          "highPeakToBase": true,
+          "highConcentration": true,
+          "narrowSpike": true,
+          "mechanical": false,
+          "smoothRamp": false
+        },
+        "thresholds": {
+          "MIN_POINTS": 6,
+          "MIN_TOTAL_VIEWS": 80,
+          "MIN_PEAK_FOR_MAGNITUDE": 15,
+          "HIGH_PEAK_TO_BASE": 8,
+          "HIGH_PEAK_SHARE": 0.35,
+          "HIGH_TOP3_SHARE": 0.72,
+          "HIGH_WINDOW3_SHARE": 0.65,
+          "ABRUPT_JUMP_RATIO": 4,
+          "ABRUPT_DROP_RATIO": 4,
+          "NARROW_SPIKE_WIDTH": 2,
+          "NARROW_SPIKE_MIN_PEAK_TO_BASE": 4,
+          "WIDE_RAMP_WIDTH": 4,
+          "SMOOTH_MAX_RAMP_STEP": 3.2,
+          "MECHANICAL_RUN": 4,
+          "MECHANICAL_VALUE_MIN": 40,
+          "MECHANICAL_SHARE": 0.25,
+          "MECHANICAL_PEAK_FRACTION": 0.5,
+          "ORGANIC_MIN_PEAK_TO_BASE": 3
+        },
+        "disclaimer": "Resultado analítico, não prova de fraude: séries horárias de views não permitem afirmar humanos ou bots com certeza. Tráfego pago legítimo, campanhas agendadas e picos orgânicos reais podem se parecer com compra. Séries idênticas são indistinguíveis por este método.",
+        "receivedAt": "2026-10-09T00:00:00.000Z",
+        "note": "Classificação de risco para triagem humana. Não é prova de fraude nem atribuição de autoria."
+      }
+    },
+    {
+      "name": "valid_low_volume_abstention",
+      "status": 200,
+      "response": {
+        "classification": "inconclusivo",
+        "reason": "Série curta (3 horas). Com menos de 6 pontos horários a classificação seria chute; preferimos não acusar.",
+        "shape": "curta",
+        "signals": {},
+        "rawMetrics": {
+          "n": 3,
+          "total": 6,
+          "peak": 3,
+          "peakIdx": 2,
+          "median": 2,
+          "peakToBase": 1.5,
+          "peakShare": 0.5,
+          "top3Share": 1,
+          "maxRiseRatio": 2,
+          "maxRiseIdx": 1,
+          "maxDropRatio": 0.667,
+          "maxDropIdx": 2,
+          "spikeWidth": 1,
+          "riseHours": 0,
+          "fallHours": 0,
+          "maxRampStep": 2,
+          "maxIdenticalRun": 1,
+          "runValue": 1,
+          "runShare": 0.1667,
+          "window3Share": 1,
+          "diurnalAmplitude": 0
+        },
+        "flags": {},
+        "thresholds": {
+          "MIN_POINTS": 6,
+          "MIN_TOTAL_VIEWS": 80,
+          "MIN_PEAK_FOR_MAGNITUDE": 15,
+          "HIGH_PEAK_TO_BASE": 8,
+          "HIGH_PEAK_SHARE": 0.35,
+          "HIGH_TOP3_SHARE": 0.72,
+          "HIGH_WINDOW3_SHARE": 0.65,
+          "ABRUPT_JUMP_RATIO": 4,
+          "ABRUPT_DROP_RATIO": 4,
+          "NARROW_SPIKE_WIDTH": 2,
+          "NARROW_SPIKE_MIN_PEAK_TO_BASE": 4,
+          "WIDE_RAMP_WIDTH": 4,
+          "SMOOTH_MAX_RAMP_STEP": 3.2,
+          "MECHANICAL_RUN": 4,
+          "MECHANICAL_VALUE_MIN": 40,
+          "MECHANICAL_SHARE": 0.25,
+          "MECHANICAL_PEAK_FRACTION": 0.5,
+          "ORGANIC_MIN_PEAK_TO_BASE": 3
+        },
+        "disclaimer": "Resultado analítico, não prova de fraude: séries horárias de views não permitem afirmar humanos ou bots com certeza. Tráfego pago legítimo, campanhas agendadas e picos orgânicos reais podem se parecer com compra. Séries idênticas são indistinguíveis por este método.",
+        "receivedAt": "2026-10-09T00:00:00.000Z",
+        "note": "Séries horárias não separam humanos de bots com certeza; tráfego pago legítimo e campanhas agendadas podem se parecer com pico comprado."
+      }
+    },
+    {
+      "name": "valid_leap_century",
+      "status": 200,
+      "response": {
+        "classification": "inconclusivo",
+        "reason": "Série curta (1 horas). Com menos de 6 pontos horários a classificação seria chute; preferimos não acusar.",
+        "shape": "curta",
+        "signals": {},
+        "rawMetrics": {
+          "n": 1,
+          "total": 1,
+          "peak": 1,
+          "peakIdx": 0,
+          "median": 1,
+          "peakToBase": 1,
+          "peakShare": 1,
+          "top3Share": 1,
+          "maxRiseRatio": 0,
+          "maxRiseIdx": -1,
+          "maxDropRatio": 0,
+          "maxDropIdx": -1,
+          "spikeWidth": 1,
+          "riseHours": 0,
+          "fallHours": 0,
+          "maxRampStep": 1,
+          "maxIdenticalRun": 1,
+          "runValue": 1,
+          "runShare": 1,
+          "window3Share": 0,
+          "diurnalAmplitude": 0
+        },
+        "flags": {},
+        "thresholds": {
+          "MIN_POINTS": 6,
+          "MIN_TOTAL_VIEWS": 80,
+          "MIN_PEAK_FOR_MAGNITUDE": 15,
+          "HIGH_PEAK_TO_BASE": 8,
+          "HIGH_PEAK_SHARE": 0.35,
+          "HIGH_TOP3_SHARE": 0.72,
+          "HIGH_WINDOW3_SHARE": 0.65,
+          "ABRUPT_JUMP_RATIO": 4,
+          "ABRUPT_DROP_RATIO": 4,
+          "NARROW_SPIKE_WIDTH": 2,
+          "NARROW_SPIKE_MIN_PEAK_TO_BASE": 4,
+          "WIDE_RAMP_WIDTH": 4,
+          "SMOOTH_MAX_RAMP_STEP": 3.2,
+          "MECHANICAL_RUN": 4,
+          "MECHANICAL_VALUE_MIN": 40,
+          "MECHANICAL_SHARE": 0.25,
+          "MECHANICAL_PEAK_FRACTION": 0.5,
+          "ORGANIC_MIN_PEAK_TO_BASE": 3
+        },
+        "disclaimer": "Resultado analítico, não prova de fraude: séries horárias de views não permitem afirmar humanos ou bots com certeza. Tráfego pago legítimo, campanhas agendadas e picos orgânicos reais podem se parecer com compra. Séries idênticas são indistinguíveis por este método.",
+        "receivedAt": "2026-10-09T00:00:00.000Z",
+        "note": "Séries horárias não separam humanos de bots com certeza; tráfego pago legítimo e campanhas agendadas podem se parecer com pico comprado."
+      }
+    },
+    {
+      "name": "invalid_json:{not json",
+      "status": 400,
+      "response": {
+        "error": "JSON inválido",
+        "expected": {
+          "series": [
+            {
+              "timestamp": "ISO UTC",
+              "views": "inteiro >= 0"
+            }
+          ]
+        }
+      }
+    },
+    {
+      "name": "invalid_json:",
+      "status": 400,
+      "response": {
+        "error": "JSON inválido",
+        "expected": {
+          "series": [
+            {
+              "timestamp": "ISO UTC",
+              "views": "inteiro >= 0"
+            }
+          ]
+        }
+      }
+    },
+    {
+      "name": "invalid_json:   ",
+      "status": 400,
+      "response": {
+        "error": "JSON inválido",
+        "expected": {
+          "series": [
+            {
+              "timestamp": "ISO UTC",
+              "views": "inteiro >= 0"
+            }
+          ]
+        }
+      }
+    },
+    {
+      "name": "oversize_content_length",
+      "status": 413,
+      "response": {
+        "error": "body excede o limite de 2000000 bytes"
+      }
+    },
+    {
+      "name": "oversize_chunked",
+      "status": 413,
+      "response": {
+        "error": "body excede o limite de 2000000 bytes"
+      }
+    },
+    {
+      "name": "malformed_host_health",
+      "status": 200,
+      "response": {
+        "ok": true,
+        "service": "conty-deteccao-views",
+        "receivedAt": "2026-10-09T00:00:00.000Z",
+        "disclaimer": "Resultado analítico, não prova de fraude: séries horárias de views não permitem afirmar humanos ou bots com certeza. Tráfego pago legítimo, campanhas agendadas e picos orgânicos reais podem se parecer com compra. Séries idênticas são indistinguíveis por este método."
+      }
+    },
+    {
+      "name": "health_after_adversarial_requests",
+      "status": 200,
+      "response": {
+        "ok": true,
+        "service": "conty-deteccao-views",
+        "receivedAt": "2026-10-09T00:00:00.000Z",
+        "disclaimer": "Resultado analítico, não prova de fraude: séries horárias de views não permitem afirmar humanos ou bots com certeza. Tráfego pago legítimo, campanhas agendadas e picos orgânicos reais podem se parecer com compra. Séries idênticas são indistinguíveis por este método."
+      }
+    }
+  ]
+}

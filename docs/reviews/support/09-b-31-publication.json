@@ -1,0 +1,250 @@
+{
+  "reviewed_sha": "31bb2150d1758c9c2efbbfc73e506f4973597ca7",
+  "concurrent": {
+    "writers": 4,
+    "readers": 3,
+    "simultaneous_barrier": true,
+    "same_pid": true,
+    "fixed_clock": 1700000000000,
+    "variant_byte_lengths": [
+      405047,
+      490547,
+      576047
+    ],
+    "writes": 300,
+    "reads": 360,
+    "results": [
+      {
+        "role": "writer",
+        "id": 0,
+        "writes": 75,
+        "reads": 0,
+        "observed": []
+      },
+      {
+        "role": "writer",
+        "id": 1,
+        "writes": 75,
+        "reads": 0,
+        "observed": []
+      },
+      {
+        "role": "writer",
+        "id": 2,
+        "writes": 75,
+        "reads": 0,
+        "observed": []
+      },
+      {
+        "role": "writer",
+        "id": 3,
+        "writes": 75,
+        "reads": 0,
+        "observed": []
+      },
+      {
+        "role": "reader",
+        "id": 4,
+        "writes": 0,
+        "reads": 120,
+        "observed": [
+          "ce7150be85cd1fab8948732f3a33208bd40680ef28d4a7a3aab4c1b784a94454",
+          "f6f5a7d4c50d7920585b1f3a5d6e7be1f21caf9ef304e249b321daf8ebc8882d",
+          "f045e96f5a6e3bb7529e13569eaaf6fdd000c869e3a39c4ffb28d0a712bb82db"
+        ]
+      },
+      {
+        "role": "reader",
+        "id": 5,
+        "writes": 0,
+        "reads": 120,
+        "observed": [
+          "ce7150be85cd1fab8948732f3a33208bd40680ef28d4a7a3aab4c1b784a94454",
+          "f045e96f5a6e3bb7529e13569eaaf6fdd000c869e3a39c4ffb28d0a712bb82db",
+          "f6f5a7d4c50d7920585b1f3a5d6e7be1f21caf9ef304e249b321daf8ebc8882d"
+        ]
+      },
+      {
+        "role": "reader",
+        "id": 6,
+        "writes": 0,
+        "reads": 120,
+        "observed": [
+          "ce7150be85cd1fab8948732f3a33208bd40680ef28d4a7a3aab4c1b784a94454",
+          "f045e96f5a6e3bb7529e13569eaaf6fdd000c869e3a39c4ffb28d0a712bb82db",
+          "f6f5a7d4c50d7920585b1f3a5d6e7be1f21caf9ef304e249b321daf8ebc8882d"
+        ]
+      }
+    ],
+    "final_hash": "ce7150be85cd1fab8948732f3a33208bd40680ef28d4a7a3aab4c1b784a94454",
+    "orphan_temps": [],
+    "errors": []
+  },
+  "failures": {
+    "exact_uuid_collision": "EEXIST propagated; foreign temp and target preserved",
+    "invalid_body": "target preserved; own temp cleaned",
+    "rename_failure": "directory preserved; own temp cleaned"
+  },
+  "readonly": [
+    {
+      "condition": "canonical",
+      "unchanged": true,
+      "disk_matches_canonical": true,
+      "before": {
+        "/private/var/folders/1h/dnd2dd992cq41yhypgy46_bc0000gn/T/conty-review09-b-31-w5_fyl9w/dataset/series.json": {
+          "bytes": "76624",
+          "inode": "108488420",
+          "mtimeNs": "1791578967000000000",
+          "hash": "f7b7ad869c3b82f77e7f3d35dbd2508129678e626c953bc4db7243d5d39ac3f4"
+        },
+        "/private/var/folders/1h/dnd2dd992cq41yhypgy46_bc0000gn/T/conty-review09-b-31-w5_fyl9w/docs/evidence/evaluation.json": {
+          "bytes": "1481",
+          "inode": "108488429",
+          "mtimeNs": "1791578967000000000",
+          "hash": "78b98b5daa2b1cfa0aad9662adf413218fb90d1db31f3eae7d831ce673bf0faf"
+        },
+        "/private/var/folders/1h/dnd2dd992cq41yhypgy46_bc0000gn/T/conty-review09-b-31-w5_fyl9w/README.md": {
+          "bytes": "13170",
+          "inode": "108488418",
+          "mtimeNs": "1791578967000000000",
+          "hash": "8438c75f80a94eaf7f4f8f7c5f7d9c4eb1b221572dc7dde9e227cd3877d522b3"
+        }
+      },
+      "after": {
+        "/private/var/folders/1h/dnd2dd992cq41yhypgy46_bc0000gn/T/conty-review09-b-31-w5_fyl9w/dataset/series.json": {
+          "bytes": "76624",
+          "inode": "108488420",
+          "mtimeNs": "1791578967000000000",
+          "hash": "f7b7ad869c3b82f77e7f3d35dbd2508129678e626c953bc4db7243d5d39ac3f4"
+        },
+        "/private/var/folders/1h/dnd2dd992cq41yhypgy46_bc0000gn/T/conty-review09-b-31-w5_fyl9w/docs/evidence/evaluation.json": {
+          "bytes": "1481",
+          "inode": "108488429",
+          "mtimeNs": "1791578967000000000",
+          "hash": "78b98b5daa2b1cfa0aad9662adf413218fb90d1db31f3eae7d831ce673bf0faf"
+        },
+        "/private/var/folders/1h/dnd2dd992cq41yhypgy46_bc0000gn/T/conty-review09-b-31-w5_fyl9w/README.md": {
+          "bytes": "13170",
+          "inode": "108488418",
+          "mtimeNs": "1791578967000000000",
+          "hash": "8438c75f80a94eaf7f4f8f7c5f7d9c4eb1b221572dc7dde9e227cd3877d522b3"
+        }
+      }
+    },
+    {
+      "condition": "corrupt",
+      "unchanged": true,
+      "disk_matches_canonical": false,
+      "before": {
+        "/private/var/folders/1h/dnd2dd992cq41yhypgy46_bc0000gn/T/conty-review09-b-31-w5_fyl9w/dataset/series.json": {
+          "bytes": "11",
+          "inode": "108488420",
+          "mtimeNs": "1791579398470869303",
+          "hash": "1c4c16c61fc310d9427d2c7d0b92de4c58d321e26b2c7358f07bea86dcb060ca"
+        },
+        "/private/var/folders/1h/dnd2dd992cq41yhypgy46_bc0000gn/T/conty-review09-b-31-w5_fyl9w/docs/evidence/evaluation.json": {
+          "bytes": "1481",
+          "inode": "108488429",
+          "mtimeNs": "1791578967000000000",
+          "hash": "78b98b5daa2b1cfa0aad9662adf413218fb90d1db31f3eae7d831ce673bf0faf"
+        },
+        "/private/var/folders/1h/dnd2dd992cq41yhypgy46_bc0000gn/T/conty-review09-b-31-w5_fyl9w/README.md": {
+          "bytes": "13170",
+          "inode": "108488418",
+          "mtimeNs": "1791578967000000000",
+          "hash": "8438c75f80a94eaf7f4f8f7c5f7d9c4eb1b221572dc7dde9e227cd3877d522b3"
+        }
+      },
+      "after": {
+        "/private/var/folders/1h/dnd2dd992cq41yhypgy46_bc0000gn/T/conty-review09-b-31-w5_fyl9w/dataset/series.json": {
+          "bytes": "11",
+          "inode": "108488420",
+          "mtimeNs": "1791579398470869303",
+          "hash": "1c4c16c61fc310d9427d2c7d0b92de4c58d321e26b2c7358f07bea86dcb060ca"
+        },
+        "/private/var/folders/1h/dnd2dd992cq41yhypgy46_bc0000gn/T/conty-review09-b-31-w5_fyl9w/docs/evidence/evaluation.json": {
+          "bytes": "1481",
+          "inode": "108488429",
+          "mtimeNs": "1791578967000000000",
+          "hash": "78b98b5daa2b1cfa0aad9662adf413218fb90d1db31f3eae7d831ce673bf0faf"
+        },
+        "/private/var/folders/1h/dnd2dd992cq41yhypgy46_bc0000gn/T/conty-review09-b-31-w5_fyl9w/README.md": {
+          "bytes": "13170",
+          "inode": "108488418",
+          "mtimeNs": "1791578967000000000",
+          "hash": "8438c75f80a94eaf7f4f8f7c5f7d9c4eb1b221572dc7dde9e227cd3877d522b3"
+        }
+      }
+    },
+    {
+      "condition": "missing",
+      "unchanged": true,
+      "disk_matches_canonical": false,
+      "before": {
+        "/private/var/folders/1h/dnd2dd992cq41yhypgy46_bc0000gn/T/conty-review09-b-31-w5_fyl9w/dataset/series.json": null,
+        "/private/var/folders/1h/dnd2dd992cq41yhypgy46_bc0000gn/T/conty-review09-b-31-w5_fyl9w/docs/evidence/evaluation.json": {
+          "bytes": "1481",
+          "inode": "108488429",
+          "mtimeNs": "1791578967000000000",
+          "hash": "78b98b5daa2b1cfa0aad9662adf413218fb90d1db31f3eae7d831ce673bf0faf"
+        },
+        "/private/var/folders/1h/dnd2dd992cq41yhypgy46_bc0000gn/T/conty-review09-b-31-w5_fyl9w/README.md": {
+          "bytes": "13170",
+          "inode": "108488418",
+          "mtimeNs": "1791578967000000000",
+          "hash": "8438c75f80a94eaf7f4f8f7c5f7d9c4eb1b221572dc7dde9e227cd3877d522b3"
+        }
+      },
+      "after": {
+        "/private/var/folders/1h/dnd2dd992cq41yhypgy46_bc0000gn/T/conty-review09-b-31-w5_fyl9w/dataset/series.json": null,
+        "/private/var/folders/1h/dnd2dd992cq41yhypgy46_bc0000gn/T/conty-review09-b-31-w5_fyl9w/docs/evidence/evaluation.json": {
+          "bytes": "1481",
+          "inode": "108488429",
+          "mtimeNs": "1791578967000000000",
+          "hash": "78b98b5daa2b1cfa0aad9662adf413218fb90d1db31f3eae7d831ce673bf0faf"
+        },
+        "/private/var/folders/1h/dnd2dd992cq41yhypgy46_bc0000gn/T/conty-review09-b-31-w5_fyl9w/README.md": {
+          "bytes": "13170",
+          "inode": "108488418",
+          "mtimeNs": "1791578967000000000",
+          "hash": "8438c75f80a94eaf7f4f8f7c5f7d9c4eb1b221572dc7dde9e227cd3877d522b3"
+        }
+      }
+    },
+    {
+      "condition": "missing_evidence",
+      "unchanged": true,
+      "disk_matches_canonical": true,
+      "before": {
+        "/private/var/folders/1h/dnd2dd992cq41yhypgy46_bc0000gn/T/conty-review09-b-31-w5_fyl9w/dataset/series.json": {
+          "bytes": "76624",
+          "inode": "108498672",
+          "mtimeNs": "1791579398523169443",
+          "hash": "f7b7ad869c3b82f77e7f3d35dbd2508129678e626c953bc4db7243d5d39ac3f4"
+        },
+        "/private/var/folders/1h/dnd2dd992cq41yhypgy46_bc0000gn/T/conty-review09-b-31-w5_fyl9w/docs/evidence/evaluation.json": null,
+        "/private/var/folders/1h/dnd2dd992cq41yhypgy46_bc0000gn/T/conty-review09-b-31-w5_fyl9w/README.md": {
+          "bytes": "13170",
+          "inode": "108488418",
+          "mtimeNs": "1791578967000000000",
+          "hash": "8438c75f80a94eaf7f4f8f7c5f7d9c4eb1b221572dc7dde9e227cd3877d522b3"
+        }
+      },
+      "after": {
+        "/private/var/folders/1h/dnd2dd992cq41yhypgy46_bc0000gn/T/conty-review09-b-31-w5_fyl9w/dataset/series.json": {
+          "bytes": "76624",
+          "inode": "108498672",
+          "mtimeNs": "1791579398523169443",
+          "hash": "f7b7ad869c3b82f77e7f3d35dbd2508129678e626c953bc4db7243d5d39ac3f4"
+        },
+        "/private/var/folders/1h/dnd2dd992cq41yhypgy46_bc0000gn/T/conty-review09-b-31-w5_fyl9w/docs/evidence/evaluation.json": null,
+        "/private/var/folders/1h/dnd2dd992cq41yhypgy46_bc0000gn/T/conty-review09-b-31-w5_fyl9w/README.md": {
+          "bytes": "13170",
+          "inode": "108488418",
+          "mtimeNs": "1791578967000000000",
+          "hash": "8438c75f80a94eaf7f4f8f7c5f7d9c4eb1b221572dc7dde9e227cd3877d522b3"
+        }
+      }
+    }
+  ]
+}

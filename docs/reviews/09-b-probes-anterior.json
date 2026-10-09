@@ -1,0 +1,1331 @@
+{
+  "reviewed_sha": "eebbf112c1c89eb6f26afa477fad70424c28b4c4",
+  "node": "v22.23.3",
+  "validation": [
+    {
+      "name": "utc_valid",
+      "shouldAccept": true,
+      "accepted": true,
+      "error": null,
+      "startMs": 1767571200000,
+      "contractPassed": true
+    },
+    {
+      "name": "utc_offset_zero",
+      "shouldAccept": true,
+      "accepted": true,
+      "error": null,
+      "startMs": 1767571200000,
+      "contractPassed": true
+    },
+    {
+      "name": "impossible_calendar",
+      "shouldAccept": false,
+      "accepted": true,
+      "error": null,
+      "startMs": 1772409600000,
+      "contractPassed": false
+    },
+    {
+      "name": "non_leap_day",
+      "shouldAccept": false,
+      "accepted": true,
+      "error": null,
+      "startMs": 1772323200000,
+      "contractPassed": false
+    },
+    {
+      "name": "non_iso_date",
+      "shouldAccept": false,
+      "accepted": true,
+      "error": null,
+      "startMs": 1767571200000,
+      "contractPassed": false
+    },
+    {
+      "name": "gap",
+      "shouldAccept": false,
+      "accepted": false,
+      "error": "timestamp[1] não é contíguo: passo de 120 minutos após o ponto 0, esperado 60 minutos UTC",
+      "contractPassed": true
+    },
+    {
+      "name": "duplicate_hour",
+      "shouldAccept": false,
+      "accepted": false,
+      "error": "timestamp[1] não é contíguo: passo de 0 minutos após o ponto 0, esperado 60 minutos UTC",
+      "contractPassed": true
+    },
+    {
+      "name": "backwards",
+      "shouldAccept": false,
+      "accepted": false,
+      "error": "timestamp[1] não é contíguo: passo de -60 minutos após o ponto 0, esperado 60 minutos UTC",
+      "contractPassed": true
+    },
+    {
+      "name": "fractional_hour",
+      "shouldAccept": false,
+      "accepted": false,
+      "error": "timestamp[0] deve ser início de hora UTC (alinhado à hora cheia)",
+      "contractPassed": true
+    },
+    {
+      "name": "non_utc",
+      "shouldAccept": false,
+      "accepted": false,
+      "error": "timestamp[0] deve estar em UTC (terminar em Z ou +00:00)",
+      "contractPassed": true
+    },
+    {
+      "name": "NaN",
+      "shouldAccept": false,
+      "accepted": false,
+      "error": "views[0] deve ser número finito",
+      "contractPassed": true
+    },
+    {
+      "name": "Infinity",
+      "shouldAccept": false,
+      "accepted": false,
+      "error": "views[0] deve ser número finito",
+      "contractPassed": true
+    },
+    {
+      "name": "fraction",
+      "shouldAccept": false,
+      "accepted": false,
+      "error": "views[0] deve ser inteiro (incremental por hora), recebido 1.5",
+      "contractPassed": true
+    },
+    {
+      "name": "negative",
+      "shouldAccept": false,
+      "accepted": false,
+      "error": "views[0] deve ser não negativo, recebido -1",
+      "contractPassed": true
+    },
+    {
+      "name": "unsafe_integer",
+      "shouldAccept": false,
+      "accepted": false,
+      "error": "views[0] deve ser inteiro seguro (≤ Number.MAX_SAFE_INTEGER)",
+      "contractPassed": true
+    }
+  ],
+  "organicRepeatedBaseline": {
+    "views": [
+      100,
+      100,
+      100,
+      100,
+      100,
+      100,
+      100,
+      100,
+      100,
+      100,
+      100,
+      147,
+      272,
+      448,
+      650,
+      852,
+      1028,
+      1153,
+      1200,
+      1184,
+      1139,
+      1070,
+      982,
+      879,
+      767,
+      650,
+      533,
+      421,
+      318,
+      230,
+      161,
+      116,
+      100,
+      100,
+      100,
+      100,
+      100,
+      100,
+      100,
+      100,
+      100,
+      100,
+      100,
+      100,
+      100,
+      100,
+      100,
+      100
+    ],
+    "outcome": {
+      "classification": "suspeito",
+      "shape": "mecanica",
+      "reason": "Ritmo mecânico: maior sequência de valores idênticos = 16 horas com 100 views (9.5% do total). Séries orgânicas têm ruído hora a hora; 16 horas com exatamente 100 views, em série com 16900 views no total, combinam repetição exata e volume — indício de padrão automatizado, não prova de fraude.",
+      "flags": {
+        "abruptJump": false,
+        "abruptDrop": false,
+        "highPeakToBase": true,
+        "highConcentration": false,
+        "narrowSpike": false,
+        "mechanical": true,
+        "smoothRamp": true
+      },
+      "rawMetrics": {
+        "n": 48,
+        "total": 16900,
+        "peak": 1200,
+        "peakIdx": 18,
+        "median": 100,
+        "peakToBase": 12,
+        "peakShare": 0.071,
+        "top3Share": 0.2093,
+        "maxRiseRatio": 1.85,
+        "maxRiseIdx": 12,
+        "maxDropRatio": 1.429,
+        "maxDropIdx": 30,
+        "spikeWidth": 12,
+        "riseHours": 4,
+        "fallHours": 7,
+        "maxRampStep": 1.85,
+        "maxIdenticalRun": 16,
+        "runValue": 100,
+        "runShare": 0.0947,
+        "window3Share": 0.2093,
+        "diurnalAmplitude": 1.562
+      }
+    },
+    "jitteredOutcome": {
+      "classification": "plausivel",
+      "shape": "rampa_suave",
+      "reason": "Subida e descida graduais (largura do pico = 11h; subida = 4h; descida = 6h; maior degrau na rampa = 1.864×) com razão pico/base de 11.755×. Forma de rampa suave é compatível com viral orgânico ou evento legítimo com propagação; pico alto sozinho não caracteriza compra.",
+      "flags": {
+        "abruptJump": false,
+        "abruptDrop": false,
+        "highPeakToBase": true,
+        "highConcentration": false,
+        "narrowSpike": false,
+        "mechanical": false,
+        "smoothRamp": true
+      },
+      "rawMetrics": {
+        "n": 48,
+        "total": 16900,
+        "peak": 1199,
+        "peakIdx": 18,
+        "median": 102,
+        "peakToBase": 11.755,
+        "peakShare": 0.0709,
+        "top3Share": 0.2094,
+        "maxRiseRatio": 1.864,
+        "maxRiseIdx": 12,
+        "maxDropRatio": 1.453,
+        "maxDropIdx": 30,
+        "spikeWidth": 11,
+        "riseHours": 4,
+        "fallHours": 6,
+        "maxRampStep": 1.864,
+        "maxIdenticalRun": 1,
+        "runValue": 98,
+        "runShare": 0.0058,
+        "window3Share": 0.2094,
+        "diurnalAmplitude": 1.565
+      }
+    },
+    "expected": "plausivel ou inconclusivo; a base repetida não transforma a rampa suave em compra"
+  },
+  "overflow": {
+    "input": [
+      9007199254740991,
+      1,
+      1,
+      1,
+      1,
+      1
+    ],
+    "expectedTotal": "9007199254740996",
+    "returnedTotal": "9007199254740992",
+    "safeTotal": false,
+    "exactTotal": false,
+    "outcome": {
+      "classification": "suspeito",
+      "shape": "pico_abrupto",
+      "reason": "Pico abrupto com magnitude concentrada: largura do pico = 1h; subida = 0h; descida = 0h; maior degrau na rampa = 9007199254740991×; pico 9007199254740991 vs mediana 1 → razão 9007199254740991×; hora do pico = 100.0% do total; top-3 horas = 100.0%; melhor janela de 3h = 100.0%. Subida/queda curtas e concentração alta combinadas são compatíveis com compra de views — indício, não prova.",
+      "flags": {
+        "abruptJump": false,
+        "abruptDrop": true,
+        "highPeakToBase": true,
+        "highConcentration": true,
+        "narrowSpike": true,
+        "mechanical": false,
+        "smoothRamp": false
+      },
+      "rawMetrics": {
+        "n": 6,
+        "total": 9007199254740992,
+        "peak": 9007199254740991,
+        "peakIdx": 0,
+        "median": 1,
+        "peakToBase": 9007199254740991,
+        "peakShare": 1,
+        "top3Share": 1,
+        "maxRiseRatio": 1,
+        "maxRiseIdx": 2,
+        "maxDropRatio": 9007199254740991,
+        "maxDropIdx": 1,
+        "spikeWidth": 1,
+        "riseHours": 0,
+        "fallHours": 0,
+        "maxRampStep": 9007199254740991,
+        "maxIdenticalRun": 5,
+        "runValue": 1,
+        "runShare": 0,
+        "window3Share": 1,
+        "diurnalAmplitude": 0
+      }
+    }
+  },
+  "holdout": {
+    "seeds": 67,
+    "series": 6834,
+    "falsePositives": 1,
+    "legitimate": 4824,
+    "fpr": 0.00020729684908789387,
+    "truePositives": 2010,
+    "suspicious": 2010,
+    "recall": 1,
+    "abstentions": 1215,
+    "rows": [
+      {
+        "seed": 0,
+        "fp": 0,
+        "legitimate": 72,
+        "tp": 30,
+        "suspicious": 30,
+        "abstentions": 20,
+        "byteReproduction": true,
+        "sha256": "4a51df6e7f2377420f04188bb62308552958dd4976731dd63344284e4db96aea",
+        "falsePositives": []
+      },
+      {
+        "seed": 1,
+        "fp": 0,
+        "legitimate": 72,
+        "tp": 30,
+        "suspicious": 30,
+        "abstentions": 16,
+        "byteReproduction": true,
+        "sha256": "dd80e8273442ff763ca8858cbcac8aeb980fc3497387ee266434e5a99339db37",
+        "falsePositives": []
+      },
+      {
+        "seed": 2,
+        "fp": 0,
+        "legitimate": 72,
+        "tp": 30,
+        "suspicious": 30,
+        "abstentions": 17,
+        "byteReproduction": true,
+        "sha256": "d432126bbe87852e45af093d90e1fbe21f4d88828b573e8051b59138ef25e407",
+        "falsePositives": []
+      },
+      {
+        "seed": 3,
+        "fp": 0,
+        "legitimate": 72,
+        "tp": 30,
+        "suspicious": 30,
+        "abstentions": 19,
+        "byteReproduction": true,
+        "sha256": "8d3772d5b0dd35d64b5058f3e3f3de713751ebf9e59ab19ffcbefb2178d71ec5",
+        "falsePositives": []
+      },
+      {
+        "seed": 4,
+        "fp": 0,
+        "legitimate": 72,
+        "tp": 30,
+        "suspicious": 30,
+        "abstentions": 19,
+        "byteReproduction": true,
+        "sha256": "7ec135ce96dc8f06ae82e12b88ae055443a2aa2e8291df73f5f4334ca72689d3",
+        "falsePositives": []
+      },
+      {
+        "seed": 5,
+        "fp": 0,
+        "legitimate": 72,
+        "tp": 30,
+        "suspicious": 30,
+        "abstentions": 20,
+        "byteReproduction": true,
+        "sha256": "ba6867ae194557e663f88c68ecd4b7b2b3ef1db16b7e5855030d7782da072a35",
+        "falsePositives": []
+      },
+      {
+        "seed": 6,
+        "fp": 0,
+        "legitimate": 72,
+        "tp": 30,
+        "suspicious": 30,
+        "abstentions": 19,
+        "byteReproduction": true,
+        "sha256": "793baa08272cc697515a445f71aa3dcb0a2a9b2d13987314bd7c4d59e0e9d9f7",
+        "falsePositives": []
+      },
+      {
+        "seed": 7,
+        "fp": 0,
+        "legitimate": 72,
+        "tp": 30,
+        "suspicious": 30,
+        "abstentions": 18,
+        "byteReproduction": true,
+        "sha256": "57e1f57c7e5b4f0a2047d2d4df746a166e58f3d8763b9632f5a054b9542aeacb",
+        "falsePositives": []
+      },
+      {
+        "seed": 8,
+        "fp": 0,
+        "legitimate": 72,
+        "tp": 30,
+        "suspicious": 30,
+        "abstentions": 18,
+        "byteReproduction": true,
+        "sha256": "1f96d36b2f785c65c02625492c700464d629203238b235bd5b585584cfe3cd01",
+        "falsePositives": []
+      },
+      {
+        "seed": 9,
+        "fp": 0,
+        "legitimate": 72,
+        "tp": 30,
+        "suspicious": 30,
+        "abstentions": 18,
+        "byteReproduction": true,
+        "sha256": "fec0e88494dc374ac4298d14514a7412e25154a167f4649189c314f65d491f87",
+        "falsePositives": []
+      },
+      {
+        "seed": 10,
+        "fp": 0,
+        "legitimate": 72,
+        "tp": 30,
+        "suspicious": 30,
+        "abstentions": 19,
+        "byteReproduction": true,
+        "sha256": "1a173630c24cb4a44ee821cc3e626f895b45babd8875ae925d71c5933908cb95",
+        "falsePositives": []
+      },
+      {
+        "seed": 11,
+        "fp": 0,
+        "legitimate": 72,
+        "tp": 30,
+        "suspicious": 30,
+        "abstentions": 19,
+        "byteReproduction": true,
+        "sha256": "21397abc78daab8532e8dc933fa0b8f023bff981fa04b4c8dff936939aaa43ba",
+        "falsePositives": []
+      },
+      {
+        "seed": 12,
+        "fp": 0,
+        "legitimate": 72,
+        "tp": 30,
+        "suspicious": 30,
+        "abstentions": 18,
+        "byteReproduction": true,
+        "sha256": "c3d19e59c7b1705cefef6abfa9a5418c5cad21543b30434bdd3bd0942ed6daed",
+        "falsePositives": []
+      },
+      {
+        "seed": 13,
+        "fp": 0,
+        "legitimate": 72,
+        "tp": 30,
+        "suspicious": 30,
+        "abstentions": 19,
+        "byteReproduction": true,
+        "sha256": "24e566f0acc5cd72ac9a717b18005fb9d18c904c6330809fd6de6fcd33a83b50",
+        "falsePositives": []
+      },
+      {
+        "seed": 14,
+        "fp": 0,
+        "legitimate": 72,
+        "tp": 30,
+        "suspicious": 30,
+        "abstentions": 17,
+        "byteReproduction": true,
+        "sha256": "893b3b89f48b124308539843e9551d2816986a31546bc9560af3298a8c9fbb04",
+        "falsePositives": []
+      },
+      {
+        "seed": 15,
+        "fp": 0,
+        "legitimate": 72,
+        "tp": 30,
+        "suspicious": 30,
+        "abstentions": 19,
+        "byteReproduction": true,
+        "sha256": "1407a2d9a1965256766d1b4f7e6fd0ba616c745cbda0d1749e164da0b413a744",
+        "falsePositives": []
+      },
+      {
+        "seed": 16,
+        "fp": 0,
+        "legitimate": 72,
+        "tp": 30,
+        "suspicious": 30,
+        "abstentions": 20,
+        "byteReproduction": true,
+        "sha256": "f4cae9af934bed98a10fbd554f261d1268c81a52fad0f9fa8c7f213ea283ccd7",
+        "falsePositives": []
+      },
+      {
+        "seed": 17,
+        "fp": 0,
+        "legitimate": 72,
+        "tp": 30,
+        "suspicious": 30,
+        "abstentions": 15,
+        "byteReproduction": true,
+        "sha256": "be5231edc4a875e3213194486f160671338d0e24e021d8927f01cb6a05827dc0",
+        "falsePositives": []
+      },
+      {
+        "seed": 18,
+        "fp": 0,
+        "legitimate": 72,
+        "tp": 30,
+        "suspicious": 30,
+        "abstentions": 15,
+        "byteReproduction": true,
+        "sha256": "97c5c8fadee0436c3aa40a6e8b1528150b05348f0fa90e81be641a80c1088605",
+        "falsePositives": []
+      },
+      {
+        "seed": 19,
+        "fp": 0,
+        "legitimate": 72,
+        "tp": 30,
+        "suspicious": 30,
+        "abstentions": 17,
+        "byteReproduction": true,
+        "sha256": "58e23f3416378799f3b0a40193f87db7daee362fbc595b49be09cb4af4253b9d",
+        "falsePositives": []
+      },
+      {
+        "seed": 20,
+        "fp": 0,
+        "legitimate": 72,
+        "tp": 30,
+        "suspicious": 30,
+        "abstentions": 19,
+        "byteReproduction": true,
+        "sha256": "c246e5bd7f4a3ec131a1d50e142f644254fa22c752acb23b1e67cb3112d61c75",
+        "falsePositives": []
+      },
+      {
+        "seed": 21,
+        "fp": 0,
+        "legitimate": 72,
+        "tp": 30,
+        "suspicious": 30,
+        "abstentions": 20,
+        "byteReproduction": true,
+        "sha256": "00e2e449d4c37b1e69b93eb4ed2c2cefe933f0285f1c257cc9524169b7b8c28f",
+        "falsePositives": []
+      },
+      {
+        "seed": 22,
+        "fp": 0,
+        "legitimate": 72,
+        "tp": 30,
+        "suspicious": 30,
+        "abstentions": 19,
+        "byteReproduction": true,
+        "sha256": "1433ce8a6112de51e7107336945a7196d93d410faeaff5b47d9ff4fb1a6945f4",
+        "falsePositives": []
+      },
+      {
+        "seed": 23,
+        "fp": 0,
+        "legitimate": 72,
+        "tp": 30,
+        "suspicious": 30,
+        "abstentions": 19,
+        "byteReproduction": true,
+        "sha256": "4dc1ff5ba0a6b26eb11cf760f1e0525258c2b77217719155e5900628d16d3aaf",
+        "falsePositives": []
+      },
+      {
+        "seed": 24,
+        "fp": 0,
+        "legitimate": 72,
+        "tp": 30,
+        "suspicious": 30,
+        "abstentions": 20,
+        "byteReproduction": true,
+        "sha256": "caaa40dc4fe6b85c1e13aacf13d9c68386fc1ae8c04ceb781d02784fb3342502",
+        "falsePositives": []
+      },
+      {
+        "seed": 25,
+        "fp": 1,
+        "legitimate": 72,
+        "tp": 30,
+        "suspicious": 30,
+        "abstentions": 18,
+        "byteReproduction": true,
+        "sha256": "357456a9f7f05079a43f1d622021ecbbbbe0823785249263a7057f692345ead6",
+        "falsePositives": [
+          {
+            "id": "viral_organico-000",
+            "profile": "viral_organico",
+            "label": "legitimo",
+            "classification": "suspeito",
+            "shape": "mecanica",
+            "reason": "Ritmo mecânico: maior sequência de valores idênticos = 5 horas com 99 views (3.1% do total). Séries orgânicas têm ruído hora a hora; 5 horas com exatamente 99 views, em série com 15863 views no total, combinam repetição exata e volume — indício de padrão automatizado, não prova de fraude."
+          }
+        ]
+      },
+      {
+        "seed": 26,
+        "fp": 0,
+        "legitimate": 72,
+        "tp": 30,
+        "suspicious": 30,
+        "abstentions": 19,
+        "byteReproduction": true,
+        "sha256": "24784c870c342990e539f669b1b2e0fe91b01e0251cb88c6b1158c29e495051d",
+        "falsePositives": []
+      },
+      {
+        "seed": 27,
+        "fp": 0,
+        "legitimate": 72,
+        "tp": 30,
+        "suspicious": 30,
+        "abstentions": 19,
+        "byteReproduction": true,
+        "sha256": "382a7b24509c5fc1edd2183c5a4ca228d2a3f79cd6f50e29dafcd9dc343f53f4",
+        "falsePositives": []
+      },
+      {
+        "seed": 28,
+        "fp": 0,
+        "legitimate": 72,
+        "tp": 30,
+        "suspicious": 30,
+        "abstentions": 18,
+        "byteReproduction": true,
+        "sha256": "617b7ff5d07ab15db58b0dbde155a19c3447cc9206c88f5b3d646ab6cb2b6b52",
+        "falsePositives": []
+      },
+      {
+        "seed": 29,
+        "fp": 0,
+        "legitimate": 72,
+        "tp": 30,
+        "suspicious": 30,
+        "abstentions": 17,
+        "byteReproduction": true,
+        "sha256": "0901cf9bade05c5407d152388c5d760dda237942658d3f20c39e43ddc614ea28",
+        "falsePositives": []
+      },
+      {
+        "seed": 30,
+        "fp": 0,
+        "legitimate": 72,
+        "tp": 30,
+        "suspicious": 30,
+        "abstentions": 16,
+        "byteReproduction": true,
+        "sha256": "2629440a0d3b34da59736b5c5a68f6575181eed1cae5ba2f5ef2825d7dd3e59b",
+        "falsePositives": []
+      },
+      {
+        "seed": 31,
+        "fp": 0,
+        "legitimate": 72,
+        "tp": 30,
+        "suspicious": 30,
+        "abstentions": 18,
+        "byteReproduction": true,
+        "sha256": "b77e7b6c55e31eaabeec9ff99d9329f30fbfc79f4f587fff6d871b87d7a6687f",
+        "falsePositives": []
+      },
+      {
+        "seed": 32,
+        "fp": 0,
+        "legitimate": 72,
+        "tp": 30,
+        "suspicious": 30,
+        "abstentions": 20,
+        "byteReproduction": true,
+        "sha256": "0ed7ec3f693b01a3f7effcf88d4d9b3864dc2c7b32d893abfaed2c93e7a83943",
+        "falsePositives": []
+      },
+      {
+        "seed": 33,
+        "fp": 0,
+        "legitimate": 72,
+        "tp": 30,
+        "suspicious": 30,
+        "abstentions": 13,
+        "byteReproduction": true,
+        "sha256": "4d8d264b8634f1af703710389a1e07cb8455ea5a905c6499bc742c2408767ec0",
+        "falsePositives": []
+      },
+      {
+        "seed": 34,
+        "fp": 0,
+        "legitimate": 72,
+        "tp": 30,
+        "suspicious": 30,
+        "abstentions": 20,
+        "byteReproduction": true,
+        "sha256": "caadbb85f50a0fb7510c7906aed615c7ae42d17980733b44b41f3a6ecda438d7",
+        "falsePositives": []
+      },
+      {
+        "seed": 35,
+        "fp": 0,
+        "legitimate": 72,
+        "tp": 30,
+        "suspicious": 30,
+        "abstentions": 18,
+        "byteReproduction": true,
+        "sha256": "74a053475def9de886811bf4e5b965282e50877797353873d0de5bd417d22219",
+        "falsePositives": []
+      },
+      {
+        "seed": 36,
+        "fp": 0,
+        "legitimate": 72,
+        "tp": 30,
+        "suspicious": 30,
+        "abstentions": 20,
+        "byteReproduction": true,
+        "sha256": "af36fe624564ddadd8c6e40f6ece69cf08f2594c8f321df9ad35f71c5f5ae637",
+        "falsePositives": []
+      },
+      {
+        "seed": 37,
+        "fp": 0,
+        "legitimate": 72,
+        "tp": 30,
+        "suspicious": 30,
+        "abstentions": 19,
+        "byteReproduction": true,
+        "sha256": "67cf3ea1bc741988bfca5c65d1b948b10d24613e05ba38c2c3b51e04e3ea5395",
+        "falsePositives": []
+      },
+      {
+        "seed": 38,
+        "fp": 0,
+        "legitimate": 72,
+        "tp": 30,
+        "suspicious": 30,
+        "abstentions": 17,
+        "byteReproduction": true,
+        "sha256": "476de8620bb19a421b6753b05f59733a1ae7f409b5efec221acbb315639788b0",
+        "falsePositives": []
+      },
+      {
+        "seed": 39,
+        "fp": 0,
+        "legitimate": 72,
+        "tp": 30,
+        "suspicious": 30,
+        "abstentions": 20,
+        "byteReproduction": true,
+        "sha256": "32e2b71ae6c890a246f759a448ca933cdf55a1b7fc360db8e3b7b3a97ebec916",
+        "falsePositives": []
+      },
+      {
+        "seed": 40,
+        "fp": 0,
+        "legitimate": 72,
+        "tp": 30,
+        "suspicious": 30,
+        "abstentions": 15,
+        "byteReproduction": true,
+        "sha256": "1e1b2a41f264e08a4cc282669278f4153814bb598c66d05e89f6194868e21bae",
+        "falsePositives": []
+      },
+      {
+        "seed": 41,
+        "fp": 0,
+        "legitimate": 72,
+        "tp": 30,
+        "suspicious": 30,
+        "abstentions": 19,
+        "byteReproduction": true,
+        "sha256": "f61c838c9572c19a53f74a515959f5a4165969f9be769aa9fca384894a30be17",
+        "falsePositives": []
+      },
+      {
+        "seed": 42,
+        "fp": 0,
+        "legitimate": 72,
+        "tp": 30,
+        "suspicious": 30,
+        "abstentions": 18,
+        "byteReproduction": true,
+        "sha256": "f5ba253727504fe8e20b006e5f2f0461025e674bc4c9532ee2a047106087e2a0",
+        "falsePositives": []
+      },
+      {
+        "seed": 43,
+        "fp": 0,
+        "legitimate": 72,
+        "tp": 30,
+        "suspicious": 30,
+        "abstentions": 18,
+        "byteReproduction": true,
+        "sha256": "fb81d52ba953f118021c8e8443335df2377c7880d96330ed008c1b19d3a411a9",
+        "falsePositives": []
+      },
+      {
+        "seed": 44,
+        "fp": 0,
+        "legitimate": 72,
+        "tp": 30,
+        "suspicious": 30,
+        "abstentions": 18,
+        "byteReproduction": true,
+        "sha256": "3cd8ba0cc1f4d4cd5dfb473b0bfdd72bbb7f8c17a66afb3b803dce6620d8868e",
+        "falsePositives": []
+      },
+      {
+        "seed": 45,
+        "fp": 0,
+        "legitimate": 72,
+        "tp": 30,
+        "suspicious": 30,
+        "abstentions": 19,
+        "byteReproduction": true,
+        "sha256": "fb71fde84c967f103a9f3c4a8df048886a506a5db75b11857bd965f3acda3a8f",
+        "falsePositives": []
+      },
+      {
+        "seed": 46,
+        "fp": 0,
+        "legitimate": 72,
+        "tp": 30,
+        "suspicious": 30,
+        "abstentions": 22,
+        "byteReproduction": true,
+        "sha256": "0563027fe181d6531ecdf5b319995b1a2f9f36dce26a596d491d1fee3805ae48",
+        "falsePositives": []
+      },
+      {
+        "seed": 47,
+        "fp": 0,
+        "legitimate": 72,
+        "tp": 30,
+        "suspicious": 30,
+        "abstentions": 18,
+        "byteReproduction": true,
+        "sha256": "f5b7634c0bf0fcad10337194b8bb0357b64047256a889a5a854c47196fb67ebf",
+        "falsePositives": []
+      },
+      {
+        "seed": 48,
+        "fp": 0,
+        "legitimate": 72,
+        "tp": 30,
+        "suspicious": 30,
+        "abstentions": 15,
+        "byteReproduction": true,
+        "sha256": "c18ac0b947f1b57bd58f769feb6ed486c9884986f9db9ba832bca9a5959819ff",
+        "falsePositives": []
+      },
+      {
+        "seed": 49,
+        "fp": 0,
+        "legitimate": 72,
+        "tp": 30,
+        "suspicious": 30,
+        "abstentions": 19,
+        "byteReproduction": true,
+        "sha256": "addd7a4a1f00472739ec88e13707d785bc56675e5af37739d22d791f532e952c",
+        "falsePositives": []
+      },
+      {
+        "seed": 50,
+        "fp": 0,
+        "legitimate": 72,
+        "tp": 30,
+        "suspicious": 30,
+        "abstentions": 16,
+        "byteReproduction": true,
+        "sha256": "f57ad4e9d6ab4a40cdb47889a2ac0505d1b4ea8786e5caab981fce73b27f0164",
+        "falsePositives": []
+      },
+      {
+        "seed": 51,
+        "fp": 0,
+        "legitimate": 72,
+        "tp": 30,
+        "suspicious": 30,
+        "abstentions": 17,
+        "byteReproduction": true,
+        "sha256": "0f2c19a78620a7566e614b793d990c417c818ce5389ac3cbd14c56361a153f43",
+        "falsePositives": []
+      },
+      {
+        "seed": 52,
+        "fp": 0,
+        "legitimate": 72,
+        "tp": 30,
+        "suspicious": 30,
+        "abstentions": 20,
+        "byteReproduction": true,
+        "sha256": "c75c237b557f507df30ab87c801faad702e536b9a35b84e12b60dda7a8ede32a",
+        "falsePositives": []
+      },
+      {
+        "seed": 53,
+        "fp": 0,
+        "legitimate": 72,
+        "tp": 30,
+        "suspicious": 30,
+        "abstentions": 20,
+        "byteReproduction": true,
+        "sha256": "07d52bba1dd4c79379e7fb9a8ea897db2f414db9657727e2a6a67306a214833d",
+        "falsePositives": []
+      },
+      {
+        "seed": 54,
+        "fp": 0,
+        "legitimate": 72,
+        "tp": 30,
+        "suspicious": 30,
+        "abstentions": 18,
+        "byteReproduction": true,
+        "sha256": "48ffa4f617a67bb9a36d3bd64157a1468ee862f3fac8986fb9067136075fa2fa",
+        "falsePositives": []
+      },
+      {
+        "seed": 55,
+        "fp": 0,
+        "legitimate": 72,
+        "tp": 30,
+        "suspicious": 30,
+        "abstentions": 17,
+        "byteReproduction": true,
+        "sha256": "eb58aa70acf562d6e82bfdca21f1593e998efd9d3fd6797f0e3733b436c0d8e8",
+        "falsePositives": []
+      },
+      {
+        "seed": 56,
+        "fp": 0,
+        "legitimate": 72,
+        "tp": 30,
+        "suspicious": 30,
+        "abstentions": 17,
+        "byteReproduction": true,
+        "sha256": "72e53717375b2ee20b0bd2cae3c0e0b12b48194df65ed9aff3c637fd62db22cc",
+        "falsePositives": []
+      },
+      {
+        "seed": 57,
+        "fp": 0,
+        "legitimate": 72,
+        "tp": 30,
+        "suspicious": 30,
+        "abstentions": 18,
+        "byteReproduction": true,
+        "sha256": "a9804bd1dd5806e8bbc9687b79f136c87293fcb6b5a8c0212be6f369cbf7f0a9",
+        "falsePositives": []
+      },
+      {
+        "seed": 58,
+        "fp": 0,
+        "legitimate": 72,
+        "tp": 30,
+        "suspicious": 30,
+        "abstentions": 14,
+        "byteReproduction": true,
+        "sha256": "a839f3d147b5380795ff08457b809d41f3f9df5da8e795f6823b9256e342cf51",
+        "falsePositives": []
+      },
+      {
+        "seed": 59,
+        "fp": 0,
+        "legitimate": 72,
+        "tp": 30,
+        "suspicious": 30,
+        "abstentions": 16,
+        "byteReproduction": true,
+        "sha256": "be3caf700acebf92c46e7a671c9b4361695d43110249056ed252c22384002e74",
+        "falsePositives": []
+      },
+      {
+        "seed": 60,
+        "fp": 0,
+        "legitimate": 72,
+        "tp": 30,
+        "suspicious": 30,
+        "abstentions": 18,
+        "byteReproduction": true,
+        "sha256": "a5d6573c5c2022527a602aecf730f828dda8a50cdbeacf5def8022957d0b3b47",
+        "falsePositives": []
+      },
+      {
+        "seed": 61,
+        "fp": 0,
+        "legitimate": 72,
+        "tp": 30,
+        "suspicious": 30,
+        "abstentions": 18,
+        "byteReproduction": true,
+        "sha256": "15c48270766fa2f10177dbc62cc8364e29976494ba5b9b71ac0fff33644f9c0d",
+        "falsePositives": []
+      },
+      {
+        "seed": 62,
+        "fp": 0,
+        "legitimate": 72,
+        "tp": 30,
+        "suspicious": 30,
+        "abstentions": 19,
+        "byteReproduction": true,
+        "sha256": "9cd983f001e430a9befedc6bbce85852c8b88d8d02b86044bc95ef5ae95d39e7",
+        "falsePositives": []
+      },
+      {
+        "seed": 63,
+        "fp": 0,
+        "legitimate": 72,
+        "tp": 30,
+        "suspicious": 30,
+        "abstentions": 19,
+        "byteReproduction": true,
+        "sha256": "3032261c0b802d399fce81cbe692f7f0ab10f883c8fed4a5a5c803f561a38fb0",
+        "falsePositives": []
+      },
+      {
+        "seed": 20261010,
+        "fp": 0,
+        "legitimate": 72,
+        "tp": 30,
+        "suspicious": 30,
+        "abstentions": 17,
+        "byteReproduction": true,
+        "sha256": "555fc18863c66d53b6a93a104136526bbc597f698a550ef14b3cc28d8b365da5",
+        "falsePositives": []
+      },
+      {
+        "seed": 123456789,
+        "fp": 0,
+        "legitimate": 72,
+        "tp": 30,
+        "suspicious": 30,
+        "abstentions": 22,
+        "byteReproduction": true,
+        "sha256": "7b678fdaa42be84e223925fcc9bde7cd5278d30ace40dbb63d6a5826d09f9d98",
+        "falsePositives": []
+      },
+      {
+        "seed": 4294967295,
+        "fp": 0,
+        "legitimate": 72,
+        "tp": 30,
+        "suspicious": 30,
+        "abstentions": 17,
+        "byteReproduction": true,
+        "sha256": "fe0d9f5e2be03495f902701a525e2223a7ea0aa90b17b2b26bb8b86f5d6748d5",
+        "falsePositives": []
+      }
+    ]
+  },
+  "matrix": {
+    "independent": {
+      "legitimo": {
+        "plausivel": 55,
+        "suspeito": 0,
+        "inconclusivo": 17
+      },
+      "suspeito": {
+        "plausivel": 0,
+        "suspeito": 30,
+        "inconclusivo": 0
+      }
+    },
+    "reported": {
+      "legitimo": {
+        "plausivel": 55,
+        "suspeito": 0,
+        "inconclusivo": 17
+      },
+      "suspeito": {
+        "plausivel": 0,
+        "suspeito": 30,
+        "inconclusivo": 0
+      }
+    },
+    "consistent": true
+  },
+  "http": [
+    {
+      "name": "valid_points",
+      "expected": 200,
+      "status": 200,
+      "contractPassed": true,
+      "data": {
+        "classification": "plausivel",
+        "shape": "legitimo_estavel",
+        "reason": "Série sem combinação de sinais de compra (variação moderada sem configuração de pico comprado). Razão pico/base 1.025×, concentração 17.1% na hora do pico, sem saltos extremos. Compatível com tráfego legítimo.",
+        "flags": {
+          "abruptJump": false,
+          "abruptDrop": false,
+          "highPeakToBase": false,
+          "highConcentration": false,
+          "narrowSpike": false,
+          "mechanical": false,
+          "smoothRamp": false
+        },
+        "rawMetrics": {
+          "n": 6,
+          "total": 603,
+          "peak": 103,
+          "peakIdx": 5,
+          "median": 100.5,
+          "peakToBase": 1.025,
+          "peakShare": 0.1708,
+          "top3Share": 0.5075,
+          "maxRiseRatio": 1.051,
+          "maxRiseIdx": 5,
+          "maxDropRatio": 1.041,
+          "maxDropIdx": 4,
+          "spikeWidth": 1,
+          "riseHours": 0,
+          "fallHours": 0,
+          "maxRampStep": 1.051,
+          "maxIdenticalRun": 1,
+          "runValue": 100,
+          "runShare": 0.1658,
+          "window3Share": 0.5025,
+          "diurnalAmplitude": 0
+        }
+      }
+    },
+    {
+      "name": "impossible_calendar",
+      "expected": 422,
+      "status": 200,
+      "contractPassed": false,
+      "data": {
+        "classification": "inconclusivo",
+        "shape": "curta",
+        "reason": "Série curta (2 horas). Com menos de 6 pontos horários a classificação seria chute; preferimos não acusar.",
+        "flags": {},
+        "rawMetrics": {
+          "n": 2,
+          "total": 200,
+          "peak": 100,
+          "peakIdx": 0,
+          "median": 100,
+          "peakToBase": 1,
+          "peakShare": 0.5,
+          "top3Share": 1,
+          "maxRiseRatio": 1,
+          "maxRiseIdx": 1,
+          "maxDropRatio": 1,
+          "maxDropIdx": 1,
+          "spikeWidth": 2,
+          "riseHours": 0,
+          "fallHours": 1,
+          "maxRampStep": 1,
+          "maxIdenticalRun": 2,
+          "runValue": 100,
+          "runShare": 1,
+          "window3Share": 0,
+          "diurnalAmplitude": 0
+        }
+      }
+    },
+    {
+      "name": "numeric_bypass",
+      "expected": 422,
+      "status": 200,
+      "contractPassed": false,
+      "data": {
+        "classification": "plausivel",
+        "shape": "legitimo_estavel",
+        "reason": "Série sem combinação de sinais de compra (variação moderada sem configuração de pico comprado). Razão pico/base 1.025×, concentração 17.1% na hora do pico, sem saltos extremos. Compatível com tráfego legítimo.",
+        "flags": {
+          "abruptJump": false,
+          "abruptDrop": false,
+          "highPeakToBase": false,
+          "highConcentration": false,
+          "narrowSpike": false,
+          "mechanical": false,
+          "smoothRamp": false
+        },
+        "rawMetrics": {
+          "n": 6,
+          "total": 603,
+          "peak": 103,
+          "peakIdx": 5,
+          "median": 100.5,
+          "peakToBase": 1.025,
+          "peakShare": 0.1708,
+          "top3Share": 0.5075,
+          "maxRiseRatio": 1.051,
+          "maxRiseIdx": 5,
+          "maxDropRatio": 1.041,
+          "maxDropIdx": 4,
+          "spikeWidth": 1,
+          "riseHours": 0,
+          "fallHours": 0,
+          "maxRampStep": 1.051,
+          "maxIdenticalRun": 1,
+          "runValue": 100,
+          "runShare": 0.1658,
+          "window3Share": 0.5025,
+          "diurnalAmplitude": 0
+        }
+      }
+    },
+    {
+      "name": "numeric_invalid_bypass",
+      "expected": 422,
+      "status": 200,
+      "contractPassed": false,
+      "data": {
+        "classification": "inconclusivo",
+        "shape": "invalida",
+        "reason": "Valores de views devem ser inteiros seguros não negativos (views incrementais por hora).",
+        "flags": {},
+        "rawMetrics": {}
+      }
+    },
+    {
+      "name": "missing_series",
+      "expected": 422,
+      "status": 200,
+      "contractPassed": false,
+      "data": {
+        "classification": "inconclusivo",
+        "shape": "invalida",
+        "reason": "Entrada inválida: esperava uma série de pontos horários ou um array de views incrementais."
+      }
+    },
+    {
+      "name": "empty_series",
+      "expected": 422,
+      "status": 200,
+      "contractPassed": false,
+      "data": {
+        "classification": "inconclusivo",
+        "shape": "invalida",
+        "reason": "Série vazia: sem pontos horários para avaliar.",
+        "flags": {},
+        "rawMetrics": {}
+      }
+    },
+    {
+      "name": "string_series",
+      "expected": 422,
+      "status": 200,
+      "contractPassed": false,
+      "data": {
+        "classification": "inconclusivo",
+        "shape": "invalida",
+        "reason": "Entrada inválida: esperava uma série de pontos horários ou um array de views incrementais."
+      }
+    },
+    {
+      "name": "sum_overflow",
+      "expected": 422,
+      "status": 200,
+      "contractPassed": false,
+      "data": {
+        "classification": "suspeito",
+        "shape": "pico_abrupto",
+        "reason": "Pico abrupto com magnitude concentrada: largura do pico = 1h; subida = 0h; descida = 0h; maior degrau na rampa = 9007199254740991×; pico 9007199254740991 vs mediana 1 → razão 9007199254740991×; hora do pico = 100.0% do total; top-3 horas = 100.0%; melhor janela de 3h = 100.0%. Subida/queda curtas e concentração alta combinadas são compatíveis com compra de views — indício, não prova.",
+        "flags": {
+          "abruptJump": false,
+          "abruptDrop": true,
+          "highPeakToBase": true,
+          "highConcentration": true,
+          "narrowSpike": true,
+          "mechanical": false,
+          "smoothRamp": false
+        },
+        "rawMetrics": {
+          "n": 6,
+          "total": 9007199254740992,
+          "peak": 9007199254740991,
+          "peakIdx": 0,
+          "median": 1,
+          "peakToBase": 9007199254740991,
+          "peakShare": 1,
+          "top3Share": 1,
+          "maxRiseRatio": 1,
+          "maxRiseIdx": 2,
+          "maxDropRatio": 9007199254740991,
+          "maxDropIdx": 1,
+          "spikeWidth": 1,
+          "riseHours": 0,
+          "fallHours": 0,
+          "maxRampStep": 9007199254740991,
+          "maxIdenticalRun": 5,
+          "runValue": 1,
+          "runShare": 0,
+          "window3Share": 1,
+          "diurnalAmplitude": 0
+        }
+      }
+    },
+    {
+      "name": "GET /health",
+      "expected": 200,
+      "status": 200,
+      "contractPassed": true
+    },
+    {
+      "name": "GET /classify",
+      "expected": 404,
+      "status": 404,
+      "contractPassed": true
+    },
+    {
+      "name": "PUT /classify",
+      "expected": 404,
+      "status": 404,
+      "contractPassed": true
+    },
+    {
+      "name": "GET /unknown",
+      "expected": 404,
+      "status": 404,
+      "contractPassed": true
+    },
+    {
+      "name": "oversized_body",
+      "expected": 413,
+      "error": "ECONNRESET",
+      "message": "socket hang up",
+      "contractPassed": false
+    }
+  ],
+  "malformedHost": {
+    "exitCode": 1,
+    "signal": null,
+    "stdout": "",
+    "stderr": "node:internal/url:818\n      href = bindingUrl.parse(input, base, true);\n                        ^\n\nTypeError: Invalid URL\n    at new URL (node:internal/url:818:25)\n    at Server.<anonymous> (file:///private/var/folders/1h/dnd2dd992cq41yhypgy46_bc0000gn/T/conty-review09-b-jj4i9vmp/src/server.js:41:17)\n    at Server.emit (node:events:519:28)\n    at parserOnIncoming (node:_http_server:1186:12)\n    at HTTPParser.parserOnHeadersComplete (node:_http_common:125:17) {\n  code: 'ERR_INVALID_URL',\n  input: '/health',\n  base: 'http://[bad'\n}\n\nNode.js v22.23.3\n"
+  }
+}

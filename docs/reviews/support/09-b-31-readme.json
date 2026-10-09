@@ -1,0 +1,35 @@
+{
+  "reviewed_sha": "31bb2150d1758c9c2efbbfc73e506f4973597ca7",
+  "negative_fields": [
+    {
+      "field": "numerator",
+      "exit_code": 1,
+      "expected_exit": 1,
+      "expected_message_found": true,
+      "readme_unchanged_after_test": true,
+      "mtime_unchanged": true,
+      "evidence": "revisoes/09-b-31-readme-numerator.txt"
+    },
+    {
+      "field": "denominator",
+      "exit_code": 1,
+      "expected_exit": 1,
+      "expected_message_found": true,
+      "readme_unchanged_after_test": true,
+      "mtime_unchanged": true,
+      "evidence": "revisoes/09-b-31-readme-denominator.txt"
+    },
+    {
+      "field": "percent",
+      "exit_code": 1,
+      "expected_exit": 1,
+      "expected_message_found": true,
+      "readme_unchanged_after_test": true,
+      "mtime_unchanged": true,
+      "evidence": "revisoes/09-b-31-readme-percent.txt"
+    }
+  ],
+  "positive_exit": 0,
+  "readme_restored_sha256": "8438c75f80a94eaf7f4f8f7c5f7d9c4eb1b221572dc7dde9e227cd3877d522b3",
+  "generated_dataset_before_readme_test": false
+}

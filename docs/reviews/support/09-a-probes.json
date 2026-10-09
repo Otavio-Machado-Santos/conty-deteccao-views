@@ -1,0 +1,510 @@
+{
+  "reproduction": {
+    "identical": true,
+    "sha256": "f7b7ad869c3b82f77e7f3d35dbd2508129678e626c953bc4db7243d5d39ac3f4"
+  },
+  "label_leakage": {
+    "classification_same": true,
+    "reason_same": true
+  },
+  "independent_seeds": {
+    "count": 100,
+    "false_positives": 1,
+    "legitimate_total": 7200,
+    "fpr": 0.0001388888888888889,
+    "suspicious_detected": 3000,
+    "suspicious_total": 3000,
+    "extra_false_positives": [
+      {
+        "seed": 25,
+        "fp": 1,
+        "rows": [
+          {
+            "id": "viral_organico-000",
+            "profile": "viral_organico",
+            "label": "legitimo",
+            "classification": "suspeito",
+            "shape": "mecanica",
+            "reason": "Ritmo mecânico: maior sequência de valores idênticos = 5 horas com 99 views (3.1% do total). Séries orgânicas têm ruído hora a hora; 5 horas com exatamente 99 views, em série com 15863 views no total, combinam repetição exata e volume — indício de padrão automatizado, não prova de fraude."
+          }
+        ]
+      }
+    ]
+  },
+  "counterexamples": [
+    {
+      "name": "viral_stable_baseline",
+      "views": [
+        200,
+        200,
+        200,
+        200,
+        200,
+        200,
+        200,
+        200,
+        200,
+        200,
+        200,
+        295,
+        544,
+        896,
+        1300,
+        1704,
+        2056,
+        2305,
+        2400,
+        2368,
+        2278,
+        2140,
+        1964,
+        1759,
+        1534,
+        1300,
+        1066,
+        841,
+        636,
+        460,
+        322,
+        232,
+        200,
+        200,
+        200,
+        200,
+        200,
+        200,
+        200,
+        200,
+        200,
+        200,
+        200,
+        200,
+        200,
+        200,
+        200,
+        200
+      ],
+      "classification": "suspeito",
+      "reason": "Ritmo mecânico: maior sequência de valores idênticos = 16 horas com 200 views (9.5% do total). Séries orgânicas têm ruído hora a hora; 16 horas com exatamente 200 views, em série com 33800 views no total, combinam repetição exata e volume — indício de padrão automatizado, não prova de fraude.",
+      "shape": "mecanica",
+      "signals": {
+        "peakToBase": {
+          "value": 12,
+          "threshold": 8,
+          "triggered": true,
+          "detail": "pico 2400 vs mediana 200 → razão 12×"
+        },
+        "abruptJump": {
+          "value": 1.844,
+          "threshold": 4,
+          "triggered": false,
+          "detail": "maior fator de subida hora a hora = 1.844× no índice 12"
+        },
+        "abruptDrop": {
+          "value": 1.429,
+          "threshold": 4,
+          "triggered": false,
+          "detail": "maior fator de queda hora a hora = 1.429× no índice 30"
+        },
+        "concentration": {
+          "value": 0.071,
+          "top3Share": 0.2093,
+          "window3Share": 0.2093,
+          "threshold": 0.35,
+          "triggered": false,
+          "detail": "hora do pico = 7.1% do total; top-3 horas = 20.9%; melhor janela de 3h = 20.9%"
+        },
+        "exactRepetition": {
+          "value": 16,
+          "runValue": 200,
+          "runShare": 0.0947,
+          "threshold": 4,
+          "triggered": true,
+          "detail": "maior sequência de valores idênticos = 16 horas com 200 views (9.5% do total)"
+        },
+        "rampShape": {
+          "value": {
+            "spikeWidth": 12,
+            "riseHours": 4,
+            "fallHours": 7,
+            "maxRampStep": 1.844
+          },
+          "threshold": {
+            "wideWidth": 4,
+            "smoothMaxStep": 3.2
+          },
+          "triggered": true,
+          "detail": "largura do pico = 12h; subida = 4h; descida = 7h; maior degrau na rampa = 1.844×"
+        }
+      },
+      "rawMetrics": {
+        "n": 48,
+        "total": 33800,
+        "peak": 2400,
+        "peakIdx": 18,
+        "median": 200,
+        "peakToBase": 12,
+        "peakShare": 0.071,
+        "top3Share": 0.2093,
+        "maxRiseRatio": 1.844,
+        "maxRiseIdx": 12,
+        "maxDropRatio": 1.429,
+        "maxDropIdx": 30,
+        "spikeWidth": 12,
+        "riseHours": 4,
+        "fallHours": 7,
+        "maxRampStep": 1.844,
+        "maxIdenticalRun": 16,
+        "runValue": 200,
+        "runShare": 0.0947,
+        "window3Share": 0.2093,
+        "diurnalAmplitude": 1.562
+      },
+      "flags": {
+        "abruptJump": false,
+        "abruptDrop": false,
+        "highPeakToBase": true,
+        "highConcentration": false,
+        "narrowSpike": false,
+        "mechanical": true,
+        "smoothRamp": true
+      },
+      "thresholds": {
+        "MIN_POINTS": 6,
+        "MIN_TOTAL_VIEWS": 80,
+        "MIN_PEAK_FOR_MAGNITUDE": 15,
+        "HIGH_PEAK_TO_BASE": 8,
+        "HIGH_PEAK_SHARE": 0.35,
+        "HIGH_TOP3_SHARE": 0.72,
+        "HIGH_WINDOW3_SHARE": 0.65,
+        "ABRUPT_JUMP_RATIO": 4,
+        "ABRUPT_DROP_RATIO": 4,
+        "NARROW_SPIKE_WIDTH": 2,
+        "NARROW_SPIKE_MIN_PEAK_TO_BASE": 4,
+        "WIDE_RAMP_WIDTH": 4,
+        "SMOOTH_MAX_RAMP_STEP": 3.2,
+        "MECHANICAL_RUN": 4,
+        "MECHANICAL_VALUE_MIN": 40,
+        "MECHANICAL_SHARE": 0.25,
+        "ORGANIC_MIN_PEAK_TO_BASE": 3
+      },
+      "disclaimer": "Resultado analítico, não prova de fraude: séries horárias de views não permitem afirmar humanos ou bots com certeza. Tráfego pago legítimo, campanhas agendadas e picos orgânicos reais podem se parecer com compra. Séries idênticas são indistinguíveis por este método."
+    },
+    {
+      "name": "same_viral_small_noise",
+      "views": [
+        198,
+        200,
+        202,
+        199,
+        201,
+        198,
+        200,
+        202,
+        199,
+        201,
+        198,
+        295,
+        546,
+        895,
+        1301,
+        1702,
+        2056,
+        2307,
+        2399,
+        2369,
+        2276,
+        2140,
+        1966,
+        1758,
+        1535,
+        1298,
+        1066,
+        843,
+        635,
+        461,
+        320,
+        232,
+        202,
+        199,
+        201,
+        198,
+        200,
+        202,
+        199,
+        201,
+        198,
+        200,
+        202,
+        199,
+        201,
+        198,
+        200,
+        202
+      ],
+      "classification": "plausivel",
+      "reason": "Subida e descida graduais (largura do pico = 11h; subida = 4h; descida = 6h; maior degrau na rampa = 1.851×) com razão pico/base de 11.876×. Forma de rampa suave é compatível com viral orgânico ou evento legítimo com propagação; pico alto sozinho não caracteriza compra.",
+      "shape": "rampa_suave",
+      "signals": {
+        "peakToBase": {
+          "value": 11.876,
+          "threshold": 8,
+          "triggered": true,
+          "detail": "pico 2399 vs mediana 202 → razão 11.876×"
+        },
+        "abruptJump": {
+          "value": 1.851,
+          "threshold": 4,
+          "triggered": false,
+          "detail": "maior fator de subida hora a hora = 1.851× no índice 12"
+        },
+        "abruptDrop": {
+          "value": 1.441,
+          "threshold": 4,
+          "triggered": false,
+          "detail": "maior fator de queda hora a hora = 1.441× no índice 30"
+        },
+        "concentration": {
+          "value": 0.071,
+          "top3Share": 0.2093,
+          "window3Share": 0.2093,
+          "threshold": 0.35,
+          "triggered": false,
+          "detail": "hora do pico = 7.1% do total; top-3 horas = 20.9%; melhor janela de 3h = 20.9%"
+        },
+        "exactRepetition": {
+          "value": 1,
+          "runValue": 198,
+          "runShare": 0.0059,
+          "threshold": 4,
+          "triggered": false,
+          "detail": "maior sequência de valores idênticos = 1 horas com 198 views (0.6% do total)"
+        },
+        "rampShape": {
+          "value": {
+            "spikeWidth": 11,
+            "riseHours": 4,
+            "fallHours": 6,
+            "maxRampStep": 1.851
+          },
+          "threshold": {
+            "wideWidth": 4,
+            "smoothMaxStep": 3.2
+          },
+          "triggered": true,
+          "detail": "largura do pico = 11h; subida = 4h; descida = 6h; maior degrau na rampa = 1.851×"
+        }
+      },
+      "rawMetrics": {
+        "n": 48,
+        "total": 33800,
+        "peak": 2399,
+        "peakIdx": 18,
+        "median": 202,
+        "peakToBase": 11.876,
+        "peakShare": 0.071,
+        "top3Share": 0.2093,
+        "maxRiseRatio": 1.851,
+        "maxRiseIdx": 12,
+        "maxDropRatio": 1.441,
+        "maxDropIdx": 30,
+        "spikeWidth": 11,
+        "riseHours": 4,
+        "fallHours": 6,
+        "maxRampStep": 1.851,
+        "maxIdenticalRun": 1,
+        "runValue": 198,
+        "runShare": 0.0059,
+        "window3Share": 0.2093,
+        "diurnalAmplitude": 1.564
+      },
+      "flags": {
+        "abruptJump": false,
+        "abruptDrop": false,
+        "highPeakToBase": true,
+        "highConcentration": false,
+        "narrowSpike": false,
+        "mechanical": false,
+        "smoothRamp": true
+      },
+      "thresholds": {
+        "MIN_POINTS": 6,
+        "MIN_TOTAL_VIEWS": 80,
+        "MIN_PEAK_FOR_MAGNITUDE": 15,
+        "HIGH_PEAK_TO_BASE": 8,
+        "HIGH_PEAK_SHARE": 0.35,
+        "HIGH_TOP3_SHARE": 0.72,
+        "HIGH_WINDOW3_SHARE": 0.65,
+        "ABRUPT_JUMP_RATIO": 4,
+        "ABRUPT_DROP_RATIO": 4,
+        "NARROW_SPIKE_WIDTH": 2,
+        "NARROW_SPIKE_MIN_PEAK_TO_BASE": 4,
+        "WIDE_RAMP_WIDTH": 4,
+        "SMOOTH_MAX_RAMP_STEP": 3.2,
+        "MECHANICAL_RUN": 4,
+        "MECHANICAL_VALUE_MIN": 40,
+        "MECHANICAL_SHARE": 0.25,
+        "ORGANIC_MIN_PEAK_TO_BASE": 3
+      },
+      "disclaimer": "Resultado analítico, não prova de fraude: séries horárias de views não permitem afirmar humanos ou bots com certeza. Tráfego pago legítimo, campanhas agendadas e picos orgânicos reais podem se parecer com compra. Séries idênticas são indistinguíveis por este método."
+    },
+    {
+      "name": "legitimate_scheduled_plateau",
+      "views": [
+        100,
+        101,
+        102,
+        100,
+        101,
+        102,
+        100,
+        101,
+        102,
+        100,
+        101,
+        102,
+        400,
+        400,
+        400,
+        400,
+        400,
+        400,
+        400,
+        400,
+        400,
+        400,
+        400,
+        400,
+        100,
+        101,
+        102,
+        100,
+        101,
+        102,
+        100,
+        101,
+        102,
+        100,
+        101,
+        102,
+        100,
+        101,
+        102,
+        100,
+        101,
+        102,
+        100,
+        101,
+        102,
+        100,
+        101,
+        102
+      ],
+      "classification": "suspeito",
+      "reason": "Ritmo mecânico: maior sequência de valores idênticos = 12 horas com 400 views (56.9% do total). Séries orgânicas têm ruído hora a hora; 12 horas com exatamente 400 views, em série com 8436 views no total, combinam repetição exata e volume — indício de padrão automatizado, não prova de fraude.",
+      "shape": "mecanica",
+      "signals": {
+        "peakToBase": {
+          "value": 3.941,
+          "threshold": 8,
+          "triggered": false,
+          "detail": "pico 400 vs mediana 101.5 → razão 3.941×"
+        },
+        "abruptJump": {
+          "value": 3.922,
+          "threshold": 4,
+          "triggered": false,
+          "detail": "maior fator de subida hora a hora = 3.922× no índice 12"
+        },
+        "abruptDrop": {
+          "value": 4,
+          "threshold": 4,
+          "triggered": true,
+          "detail": "maior fator de queda hora a hora = 4× no índice 24"
+        },
+        "concentration": {
+          "value": 0.0474,
+          "top3Share": 0.1422,
+          "window3Share": 0.1422,
+          "threshold": 0.35,
+          "triggered": false,
+          "detail": "hora do pico = 4.7% do total; top-3 horas = 14.2%; melhor janela de 3h = 14.2%"
+        },
+        "exactRepetition": {
+          "value": 12,
+          "runValue": 400,
+          "runShare": 0.569,
+          "threshold": 4,
+          "triggered": true,
+          "detail": "maior sequência de valores idênticos = 12 horas com 400 views (56.9% do total)"
+        },
+        "rampShape": {
+          "value": {
+            "spikeWidth": 12,
+            "riseHours": 0,
+            "fallHours": 11,
+            "maxRampStep": 4
+          },
+          "threshold": {
+            "wideWidth": 4,
+            "smoothMaxStep": 3.2
+          },
+          "triggered": false,
+          "detail": "largura do pico = 12h; subida = 0h; descida = 11h; maior degrau na rampa = 4×"
+        }
+      },
+      "rawMetrics": {
+        "n": 48,
+        "total": 8436,
+        "peak": 400,
+        "peakIdx": 12,
+        "median": 101.5,
+        "peakToBase": 3.941,
+        "peakShare": 0.0474,
+        "top3Share": 0.1422,
+        "maxRiseRatio": 3.922,
+        "maxRiseIdx": 12,
+        "maxDropRatio": 4,
+        "maxDropIdx": 24,
+        "spikeWidth": 12,
+        "riseHours": 0,
+        "fallHours": 11,
+        "maxRampStep": 4,
+        "maxIdenticalRun": 12,
+        "runValue": 400,
+        "runShare": 0.569,
+        "window3Share": 0.1422,
+        "diurnalAmplitude": 0.859
+      },
+      "flags": {
+        "abruptJump": false,
+        "abruptDrop": true,
+        "highPeakToBase": false,
+        "highConcentration": false,
+        "narrowSpike": false,
+        "mechanical": true,
+        "smoothRamp": false
+      },
+      "thresholds": {
+        "MIN_POINTS": 6,
+        "MIN_TOTAL_VIEWS": 80,
+        "MIN_PEAK_FOR_MAGNITUDE": 15,
+        "HIGH_PEAK_TO_BASE": 8,
+        "HIGH_PEAK_SHARE": 0.35,
+        "HIGH_TOP3_SHARE": 0.72,
+        "HIGH_WINDOW3_SHARE": 0.65,
+        "ABRUPT_JUMP_RATIO": 4,
+        "ABRUPT_DROP_RATIO": 4,
+        "NARROW_SPIKE_WIDTH": 2,
+        "NARROW_SPIKE_MIN_PEAK_TO_BASE": 4,
+        "WIDE_RAMP_WIDTH": 4,
+        "SMOOTH_MAX_RAMP_STEP": 3.2,
+        "MECHANICAL_RUN": 4,
+        "MECHANICAL_VALUE_MIN": 40,
+        "MECHANICAL_SHARE": 0.25,
+        "ORGANIC_MIN_PEAK_TO_BASE": 3
+      },
+      "disclaimer": "Resultado analítico, não prova de fraude: séries horárias de views não permitem afirmar humanos ou bots com certeza. Tráfego pago legítimo, campanhas agendadas e picos orgânicos reais podem se parecer com compra. Séries idênticas são indistinguíveis por este método."
+    }
+  ]
+}

@@ -1,0 +1,306 @@
+{
+  "reviewed_sha": "829b1bc9cf4df285c8f867cdd6166799fd862659",
+  "base_sha": "f489f871f45f27022ea7791bcd7cbfe447edc4c2",
+  "delta_base_sha": "31bb2150d1758c9c2efbbfc73e506f4973597ca7",
+  "previous_review": "revisoes/09-b-31-anterior.json",
+  "earlier_reviews": [
+    "revisoes/09-b-21-anterior.json",
+    "revisoes/09-b-anterior.json"
+  ],
+  "reviewer": "implementar_metricas; revisão B independente final/delta",
+  "reviewed_at": "2026-10-09T21:07:50.537424+00:00",
+  "scope": "Delta limitado à correção do P2 de isolamento do teste e à nota IA/evidências. Commit fixo por git archive isolado. Nenhum código candidato editado; nenhuma geração ou nova sondagem do produto imutável executada.",
+  "environment": {
+    "node": "v22.23.3",
+    "os": "macOS"
+  },
+  "commands": [
+    {
+      "command": "git archive 829b1bc9cf4df285c8f867cdd6166799fd862659; git diff --check 31bb215...829b1bc; leitura do delta de test/generate.test.js e README",
+      "exit_code": 0,
+      "result": "Somente teste cleanup, README e evidências mudaram; prefixo completo/finally/asserts conferidos. Nota IA atribui honestamente a correção a Codex."
+    },
+    {
+      "command": "npm test com Node22 no git archive 829, com sentinel alheio contendo cleanup presente",
+      "exit_code": 0,
+      "result": "53/53 testes, workers padrão, antes de qualquer geração. Bytes, inode e mtime de dataset/evaluation/README e sentinel alheio preservados.",
+      "evidence": "revisoes/09-b-829-tests.txt; revisoes/09-b-829-isolation.json"
+    },
+    {
+      "command": "10 pares de duas invocações node --test test/*.test.js simultâneas no mesmo archive isolado; sem flags de serialização; sentinel alheio presente",
+      "exit_code": 0,
+      "result": "20/20 suítes passaram; nenhum órfão próprio; sentinel alheio preservado byte/inode/mtime; arquivos compartilhados intactos. Reproduz o contexto que falhou no quinto par em 31 e confirma a resolução.",
+      "evidence": "revisoes/09-b-829-isolation.json"
+    },
+    {
+      "command": "git show e hashes dos nove arquivos críticos 31bb215→829b1bc; comparar também bytes extraídos no archive",
+      "exit_code": 0,
+      "result": "generate/evaluate/server/validate/classify/signals/prng/dataset/readme-metrics.test idênticos byte a byte.",
+      "evidence": "revisoes/09-b-829-source-integrity.json"
+    },
+    {
+      "command": "Herdar explicitamente sondagens anteriores do produto sob hashes idênticos; sem repetir por rotina",
+      "result": "Writer/readonly/README negativos e geração canônica medidos em 31; HTTP/schema/classificador e 267 seeds medidos em 21. Nenhuma afirmação de nova execução no 829.",
+      "evidence": "revisoes/09-b-31-anterior.json; revisoes/09-b-21-anterior.json; revisoes/09-b-829-source-integrity.json"
+    }
+  ],
+  "source_integrity": {
+    "delta_31_to_829": {
+      "reviewed_sha": "829b1bc9cf4df285c8f867cdd6166799fd862659",
+      "previous_sha": "31bb2150d1758c9c2efbbfc73e506f4973597ca7",
+      "scope": "Somente teste de cleanup, README e evidências mudaram; fontes do produto e dataset herdadas",
+      "files": [
+        {
+          "file": "src/generate.js",
+          "previous_blob": "1446b8e50fbbe8fd26f6cc3f2b2513fa23c093c8",
+          "candidate_blob": "1446b8e50fbbe8fd26f6cc3f2b2513fa23c093c8",
+          "previous_sha256": "4a3aa2322c8317ecf0cab7d6aeaa2077c70b8079d392c12badb1f4b11e4c920c",
+          "candidate_sha256": "4a3aa2322c8317ecf0cab7d6aeaa2077c70b8079d392c12badb1f4b11e4c920c",
+          "identical": true,
+          "snapshot_matches_commit": true
+        },
+        {
+          "file": "scripts/evaluate.js",
+          "previous_blob": "966a3f2c5448af30646f2b1c08d0d47b72d48601",
+          "candidate_blob": "966a3f2c5448af30646f2b1c08d0d47b72d48601",
+          "previous_sha256": "5e64f6ea94f4dd7d993e353bdd9c3236d67fb1014ff1d5579c52fc0fba145cd2",
+          "candidate_sha256": "5e64f6ea94f4dd7d993e353bdd9c3236d67fb1014ff1d5579c52fc0fba145cd2",
+          "identical": true,
+          "snapshot_matches_commit": true
+        },
+        {
+          "file": "src/server.js",
+          "previous_blob": "523c834a4dcc47d29646366c460343806681948d",
+          "candidate_blob": "523c834a4dcc47d29646366c460343806681948d",
+          "previous_sha256": "259a2bd7aa3f61f193528aa7530b8ae04c75126874d8904b6a5d1e6f7e126636",
+          "candidate_sha256": "259a2bd7aa3f61f193528aa7530b8ae04c75126874d8904b6a5d1e6f7e126636",
+          "identical": true,
+          "snapshot_matches_commit": true
+        },
+        {
+          "file": "src/validate.js",
+          "previous_blob": "32abf906c7e5bc545e9a117b9cbb949c9e9dcef6",
+          "candidate_blob": "32abf906c7e5bc545e9a117b9cbb949c9e9dcef6",
+          "previous_sha256": "7516b7a8bbc6c2349f5e657ef4e310eb95f9819ca1f21bc5f4caed4c4dd5fe05",
+          "candidate_sha256": "7516b7a8bbc6c2349f5e657ef4e310eb95f9819ca1f21bc5f4caed4c4dd5fe05",
+          "identical": true,
+          "snapshot_matches_commit": true
+        },
+        {
+          "file": "src/classify.js",
+          "previous_blob": "c0e73ce6d44e755994af5d6415a357d29d5bdeac",
+          "candidate_blob": "c0e73ce6d44e755994af5d6415a357d29d5bdeac",
+          "previous_sha256": "8f6a5473cce82dcb00bab52a7ed6b5d607c0d7cf288559bba384e408333b4655",
+          "candidate_sha256": "8f6a5473cce82dcb00bab52a7ed6b5d607c0d7cf288559bba384e408333b4655",
+          "identical": true,
+          "snapshot_matches_commit": true
+        },
+        {
+          "file": "src/signals.js",
+          "previous_blob": "ccf354faf9ce1a5dfcb54da5cc3184a8938bbd71",
+          "candidate_blob": "ccf354faf9ce1a5dfcb54da5cc3184a8938bbd71",
+          "previous_sha256": "5f10115c0c8e15afea935953d7633c4c398204997cfab80436bc235f06602a4f",
+          "candidate_sha256": "5f10115c0c8e15afea935953d7633c4c398204997cfab80436bc235f06602a4f",
+          "identical": true,
+          "snapshot_matches_commit": true
+        },
+        {
+          "file": "src/prng.js",
+          "previous_blob": "a295465fc6a495c8396590460cfc357490837396",
+          "candidate_blob": "a295465fc6a495c8396590460cfc357490837396",
+          "previous_sha256": "0f2c8480804c106d6a9c17a44030fb1c3fd24e764abfd4099516848df8c4623a",
+          "candidate_sha256": "0f2c8480804c106d6a9c17a44030fb1c3fd24e764abfd4099516848df8c4623a",
+          "identical": true,
+          "snapshot_matches_commit": true
+        },
+        {
+          "file": "dataset/series.json",
+          "previous_blob": "2dc156d66713f5a013d7ffcf54f69ccfe83172d2",
+          "candidate_blob": "2dc156d66713f5a013d7ffcf54f69ccfe83172d2",
+          "previous_sha256": "f7b7ad869c3b82f77e7f3d35dbd2508129678e626c953bc4db7243d5d39ac3f4",
+          "candidate_sha256": "f7b7ad869c3b82f77e7f3d35dbd2508129678e626c953bc4db7243d5d39ac3f4",
+          "identical": true,
+          "snapshot_matches_commit": true
+        },
+        {
+          "file": "test/readme-metrics.test.js",
+          "previous_blob": "06aae05edfa44b60b993747cf519803318e778cf",
+          "candidate_blob": "06aae05edfa44b60b993747cf519803318e778cf",
+          "previous_sha256": "a121c164fe5a673e4b5e283802cb9f3a681553d715227b81bcf2c9a44c1ac3e0",
+          "candidate_sha256": "a121c164fe5a673e4b5e283802cb9f3a681553d715227b81bcf2c9a44c1ac3e0",
+          "identical": true,
+          "snapshot_matches_commit": true
+        }
+      ],
+      "all_identical": true
+    },
+    "previous_21_to_31": "revisoes/09-b-31-source-integrity.json"
+  },
+  "resolutions": [
+    {
+      "id": "09-b-calendar",
+      "status": "resolved",
+      "original_reviewed_sha": "eebbf112c1c89eb6f26afa477fad70424c28b4c4",
+      "source": "src/validate.js:27,35",
+      "evidence": "validation do probe final: calendários impossíveis/nonISO rejeitados, UTC válido aceito, anos0000/0001/0099/0100 sem remapeamento e séculos bissextos corretos; HTTP invalid calendar422.",
+      "validation_on_new_candidate": "Fontes de API/validação/classificação/sinais permanecem byte a byte iguais ao21; sondagens reais21 herdadas com escopo explícito, vide source_integrity."
+    },
+    {
+      "id": "09-b-api-validation",
+      "status": "resolved",
+      "original_reviewed_sha": "eebbf112c1c89eb6f26afa477fad70424c28b4c4",
+      "source": "src/server.js:117,194",
+      "evidence": "Probes HTTP agora422 para numeric bypass/negativo/missing/empty/string; JSONvazio/só espaços/truncado400 nos requests reais.",
+      "validation_on_new_candidate": "Fontes de API/validação/classificação/sinais permanecem byte a byte iguais ao21; sondagens reais21 herdadas com escopo explícito, vide source_integrity."
+    },
+    {
+      "id": "09-b-aggregate-precision",
+      "status": "resolved",
+      "original_reviewed_sha": "eebbf112c1c89eb6f26afa477fad70424c28b4c4",
+      "source": "src/validate.js:128; src/classify.js:114",
+      "evidence": "Unsafe total rejeitado antes dos sinais; HTTP422; biblioteca retorna invalida, sem publicar total inexato.",
+      "validation_on_new_candidate": "Fontes de API/validação/classificação/sinais permanecem byte a byte iguais ao21; sondagens reais21 herdadas com escopo explícito, vide source_integrity."
+    },
+    {
+      "id": "09-b-body-limit",
+      "status": "resolved",
+      "original_reviewed_sha": "eebbf112c1c89eb6f26afa477fad70424c28b4c4",
+      "source": "src/server.js:35,62",
+      "evidence": "12matrizes CL/chunked, keepAlive/agent:false e3tamanhos;413JSON em todos, health200+POSTválido200; reusedSocket=true no keepAlive; zeroerros sockets.",
+      "validation_on_new_candidate": "Fontes de API/validação/classificação/sinais permanecem byte a byte iguais ao21; sondagens reais21 herdadas com escopo explícito, vide source_integrity."
+    },
+    {
+      "id": "09-b-malformed-host",
+      "status": "resolved",
+      "original_reviewed_sha": "eebbf112c1c89eb6f26afa477fad70424c28b4c4",
+      "source": "src/server.js:104,135",
+      "evidence": "Subprocesso Host:[bad agoraexit0/HTTP200; health no mesmo socket disponível; base fixa e tratamento externo de erro.",
+      "validation_on_new_candidate": "Fontes de API/validação/classificação/sinais permanecem byte a byte iguais ao21; sondagens reais21 herdadas com escopo explícito, vide source_integrity."
+    },
+    {
+      "id": "09-b-organic-repetition",
+      "status": "resolved",
+      "original_reviewed_sha": "eebbf112c1c89eb6f26afa477fad70424c28b4c4",
+      "source": "src/classify.js:163,190,257",
+      "evidence": "A rampa48h com baselineconstante vira plausivel, mechanical=false, smoothRamp=true; viral seed25 deixou de gerarFP; suspeitos sintéticos foram preservados.",
+      "validation_on_new_candidate": "Fontes de API/validação/classificação/sinais permanecem byte a byte iguais ao21; sondagens reais21 herdadas com escopo explícito, vide source_integrity."
+    },
+    {
+      "id": "09-b-concurrent-dataset-write",
+      "status": "resolved",
+      "original_reviewed_sha": "21c55d52d5e51f39ee8a06607c5c2e6d4da37afc",
+      "source": "scripts/evaluate.js:138-185; src/generate.js:305-343; test/generate.test.js:90-109",
+      "evidence": "npmtest53/53+20repetições com workers padrão antes de generate:evaluate, dataset/evaluation/README preservados byte/inode/mtime; readonly também com dataset corrupto/ausente e evidence ausente. Writer próprio sob barreira7threads,300publicações/360leituras3corposUnicode405–576KB íntegros; EEXIST/invalidbody/renamefail preservam target/tempalheio e limpam próprio."
+    },
+    {
+      "id": "09-b-test-cleanup-isolation",
+      "status": "resolved",
+      "original_reviewed_sha": "31bb2150d1758c9c2efbbfc73e506f4973597ca7",
+      "source": "test/generate.test.js:210,228,231-237",
+      "change": "Prefixo completo .${basename(tmp)}. em vez de includes(cleanup); filtro de órfãos próprios e todos os asserts mantidos; limpeza do namespace temporário exclusivo protegida por finally.",
+      "evidence": "No git archive 829, npm test 53/53 e 10 pares de duas suítes simultâneas com workers padrão passaram. Temporário alheio com cleanup no nome permaneceu presente durante todas as execuções, com bytes/inode/mtime preservados. Nenhum órfão próprio permaneceu.",
+      "artifacts": [
+        "revisoes/09-b-829-tests.txt",
+        "revisoes/09-b-829-isolation.json"
+      ]
+    }
+  ],
+  "findings": [],
+  "statistics": {
+    "canonical": {
+      "seed": 20261009,
+      "false_positives": 0,
+      "legitimate": 72,
+      "true_positives": 30,
+      "suspicious": 30,
+      "inconclusive": 17,
+      "matrix": {
+        "legitimo": {
+          "plausivel": 55,
+          "suspeito": 0,
+          "inconclusivo": 17
+        },
+        "suspeito": {
+          "plausivel": 0,
+          "suspeito": 30,
+          "inconclusivo": 0
+        }
+      },
+      "matrix_counted_independently": "Medição31confirmada; contagem independente21 herdada sob hashes iguais de classificador/dataset/geração/métricas.",
+      "measured_on_sha": "31bb2150d1758c9c2efbbfc73e506f4973597ca7",
+      "evidence": "revisoes/09-b-31-evaluation.json",
+      "inherited_on_sha": "829b1bc9cf4df285c8f867cdd6166799fd862659",
+      "inheritance_basis": "Medição feita em 31bb215; dataset, gerador, evaluator e classificador byte a byte idênticos em 829b1bc. Não reexecutada a geração neste delta limitado."
+    },
+    "additional_synthetic_sensitivity": {
+      "seed_count": 267,
+      "seed_ranges": [
+        "0–63",
+        "1000–1199"
+      ],
+      "other_seeds": [
+        20261010,
+        123456789,
+        4294967295
+      ],
+      "series": 27234,
+      "false_positives": 2,
+      "legitimate": 19224,
+      "fpr": 0.00010403662089055348,
+      "true_positives": 8010,
+      "suspicious": 8010,
+      "inconclusive": 4790,
+      "all_reproductions_identical": true,
+      "false_positive_cases": [
+        {
+          "seed": 1079,
+          "cases": [
+            {
+              "id": "diurno-001",
+              "profile": "diurno",
+              "label": "legitimo",
+              "classification": "suspeito",
+              "shape": "mecanica",
+              "reason": "Ritmo mecânico: maior sequência de valores idênticos = 4 horas com 141 views (10.4% do total). Séries orgânicas têm ruído hora a hora; 4 horas com exatamente 141 views, em série com 5399 views no total, combinam repetição exata elevada e volume — indício de padrão automatizado, não prova de fraude."
+            }
+          ]
+        },
+        {
+          "seed": 1164,
+          "cases": [
+            {
+              "id": "diurno-010",
+              "profile": "diurno",
+              "label": "legitimo",
+              "classification": "suspeito",
+              "shape": "mecanica",
+              "reason": "Ritmo mecânico: maior sequência de valores idênticos = 4 horas com 75 views (5.9% do total). Séries orgânicas têm ruído hora a hora; 4 horas com exatamente 75 views, em série com 5081 views no total, combinam repetição exata elevada e volume — indício de padrão automatizado, não prova de fraude."
+            }
+          ]
+        }
+      ],
+      "interpretation": "Avaliação sintética de desenvolvimento; não é holdout cego nem FPR de produção. Dois FP diurnos pela regra mecânica documentada:1079/diurno-001 run4@141 e1164/diurno-010 run4@75. Não são a regressão viral/baseline original; critério50%peak permite repetição75 compeak147 mesmoabaixomediana113. Nenhuma calibração foi alterada para zerar estesFP.",
+      "measured_on_sha": "21c55d52d5e51f39ee8a06607c5c2e6d4da37afc",
+      "inherited_on_sha": "829b1bc9cf4df285c8f867cdd6166799fd862659",
+      "inheritance_basis": "Medição em 21c55d5 herdada explicitamente: API, validação, classificador, sinais, PRNG e dataset iguais de 21→31; gerador/evaluator e esses arquivos iguais de 31→829. Não é novo holdout nem taxa de produção."
+    }
+  },
+  "harness_note": "EPIPE no primeiro harness foi isolado como teardown prematuro: ele fazia closeAllConnections antes do uploadfinish. O harness corrigido aguarda finish e fechamento gracioso;12matrizes HTTP completas não tiveram EPIPE/ECONNRESET/erro de socket. Não é achado pendente do produto.",
+  "review_axes": {
+    "Standards": "Pass no delta: zero violações documentadas ou defeitos pendentes. Prefixo acompanha literalmente o nome temporário usado por writeJsonAtomic; cleanup em finally restringido ao namespace único deste teste. Asserts não foram relaxados.",
+    "Spec": "Pass no delta: requisito de testes reproduzíveis e isolamento preservado, P2 anterior resolvido. Código do produto, dataset e métricas imutáveis comprovados por hashes; nota IA atualizada."
+  },
+  "out_of_contract_suggestions": [
+    {
+      "priority": 3,
+      "file": "test/generate.test.js",
+      "line": 159,
+      "title": "Sincronizar ready de todos os workers antes do go para fortalecer prova de sobreposição",
+      "note": "Cada worker começa assim que anuncia ready. Barreira conjunta melhora evidência concorrente, sem indicar defeito no writer; sondagem própria desta revisão já usou barreira real."
+    }
+  ],
+  "verdict": "pass",
+  "review_gate": "approved",
+  "publication_performed": false,
+  "note": "Nenhum P0/P1/P2 pendente. P3 opcional de barreira no stress do teste permanece registrado fora do contrato. Revisão encerrada após o delta relevante passar; não houve edição do código, push ou submissão."
+}

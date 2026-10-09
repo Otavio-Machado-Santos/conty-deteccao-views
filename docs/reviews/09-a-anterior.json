@@ -1,0 +1,377 @@
+{
+  "challenge": "bots-visualizacao",
+  "reviewer": "/root/implementar_repasses (Codex; independente da implementação MiMo)",
+  "axis": "spec e metodologia do classificador/dataset",
+  "reviewed_sha": "eebbf112c1c89eb6f26afa477fad70424c28b4c4",
+  "base_sha": "f489f871f45f27022ea7791bcd7cbfe447edc4c2",
+  "environment": {
+    "node": "v22.23.3",
+    "copy": "/var/folders/1h/dnd2dd992cq41yhypgy46_bc0000gn/T/conty-review-09-a-88rzqyho",
+    "note": "Testes e avaliação executados em cópia exata do commit para preservar arquivos do repo."
+  },
+  "commands_results": [
+    {
+      "command": "npm test",
+      "where": "cópia do SHA fixo",
+      "exit_code": 0,
+      "result": "29/29 testes passaram"
+    },
+    {
+      "command": "npm run generate:evaluate",
+      "where": "cópia do SHA fixo",
+      "exit_code": 0,
+      "result": {
+        "dataset_series": 102,
+        "dataset_bytes": 76624,
+        "false_positives": 0,
+        "legitimate_total": 72,
+        "fpr_percent": 0,
+        "recall": 30,
+        "suspicious_total": 30,
+        "inconclusives": 17
+      }
+    },
+    {
+      "command": "node --test test/readme-metrics.test.js após alterar só a linha FPR do README externo",
+      "where": "cópia fora repo",
+      "result": {
+        "all_divergences_failed": true,
+        "variants": [
+          {
+            "tamper": "FPR: 1/72 (1.39%)",
+            "exit_code": 1,
+            "readme_not_self_repaired": true,
+            "proof": [
+              "not ok 1 - FPR do README bate com a medição do generate:evaluate",
+              "    numerador do README (1) diverge do medido (0)",
+              "# pass 2",
+              "# fail 1"
+            ]
+          },
+          {
+            "tamper": "FPR: 0/73 (0%)",
+            "exit_code": 1,
+            "readme_not_self_repaired": true,
+            "proof": [
+              "not ok 1 - FPR do README bate com a medição do generate:evaluate",
+              "    denominador do README (73) diverge do medido (72)",
+              "# pass 2",
+              "# fail 1"
+            ]
+          },
+          {
+            "tamper": "FPR: 0/72 (1%)",
+            "exit_code": 1,
+            "readme_not_self_repaired": true,
+            "proof": [
+              "not ok 1 - FPR do README bate com a medição do generate:evaluate",
+              "    percentual do README (1%) diverge do medido (0%)",
+              "# pass 2",
+              "# fail 1"
+            ]
+          }
+        ]
+      }
+    },
+    {
+      "command": "node --input-type=module; classify/probes + evaluateDataset(buildDataset({seed}))",
+      "result": {
+        "reproduction": {
+          "identical": true,
+          "sha256": "f7b7ad869c3b82f77e7f3d35dbd2508129678e626c953bc4db7243d5d39ac3f4"
+        },
+        "label_leakage": {
+          "classification_same": true,
+          "reason_same": true
+        },
+        "independent_seeds": {
+          "count": 100,
+          "false_positives": 1,
+          "legitimate_total": 7200,
+          "fpr": 0.0001388888888888889,
+          "suspicious_detected": 3000,
+          "suspicious_total": 3000,
+          "extra_false_positives": [
+            {
+              "seed": 25,
+              "fp": 1,
+              "rows": [
+                {
+                  "id": "viral_organico-000",
+                  "profile": "viral_organico",
+                  "label": "legitimo",
+                  "classification": "suspeito",
+                  "shape": "mecanica",
+                  "reason": "Ritmo mecânico: maior sequência de valores idênticos = 5 horas com 99 views (3.1% do total). Séries orgânicas têm ruído hora a hora; 5 horas com exatamente 99 views, em série com 15863 views no total, combinam repetição exata e volume — indício de padrão automatizado, não prova de fraude."
+                }
+              ]
+            }
+          ]
+        },
+        "counterexamples": [
+          {
+            "name": "viral_stable_baseline",
+            "classification": "suspeito",
+            "shape": "mecanica",
+            "flags": {
+              "abruptJump": false,
+              "abruptDrop": false,
+              "highPeakToBase": true,
+              "highConcentration": false,
+              "narrowSpike": false,
+              "mechanical": true,
+              "smoothRamp": true
+            },
+            "rawMetrics": {
+              "n": 48,
+              "total": 33800,
+              "peak": 2400,
+              "peakIdx": 18,
+              "median": 200,
+              "peakToBase": 12,
+              "peakShare": 0.071,
+              "top3Share": 0.2093,
+              "maxRiseRatio": 1.844,
+              "maxRiseIdx": 12,
+              "maxDropRatio": 1.429,
+              "maxDropIdx": 30,
+              "spikeWidth": 12,
+              "riseHours": 4,
+              "fallHours": 7,
+              "maxRampStep": 1.844,
+              "maxIdenticalRun": 16,
+              "runValue": 200,
+              "runShare": 0.0947,
+              "window3Share": 0.2093,
+              "diurnalAmplitude": 1.562
+            },
+            "reason": "Ritmo mecânico: maior sequência de valores idênticos = 16 horas com 200 views (9.5% do total). Séries orgânicas têm ruído hora a hora; 16 horas com exatamente 200 views, em série com 33800 views no total, combinam repetição exata e volume — indício de padrão automatizado, não prova de fraude."
+          },
+          {
+            "name": "same_viral_small_noise",
+            "classification": "plausivel",
+            "shape": "rampa_suave",
+            "flags": {
+              "abruptJump": false,
+              "abruptDrop": false,
+              "highPeakToBase": true,
+              "highConcentration": false,
+              "narrowSpike": false,
+              "mechanical": false,
+              "smoothRamp": true
+            },
+            "rawMetrics": {
+              "n": 48,
+              "total": 33800,
+              "peak": 2399,
+              "peakIdx": 18,
+              "median": 202,
+              "peakToBase": 11.876,
+              "peakShare": 0.071,
+              "top3Share": 0.2093,
+              "maxRiseRatio": 1.851,
+              "maxRiseIdx": 12,
+              "maxDropRatio": 1.441,
+              "maxDropIdx": 30,
+              "spikeWidth": 11,
+              "riseHours": 4,
+              "fallHours": 6,
+              "maxRampStep": 1.851,
+              "maxIdenticalRun": 1,
+              "runValue": 198,
+              "runShare": 0.0059,
+              "window3Share": 0.2093,
+              "diurnalAmplitude": 1.564
+            },
+            "reason": "Subida e descida graduais (largura do pico = 11h; subida = 4h; descida = 6h; maior degrau na rampa = 1.851×) com razão pico/base de 11.876×. Forma de rampa suave é compatível com viral orgânico ou evento legítimo com propagação; pico alto sozinho não caracteriza compra."
+          },
+          {
+            "name": "legitimate_scheduled_plateau",
+            "classification": "suspeito",
+            "shape": "mecanica",
+            "flags": {
+              "abruptJump": false,
+              "abruptDrop": true,
+              "highPeakToBase": false,
+              "highConcentration": false,
+              "narrowSpike": false,
+              "mechanical": true,
+              "smoothRamp": false
+            },
+            "rawMetrics": {
+              "n": 48,
+              "total": 8436,
+              "peak": 400,
+              "peakIdx": 12,
+              "median": 101.5,
+              "peakToBase": 3.941,
+              "peakShare": 0.0474,
+              "top3Share": 0.1422,
+              "maxRiseRatio": 3.922,
+              "maxRiseIdx": 12,
+              "maxDropRatio": 4,
+              "maxDropIdx": 24,
+              "spikeWidth": 12,
+              "riseHours": 0,
+              "fallHours": 11,
+              "maxRampStep": 4,
+              "maxIdenticalRun": 12,
+              "runValue": 400,
+              "runShare": 0.569,
+              "window3Share": 0.1422,
+              "diurnalAmplitude": 0.859
+            },
+            "reason": "Ritmo mecânico: maior sequência de valores idênticos = 12 horas com 400 views (56.9% do total). Séries orgânicas têm ruído hora a hora; 12 horas com exatamente 400 views, em série com 8436 views no total, combinam repetição exata e volume — indício de padrão automatizado, não prova de fraude."
+          }
+        ]
+      }
+    },
+    {
+      "command": "node --input-type=module; servidor real em porta efêmera + fetch POST /classify",
+      "where": "cópia do SHA fixo",
+      "exit_code": 0,
+      "result": [
+        {
+          "name": "empty_series",
+          "status": 200,
+          "classification": "inconclusivo",
+          "reason": "Série vazia: sem pontos horários para avaliar."
+        },
+        {
+          "name": "negative_array",
+          "status": 200,
+          "classification": "inconclusivo",
+          "reason": "Valores de views devem ser inteiros seguros não negativos (views incrementais por hora)."
+        },
+        {
+          "name": "missing_series",
+          "status": 200,
+          "classification": "inconclusivo",
+          "reason": "Entrada inválida: esperava uma série de pontos horários ou um array de views incrementais."
+        },
+        {
+          "name": "impossible_calendar",
+          "status": 200,
+          "classification": "plausivel",
+          "reason": "Série sem combinação de sinais de compra (variação moderada sem configuração de pico comprado). Razão pico/base 1.024×, concentração 17.1% na hora do pico, sem saltos extremos. Compatível com tráfego legítimo."
+        }
+      ]
+    }
+  ],
+  "findings": [
+    {
+      "id": "09-A-01",
+      "priority": "P2",
+      "kind": "requirement",
+      "requires_fix_for_challenge": true,
+      "file": "src/classify.js",
+      "line": 156,
+      "related_lines": [
+        161,
+        226,
+        257
+      ],
+      "title": "Repetição do baseline acusa viral suave antes da proteção orgânica",
+      "details": "A condição mechanical aceita qualquer run >=5 mesmo com participação mínima e é avaliada antes da rampa suave. Um viral suave com baseline200, pico2400, largura12h e maxRampStep1,844× retorna suspeito/mecanica, apesar de smoothRamp=true e ausência de saltos/concentração. O mesmo viral com ruído±2 retorna plausivel. No gerador existente, seed25 produz viral_organico-000 legítimo que também vira mecanica por uma run5×99 representando só3,1% do total. O enunciado exige que um pico orgânico plausível não caia no mesmo balde do comprado; este caso passa pelo próprio critério documentado de rampa e ainda é acusado.",
+      "reproduction": {
+        "artifact": "revisoes/support/09-a-probes.json",
+        "stable_case": "counterexamples[0]",
+        "noise_control": "counterexamples[1]",
+        "seed_case": {
+          "seed": 25,
+          "id": "viral_organico-000"
+        },
+        "aggregate": {
+          "seeds": 100,
+          "fp": 1,
+          "legitimate_total": 7200
+        }
+      },
+      "recommendation": "Revisar a posição e representatividade das runs de baseline sem desligar a detecção dos casos mecânicos elevados. Acrescentar regressões do viral constante e do seed25, hard negatives no gerador e recalcular FPR/README honestamente."
+    },
+    {
+      "id": "09-A-02",
+      "priority": "P2",
+      "kind": "documented_contract",
+      "requires_fix_for_challenge": true,
+      "file": "src/server.js",
+      "line": 76,
+      "related_file": "README.md",
+      "related_line": 31,
+      "title": "Validação HTTP é pulada para série vazia e formatos não compostos por pontos",
+      "details": "O README promete422 para violações do contrato. Porém a rota só chama validateSeries quando o primeiro elemento é objeto e o array não está vazio. {series:[]}, {series:[-1,2,3,4,5,6]} e {other:'missing'} recebem200/inconclusivo. A abstenção estatística válida fica indistinguível de uma requisição inválida bem sucedida.",
+      "reproduction": {
+        "artifact": "revisoes/support/09-a-api-probes.json",
+        "cases": [
+          "empty_series",
+          "negative_array",
+          "missing_series"
+        ],
+        "observed_status": 200,
+        "documented_status": 422
+      },
+      "recommendation": "Validar incondicionalmente o formato público de pontos antes de classificar; manter arrays numéricos, se necessários, somente na interface interna. Acrescentar regressões da API."
+    },
+    {
+      "id": "09-A-03",
+      "priority": "P2",
+      "kind": "documented_contract",
+      "requires_fix_for_challenge": true,
+      "file": "src/validate.js",
+      "line": 40,
+      "title": "Calendário inexistente é normalizado silenciosamente por Date.parse",
+      "details": "Seis pontos horários de 2026-02-30 passam a validação e a API responde200/plausivel. Date.parse normaliza para março; o calendário informado pelo cliente não existe. O contrato descreve timestamps ISO horários e promete422 nas violações.",
+      "reproduction": {
+        "artifact": "revisoes/support/09-a-api-probes.json",
+        "case": "impossible_calendar",
+        "observed_status": 200,
+        "classification": "plausivel"
+      },
+      "recommendation": "Validar existência dos componentes civis do timestamp antes/por roundtrip da conversão, preservando Z/+00:00 e o passo horário; incluir regressão de fevereiro30."
+    },
+    {
+      "id": "09-A-04",
+      "priority": "P3",
+      "kind": "methodology_suggestion",
+      "requires_fix_for_challenge": false,
+      "file": "src/generate.js",
+      "line": 134,
+      "related_file": "README.md",
+      "related_line": 135,
+      "title": "FPR oficial omite campanhas legítimas com inteiros repetidos",
+      "details": "Todos os perfis legítimos de maior volume acrescentam ruído contínuo; uma campanha plausível com400 views por12h retorna suspeito/mecanica. A limitação está declarada e séries idênticas a um bot são indistinguíveis só por views; não se exige acurácia perfeita nem é possível resolver a origem com o rótulo. Porém incluir esse hard negative expõe o custo real da heurística no dataset, ou permite política conservadora de inconclusivo para repetição isolada. O 0/72 medido não foi fraudado, apenas vale para perfis limitados.",
+      "reproduction": {
+        "artifact": "revisoes/support/09-a-probes.json",
+        "case": "legitimate_scheduled_plateau"
+      },
+      "recommendation": "Adicionar exemplos de campanha/medição arredondada repetida e publicar sua matriz, preferindo abstenção onde os sinais não separam mecanismos."
+    }
+  ],
+  "positive_checks": [
+    "Arquivo do dataset é byte a byte igual à regeneração; SHA256 f7b7ad869c3b82f77e7f3d35dbd2508129678e626c953bc4db7243d5d39ac3f4.",
+    "FPR oficial0/72 é derivado do comando; numerador, denominador e percentual divergentes fazem o teste falhar em cópia externa sem alterar README.",
+    "classify/signals não importam dataset, perfis ou labels; avaliação só usa rótulo depois da predição. Metadata de rótulo adversarial na entrada não mudou resultado.",
+    "API e testes distinguem o viral ruidoso fornecido do pico comprado e mostram abstenção para pouco volume e pico ambíguo.",
+    "README delimita dados sintéticos, falta de evidência de fraude, limiares fixos e impossibilidade de diferenciar séries idênticas."
+  ],
+  "methodology_limits": [
+    "100 novos seeds cobrem somente as mesmas famílias paramétricas do gerador; não são validação externa nem FPR de produção.",
+    "Limiares são fixos e auditáveis; não houve evidência de acesso a rótulo no classificador ou de um ajuste específico ao número da seed. A ausência de hard negatives ainda torna o dataset favorável à heurística mecânica.",
+    "Este relatório é sobre o SHA fixo acima. Correções exigem nova revisão do delta antes do envio."
+  ],
+  "verdict": "changes_requested",
+  "repository_mutated_by_reviewer": false,
+  "evidence_artifacts": [
+    "revisoes/support/09-a-probes.json",
+    "revisoes/support/09-a-api-probes.json",
+    "revisoes/support/09-a-readme-divergence.json",
+    "revisoes/support/09-a-tests.txt",
+    "revisoes/support/09-a-evaluation.txt"
+  ],
+  "reviewed_at": "2026-10-09T19:29:46.583755+00:00",
+  "source_integrity": {
+    "head": "eebbf112c1c89eb6f26afa477fad70424c28b4c4",
+    "working_tree_clean": true,
+    "diff_check_exit_code": 0
+  }
+}

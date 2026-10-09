@@ -1,0 +1,677 @@
+{
+  "challenge": "bots-visualizacao",
+  "reviewer": "/root/implementar_repasses (Codex; revisão A independente da implementação MiMo e do ajuste de I/O feito pelo coordenador)",
+  "axis": "spec, metodologia e delta readonly/isolamento/publicação atômica",
+  "reviewed_sha": "31bb2150d1758c9c2efbbfc73e506f4973597ca7",
+  "base_sha": "f489f871f45f27022ea7791bcd7cbfe447edc4c2",
+  "delta_base_sha": "21c55d52d5e51f39ee8a06607c5c2e6d4da37afc",
+  "previous_reviews": [
+    "revisoes/09-a-anterior.json",
+    "revisoes/09-a-21-anterior.json"
+  ],
+  "environment": {
+    "node": "v22.23.3",
+    "copy": "/var/folders/1h/dnd2dd992cq41yhypgy46_bc0000gn/T/conty-review-09-a-31-7nd2looo",
+    "note": "Extração por git archive do SHA fixo. Primeiro npm test e mais 15 rodadas padrão executados antes de generate:evaluate. Probes somente em cópia externa/temporários; nenhum arquivo de código do repo alterado pelo revisor."
+  },
+  "commands_results": [
+    {
+      "command": "npm test",
+      "when": "Primeira execução na cópia git archive, antes de generate:evaluate",
+      "exit_code": 0,
+      "result": "53/53 passaram; comando original node --test test/*.test.js, workers padrão",
+      "evidence": "revisoes/support/09-a-31-tests-first.txt"
+    },
+    {
+      "command": "npm test, 15 rodadas independentes posteriores",
+      "when": "Todas antes de generate:evaluate",
+      "result": {
+        "command": "npm test",
+        "default_workers": true,
+        "before_generate_evaluate": true,
+        "runs": [
+          {
+            "run": 1,
+            "exit_code": 0,
+            "proof": [
+              "# tests 53",
+              "# pass 53",
+              "# fail 0"
+            ]
+          },
+          {
+            "run": 2,
+            "exit_code": 0,
+            "proof": [
+              "# tests 53",
+              "# pass 53",
+              "# fail 0"
+            ]
+          },
+          {
+            "run": 3,
+            "exit_code": 0,
+            "proof": [
+              "# tests 53",
+              "# pass 53",
+              "# fail 0"
+            ]
+          },
+          {
+            "run": 4,
+            "exit_code": 0,
+            "proof": [
+              "# tests 53",
+              "# pass 53",
+              "# fail 0"
+            ]
+          },
+          {
+            "run": 5,
+            "exit_code": 0,
+            "proof": [
+              "# tests 53",
+              "# pass 53",
+              "# fail 0"
+            ]
+          },
+          {
+            "run": 6,
+            "exit_code": 0,
+            "proof": [
+              "# tests 53",
+              "# pass 53",
+              "# fail 0"
+            ]
+          },
+          {
+            "run": 7,
+            "exit_code": 0,
+            "proof": [
+              "# tests 53",
+              "# pass 53",
+              "# fail 0"
+            ]
+          },
+          {
+            "run": 8,
+            "exit_code": 0,
+            "proof": [
+              "# tests 53",
+              "# pass 53",
+              "# fail 0"
+            ]
+          },
+          {
+            "run": 9,
+            "exit_code": 0,
+            "proof": [
+              "# tests 53",
+              "# pass 53",
+              "# fail 0"
+            ]
+          },
+          {
+            "run": 10,
+            "exit_code": 0,
+            "proof": [
+              "# tests 53",
+              "# pass 53",
+              "# fail 0"
+            ]
+          },
+          {
+            "run": 11,
+            "exit_code": 0,
+            "proof": [
+              "# tests 53",
+              "# pass 53",
+              "# fail 0"
+            ]
+          },
+          {
+            "run": 12,
+            "exit_code": 0,
+            "proof": [
+              "# tests 53",
+              "# pass 53",
+              "# fail 0"
+            ]
+          },
+          {
+            "run": 13,
+            "exit_code": 0,
+            "proof": [
+              "# tests 53",
+              "# pass 53",
+              "# fail 0"
+            ]
+          },
+          {
+            "run": 14,
+            "exit_code": 0,
+            "proof": [
+              "# tests 53",
+              "# pass 53",
+              "# fail 0"
+            ]
+          },
+          {
+            "run": 15,
+            "exit_code": 0,
+            "proof": [
+              "# tests 53",
+              "# pass 53",
+              "# fail 0"
+            ]
+          }
+        ],
+        "passed": true,
+        "count": 15
+      },
+      "note": "Somando a primeira rodada, 16 execuções padrão consecutivas passaram 53/53. Nenhuma serialização e nenhum assert relaxado.",
+      "evidence": "revisoes/support/09-a-31-test-runs.json"
+    },
+    {
+      "command": "node revisoes/support/09-a-31-io-probe.mjs <cópia> <output>",
+      "exit_code": 0,
+      "result": {
+        "passed": true,
+        "readonly_unchanged": true,
+        "disk_bytes_negative": {
+          "diskMatchesCanonical": false,
+          "tampered_bytes_not_repaired": true
+        },
+        "missing_dataset": {
+          "diskMatchesCanonical": false,
+          "file_not_created": true,
+          "evidence_and_readme_unchanged": true
+        },
+        "concurrency": {
+          "barrier_synchronized": true,
+          "fixed_clock_ms": 1700000000000,
+          "same_pid": true,
+          "writers": 4,
+          "reader_threads": 3,
+          "publications": 480,
+          "reads": 6000,
+          "observed_versions": [
+            [
+              "initial",
+              0,
+              3,
+              2,
+              1
+            ],
+            [
+              "initial",
+              0,
+              2,
+              3,
+              1
+            ],
+            [
+              "initial",
+              3,
+              1,
+              0,
+              2
+            ]
+          ],
+          "all_reads_whole_known_utf8": true,
+          "final_whole": true,
+          "temporary_files_remaining": 0,
+          "body_bytes": [
+            276026,
+            312026,
+            348026,
+            384026
+          ]
+        },
+        "exclusive_collision": {
+          "error": "EEXIST",
+          "foreign_tmp_preserved": true,
+          "no_final_created": true
+        },
+        "partial_write_failure": {
+          "error": "EIO",
+          "exclusive_flags": "wx",
+          "fd_closed": true,
+          "owned_tmp_removed": true,
+          "previous_final_preserved": true,
+          "foreign_preserved": true
+        },
+        "rename_failure": {
+          "code": "EISDIR",
+          "owned_tmp_removed": true,
+          "existing_directory_preserved": true,
+          "foreign_preserved": true
+        },
+        "canonical_sha256": "f7b7ad869c3b82f77e7f3d35dbd2508129678e626c953bc4db7243d5d39ac3f4"
+      },
+      "evidence": "revisoes/support/09-a-31-io-probes.json"
+    },
+    {
+      "command": "node --test test/readme-metrics.test.js, com três linhas FPR adulteradas e dataset corrompido em rodadas separadas",
+      "result": {
+        "all_fpr_divergences_failed": true,
+        "variants": [
+          {
+            "tamper": "FPR: 1/72 (1.39%)",
+            "exit_code": 1,
+            "readme_not_self_repaired": true,
+            "dataset_unchanged": true,
+            "evaluation_unchanged": true,
+            "proof": [
+              "not ok 1 - FPR do README bate com a medição do generate:evaluate",
+              "    numerador do README (1) diverge do medido (0)",
+              "# pass 3",
+              "# fail 1"
+            ]
+          },
+          {
+            "tamper": "FPR: 0/73 (0%)",
+            "exit_code": 1,
+            "readme_not_self_repaired": true,
+            "dataset_unchanged": true,
+            "evaluation_unchanged": true,
+            "proof": [
+              "not ok 1 - FPR do README bate com a medição do generate:evaluate",
+              "    denominador do README (73) diverge do medido (72)",
+              "# pass 3",
+              "# fail 1"
+            ]
+          },
+          {
+            "tamper": "FPR: 0/72 (1%)",
+            "exit_code": 1,
+            "readme_not_self_repaired": true,
+            "dataset_unchanged": true,
+            "evaluation_unchanged": true,
+            "proof": [
+              "not ok 1 - FPR do README bate com a medição do generate:evaluate",
+              "    percentual do README (1%) diverge do medido (0%)",
+              "# pass 3",
+              "# fail 1"
+            ]
+          }
+        ],
+        "negative_disk_reproduction": {
+          "exit_code": 1,
+          "corrupt_dataset_not_repaired": true,
+          "proof": [
+            "not ok 3 - reprodução byte a byte é confirmada na avaliação",
+            "# pass 3",
+            "# fail 1"
+          ]
+        }
+      },
+      "evidence": "revisoes/support/09-a-31-readme-divergence.json"
+    },
+    {
+      "command": "node --check para cada arquivo JavaScript de src/,scripts/,test/",
+      "exit_code": 0,
+      "result": {
+        "node": "v22.23.3",
+        "syntax_files": 12,
+        "results": [
+          {
+            "file": "scripts/evaluate.js",
+            "exit_code": 0
+          },
+          {
+            "file": "src/classify.js",
+            "exit_code": 0
+          },
+          {
+            "file": "src/generate.js",
+            "exit_code": 0
+          },
+          {
+            "file": "src/prng.js",
+            "exit_code": 0
+          },
+          {
+            "file": "src/server.js",
+            "exit_code": 0
+          },
+          {
+            "file": "src/signals.js",
+            "exit_code": 0
+          },
+          {
+            "file": "src/validate.js",
+            "exit_code": 0
+          },
+          {
+            "file": "test/api.test.js",
+            "exit_code": 0
+          },
+          {
+            "file": "test/classify.test.js",
+            "exit_code": 0
+          },
+          {
+            "file": "test/generate.test.js",
+            "exit_code": 0
+          },
+          {
+            "file": "test/readme-metrics.test.js",
+            "exit_code": 0
+          },
+          {
+            "file": "test/validate.test.js",
+            "exit_code": 0
+          }
+        ]
+      },
+      "note": "Projeto JavaScript sem script typecheck nem dependências; checagem de sintaxe 12/12.",
+      "evidence": "revisoes/support/09-a-31-syntax.json"
+    },
+    {
+      "command": "npm run generate:evaluate",
+      "when": "Depois dos testes padrão e dos negativos, com artefatos restaurados",
+      "exit_code": 0,
+      "result": {
+        "series": 102,
+        "dataset_bytes": 76624,
+        "fpr": "0/72 (0%)",
+        "recall": "30/30 (100%)",
+        "inconclusives": 17
+      },
+      "evidence": "revisoes/support/09-a-31-evaluation.txt"
+    },
+    {
+      "command": "node revisoes/support/09-a-final-probe.mjs <cópia31> <09-a-probes.json> <output>",
+      "exit_code": 0,
+      "result": {
+        "passed": true,
+        "reproduction": {
+          "identical": true,
+          "sha256": "f7b7ad869c3b82f77e7f3d35dbd2508129678e626c953bc4db7243d5d39ac3f4"
+        },
+        "counterexamples": [
+          {
+            "name": "viral_stable_baseline",
+            "classification": "plausivel"
+          },
+          {
+            "name": "same_viral_small_noise",
+            "classification": "plausivel"
+          },
+          {
+            "name": "legitimate_scheduled_plateau",
+            "classification": "suspeito"
+          }
+        ],
+        "same_seed_range": {
+          "seeds": 100,
+          "seed_range": [
+            1,
+            100
+          ],
+          "false_positives": 0,
+          "legitimate": 7200,
+          "detected": 3000,
+          "suspicious": 3000,
+          "abstentions": 1809,
+          "false_positive_cases": []
+        },
+        "additional_seed_range": {
+          "seeds": 100,
+          "seed_range": [
+            1000,
+            1099
+          ],
+          "false_positives": 1,
+          "legitimate": 7200,
+          "detected": 3000,
+          "suspicious": 3000,
+          "abstentions": 1810,
+          "false_positive_cases": [
+            {
+              "seed": 1079,
+              "id": "diurno-001",
+              "profile": "diurno",
+              "label": "legitimo",
+              "classification": "suspeito",
+              "shape": "mecanica",
+              "reason": "Ritmo mecânico: maior sequência de valores idênticos = 4 horas com 141 views (10.4% do total). Séries orgânicas têm ruído hora a hora; 4 horas com exatamente 141 views, em série com 5399 views no total, combinam repetição exata elevada e volume — indício de padrão automatizado, não prova de fraude."
+            }
+          ]
+        },
+        "seed25": {
+          "classification": "plausivel",
+          "shape": "rampa_suave",
+          "reason": "Subida e descida graduais (largura do pico = 13h; subida = 5h; descida = 7h; maior degrau na rampa = 1.607×) com razão pico/base de 8.129×. A sequência de 5h com 99 views está no nível de base (3.1% do total), compatível com fundo estável durante propagação orgânica — não é ritmo de entrega mecânica. Pico alto sozinho não caracteriza compra."
+        },
+        "api": [
+          {
+            "name": "empty_series",
+            "status": 422
+          },
+          {
+            "name": "negative_array",
+            "status": 422
+          },
+          {
+            "name": "missing_series",
+            "status": 422
+          },
+          {
+            "name": "bare_array",
+            "status": 422
+          },
+          {
+            "name": "numeric_series",
+            "status": 422
+          },
+          {
+            "name": "overflow_total",
+            "status": 422
+          },
+          {
+            "name": "impossible_calendar",
+            "status": 422
+          },
+          {
+            "name": "century_not_leap",
+            "status": 422
+          },
+          {
+            "name": "safe_sum_limit",
+            "status": 200
+          },
+          {
+            "name": "valid_low_volume_abstention",
+            "status": 200
+          },
+          {
+            "name": "valid_leap_century",
+            "status": 200
+          },
+          {
+            "name": "invalid_json:{not json",
+            "status": 400
+          },
+          {
+            "name": "invalid_json:",
+            "status": 400
+          },
+          {
+            "name": "invalid_json:   ",
+            "status": 400
+          },
+          {
+            "name": "oversize_content_length",
+            "status": 413
+          },
+          {
+            "name": "oversize_chunked",
+            "status": 413
+          },
+          {
+            "name": "malformed_host_health",
+            "status": 200
+          },
+          {
+            "name": "health_after_adversarial_requests",
+            "status": 200
+          }
+        ]
+      },
+      "note": "Reexecução dos 18 probes HTTP e 200 seeds do revisor; não apenas herança do resultado anterior.",
+      "evidence": "revisoes/support/09-a-31-domain-probes.json"
+    },
+    {
+      "command": "git diff --exit-code 21c55d5 31bb215 -- dataset/series.json src/classify.js src/validate.js src/server.js src/prng.js src/signals.js test/api.test.js test/classify.test.js test/validate.test.js; hashes; comparação final dos fontes da cópia com git show",
+      "exit_code": 0,
+      "result": {
+        "hashes": {
+          "dataset/series.json": {
+            "21c55d52d5e51f39ee8a06607c5c2e6d4da37afc": "f7b7ad869c3b82f77e7f3d35dbd2508129678e626c953bc4db7243d5d39ac3f4",
+            "31bb2150d1758c9c2efbbfc73e506f4973597ca7": "f7b7ad869c3b82f77e7f3d35dbd2508129678e626c953bc4db7243d5d39ac3f4"
+          },
+          "src/classify.js": {
+            "21c55d52d5e51f39ee8a06607c5c2e6d4da37afc": "8f6a5473cce82dcb00bab52a7ed6b5d607c0d7cf288559bba384e408333b4655",
+            "31bb2150d1758c9c2efbbfc73e506f4973597ca7": "8f6a5473cce82dcb00bab52a7ed6b5d607c0d7cf288559bba384e408333b4655"
+          },
+          "src/validate.js": {
+            "21c55d52d5e51f39ee8a06607c5c2e6d4da37afc": "7516b7a8bbc6c2349f5e657ef4e310eb95f9819ca1f21bc5f4caed4c4dd5fe05",
+            "31bb2150d1758c9c2efbbfc73e506f4973597ca7": "7516b7a8bbc6c2349f5e657ef4e310eb95f9819ca1f21bc5f4caed4c4dd5fe05"
+          },
+          "src/server.js": {
+            "21c55d52d5e51f39ee8a06607c5c2e6d4da37afc": "259a2bd7aa3f61f193528aa7530b8ae04c75126874d8904b6a5d1e6f7e126636",
+            "31bb2150d1758c9c2efbbfc73e506f4973597ca7": "259a2bd7aa3f61f193528aa7530b8ae04c75126874d8904b6a5d1e6f7e126636"
+          },
+          "src/prng.js": {
+            "21c55d52d5e51f39ee8a06607c5c2e6d4da37afc": "0f2c8480804c106d6a9c17a44030fb1c3fd24e764abfd4099516848df8c4623a",
+            "31bb2150d1758c9c2efbbfc73e506f4973597ca7": "0f2c8480804c106d6a9c17a44030fb1c3fd24e764abfd4099516848df8c4623a"
+          },
+          "src/signals.js": {
+            "21c55d52d5e51f39ee8a06607c5c2e6d4da37afc": "5f10115c0c8e15afea935953d7633c4c398204997cfab80436bc235f06602a4f",
+            "31bb2150d1758c9c2efbbfc73e506f4973597ca7": "5f10115c0c8e15afea935953d7633c4c398204997cfab80436bc235f06602a4f"
+          }
+        },
+        "source": {
+          "source_files_verified": 18,
+          "copy_source_bytes_match_git": true,
+          "dataset_bytes_match_git": true,
+          "initial_review_unchanged": true,
+          "review21_sha": "21c55d52d5e51f39ee8a06607c5c2e6d4da37afc"
+        },
+        "unchanged_diff_exit": 0
+      },
+      "evidence": "revisoes/support/09-a-31-integrity.json"
+    }
+  ],
+  "findings": [
+    {
+      "id": "09-A-04",
+      "priority": "P3",
+      "kind": "methodology_suggestion",
+      "requires_fix_for_challenge": false,
+      "file": "src/generate.js",
+      "line": 134,
+      "related_file": "README.md",
+      "related_line": 137,
+      "title": "Ampliar hard negatives para quantificação da sensibilidade à repetição legítima",
+      "details": "O limite conhecido continua corretamente declarado: a campanha legítima sintetizada pelo revisor com 12 horas de 400 views é suspeito/mecanica. Na nova faixa de seeds 1000–1099, ocorreu 1 FP/7200 legítimos: seed 1079, diurno-001, por 4 horas de 141 views (10,4% do total). O 0/72 oficial permanece correto, e a entrega não promete FPR zero fora desse dataset. Os mesmos casos foram reexecutados no candidato 31, com resultados idênticos. Isto é sugestão de metodologia, sem requisito de eliminar todo falso positivo ou de ajustar limiar a esse seed.",
+      "reproduction": {
+        "artifact": "revisoes/support/09-a-31-domain-probes.json",
+        "cases": [
+          "legitimate_scheduled_plateau",
+          "additional_seed_range.false_positive_cases"
+        ],
+        "additional_seed_range": [
+          1000,
+          1099
+        ],
+        "fp": 1,
+        "legitimate": 7200
+      },
+      "recommendation": "Publicar sensibilidade a exemplos legítimos repetidos/quantizados e considerar abstenção nas regiões ambíguas. Evitar usar estes novos seeds como alegação de holdout cego após terem sido inspecionados."
+    }
+  ],
+  "resolved_findings": [
+    {
+      "id": "09-A-01",
+      "previous_priority": "P2",
+      "status": "resolved_verified",
+      "proof": "Viral com baseline 200, pico 2400 e rampa suave retorna plausivel com mechanical=false; variante com ruído e viral_organico-000 da seed 25 seguem plausivel. Reexecutado no SHA 31; ver revisoes/support/09-a-31-domain-probes.json."
+    },
+    {
+      "id": "09-A-02",
+      "previous_priority": "P2",
+      "status": "resolved_verified",
+      "proof": "HTTP real retorna 422 para série vazia, negativa, ausente, array público direto e array numérico. Série válida de baixo volume retorna 200/inconclusivo. Reexecutado no SHA 31; ver revisoes/support/09-a-31-domain-probes.json."
+    },
+    {
+      "id": "09-A-03",
+      "previous_priority": "P2",
+      "status": "resolved_verified",
+      "proof": "HTTP real retorna 422 para 2026-02-30 e 1900-02-29; 200 para 2000-02-29 com +00:00. Reexecutado no SHA 31; ver revisoes/support/09-a-31-domain-probes.json."
+    },
+    {
+      "id": "09-A-05",
+      "previous_priority": "P2",
+      "status": "resolved_verified",
+      "file": "src/generate.js",
+      "line": 305,
+      "related_locations": [
+        {
+          "file": "src/generate.js",
+          "line": 314
+        },
+        {
+          "file": "src/generate.js",
+          "line": 316
+        },
+        {
+          "file": "src/generate.js",
+          "line": 319
+        },
+        {
+          "file": "scripts/evaluate.js",
+          "line": 145
+        },
+        {
+          "file": "scripts/evaluate.js",
+          "line": 180
+        }
+      ],
+      "proof": "runEvaluation(writeEvidence:false) constrói em memória e compara bytes reais sem gravação: bytes/inode/mtime do dataset, evidence e README ficaram iguais. Dataset adulterado ou ausente retorna diskMatchesCanonical=false sem reparar/criar; o teste de reprodução falha para bytes corrompidos. Teste de clock usa caminho isolado. As 16 execuções com workers padrão passaram 53/53 antes de generate:evaluate. Publicação com UUID + openSync wx no mesmo diretório escreve integralmente pelo fd exclusivo, fecha e faz rename. Probe independente com barreira, mesmo PID/clock, 4 escritores × 120 e 3 leitores totalizou 480 publicações e 6.000 leituras de quatro corpos UTF8 diferentes (276026–384026 bytes), todas integrais. Colisão UUID forçada produz EEXIST e preserva temporário alheio; falha EIO após escrita parcial fecha fd/remove só temporário próprio/preserva final anterior; falha no rename EISDIR limpa temporário e preserva diretório destino. Nenhum temporário órfão."
+    }
+  ],
+  "positive_checks": [
+    "Não permanecem findings P0/P1/P2. Falha de concorrência comprovada no SHA 21 foi corrigida e coberta por testes e probes independentes.",
+    "Dataset com 76624 bytes permanece byte a byte idêntico ao candidato inicial: SHA256 f7b7ad869c3b82f77e7f3d35dbd2508129678e626c953bc4db7243d5d39ac3f4. O gerador mudou somente em imports e publicação; perfis, labels e PRNG não mudaram.",
+    "Classificador, API, validação e métricas básicas têm hashes idênticos ao SHA 21. Viral de baseline estável e seed 25 seguem plausivel; compradores sintéticos detectados.",
+    "README negativo falha nas divergências de numerador, denominador e percentual; nenhum README/dataset/evidence é autoeditado durante a validação.",
+    "18 requests HTTP reais passaram: 422 para schema/calendário/soma; 400 para JSON; 413 com Content-Length/chunked; 200 para abstenção válida/Host/health.",
+    "Nota de IA atribui as correções principais ao MiMo CLI e a escrita integral por descritor ao Codex; mantém revisão final pendente e nenhuma alegação de revisão humana."
+  ],
+  "methodology_limits": [
+    "FPR oficial 0/72 mede o dataset sintético fixo; as faixas 1–100 e 1000–1099 usam as mesmas famílias paramétricas. Elas são sensibilidade de desenvolvimento, não estimativa de produção nem holdout cego após inspeção.",
+    "Nas duas faixas de 100 seeds houve 0/7200 FP e 1/7200 FP, respectivamente; recall 3000/3000 em ambas. A campanha legítima repetida e diurno-001 da seed 1079 ainda demonstram sensibilidade à repetição elevada, coerente com a limitação declarada. Sugestão P3 permanece sem requisito de eliminar todos os falsos positivos.",
+    "A aprovação é desta revisão independente A sobre o SHA fixo. Não significa publicação, aprovação humana ou conclusão dos demais gates coordenados."
+  ],
+  "verdict": "approved",
+  "approval_scope": "Entrega 9 no SHA 31bb2150d1758c9c2efbbfc73e506f4973597ca7; nenhum P0/P1/P2 aberto",
+  "repository_mutated_by_reviewer": false,
+  "evidence_artifacts": [
+    "revisoes/09-a-anterior.json",
+    "revisoes/09-a-21-anterior.json",
+    "revisoes/support/09-a-31-tests-first.txt",
+    "revisoes/support/09-a-31-test-runs.json",
+    "revisoes/support/09-a-31-io-probe.mjs",
+    "revisoes/support/09-a-31-io-probes.json",
+    "revisoes/support/09-a-31-readme-divergence.json",
+    "revisoes/support/09-a-31-syntax.json",
+    "revisoes/support/09-a-31-evaluation.txt",
+    "revisoes/support/09-a-31-domain-probes.json",
+    "revisoes/support/09-a-final-probe.mjs",
+    "revisoes/support/09-a-31-integrity.json"
+  ],
+  "reviewed_at": "2026-10-09 20:55:50 UTC"
+}

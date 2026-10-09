@@ -1,0 +1,123 @@
+{
+  "reviewed_sha": "31bb2150d1758c9c2efbbfc73e506f4973597ca7",
+  "inherited_review_sha": "21c55d52d5e51f39ee8a06607c5c2e6d4da37afc",
+  "unchanged_files": [
+    {
+      "file": "src/server.js",
+      "original_blob": "523c834a4dcc47d29646366c460343806681948d",
+      "candidate_blob": "523c834a4dcc47d29646366c460343806681948d",
+      "original_sha256": "259a2bd7aa3f61f193528aa7530b8ae04c75126874d8904b6a5d1e6f7e126636",
+      "candidate_sha256": "259a2bd7aa3f61f193528aa7530b8ae04c75126874d8904b6a5d1e6f7e126636",
+      "identical": true,
+      "snapshot_matches_commit": true
+    },
+    {
+      "file": "src/validate.js",
+      "original_blob": "32abf906c7e5bc545e9a117b9cbb949c9e9dcef6",
+      "candidate_blob": "32abf906c7e5bc545e9a117b9cbb949c9e9dcef6",
+      "original_sha256": "7516b7a8bbc6c2349f5e657ef4e310eb95f9819ca1f21bc5f4caed4c4dd5fe05",
+      "candidate_sha256": "7516b7a8bbc6c2349f5e657ef4e310eb95f9819ca1f21bc5f4caed4c4dd5fe05",
+      "identical": true,
+      "snapshot_matches_commit": true
+    },
+    {
+      "file": "src/classify.js",
+      "original_blob": "c0e73ce6d44e755994af5d6415a357d29d5bdeac",
+      "candidate_blob": "c0e73ce6d44e755994af5d6415a357d29d5bdeac",
+      "original_sha256": "8f6a5473cce82dcb00bab52a7ed6b5d607c0d7cf288559bba384e408333b4655",
+      "candidate_sha256": "8f6a5473cce82dcb00bab52a7ed6b5d607c0d7cf288559bba384e408333b4655",
+      "identical": true,
+      "snapshot_matches_commit": true
+    },
+    {
+      "file": "src/signals.js",
+      "original_blob": "ccf354faf9ce1a5dfcb54da5cc3184a8938bbd71",
+      "candidate_blob": "ccf354faf9ce1a5dfcb54da5cc3184a8938bbd71",
+      "original_sha256": "5f10115c0c8e15afea935953d7633c4c398204997cfab80436bc235f06602a4f",
+      "candidate_sha256": "5f10115c0c8e15afea935953d7633c4c398204997cfab80436bc235f06602a4f",
+      "identical": true,
+      "snapshot_matches_commit": true
+    },
+    {
+      "file": "src/prng.js",
+      "original_blob": "a295465fc6a495c8396590460cfc357490837396",
+      "candidate_blob": "a295465fc6a495c8396590460cfc357490837396",
+      "original_sha256": "0f2c8480804c106d6a9c17a44030fb1c3fd24e764abfd4099516848df8c4623a",
+      "candidate_sha256": "0f2c8480804c106d6a9c17a44030fb1c3fd24e764abfd4099516848df8c4623a",
+      "identical": true,
+      "snapshot_matches_commit": true
+    },
+    {
+      "file": "dataset/series.json",
+      "original_blob": "2dc156d66713f5a013d7ffcf54f69ccfe83172d2",
+      "candidate_blob": "2dc156d66713f5a013d7ffcf54f69ccfe83172d2",
+      "original_sha256": "f7b7ad869c3b82f77e7f3d35dbd2508129678e626c953bc4db7243d5d39ac3f4",
+      "candidate_sha256": "f7b7ad869c3b82f77e7f3d35dbd2508129678e626c953bc4db7243d5d39ac3f4",
+      "identical": true,
+      "snapshot_matches_commit": true
+    }
+  ],
+  "profiles_generation_and_canonical_serialization_literal_unchanged": true,
+  "syntax": [
+    {
+      "file": "scripts/evaluate.js",
+      "exit_code": 0,
+      "output": ""
+    },
+    {
+      "file": "src/classify.js",
+      "exit_code": 0,
+      "output": ""
+    },
+    {
+      "file": "src/generate.js",
+      "exit_code": 0,
+      "output": ""
+    },
+    {
+      "file": "src/prng.js",
+      "exit_code": 0,
+      "output": ""
+    },
+    {
+      "file": "src/server.js",
+      "exit_code": 0,
+      "output": ""
+    },
+    {
+      "file": "src/signals.js",
+      "exit_code": 0,
+      "output": ""
+    },
+    {
+      "file": "src/validate.js",
+      "exit_code": 0,
+      "output": ""
+    },
+    {
+      "file": "test/api.test.js",
+      "exit_code": 0,
+      "output": ""
+    },
+    {
+      "file": "test/classify.test.js",
+      "exit_code": 0,
+      "output": ""
+    },
+    {
+      "file": "test/generate.test.js",
+      "exit_code": 0,
+      "output": ""
+    },
+    {
+      "file": "test/readme-metrics.test.js",
+      "exit_code": 0,
+      "output": ""
+    },
+    {
+      "file": "test/validate.test.js",
+      "exit_code": 0,
+      "output": ""
+    }
+  ]
+}

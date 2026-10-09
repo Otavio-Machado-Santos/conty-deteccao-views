@@ -1,0 +1,11 @@
+{
+  "command": "node --test --test-name-pattern=\"writeJsonAtomic remove\" test/generate.test.js",
+  "foreign": "dataset/.unrelated-review-cleanup-sentinel.tmp",
+  "exit_code": 1,
+  "foreign_unchanged": true,
+  "failure_mentions_foreign": true,
+  "leftovers": [
+    ".unrelated-review-cleanup-sentinel.tmp",
+    "..test-tmp-cleanup-11080-1791579426967-nrovhx1eea.foreign-preexisting.tmp"
+  ]
+}

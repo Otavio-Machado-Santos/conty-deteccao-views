@@ -1,0 +1,188 @@
+
+> conty-deteccao-views@1.0.0 test
+> node --test test/*.test.js
+
+TAP version 13
+# Subtest: POST /classify devolve classificação, motivo em português e sinais
+ok 1 - POST /classify devolve classificação, motivo em português e sinais
+  ---
+  duration_ms: 21.893125
+  type: 'test'
+  ...
+# Subtest: POST /classify distingue viral orgânico de pico comprado
+ok 2 - POST /classify distingue viral orgânico de pico comprado
+  ---
+  duration_ms: 9.170167
+  type: 'test'
+  ...
+# Subtest: POST /classify rejeita série não contígua com 422 e contrato
+ok 3 - POST /classify rejeita série não contígua com 422 e contrato
+  ---
+  duration_ms: 3.605333
+  type: 'test'
+  ...
+# Subtest: POST /classify com JSON inválido devolve 400
+ok 4 - POST /classify com JSON inválido devolve 400
+  ---
+  duration_ms: 2.251958
+  type: 'test'
+  ...
+# Subtest: GET /health responde ok com relógio injetado
+ok 5 - GET /health responde ok com relógio injetado
+  ---
+  duration_ms: 3.080541
+  type: 'test'
+  ...
+# Subtest: rota desconhecida devolve 404 com lista de rotas
+ok 6 - rota desconhecida devolve 404 com lista de rotas
+  ---
+  duration_ms: 1.983334
+  type: 'test'
+  ...
+# Subtest: viral orgânico (rampa suave) não é acusado mesmo com pico alto
+ok 7 - viral orgânico (rampa suave) não é acusado mesmo com pico alto
+  ---
+  duration_ms: 6.635667
+  type: 'test'
+  ...
+# Subtest: pico comprado abrupto é suspeito e se distingue do viral
+ok 8 - pico comprado abrupto é suspeito e se distingue do viral
+  ---
+  duration_ms: 0.758208
+  type: 'test'
+  ...
+# Subtest: ritmo mecânico com volume suficiente é suspeito
+ok 9 - ritmo mecânico com volume suficiente é suspeito
+  ---
+  duration_ms: 0.290791
+  type: 'test'
+  ...
+# Subtest: abstém com poucos pontos horários
+ok 10 - abstém com poucos pontos horários
+  ---
+  duration_ms: 0.150958
+  type: 'test'
+  ...
+# Subtest: abstém com volume total baixo
+ok 11 - abstém com volume total baixo
+  ---
+  duration_ms: 0.327541
+  type: 'test'
+  ...
+# Subtest: abstém em pico isolado ambíguo (prefere não acusar)
+ok 12 - abstém em pico isolado ambíguo (prefere não acusar)
+  ---
+  duration_ms: 0.219
+  type: 'test'
+  ...
+# Subtest: classificação suspeita traz disclaimer e motivo legível
+ok 13 - classificação suspeita traz disclaimer e motivo legível
+  ---
+  duration_ms: 0.945166
+  type: 'test'
+  ...
+# Subtest: valores inválidos não viram suspeito
+ok 14 - valores inválidos não viram suspeito
+  ---
+  duration_ms: 0.188792
+  type: 'test'
+  ...
+# Subtest: dataset é reprodutível byte a byte com a seed fixa
+ok 15 - dataset é reprodutível byte a byte com a seed fixa
+  ---
+  duration_ms: 20.107708
+  type: 'test'
+  ...
+# Subtest: dataset em disco corresponde ao payload canônico regenerado
+ok 16 - dataset em disco corresponde ao payload canônico regenerado
+  ---
+  duration_ms: 3.097125
+  type: 'test'
+  ...
+# Subtest: todo item do dataset satisfaz o contrato de série contígua
+ok 17 - todo item do dataset satisfaz o contrato de série contígua
+  ---
+  duration_ms: 3.435292
+  type: 'test'
+  ...
+# Subtest: perfis legítimos e suspeitos estão representados
+ok 18 - perfis legítimos e suspeitos estão representados
+  ---
+  duration_ms: 0.36175
+  type: 'test'
+  ...
+# Subtest: viral orgânico do dataset não é acusado; compra abrupta é
+ok 19 - viral orgânico do dataset não é acusado; compra abrupta é
+  ---
+  duration_ms: 1.1405
+  type: 'test'
+  ...
+# Subtest: gerar com clock injetado não altera o corpo do dataset
+ok 20 - gerar com clock injetado não altera o corpo do dataset
+  ---
+  duration_ms: 8.80425
+  type: 'test'
+  ...
+# Subtest: FPR do README bate com a medição do generate:evaluate
+ok 21 - FPR do README bate com a medição do generate:evaluate
+  ---
+  duration_ms: 32.3235
+  type: 'test'
+  ...
+# Subtest: avaliação grava evaluation.json coerente com o cálculo
+ok 22 - avaliação grava evaluation.json coerente com o cálculo
+  ---
+  duration_ms: 21.568084
+  type: 'test'
+  ...
+# Subtest: reprodução byte a byte é confirmada na avaliação
+ok 23 - reprodução byte a byte é confirmada na avaliação
+  ---
+  duration_ms: 21.3805
+  type: 'test'
+  ...
+# Subtest: aceita série contígua UTC com views inteiros seguros não negativos
+ok 24 - aceita série contígua UTC com views inteiros seguros não negativos
+  ---
+  duration_ms: 1.640834
+  type: 'test'
+  ...
+# Subtest: rejeita timestamp fora de UTC
+ok 25 - rejeita timestamp fora de UTC
+  ---
+  duration_ms: 0.211333
+  type: 'test'
+  ...
+# Subtest: rejeita passo não horário (série não contígua)
+ok 26 - rejeita passo não horário (série não contígua)
+  ---
+  duration_ms: 0.071041
+  type: 'test'
+  ...
+# Subtest: rejeita views não inteiro, negativo ou não seguro
+ok 27 - rejeita views não inteiro, negativo ou não seguro
+  ---
+  duration_ms: 0.812875
+  type: 'test'
+  ...
+# Subtest: rejeita série vazia e formato inválido
+ok 28 - rejeita série vazia e formato inválido
+  ---
+  duration_ms: 0.132083
+  type: 'test'
+  ...
+# Subtest: expandCompact gera timestamps horários contíguos a partir de start
+ok 29 - expandCompact gera timestamps horários contíguos a partir de start
+  ---
+  duration_ms: 1.24375
+  type: 'test'
+  ...
+1..29
+# tests 29
+# suites 0
+# pass 29
+# fail 0
+# cancelled 0
+# skipped 0
+# todo 0
+# duration_ms 144.844375

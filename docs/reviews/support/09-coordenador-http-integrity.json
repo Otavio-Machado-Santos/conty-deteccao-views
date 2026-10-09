@@ -1,0 +1,17 @@
+{
+  "code_sha": "829b1bc9cf4df285c8f867cdd6166799fd862659",
+  "capture_runtime_sha": "31bb2150d1758c9c2efbbfc73e506f4973597ca7",
+  "basis": "Só test, README e evidência mudaram; os oito arquivos que servem e classificam são byte idênticos. O fluxo real10etapas41checks do31 prova o mesmo comportamento executável829.",
+  "http_record": "evidencias/2026-10-09/fluxos/desafio-9-http.json",
+  "http_passed": true,
+  "unchanged_files_sha256": {
+    "src/server.js": "259a2bd7aa3f61f193528aa7530b8ae04c75126874d8904b6a5d1e6f7e126636",
+    "src/classify.js": "8f6a5473cce82dcb00bab52a7ed6b5d607c0d7cf288559bba384e408333b4655",
+    "src/validate.js": "7516b7a8bbc6c2349f5e657ef4e310eb95f9819ca1f21bc5f4caed4c4dd5fe05",
+    "src/signals.js": "5f10115c0c8e15afea935953d7633c4c398204997cfab80436bc235f06602a4f",
+    "src/prng.js": "0f2c8480804c106d6a9c17a44030fb1c3fd24e764abfd4099516848df8c4623a",
+    "src/generate.js": "4a3aa2322c8317ecf0cab7d6aeaa2077c70b8079d392c12badb1f4b11e4c920c",
+    "scripts/evaluate.js": "5e64f6ea94f4dd7d993e353bdd9c3236d67fb1014ff1d5579c52fc0fba145cd2",
+    "dataset/series.json": "f7b7ad869c3b82f77e7f3d35dbd2508129678e626c953bc4db7243d5d39ac3f4"
+  }
+}

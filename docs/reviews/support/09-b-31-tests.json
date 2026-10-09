@@ -1,0 +1,49 @@
+{
+  "sha": "31bb2150d1758c9c2efbbfc73e506f4973597ca7",
+  "command": "npm test",
+  "node": "v22.23.3",
+  "generation_run_before_test": false,
+  "exit_code": 0,
+  "elapsed_seconds": 0.5471065000019735,
+  "before": {
+    "dataset/series.json": {
+      "size": 76624,
+      "inode": 108488420,
+      "mtime_ns": 1791578967000000000,
+      "sha256": "f7b7ad869c3b82f77e7f3d35dbd2508129678e626c953bc4db7243d5d39ac3f4"
+    },
+    "docs/evidence/evaluation.json": {
+      "size": 1481,
+      "inode": 108488429,
+      "mtime_ns": 1791578967000000000,
+      "sha256": "78b98b5daa2b1cfa0aad9662adf413218fb90d1db31f3eae7d831ce673bf0faf"
+    },
+    "README.md": {
+      "size": 13170,
+      "inode": 108488418,
+      "mtime_ns": 1791578967000000000,
+      "sha256": "8438c75f80a94eaf7f4f8f7c5f7d9c4eb1b221572dc7dde9e227cd3877d522b3"
+    }
+  },
+  "after": {
+    "dataset/series.json": {
+      "size": 76624,
+      "inode": 108488420,
+      "mtime_ns": 1791578967000000000,
+      "sha256": "f7b7ad869c3b82f77e7f3d35dbd2508129678e626c953bc4db7243d5d39ac3f4"
+    },
+    "docs/evidence/evaluation.json": {
+      "size": 1481,
+      "inode": 108488429,
+      "mtime_ns": 1791578967000000000,
+      "sha256": "78b98b5daa2b1cfa0aad9662adf413218fb90d1db31f3eae7d831ce673bf0faf"
+    },
+    "README.md": {
+      "size": 13170,
+      "inode": 108488418,
+      "mtime_ns": 1791578967000000000,
+      "sha256": "8438c75f80a94eaf7f4f8f7c5f7d9c4eb1b221572dc7dde9e227cd3877d522b3"
+    }
+  },
+  "unchanged": true
+}

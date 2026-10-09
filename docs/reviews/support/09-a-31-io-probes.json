@@ -1,0 +1,123 @@
+{
+  "sha": "31bb2150d1758c9c2efbbfc73e506f4973597ca7",
+  "passed": true,
+  "readonly": {
+    "unchanged": true,
+    "before": [
+      {
+        "path": "/var/folders/1h/dnd2dd992cq41yhypgy46_bc0000gn/T/conty-review-09-a-31-7nd2looo/dataset/series.json",
+        "ino": 108479322,
+        "mtimeMs": 1791578967000,
+        "size": 76624,
+        "sha256": "f7b7ad869c3b82f77e7f3d35dbd2508129678e626c953bc4db7243d5d39ac3f4"
+      },
+      {
+        "path": "/var/folders/1h/dnd2dd992cq41yhypgy46_bc0000gn/T/conty-review-09-a-31-7nd2looo/docs/evidence/evaluation.json",
+        "ino": 108479331,
+        "mtimeMs": 1791578967000,
+        "size": 1481,
+        "sha256": "78b98b5daa2b1cfa0aad9662adf413218fb90d1db31f3eae7d831ce673bf0faf"
+      },
+      {
+        "path": "/var/folders/1h/dnd2dd992cq41yhypgy46_bc0000gn/T/conty-review-09-a-31-7nd2looo/README.md",
+        "ino": 108479320,
+        "mtimeMs": 1791578967000,
+        "size": 13170,
+        "sha256": "8438c75f80a94eaf7f4f8f7c5f7d9c4eb1b221572dc7dde9e227cd3877d522b3"
+      }
+    ],
+    "after": [
+      {
+        "path": "/var/folders/1h/dnd2dd992cq41yhypgy46_bc0000gn/T/conty-review-09-a-31-7nd2looo/dataset/series.json",
+        "ino": 108479322,
+        "mtimeMs": 1791578967000,
+        "size": 76624,
+        "sha256": "f7b7ad869c3b82f77e7f3d35dbd2508129678e626c953bc4db7243d5d39ac3f4"
+      },
+      {
+        "path": "/var/folders/1h/dnd2dd992cq41yhypgy46_bc0000gn/T/conty-review-09-a-31-7nd2looo/docs/evidence/evaluation.json",
+        "ino": 108479331,
+        "mtimeMs": 1791578967000,
+        "size": 1481,
+        "sha256": "78b98b5daa2b1cfa0aad9662adf413218fb90d1db31f3eae7d831ce673bf0faf"
+      },
+      {
+        "path": "/var/folders/1h/dnd2dd992cq41yhypgy46_bc0000gn/T/conty-review-09-a-31-7nd2looo/README.md",
+        "ino": 108479320,
+        "mtimeMs": 1791578967000,
+        "size": 13170,
+        "sha256": "8438c75f80a94eaf7f4f8f7c5f7d9c4eb1b221572dc7dde9e227cd3877d522b3"
+      }
+    ]
+  },
+  "disk_bytes_negative": {
+    "diskMatchesCanonical": false,
+    "tampered_bytes_not_repaired": true
+  },
+  "missing_dataset": {
+    "diskMatchesCanonical": false,
+    "file_not_created": true,
+    "evidence_and_readme_unchanged": true
+  },
+  "concurrency": {
+    "barrier_synchronized": true,
+    "fixed_clock_ms": 1700000000000,
+    "same_pid": true,
+    "writers": 4,
+    "reader_threads": 3,
+    "publications": 480,
+    "reads": 6000,
+    "observed_versions": [
+      [
+        "initial",
+        0,
+        3,
+        2,
+        1
+      ],
+      [
+        "initial",
+        0,
+        2,
+        3,
+        1
+      ],
+      [
+        "initial",
+        3,
+        1,
+        0,
+        2
+      ]
+    ],
+    "all_reads_whole_known_utf8": true,
+    "final_whole": true,
+    "temporary_files_remaining": 0,
+    "body_bytes": [
+      276026,
+      312026,
+      348026,
+      384026
+    ]
+  },
+  "exclusive_collision": {
+    "error": "EEXIST",
+    "foreign_tmp_preserved": true,
+    "no_final_created": true
+  },
+  "partial_write_failure": {
+    "error": "EIO",
+    "exclusive_flags": "wx",
+    "fd_closed": true,
+    "owned_tmp_removed": true,
+    "previous_final_preserved": true,
+    "foreign_preserved": true
+  },
+  "rename_failure": {
+    "code": "EISDIR",
+    "owned_tmp_removed": true,
+    "existing_directory_preserved": true,
+    "foreign_preserved": true
+  },
+  "canonical_sha256": "f7b7ad869c3b82f77e7f3d35dbd2508129678e626c953bc4db7243d5d39ac3f4"
+}

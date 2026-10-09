@@ -1,0 +1,36 @@
+{
+  "hashes": {
+    "dataset/series.json": {
+      "21c55d52d5e51f39ee8a06607c5c2e6d4da37afc": "f7b7ad869c3b82f77e7f3d35dbd2508129678e626c953bc4db7243d5d39ac3f4",
+      "31bb2150d1758c9c2efbbfc73e506f4973597ca7": "f7b7ad869c3b82f77e7f3d35dbd2508129678e626c953bc4db7243d5d39ac3f4"
+    },
+    "src/classify.js": {
+      "21c55d52d5e51f39ee8a06607c5c2e6d4da37afc": "8f6a5473cce82dcb00bab52a7ed6b5d607c0d7cf288559bba384e408333b4655",
+      "31bb2150d1758c9c2efbbfc73e506f4973597ca7": "8f6a5473cce82dcb00bab52a7ed6b5d607c0d7cf288559bba384e408333b4655"
+    },
+    "src/validate.js": {
+      "21c55d52d5e51f39ee8a06607c5c2e6d4da37afc": "7516b7a8bbc6c2349f5e657ef4e310eb95f9819ca1f21bc5f4caed4c4dd5fe05",
+      "31bb2150d1758c9c2efbbfc73e506f4973597ca7": "7516b7a8bbc6c2349f5e657ef4e310eb95f9819ca1f21bc5f4caed4c4dd5fe05"
+    },
+    "src/server.js": {
+      "21c55d52d5e51f39ee8a06607c5c2e6d4da37afc": "259a2bd7aa3f61f193528aa7530b8ae04c75126874d8904b6a5d1e6f7e126636",
+      "31bb2150d1758c9c2efbbfc73e506f4973597ca7": "259a2bd7aa3f61f193528aa7530b8ae04c75126874d8904b6a5d1e6f7e126636"
+    },
+    "src/prng.js": {
+      "21c55d52d5e51f39ee8a06607c5c2e6d4da37afc": "0f2c8480804c106d6a9c17a44030fb1c3fd24e764abfd4099516848df8c4623a",
+      "31bb2150d1758c9c2efbbfc73e506f4973597ca7": "0f2c8480804c106d6a9c17a44030fb1c3fd24e764abfd4099516848df8c4623a"
+    },
+    "src/signals.js": {
+      "21c55d52d5e51f39ee8a06607c5c2e6d4da37afc": "5f10115c0c8e15afea935953d7633c4c398204997cfab80436bc235f06602a4f",
+      "31bb2150d1758c9c2efbbfc73e506f4973597ca7": "5f10115c0c8e15afea935953d7633c4c398204997cfab80436bc235f06602a4f"
+    }
+  },
+  "source": {
+    "source_files_verified": 18,
+    "copy_source_bytes_match_git": true,
+    "dataset_bytes_match_git": true,
+    "initial_review_unchanged": true,
+    "review21_sha": "21c55d52d5e51f39ee8a06607c5c2e6d4da37afc"
+  },
+  "unchanged_diff_exit": 0
+}
