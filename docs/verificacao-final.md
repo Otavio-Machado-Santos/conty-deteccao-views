@@ -25,3 +25,6 @@ Status observado: **Entrega registrada**, em 2026-10-09T21:09:49.561Z.
 - [Screenshot real do registro](evidence/conty-recibo.jpg).
 
 O registro confirma o envio do link; a avaliação da Conty e o ranking dependem da auditoria da organização. Não é uma aprovação técnica pelo avaliador.
+
+
+[GIF do envio real à Conty](evidence/conty-envio.gif), [manifesto dos frames](evidence/conty-envio-capture.json) e [painel com as nove entregas registradas](evidence/conty-nove-registros.jpg).
