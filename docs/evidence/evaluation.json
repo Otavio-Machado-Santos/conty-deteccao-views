@@ -1,0 +1,49 @@
+{
+  "generatedAt": "2026-10-09T19:21:22.539Z",
+  "seed": 20261009,
+  "datasetPath": "dataset/series.json",
+  "reproduction": {
+    "identicalAcrossRuns": true,
+    "identicalIgnoringClock": true,
+    "bytes": 76624,
+    "diskMatchesCanonical": true
+  },
+  "metrics": {
+    "series": 102,
+    "falsePositives": 0,
+    "legitimateTotal": 72,
+    "fpr": 0,
+    "fprPercent": 0,
+    "fprDisplay": "0/72",
+    "recallSuspiciousNumerator": 30,
+    "recallSuspiciousDenominator": 30,
+    "recallSuspicious": 1,
+    "recallSuspiciousPercent": 100,
+    "inconclusives": 17,
+    "confusionMatrix": {
+      "legitimo": {
+        "plausivel": 55,
+        "suspeito": 0,
+        "inconclusivo": 17
+      },
+      "suspeito": {
+        "plausivel": 0,
+        "suspeito": 30,
+        "inconclusivo": 0
+      }
+    },
+    "counts": {
+      "series": 102,
+      "legitimateTotal": 72,
+      "suspiciousTotal": 30,
+      "inconclusives": 17,
+      "falsePositives": 0,
+      "trueNegatives": 72,
+      "truePositives": 30,
+      "falseNegatives": 0
+    }
+  },
+  "fprNote": "FPR = legítimos classificados como suspeitos / total de legítimos. Inconclusivo não é falso positivo (abstinência).",
+  "recallNote": "Recall da classe suspeita = suspeitos detectados / total de suspeitos sintéticos. Inconclusivo conta como não detectado.",
+  "labelNote": "Rótulos sintéticos gerados por regras deste script. A taxa de falso positivo vale apenas para este conjunto; não estima produção real."
+}
