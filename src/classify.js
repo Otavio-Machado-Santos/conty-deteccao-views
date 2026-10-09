@@ -1,4 +1,8 @@
-import { validateSeries, SeriesValidationError } from './validate.js';
+import {
+  validateSeries,
+  sumViewsSafe,
+  SeriesValidationError,
+} from './validate.js';
 import { computeSignals } from './signals.js';
 
 /**
@@ -38,6 +42,10 @@ export const THRESHOLDS = Object.freeze({
   MECHANICAL_RUN: 4,
   MECHANICAL_VALUE_MIN: 40,
   MECHANICAL_SHARE: 0.25,
+  // A run precisa estar na região elevada (perto do pico) para ser "entrega
+  // mecânica". Run de baseline (valor típico, longe do pico) é persistência
+  // de fundo, não ritmo de entrega.
+  MECHANICAL_PEAK_FRACTION: 0.5,
   ORGANIC_MIN_PEAK_TO_BASE: 3,
 });
 
@@ -103,6 +111,21 @@ export function classify(input, options = {}) {
     }
   }
 
+  // Soma segura ANTES de derivar sinais: total inexato contamina toda métrica.
+  try {
+    sumViewsSafe(views);
+  } catch (err) {
+    if (err instanceof SeriesValidationError) {
+      return result(
+        CLASSIFICATIONS.INCONCLUSIVE,
+        `Série fora do contrato (${err.message}). Valores inválidos não viram suspeito.`,
+        'invalida',
+        {},
+      );
+    }
+    throw err;
+  }
+
   const signals = computeSignals(views, startMs);
   const t = THRESHOLDS;
 
@@ -137,6 +160,20 @@ export function classify(input, options = {}) {
   // --- Flags de sinais (cada uma auditável) --------------------------------
   // Pico "curto" só conta como sinal de spike se a razão pico/base for
   // relevante — senão toda série ruidosa teria largura 1–2 na metade do range.
+
+  // Posição/representatividade da run de repetição exata:
+  // - "elevada" = o valor repetido está no platô elevado (região do pico) ou
+  //   claramente acima do nível típico (mediana) — entrega mecânica;
+  // - "baseline" = valor típico ou abaixo, longe do pico — persistência de
+  //   fundo, não ritmo de entrega.
+  const runAtPeakRegion =
+    signals.runValue >= signals.peak * t.MECHANICAL_PEAK_FRACTION;
+  const runElevated = signals.runValue > signals.median || runAtPeakRegion;
+  const runRepresentative =
+    signals.runShare >= t.MECHANICAL_SHARE || runAtPeakRegion;
+  const baselineRunDuringSmoothRamp =
+    signals.maxIdenticalRun >= t.MECHANICAL_RUN && !runElevated;
+
   const flags = {
     abruptJump: signals.maxRiseRatio >= t.ABRUPT_JUMP_RATIO,
     abruptDrop: signals.maxDropRatio >= t.ABRUPT_DROP_RATIO,
@@ -150,15 +187,14 @@ export function classify(input, options = {}) {
       signals.peakToBase >= t.NARROW_SPIKE_MIN_PEAK_TO_BASE,
     // Repetição exata de valor não-trivial por várias horas é rara em tráfego
     // orgânico (que tem ruído). Exigimos que o valor repetido seja
-    // representativo — run curta num vale de baixa atividade (abaixo da
-    // mediana, participação pequena) é coincidência de arredondamento,
-    // não ritmo mecânico de entrega.
+    // representativo e esteja na região elevada da série — run longa no
+    // baseline (valor típico/baixo, participação pequena) é coincidência de
+    // arredondamento ou fundo constante, não ritmo mecânico de entrega.
     mechanical:
       signals.maxIdenticalRun >= t.MECHANICAL_RUN &&
       signals.runValue >= t.MECHANICAL_VALUE_MIN &&
-      (signals.runValue >= signals.median ||
-        signals.runShare >= t.MECHANICAL_SHARE ||
-        signals.maxIdenticalRun >= 5),
+      runElevated &&
+      runRepresentative,
     // Rampa suave = região elevada larga sem degrau abrupto hora a hora.
     smoothRamp:
       signals.spikeWidth >= t.WIDE_RAMP_WIDTH &&
@@ -218,15 +254,31 @@ export function classify(input, options = {}) {
     },
   };
 
+  // --- Conflito: repetição de baseline × rampa orgânica --------------------
+  // Run longa de valor típico (baseline) durante rampa suave é persistência
+  // de fundo — não vira acusação automática de ritmo mecânico. Preferimos
+  // a leitura orgânica (ou abstenção) a punir um viral suave.
+  if (baselineRunDuringSmoothRamp && flags.smoothRamp) {
+    return result(
+      CLASSIFICATIONS.PLAUSIBLE,
+      `Subida e descida graduais (${signalSummary.rampShape.detail}) com razão pico/base de ${signals.peakToBase}×. A sequência de ${signals.maxIdenticalRun}h com ${signals.runValue} views está no nível de base (${(signals.runShare * 100).toFixed(1)}% do total), compatível com fundo estável durante propagação orgânica — não é ritmo de entrega mecânica. Pico alto sozinho não caracteriza compra.`,
+      'rampa_suave',
+      signals,
+      signalSummary,
+      flags,
+    );
+  }
+
   // --- Padrão mecânico com volume suficiente ------------------------------
-  // Combinação: (1) repetição exata longa; (2) valor repetido não-trivial;
-  // (3) volume total da série já passou o piso. Tráfego orgânico tem ruído e
-  // quase nunca produz inteiros idênticos em sequência; campanha com entrega
-  // perfeitamente estável é o principal falso positivo deste sinal.
+  // Combinação: (1) repetição exata longa; (2) valor repetido não-trivial e
+  // elevado (acima da mediana e/ou na região do pico); (3) representatividade
+  // (participação no total ou região elevada). Tráfego orgânico tem ruído e
+  // quase nunca produz inteiros idênticos em sequência no pico; campanha com
+  // entrega perfeitamente estável é o principal falso positivo deste sinal.
   if (flags.mechanical) {
     return result(
       CLASSIFICATIONS.SUSPICIOUS,
-      `Ritmo mecânico: ${signalSummary.exactRepetition.detail}. Séries orgânicas têm ruído hora a hora; ${signals.maxIdenticalRun} horas com exatamente ${signals.runValue} views, em série com ${signals.total} views no total, combinam repetição exata e volume — indício de padrão automatizado, não prova de fraude.`,
+      `Ritmo mecânico: ${signalSummary.exactRepetition.detail}. Séries orgânicas têm ruído hora a hora; ${signals.maxIdenticalRun} horas com exatamente ${signals.runValue} views, em série com ${signals.total} views no total, combinam repetição exata elevada e volume — indício de padrão automatizado, não prova de fraude.`,
       'mecanica',
       signals,
       signalSummary,

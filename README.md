@@ -25,10 +25,11 @@ npm run generate:evaluate # regenera dataset e calcula FPR/matrix/recall
 }
 ```
 
-- `timestamp`: ISO em UTC (`Z` ou `+00:00`), alinhado à hora cheia, passo exato de 1 hora, sem lacunas.
+- `timestamp`: ISO UTC estrito (`YYYY-MM-DDTHH:mm:ss(.sss)?Z` ou `+00:00`), alinhado à hora cheia, passo exato de 1 hora, sem lacunas. O calendário civil é conferido por roundtrip: `2026-02-30` e `2026-02-29` (ano não bissexto) são rejeitados, sem normalização silenciosa. Formatos não ISO (strings RFC, offsets não-UTC) são rejeitados.
 - `views`: inteiro seguro ≥ 0 — **incremental daquela hora**, não acumulado.
+- **Soma total:** a soma de `views` deve caber em `Number.MAX_SAFE_INTEGER` (9007199254740991). Séries acima disso retornam `422`: o total não seria representável com precisão exata e as métricas derivadas (razões, concentração) seriam incorretas. O limite vale para a API e para o caminho interno de arrays numéricos.
 
-Violações do contrato retornam `422` com a regra violada.
+Violações do contrato retornam `422` com a regra violada. O corpo HTTP deve ser `{ series: [...] }`; arrays numéricos são conveniência da biblioteca interna, **fora do contrato HTTP**. JSON sintaticamente inválido retorna `400`. Corpo acima de 2.000.000 bytes retorna `413` JSON (com `Content-Length` ou chunked), sem reset de socket.
 
 ## Exemplo real de request/response
 
@@ -83,25 +84,26 @@ Response (resumo do JSON real devolvido por `http://127.0.0.1:3009/classify`):
 | `peakToBase` | pico ÷ mediana da série | ≥ 8× |
 | `abruptJump` / `abruptDrop` | maior fator multiplicativo hora a hora | ≥ 4× |
 | `concentration` | fração do total na hora do pico / top-3 / melhor janela de 3h | ≥ 35% / 72% / 65% |
-| `exactRepetition` | maior sequência de inteiros idênticos | ≥ 4 h, valor ≥ 40, e valor representativo |
+| `exactRepetition` | maior sequência de inteiros idênticos | ≥ 4 h, valor ≥ 40, **elevada** (acima da mediana ou ≥ 50% do pico) **e representativa** (≥ 25% do total ou na região do pico) |
 | `rampShape` | largura do pico (horas acima da metade do range), degrau máximo | largura ≥ 4 h e degrau < 3,2× = rampa suave |
 
 **Regras de decisão (ordem):**
 
 1. **Abstinência:** menos de 6 pontos, menos de 80 views no total, ou pico < 15 → `inconclusivo`.
-2. **Mecânico:** run de ≥ 4 horas com o mesmo valor (≥ 40, representativo) → `suspeito`.
-3. **Pico abrupto:** (subida/queda abrupta **ou** pico curto com razão ≥ 4) **e** (razão pico/base alta **ou** concentração alta), sem rampa suave → `suspeito`.
-4. **Rampa suave:** região elevada larga sem degrau abrupto, ainda que com pico alto → `plausivel` (viral orgânico).
-5. **Pico/sinal isolado:** sinais parciais sem combinação → `inconclusivo` (**prefere não acusar**).
-6. **Caso comum:** diurno, campanha sustentada, tráfego estável → `plausivel`.
+2. **Conflito run×rampa:** run longa de baseline (valor típico/baixo, longe do pico) durante rampa suave → `plausivel` (persistência de fundo, não ritmo de entrega).
+3. **Mecânico:** run de ≥ 4 h com o mesmo valor (≥ 40), **elevado e representativo** (ver tabela) → `suspeito`.
+4. **Pico abrupto:** (subida/queda abrupta **ou** pico curto com razão ≥ 4) **e** (razão pico/base alta **ou** concentração alta), sem rampa suave → `suspeito`.
+5. **Rampa suave:** região elevada larga sem degrau abrupto, ainda que com pico alto → `plausivel` (viral orgânico).
+6. **Pico/sinal isolado:** sinais parciais sem combinação → `inconclusivo` (**prefere não acusar**).
+7. **Caso comum:** diurno, campanha sustentada, tráfego estável → `plausivel`.
 
-Pico alto **sozinho** nunca leva a `suspeito`. É preciso combinar sinais de famílias diferentes (abruptez **e** magnitude/concentração, ou repetição exata com volume).
+Pico alto **sozinho** nunca leva a `suspeito`. É preciso combinar sinais de famílias diferentes (abruptez **e** magnitude/concentração, ou repetição exata elevada e representativa).
 
 ## Por que distingue os exemplos
 
-- **Viral orgânico** (subida e queda graduais, largura ≥ 4 h, degraus < 3,2×): cai na regra 4, mesmo com razão pico/base de 8–15×. Teste: `test/classify.test.js` ("viral orgânico … não é acusado").
-- **Pico comprado** (base ruidosa + 1–2 h de 15–60× + volta imediata): salto e queda ≥ 4×, pico curto, concentração alta → regra 3. Teste: mesma suíte distingue os dois no mesmo assert.
-- **Ritmo mecânico** (5–9 h com o mesmo inteiro): regra 2. Teste dedicado.
+- **Viral orgânico** (subida e queda graduais, largura ≥ 4 h, degraus < 3,2×): cai na regra 5, mesmo com razão pico/base de 8–15×. Baseline constante durante a rampa (run longa de valor típico, participação pequena) cai na regra 2 — **não** vira ritmo mecânico. Testes: `test/classify.test.js` ("viral orgânico … não é acusado", "regressão: viral com baseline constante", "regressão: viral seed25").
+- **Pico comprado** (base ruidosa + 1–2 h de 15–60× + volta imediata): salto e queda ≥ 4×, pico curto, concentração alta → regra 4. Teste: mesma suíte distingue os dois no mesmo assert.
+- **Ritmo mecânico** (5–9 h com o mesmo inteiro **elevado**, na região do pico/platô): regra 3. Teste dedicado.
 - **Evento rápido legítimo / volume baixo:** abstenção (ver abaixo).
 
 ## Dataset sintético e métricas
@@ -132,7 +134,13 @@ Matriz de confusão (verdade sintética × predição) — 102 séries:
 
 ### Limitações do FPR
 
-0/72 é a taxa **neste dataset sintético**, com política de abstenção (17 `inconclusivo` que preferem não acusar). Em produção a taxa não é 0%: tráfego pago legítimo com entrega muito irregular pode se parecer com compra; campanhas agendadas com entrega perfeitamente estável podem disparar o sinal mecânico; um atacante que calce ruído e rampa suave na compra não é distinguido de viral real. Séries byte a byte iguais são indistinguíveis — o método só vê volume por hora.
+0/72 é a taxa **neste dataset sintético**, com política de abstenção (17 `inconclusivo` que preferem não acusar). **Esta medição não estabelece a taxa em produção.** Tráfego pago legítimo com entrega muito irregular pode se parecer com compra; campanhas agendadas com entrega perfeitamente estável **na região elevada** podem disparar o sinal mecânico (limitação conhecida — séries idênticas a um bot são indistinguíveis só por views); um atacante que calce ruído e rampa suave na compra não é distinguido de viral real. Séries byte a byte iguais são indistinguíveis — o método só vê volume por hora.
+
+**Limite de soma:** a API rejeita séries cujo total excede `Number.MAX_SAFE_INTEGER` (9007199254740991) com `422`, porque o total não seria exato e as métricas derivadas estariam erradas. Cada ponto individual já deve ser inteiro seguro; a checagem do total protege a agregação.
+
+### Cheque de sensibilidade multi-seed
+
+O teste "regressão: múltiplas seeds sem falso positivo nos legítimos" roda o gerador em 8 seeds (incluindo a seed 25, que continha o falso positivo orgânico) e exige: zero legítimos classificados como `suspeito` e 100% de recall dos suspeitos. Uma varredura de desenvolvimento posterior cobriu 100 seeds (0–99): 0 FP em 7200 legítimos, 3000/3000 suspeitos detectados, 1810 abstenções (`docs/evidence/development-seeds.json`). Isso é **sensibilidade sintética de desenvolvimento, não um holdout cego**: as seeds foram vistas durante a revisão, a calibração dos limiares e o gerador compartilham as mesmas hipóteses, e um FPR de 0% nesse conjunto **não estima taxa em produção**.
 
 ## Caso em que o classificador prefere não acusar
 
@@ -145,15 +153,21 @@ Mesmo parecendo "um pico", não vira `suspeito` sem combinação de sinais. Os 5
 ## Decisões que eu mudaria
 
 1. **Separar "compra" de "tráfego pago irregular"** exigiria features externas (fonte de tráfego, geography, user-agents, retenção). Com só views/hora, o teto de acurácia é baixo de propósito.
-2. **O sinal mecânico** podia ganhar uma janela (ex.: run de 4 h apenas no vale noturno com valor abaixo da mediana não dispara — já evitamos um falso positivo assim), mas o caso perfeito de campanha com entrega estável continuaria indistingível de bot.
+2. **O sinal mecânico** exige valor elevado e representativo (posição na região do pico/platô e participação no total); runs de baseline durante rampa suave não acusam. Ainda assim, campanha com entrega perfeitamente estável na região elevada continua indistinguível de bot — limitação conhecida.
 3. **Limiares fixos** (8×, 4×, 35%) são auditáveis mas não se adaptam por conta/vertical. Preferiria calibração por perfil de criador com histórico, o que está fora do escopo.
 4. **Classificação em 3 rótulos** foi a escolha certa para o custo de falso positivo; um score contínuo + calibração seria o próximo passo natural.
 
 ## Nota sobre IA
 
-Primeira implementação e testes gerados pelo **MiMo CLI (modelo mimo-v2.6-pro)**. Coordenação e revisões independentes por **Codex** ocorrerão antes de publicação. **Nenhuma revisão humana é alegada.**
+Implementação e correções geradas pelo **MiMo CLI**. **Codex** coordenou e conferiu. Duas revisões independentes finais estão pendentes. **Nenhuma revisão humana é alegada.**
 
 ## Evidências
 
-- `docs/evidence/test.txt` — saída real de `npm test` e checagem de sintaxe.
+- `docs/evidence/test.txt` — saída real de `npm test` (50 testes).
+- `docs/evidence/syntax-check.txt` — checagem de sintaxe dos 12 arquivos JavaScript.
 - `docs/evidence/evaluation.json` — saída estruturada de `npm run generate:evaluate`.
+- `docs/evidence/evaluate.txt` — saída legível de `npm run generate:evaluate`.
+- `docs/evidence/http-regressions.txt` — regressões HTTP reais: contrato, calendário, soma, body limit (Content-Length e chunked) e host malformado.
+- `docs/evidence/coordinator-probes.json` — conferência Codex de 25 requests HTTP, calendário e sensibilidade sintética de desenvolvimento.
+- `docs/evidence/readme-divergences.json` — prova de falha para numerador, denominador e percentual adulterados, sem autoeditar o README.
+- `docs/evidence/dataset-integrity.json` — hashes do dataset e gerador iguais aos do candidato inicial.

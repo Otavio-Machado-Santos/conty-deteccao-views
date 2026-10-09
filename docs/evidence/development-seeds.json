@@ -1,0 +1,22 @@
+{
+  "description": "Cheque sintético de sensibilidade de desenvolvimento — varredura de 100 seeds do gerador (0–99) após as correções do desafio 9.",
+  "source": "conferência independente do coordenador (docs/review-inputs/coordinator-probes.json)",
+  "node": "v22.23.3",
+  "metrics": {
+    "seeds": 100,
+    "seedRange": "0–99",
+    "seriesTotal": 10200,
+    "legitimateTotal": 7200,
+    "falsePositives": 0,
+    "suspiciousTotal": 3000,
+    "suspiciousDetected": 3000,
+    "abstentions": 1810
+  },
+  "officialDataset": {
+    "seed": 20261009,
+    "fpr": "0/72 (0%)",
+    "recallSuspicious": "30/30 (100%)",
+    "inconclusives": 17
+  },
+  "note": "Sensibilidade sintética de desenvolvimento, não holdout cego nem estimativa de FPR em produção. As seeds foram vistas durante a revisão; calibração e gerador compartilham hipóteses. Não move diagnósticos temporários para entrega final."
+}

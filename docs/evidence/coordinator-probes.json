@@ -1,0 +1,255 @@
+{
+  "runtime": "v22.23.3",
+  "passed": true,
+  "classifier": {
+    "viral_stable_baseline": {
+      "classification": "plausivel",
+      "shape": "rampa_suave",
+      "flags": {
+        "abruptJump": false,
+        "abruptDrop": false,
+        "highPeakToBase": true,
+        "highConcentration": false,
+        "narrowSpike": false,
+        "mechanical": false,
+        "smoothRamp": true
+      },
+      "reason": "Subida e descida graduais (largura do pico = 12h; subida = 4h; descida = 7h; maior degrau na rampa = 1.844×) com razão pico/base de 12×. A sequência de 16h com 200 views está no nível de base (9.5% do total), compatível com fundo estável durante propagação orgânica — não é ritmo de entrega mecânica. Pico alto sozinho não caracteriza compra."
+    },
+    "same_viral_small_noise": {
+      "classification": "plausivel",
+      "shape": "rampa_suave",
+      "flags": {
+        "abruptJump": false,
+        "abruptDrop": false,
+        "highPeakToBase": true,
+        "highConcentration": false,
+        "narrowSpike": false,
+        "mechanical": false,
+        "smoothRamp": true
+      },
+      "reason": "Subida e descida graduais (largura do pico = 11h; subida = 4h; descida = 6h; maior degrau na rampa = 1.851×) com razão pico/base de 11.876×. Forma de rampa suave é compatível com viral orgânico ou evento legítimo com propagação; pico alto sozinho não caracteriza compra."
+    },
+    "seed25": {
+      "classification": "plausivel",
+      "reason": "Subida e descida graduais (largura do pico = 13h; subida = 5h; descida = 7h; maior degrau na rampa = 1.607×) com razão pico/base de 8.129×. A sequência de 5h com 99 views está no nível de base (3.1% do total), compatível com fundo estável durante propagação orgânica — não é ritmo de entrega mecânica. Pico alto sozinho não caracteriza compra."
+    }
+  },
+  "validation": [
+    {
+      "name": "Z",
+      "accepted": true,
+      "expected": true
+    },
+    {
+      "name": "zero-offset",
+      "accepted": true,
+      "expected": true
+    },
+    {
+      "name": "leap",
+      "accepted": true,
+      "expected": true
+    },
+    {
+      "name": "feb30",
+      "accepted": false,
+      "expected": false
+    },
+    {
+      "name": "year-0000-leap",
+      "accepted": true,
+      "expected": true
+    },
+    {
+      "name": "year-0099",
+      "accepted": true,
+      "expected": true
+    },
+    {
+      "name": "non-leap",
+      "accepted": false,
+      "expected": false
+    },
+    {
+      "name": "century",
+      "accepted": false,
+      "expected": false
+    },
+    {
+      "name": "surrounding-space",
+      "accepted": false,
+      "expected": false
+    },
+    {
+      "name": "non-ISO",
+      "accepted": false,
+      "expected": false
+    },
+    {
+      "name": "offset",
+      "accepted": false,
+      "expected": false
+    }
+  ],
+  "http": [
+    {
+      "name": "missing",
+      "status": 422,
+      "error": "campo obrigatório \"series\" ausente"
+    },
+    {
+      "name": "null",
+      "status": 422,
+      "error": "corpo deve ser um objeto JSON no formato { series: [{ timestamp, views }, ...] }"
+    },
+    {
+      "name": "empty",
+      "status": 422,
+      "error": "series não pode ser vazia"
+    },
+    {
+      "name": "numeric",
+      "status": 422,
+      "error": "series[0] deve ser objeto"
+    },
+    {
+      "name": "negative",
+      "status": 422,
+      "error": "series[0] deve ser objeto"
+    },
+    {
+      "name": "string",
+      "status": 422,
+      "error": "series deve ser um array de pontos"
+    },
+    {
+      "name": "mixed",
+      "status": 422,
+      "error": "series[1] deve ser objeto"
+    },
+    {
+      "name": "feb30",
+      "status": 422,
+      "error": "timestamp[0] não corresponde a uma data civil existente: 2026-02-30T00:00:00Z"
+    },
+    {
+      "name": "aggregate-overflow",
+      "status": 422,
+      "error": "soma das views excede o total seguro (Number.MAX_SAFE_INTEGER = 9007199254740991); limite documentado no README"
+    },
+    {
+      "name": "short-valid",
+      "status": 200,
+      "classification": "inconclusivo"
+    },
+    {
+      "name": "bad-json",
+      "status": 400
+    },
+    {
+      "name": "empty-json",
+      "status": 400
+    },
+    {
+      "name": "whitespace-json",
+      "status": 400
+    },
+    {
+      "name": "oversized-content-length",
+      "status": 413,
+      "body": "{\n  \"error\": \"body excede o limite de 2000000 bytes\"\n}"
+    },
+    {
+      "name": "oversized-chunked",
+      "status": 413,
+      "body": "{\n  \"error\": \"body excede o limite de 2000000 bytes\"\n}"
+    },
+    {
+      "name": "oversized-content-length-connection-close",
+      "status": 413,
+      "body": "{\n  \"error\": \"body excede o limite de 2000000 bytes\"\n}"
+    },
+    {
+      "name": "oversized-chunked-connection-close",
+      "status": 413,
+      "body": "{\n  \"error\": \"body excede o limite de 2000000 bytes\"\n}"
+    },
+    {
+      "name": "malformed-host",
+      "status": 200,
+      "body": "{\n  \"ok\": true,\n  \"service\": \"conty-deteccao-views\",\n  \"receivedAt\": \"2026-10-09T20:21:32.780Z\",\n  \"disclaimer\": \"Resultado analítico, não prova de fraude: séries horárias de views não permitem afirmar humanos ou bots com certeza. Tráfego pago legítimo, campanhas agendadas e picos orgânicos reais podem se parecer com compra. Séries idênticas são indistinguíveis por este método.\"\n}"
+    },
+    {
+      "name": "reuse-agent-overflow-0",
+      "status": 413,
+      "body": "{\n  \"error\": \"body excede o limite de 2000000 bytes\"\n}"
+    },
+    {
+      "name": "reuse-agent-health-0",
+      "status": 200,
+      "body": "{\n  \"ok\": true,\n  \"service\": \"conty-deteccao-views\",\n  \"receivedAt\": \"2026-10-09T20:21:32.783Z\",\n  \"disclaimer\": \"Resultado analítico, não prova de fraude: séries horárias de views não permitem afirmar humanos ou bots com certeza. Tráfego pago legítimo, campanhas agendadas e picos orgânicos reais podem se parecer com compra. Séries idênticas são indistinguíveis por este método.\"\n}"
+    },
+    {
+      "name": "reuse-agent-overflow-1",
+      "status": 413,
+      "body": "{\n  \"error\": \"body excede o limite de 2000000 bytes\"\n}"
+    },
+    {
+      "name": "reuse-agent-health-1",
+      "status": 200,
+      "body": "{\n  \"ok\": true,\n  \"service\": \"conty-deteccao-views\",\n  \"receivedAt\": \"2026-10-09T20:21:32.785Z\",\n  \"disclaimer\": \"Resultado analítico, não prova de fraude: séries horárias de views não permitem afirmar humanos ou bots com certeza. Tráfego pago legítimo, campanhas agendadas e picos orgânicos reais podem se parecer com compra. Séries idênticas são indistinguíveis por este método.\"\n}"
+    },
+    {
+      "name": "reuse-agent-overflow-2",
+      "status": 413,
+      "body": "{\n  \"error\": \"body excede o limite de 2000000 bytes\"\n}"
+    },
+    {
+      "name": "reuse-agent-health-2",
+      "status": 200,
+      "body": "{\n  \"ok\": true,\n  \"service\": \"conty-deteccao-views\",\n  \"receivedAt\": \"2026-10-09T20:21:32.788Z\",\n  \"disclaimer\": \"Resultado analítico, não prova de fraude: séries horárias de views não permitem afirmar humanos ou bots com certeza. Tráfego pago legítimo, campanhas agendadas e picos orgânicos reais podem se parecer com compra. Séries idênticas são indistinguíveis por este método.\"\n}"
+    },
+    {
+      "name": "health-after-malformed-host-and-oversized-bodies",
+      "status": 200
+    }
+  ],
+  "developmentSeeds": {
+    "seeds": 100,
+    "falsePositives": 0,
+    "legitimate": 7200,
+    "truePositives": 3000,
+    "suspicious": 3000,
+    "abstentions": 1810,
+    "note": "Cheque sintético de sensibilidade; seeds observadas na revisão não são um holdout real independente."
+  },
+  "official": {
+    "fpr": {
+      "numerator": 0,
+      "denominator": 72,
+      "value": 0,
+      "percent": 0,
+      "note": "FPR = legítimos classificados como suspeitos / total de legítimos. Inconclusivo não é falso positivo (abstinência)."
+    },
+    "recall": {
+      "numerator": 30,
+      "denominator": 30,
+      "value": 1,
+      "percent": 100,
+      "note": "Recall da classe suspeita = suspeitos detectados / total de suspeitos sintéticos. Inconclusivo conta como não detectado."
+    },
+    "matrix": {
+      "legitimo": {
+        "plausivel": 55,
+        "suspeito": 0,
+        "inconclusivo": 17
+      },
+      "suspeito": {
+        "plausivel": 0,
+        "suspeito": 30,
+        "inconclusivo": 0
+      }
+    }
+  }
+}

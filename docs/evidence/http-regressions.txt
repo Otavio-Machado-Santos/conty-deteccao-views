@@ -1,0 +1,35 @@
+Conferência Codex após correções via MiMo CLI
+Node v22.23.3
+MiMo session: ses_ffe5eddd2d2ffffegDRlXZwFM0
+HTTP real em loopback; portas efêmeras; dados sintéticos locais
+
+missing: HTTP 422; campo obrigatório "series" ausente
+null: HTTP 422; corpo deve ser um objeto JSON no formato { series: [{ timestamp, views }, ...] }
+empty: HTTP 422; series não pode ser vazia
+numeric: HTTP 422; series[0] deve ser objeto
+negative: HTTP 422; series[0] deve ser objeto
+string: HTTP 422; series deve ser um array de pontos
+mixed: HTTP 422; series[1] deve ser objeto
+feb30: HTTP 422; timestamp[0] não corresponde a uma data civil existente: 2026-02-30T00:00:00Z
+aggregate-overflow: HTTP 422; soma das views excede o total seguro (Number.MAX_SAFE_INTEGER = 9007199254740991); limite documentado no README
+short-valid: HTTP 200
+bad-json: HTTP 400
+empty-json: HTTP 400
+whitespace-json: HTTP 400
+oversized-content-length: HTTP 413
+oversized-chunked: HTTP 413
+oversized-content-length-connection-close: HTTP 413
+oversized-chunked-connection-close: HTTP 413
+malformed-host: HTTP 200
+reuse-agent-overflow-0: HTTP 413
+reuse-agent-health-0: HTTP 200
+reuse-agent-overflow-1: HTTP 413
+reuse-agent-health-1: HTTP 200
+reuse-agent-overflow-2: HTTP 413
+reuse-agent-health-2: HTTP 200
+health-after-malformed-host-and-oversized-bodies: HTTP 200
+
+Todas as 25 assertions HTTP passaram.
+Content-Length e chunked: 413 JSON com keep-alive e Connection:close, sem falha de rede.
+Reutilização de agent keep-alive: três ciclos overflow 413 -> health 200.
+Host malformado: 200, seguido de health 200.

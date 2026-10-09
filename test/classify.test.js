@@ -1,6 +1,7 @@
 import test from 'node:test';
 import assert from 'node:assert/strict';
 import { classify, CLASSIFICATIONS, THRESHOLDS } from '../src/classify.js';
+import { buildDataset, expandDatasetSeries } from '../src/generate.js';
 
 const baseStart = Date.parse('2026-01-05T00:00:00.000Z');
 const hour = (i) => new Date(baseStart + i * 3_600_000).toISOString();
@@ -119,4 +120,69 @@ test('valores inválidos não viram suspeito', () => {
   assert.equal(outcome.classification, CLASSIFICATIONS.INCONCLUSIVE);
   assert.match(outcome.reason, /fora do contrato|não negativo|inteiros seguros/i);
   assert.notEqual(outcome.classification, CLASSIFICATIONS.SUSPICIOUS);
+});
+
+// --- Regressões de falso positivo orgânico -------------------------------
+// Baseline constante durante rampa suave NÃO vira "ritmo mecânico".
+// Dados dos contraexemplos das revisões independentes 09-a / 09-b.
+
+test('regressão: viral com baseline constante (rampa suave) não é acusado', () => {
+  // counterexamples[0] de 09-a-probes.json / organicRepeatedBaseline de 09-b
+  const views = [
+    200, 200, 200, 200, 200, 200, 200, 200, 200, 200, 200, 295, 544, 896,
+    1300, 1704, 2056, 2305, 2400, 2368, 2278, 2140, 1964, 1759, 1534, 1300,
+    1066, 841, 636, 460, 322, 232, 200, 200, 200, 200, 200, 200, 200, 200,
+    200, 200, 200, 200, 200, 200, 200, 200,
+  ];
+  const outcome = classify(series(views));
+  assert.ok(outcome.flags.smoothRamp, 'deveria ter rampa suave');
+  assert.equal(outcome.flags.mechanical, false, 'run de baseline não é mecânica');
+  assert.ok(
+    outcome.classification === CLASSIFICATIONS.PLAUSIBLE ||
+      outcome.classification === CLASSIFICATIONS.INCONCLUSIVE,
+    `esperava plausivel/inconclusivo, veio ${outcome.classification}`,
+  );
+  assert.notEqual(outcome.classification, CLASSIFICATIONS.SUSPICIOUS);
+});
+
+test('regressão: viral seed25 (run curta de baseline) não é acusado', () => {
+  const dataset = buildDataset({ seed: 25, clock: () => new Date(0) });
+  const entry = dataset.series.find((s) => s.id === 'viral_organico-000');
+  assert.ok(entry, 'viral_organico-000 deve existir no seed 25');
+  assert.equal(entry.label, 'legitimo');
+  const outcome = classify(expandDatasetSeries(entry));
+  assert.ok(
+    outcome.classification === CLASSIFICATIONS.PLAUSIBLE ||
+      outcome.classification === CLASSIFICATIONS.INCONCLUSIVE,
+    `esperava plausivel/inconclusivo, veio ${outcome.classification} (${outcome.shape})`,
+  );
+  assert.notEqual(outcome.classification, CLASSIFICATIONS.SUSPICIOUS);
+});
+
+test('regressão: múltiplas seeds sem falso positivo nos legítimos', () => {
+  // Cheque de sensibilidade sintético. Seeds vistas pelos revisores NÃO são
+  // holdout independente de verdade: calibração e gerador compartilham
+  // hipóteses; 0% neste conjunto não estima produção.
+  for (const seed of [20261009, 25, 1, 2, 3, 7, 42, 99]) {
+    const dataset = buildDataset({ seed, clock: () => new Date(0) });
+    for (const entry of dataset.series) {
+      if (entry.label !== 'legitimo') continue;
+      const outcome = classify(expandDatasetSeries(entry));
+      assert.notEqual(
+        outcome.classification,
+        CLASSIFICATIONS.SUSPICIOUS,
+        `FP em seed=${seed} id=${entry.id} shape=${outcome.shape}`,
+      );
+    }
+    // Recall dos suspeitos originais preservado
+    for (const entry of dataset.series) {
+      if (entry.label !== 'suspeito') continue;
+      const outcome = classify(expandDatasetSeries(entry));
+      assert.equal(
+        outcome.classification,
+        CLASSIFICATIONS.SUSPICIOUS,
+        `FN em seed=${seed} id=${entry.id} veio ${outcome.classification} (${outcome.shape})`,
+      );
+    }
+  }
 });

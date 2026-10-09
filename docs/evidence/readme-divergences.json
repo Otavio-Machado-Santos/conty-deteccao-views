@@ -1,0 +1,25 @@
+{
+  "passed": true,
+  "checked_in_copy": true,
+  "original_repo_untouched": true,
+  "variants": [
+    {
+      "tamper": "FPR: 1/72 (0%)",
+      "exit_code": 1,
+      "readme_unchanged": true,
+      "proof": "not ok 1 - FPR do README bate com a medição do generate:evaluate\n    numerador do README (1) diverge do medido (0)\n# fail 1"
+    },
+    {
+      "tamper": "FPR: 0/73 (0%)",
+      "exit_code": 1,
+      "readme_unchanged": true,
+      "proof": "not ok 1 - FPR do README bate com a medição do generate:evaluate\n    denominador do README (73) diverge do medido (72)\n# fail 1"
+    },
+    {
+      "tamper": "FPR: 0/72 (1.0%)",
+      "exit_code": 1,
+      "readme_unchanged": true,
+      "proof": "not ok 1 - FPR do README bate com a medição do generate:evaluate\n    percentual do README (1%) diverge do medido (0%)\n# fail 1"
+    }
+  ]
+}

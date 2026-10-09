@@ -1,0 +1,17 @@
+{
+  "initial_commit": "eebbf112c1c89eb6f26afa477fad70424c28b4c4",
+  "passed": true,
+  "labels_and_dataset_byte_identical": true,
+  "files": {
+    "src/generate.js": {
+      "initial_sha256": "1a1506a8e8f8b0f6ab004fdf676da2e2d86785d2d052b911243d4f4c52c1a36f",
+      "candidate_sha256": "1a1506a8e8f8b0f6ab004fdf676da2e2d86785d2d052b911243d4f4c52c1a36f",
+      "identical": true
+    },
+    "dataset/series.json": {
+      "initial_sha256": "f7b7ad869c3b82f77e7f3d35dbd2508129678e626c953bc4db7243d5d39ac3f4",
+      "candidate_sha256": "f7b7ad869c3b82f77e7f3d35dbd2508129678e626c953bc4db7243d5d39ac3f4",
+      "identical": true
+    }
+  }
+}
