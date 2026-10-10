@@ -1,0 +1,143 @@
+{
+  "data": "2026-10-10",
+  "executor": "Claude Code",
+  "modelo": "claude-opus-5-5",
+  "subagentes": 9,
+  "metodo": "Um subagente por atividade, clone público sem credenciais, Node 22.23.3, parecer próprio antes de ler pareceres anteriores, sondagens e mutações; o coordenador reproduziu as nove suítes e os P2.",
+  "ambiente": "macOS arm64, Node.js 22.23.3, clones públicos sem credenciais",
+  "resultado": "Nenhum P0/P1. P2 técnicos em 1 e 9; P2 de comunicação nas notas de 3 e 8; observação comum: a declaração de IA informa que não houve revisão humana do código.",
+  "publicacao_das_correcoes": "commits novos, avanço simples, sem force-push",
+  "atividades": [
+    {
+      "id": 1,
+      "atividade": "Repasses que não fecham",
+      "repositorio": "https://github.com/Otavio-Machado-Santos/conty-challenge-debug",
+      "commit_examinado": "1b0702e9c6b9c7dbcaed6c574cfcebd7abf0d1e8",
+      "modelo_do_subagente": "claude-opus-5-5",
+      "veredito_codigo": "ajustes_necessarios",
+      "resumo": "Sem P0/P1. P2: data sem offset dependia do fuso do servidor; corrigido em d4e19db. Testes originais, contrato e armadilhas conferidos.",
+      "correcao_publicada": {
+        "commits": [
+          "d4e19dbabd90635dfbcc64f35d81b2be64534b21"
+        ],
+        "codigo_alterado": true,
+        "validacao": "49/49 em UTC, America/Sao_Paulo, Asia/Tokyo, Pacific/Honolulu e Pacific/Kiritimati; typecheck; os três testes novos falham no código anterior"
+      },
+      "testes_atuais": 49
+    },
+    {
+      "id": 2,
+      "atividade": "Descoberta lenta",
+      "repositorio": "https://github.com/Otavio-Machado-Santos/conty-challenge-optimize",
+      "commit_examinado": "b2a204f792f8d0ef535b148830800bf811e5d776",
+      "modelo_do_subagente": "claude-opus-5-5",
+      "veredito_codigo": "aprovado",
+      "resumo": "Sem P0/P1; código aprovado: 4 queries de 0 a 100.000 criadores e resposta idêntica à original em 1.224 páginas. Comentário-armadilha e material de outras entregas removidos em 11a51ee.",
+      "correcao_publicada": {
+        "commits": [
+          "11a51ee68bd0e42d26bac42132ba35dd88e993ff"
+        ],
+        "codigo_alterado": false,
+        "validacao": "14/14; typecheck; bench com 4 queries por página"
+      },
+      "testes_atuais": 14
+    },
+    {
+      "id": 3,
+      "atividade": "Revisão de roteiro",
+      "repositorio": "https://github.com/Otavio-Machado-Santos/conty-revisao-roteiro",
+      "commit_examinado": "61f47b56f86cb593e2a453069e9e176267759753",
+      "modelo_do_subagente": "claude-opus-5-5",
+      "veredito_codigo": "aprovado",
+      "resumo": "Sem P0/P1; código aprovado, inclusive a renovação de pedido vencido. P2 de comunicação: a nota registrada citava arquivo inexistente e 23 testes; o README faz a ponte desde e92a1db.",
+      "correcao_publicada": {
+        "commits": [
+          "e92a1dbf6cfc60e0cd526470af427976534dac0f"
+        ],
+        "codigo_alterado": false,
+        "validacao": "33/33"
+      },
+      "testes_atuais": 33
+    },
+    {
+      "id": 4,
+      "atividade": "Métricas das redes do criador",
+      "repositorio": "https://github.com/Otavio-Machado-Santos/conty-metricas-redes",
+      "commit_examinado": "d1499c693fc363b9fbef24bc108ec6c48173bfcd",
+      "modelo_do_subagente": "claude-opus-5-5",
+      "veredito_codigo": "aprovado",
+      "resumo": "Sem P0/P1; código aprovado, só achados P3.",
+      "correcao_publicada": null,
+      "testes_atuais": 75
+    },
+    {
+      "id": 5,
+      "atividade": "Vendas atribuídas ao criador",
+      "repositorio": "https://github.com/Otavio-Machado-Santos/conty-vendas-shopify",
+      "commit_examinado": "db5add1f9416442ea5623e499f5969e67fc00d4a",
+      "modelo_do_subagente": "claude-opus-5-5",
+      "veredito_codigo": "aprovado",
+      "resumo": "Sem P0/P1; código aprovado, só achados P3.",
+      "correcao_publicada": null,
+      "testes_atuais": 28
+    },
+    {
+      "id": 6,
+      "atividade": "Origem do cadastro no app",
+      "repositorio": "https://github.com/Otavio-Machado-Santos/conty-origem-cadastros",
+      "commit_examinado": "9abcbfcc8a8bbaa34c1443a6713c4d2d531ccccc",
+      "modelo_do_subagente": "claude-opus-5-5",
+      "veredito_codigo": "aprovado",
+      "resumo": "Sem P0/P1; código aprovado, só achados P3.",
+      "correcao_publicada": null,
+      "testes_atuais": 34
+    },
+    {
+      "id": 7,
+      "atividade": "Rastreio do produto enviado ao criador",
+      "repositorio": "https://github.com/Otavio-Machado-Santos/conty-rastreio-produto",
+      "commit_examinado": "d520664f7a48bf4943853af64339b97f43fa39b0",
+      "modelo_do_subagente": "claude-opus-5-5",
+      "veredito_codigo": "aprovado",
+      "resumo": "Sem P0/P1; código aprovado, só achados P3.",
+      "correcao_publicada": null,
+      "testes_atuais": 28
+    },
+    {
+      "id": 8,
+      "atividade": "Revisão de vídeo por versão",
+      "repositorio": "https://github.com/Otavio-Machado-Santos/conty-revisao-video",
+      "commit_examinado": "45533e29c2cb47493c8440dbbe5c6bfddf29926d",
+      "modelo_do_subagente": "claude-opus-5-5",
+      "veredito_codigo": "aprovado",
+      "resumo": "Sem P0/P1; código aprovado, inclusive a regra das peças opcionais. P2 de comunicação: a nota registrada descrevia a regra antiga; o README avisa desde eefe1a7.",
+      "correcao_publicada": {
+        "commits": [
+          "eefe1a702f7fb9df0284bcf74fd271e1a5c05568"
+        ],
+        "codigo_alterado": false,
+        "validacao": "27/27"
+      },
+      "testes_atuais": 27
+    },
+    {
+      "id": 9,
+      "atividade": "Views que não parecem humanas",
+      "repositorio": "https://github.com/Otavio-Machado-Santos/conty-deteccao-views",
+      "commit_examinado": "cfed90973edbfe3346a664d122c840ff1e3b70dd",
+      "modelo_do_subagente": "claude-opus-5-5",
+      "veredito_codigo": "ajustes_necessarios",
+      "resumo": "Sem P0/P1. P2: post recente decaindo virava suspeito, o motivo citava sinais desligados e o exemplo do README divergia da API; corrigidos em 0c73a11 e 268ae54.",
+      "correcao_publicada": {
+        "commits": [
+          "0c73a119d14302d82bca753dc58d463cd04bc658",
+          "268ae54d840b9a76ce79965ed6348c73667fc16a"
+        ],
+        "codigo_alterado": true,
+        "validacao": "56/56; FPR 0/72, recall 30/30 e 17 inconclusivos inalterados; famílias orgânicas fora do gerador de ~380/500 suspeitos para 0; seeds 2000–4999 com 18 FP em 216.000 (regra mecânica), como antes; os três testes novos falham no classificador anterior"
+      },
+      "testes_atuais": 56
+    }
+  ],
+  "limites": "Auditoria assistida por IA, sem revisão humana do código. Não substitui a avaliação da Conty. As correções de 10/10 foram validadas com as suítes de cada projeto e não passaram pelas duas revisões Codex."
+}

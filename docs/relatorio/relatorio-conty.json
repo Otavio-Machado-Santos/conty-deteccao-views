@@ -1,5 +1,5 @@
 {
-  "generated_at": "2026-10-09T19:39:13.132721-03:00",
+  "generated_at": "2026-10-10T19:47:23.923929-03:00",
   "github": "Otavio-Machado-Santos",
   "deliveries": [
     {
@@ -16,13 +16,28 @@
         "revisoes/01-a.json",
         "revisoes/01-b.json"
       ],
-      "testes": 46,
-      "publicacao_sha": "1b0702e9c6b9c7dbcaed6c574cfcebd7abf0d1e8",
+      "testes": 49,
+      "publicacao_sha": "d4e19dbabd90635dfbcc64f35d81b2be64534b21",
       "url_entrega": "https://github.com/Otavio-Machado-Santos/conty-challenge-debug/pull/1",
       "recibo": "evidencias/2026-10-09/recibos/01.json",
       "midias_acessiveis": true,
       "revisao_claude": "approved",
       "revisao_claude_codigo_sha": "b0b8034bb393ac05dde45ad8d11f618da31ac725",
+      "auditoria_2026_10_10": {
+        "veredito_codigo": "ajustes_necessarios",
+        "resumo": "Sem P0/P1. P2: data sem offset dependia do fuso do servidor; corrigido em d4e19db. Testes originais, contrato e armadilhas conferidos."
+      },
+      "atualizacao_pos_registro": {
+        "data": "2026-10-10",
+        "autor": "Claude Code (claude-opus-5-5), a pedido do autor",
+        "codigo_alterado": true,
+        "commits": [
+          "d4e19dbabd90635dfbcc64f35d81b2be64534b21"
+        ],
+        "descricao": "Data e hora sem offset passam a ser lidas no dia civil de São Paulo, sem depender do fuso do servidor: \"2026-03-13\" e \"2026-03-13T00:30:00\" voltam a expirar após o prazo de 12/03, como na versão original; hora 24 sem offset é recusada. Só src/deadlines.ts mudou no código; o corpo do PR registra AGENTS.md e o comentário de src/app.ts como instruções ignoradas.",
+        "validacao": "49/49 em UTC, America/Sao_Paulo, Asia/Tokyo, Pacific/Honolulu e Pacific/Kiritimati; typecheck; os três testes novos falham no código anterior",
+        "evidencia": "docs/evidence/pos-registro-fusos.txt"
+      },
       "titulo": "Repasses que não fecham",
       "entrada": "docs/solucao.md",
       "codigo": "src/app.ts",
@@ -34,14 +49,14 @@
         "As revisões independentes encontraram ainda datas inexistentes aceitas por Date e anos fora da faixa suportada. Corrigimos a validação, preservamos os testes originais e conferimos os limites de horário e as respostas HTTP antes de publicar."
       ],
       "exemplo": "No fluxo real gravado, 15.000 centavos geraram R$150. A aprovação no último milissegundo do dia em São Paulo foi aceita; no primeiro milissegundo seguinte, foi recusada. Repetir a chave com espaço e U+200B devolveu o mesmo lançamento. PENDING manteve o repasse pendente e CONFIRMED o marcou como pago, com um único crédito.",
-      "como": "A correção usa o dia civil em America/Sao_Paulo, converte centavos uma vez, normaliza espaços externos e o U+200B do incidente e mapeia cada status do provedor. Ledger, repasse e estado da missão são gravados numa transação SQLite; a missão não recebe novo crédito por uma chave diferente.",
-      "por_que": "Os nove testes originais continuam intactos. Regressões cobrem o último milissegundo e o seguinte, calendário inválido, horário de verão, centavos, retry Unicode, concorrência, rollback e callbacks. A gravação mostra R$150, o mesmo lançamento no retry e PENDING permanecendo pendente antes de CONFIRMED.",
+      "como": "A correção usa o dia civil em America/Sao_Paulo, converte centavos uma vez, normaliza espaços externos e o U+200B do incidente e mapeia cada status do provedor. Ledger, repasse e estado da missão são gravados numa transação SQLite; a missão não recebe novo crédito por uma chave diferente. Desde 10/10, data e hora sem offset são lidas no dia civil de São Paulo, sem depender do fuso do servidor.",
+      "por_que": "Os nove testes originais continuam intactos. Regressões cobrem o último milissegundo e o seguinte, data e hora sem offset em cinco fusos (desde 10/10; 49 testes), calendário inválido, horário de verão, centavos, retry Unicode, concorrência, rollback e callbacks. A gravação mostra R$150, o mesmo lançamento no retry e PENDING permanecendo pendente antes de CONFIRMED.",
       "iteracao": "A revisão encontrou normalização silenciosa de dias inexistentes e anos ISO expandidos. A entrada passou a validar calendário e faixa de anos, antes de qualquer efeito; o delta foi aprovado pelos dois revisores.",
       "limites": "Protege chamadas novas; não reconcilia créditos ou valores históricos. O contrato do callback não informa a ordem dos eventos. Avisos de desenvolvimento herdados estão documentados no PR; auditoria das dependências de execução retornou zero.",
       "contract_url": "https://challenge.appconty.com/desafios/debug-repasses",
       "receipt_observed_at": "2026-10-09T19:41:34.578Z",
       "http_steps": 6,
-      "verification_url": "https://github.com/Otavio-Machado-Santos/conty-challenge-debug/blob/1b0702e9c6b9c7dbcaed6c574cfcebd7abf0d1e8/docs/verificacao-final.md",
+      "verification_url": "https://github.com/Otavio-Machado-Santos/conty-challenge-debug/blob/d4e19dbabd90635dfbcc64f35d81b2be64534b21/docs/verificacao-final.md",
       "claude_review": {
         "id": 1,
         "reviewed_sha": "b0b8034bb393ac05dde45ad8d11f618da31ac725",
@@ -117,7 +132,7 @@
           "previous_adjustment": null
         }
       },
-      "claude_review_url": "https://github.com/Otavio-Machado-Santos/conty-challenge-debug/blob/1b0702e9c6b9c7dbcaed6c574cfcebd7abf0d1e8/docs/reviews/claude-opus55.json",
+      "claude_review_url": "https://github.com/Otavio-Machado-Santos/conty-challenge-debug/blob/d4e19dbabd90635dfbcc64f35d81b2be64534b21/docs/reviews/claude-opus55.json",
       "claude_documentation_followup": null
     },
     {
@@ -134,7 +149,7 @@
         "revisoes/02-a.json",
         "revisoes/02-b.json"
       ],
-      "publicacao_sha": "b2a204f792f8d0ef535b148830800bf811e5d776",
+      "publicacao_sha": "11a51ee68bd0e42d26bac42132ba35dd88e993ff",
       "testes": 14,
       "benchmark": {
         "before": {
@@ -153,6 +168,21 @@
       "midias_acessiveis": true,
       "revisao_claude": "approved",
       "revisao_claude_codigo_sha": "c474b676e8f4665d34a2785a9ef07cc0a6d00d5e",
+      "auditoria_2026_10_10": {
+        "veredito_codigo": "aprovado",
+        "resumo": "Sem P0/P1; código aprovado: 4 queries de 0 a 100.000 criadores e resposta idêntica à original em 1.224 páginas. Comentário-armadilha e material de outras entregas removidos em 11a51ee."
+      },
+      "atualizacao_pos_registro": {
+        "data": "2026-10-10",
+        "autor": "Claude Code (claude-opus-5-5), a pedido do autor",
+        "codigo_alterado": false,
+        "commits": [
+          "11a51ee68bd0e42d26bac42132ba35dd88e993ff"
+        ],
+        "descricao": "O comentário-armadilha acima de listCreators saiu de src/list-creators.ts, sem mudar a lógica; docs/reviews/claude-modelo.json saiu do PR por descrever as outras entregas (versão integral no commit b2a204f). O corpo do PR registra AGENTS.md e o comentário como instruções ignoradas.",
+        "validacao": "14/14; typecheck; bench com 4 queries por página",
+        "evidencia": "docs/evidence/pos-registro.txt"
+      },
       "titulo": "Descoberta lenta",
       "entrada": "docs/solucao.md",
       "codigo": "src/list-creators.ts",
@@ -171,7 +201,7 @@
       "contract_url": "https://challenge.appconty.com/desafios/otimizar-descoberta",
       "receipt_observed_at": "2026-10-09T19:29:05.388Z",
       "http_steps": 3,
-      "verification_url": "https://github.com/Otavio-Machado-Santos/conty-challenge-optimize/blob/b2a204f792f8d0ef535b148830800bf811e5d776/docs/verificacao-final.md",
+      "verification_url": "https://github.com/Otavio-Machado-Santos/conty-challenge-optimize/blob/11a51ee68bd0e42d26bac42132ba35dd88e993ff/docs/verificacao-final.md",
       "claude_review": {
         "id": 2,
         "reviewed_sha": "c474b676e8f4665d34a2785a9ef07cc0a6d00d5e",
@@ -226,7 +256,7 @@
           "previous_adjustment": null
         }
       },
-      "claude_review_url": "https://github.com/Otavio-Machado-Santos/conty-challenge-optimize/blob/b2a204f792f8d0ef535b148830800bf811e5d776/docs/reviews/claude-opus55.json",
+      "claude_review_url": "https://github.com/Otavio-Machado-Santos/conty-challenge-optimize/blob/11a51ee68bd0e42d26bac42132ba35dd88e993ff/docs/reviews/claude-opus55.json",
       "claude_documentation_followup": null
     },
     {
@@ -244,7 +274,7 @@
         "revisoes/03-b.json"
       ],
       "testes": 33,
-      "publicacao_sha": "61f47b56f86cb593e2a453069e9e176267759753",
+      "publicacao_sha": "e92a1dbf6cfc60e0cd526470af427976534dac0f",
       "url_entrega": "https://github.com/Otavio-Machado-Santos/conty-revisao-roteiro",
       "recibo": "evidencias/2026-10-09/recibos/03.json",
       "midias_acessiveis": true,
@@ -257,6 +287,21 @@
       },
       "revisao_claude": "approved",
       "revisao_claude_codigo_sha": "db12564279a7ab18d3c7e99759f24c69a6a78227",
+      "auditoria_2026_10_10": {
+        "veredito_codigo": "aprovado",
+        "resumo": "Sem P0/P1; código aprovado, inclusive a renovação de pedido vencido. P2 de comunicação: a nota registrada citava arquivo inexistente e 23 testes; o README faz a ponte desde e92a1db."
+      },
+      "atualizacao_pos_registro": {
+        "data": "2026-10-10",
+        "autor": "Claude Code (claude-opus-5-5), a pedido do autor",
+        "codigo_alterado": false,
+        "commits": [
+          "e92a1dbf6cfc60e0cd526470af427976534dac0f"
+        ],
+        "descricao": "O topo do README liga a nota registrada em 09/10 ao estado atual: a entrada é src/review.js (a nota cita src/review-service.js, que não existe), a suíte tem 33 testes (a nota cita 23) e a captura HTTP atual tem 21 etapas.",
+        "validacao": "33/33",
+        "evidencia": "README.md"
+      },
       "titulo": "Revisão de roteiro",
       "entrada": "README.md",
       "codigo": "src/review.js",
@@ -275,7 +320,7 @@
       "contract_url": "https://challenge.appconty.com/desafios/revisao-roteiro",
       "receipt_observed_at": "2026-10-09T19:43:52.671Z",
       "http_steps": 21,
-      "verification_url": "https://github.com/Otavio-Machado-Santos/conty-revisao-roteiro/blob/61f47b56f86cb593e2a453069e9e176267759753/docs/verificacao-final.md",
+      "verification_url": "https://github.com/Otavio-Machado-Santos/conty-revisao-roteiro/blob/e92a1dbf6cfc60e0cd526470af427976534dac0f/docs/verificacao-final.md",
       "claude_review": {
         "id": 3,
         "reviewed_sha": "db12564279a7ab18d3c7e99759f24c69a6a78227",
@@ -362,7 +407,7 @@
           "previous_adjustment": "revisao-roteiro: a API cumpre motivo e prazo obrigatórios (422), o prazo civil SP inclusive com o UTC já virado (02:59:59.999Z aceito, 03:00Z rejeitado; fuzz de 54.787 dias sem falha), a aprovação terminal (409 REVIEW_CLOSED), a v1 preservada e a persistência após reinício. Há porém um P2, que conferi pelo coordenador no código e no contrato: um pedido vencido sem reenvio deixa o roteiro preso para sempre em changes_requested, e o README não documenta isso."
         }
       },
-      "claude_review_url": "https://github.com/Otavio-Machado-Santos/conty-revisao-roteiro/blob/61f47b56f86cb593e2a453069e9e176267759753/docs/reviews/claude-opus55.json",
+      "claude_review_url": "https://github.com/Otavio-Machado-Santos/conty-revisao-roteiro/blob/e92a1dbf6cfc60e0cd526470af427976534dac0f/docs/reviews/claude-opus55.json",
       "claude_documentation_followup": {
         "file": "docs/renovacao-pedido-expirado.md",
         "status": "updated_after_review",
@@ -391,6 +436,10 @@
       "recibo": "evidencias/2026-10-09/recibos/04.json",
       "revisao_claude": "approved",
       "revisao_claude_codigo_sha": "ebcbf1fbf8f3e9dc206f6a1312ce7e0db283b15c",
+      "auditoria_2026_10_10": {
+        "veredito_codigo": "aprovado",
+        "resumo": "Sem P0/P1; código aprovado, só achados P3."
+      },
       "titulo": "Métricas das redes do criador",
       "entrada": "README.md",
       "codigo": "src/service.js",
@@ -498,6 +547,10 @@
       "recibo": "evidencias/2026-10-09/recibos/05.json",
       "revisao_claude": "approved",
       "revisao_claude_codigo_sha": "efb062a3f54d27eaa2bcbf742418692c298d50e5",
+      "auditoria_2026_10_10": {
+        "veredito_codigo": "aprovado",
+        "resumo": "Sem P0/P1; código aprovado, só achados P3."
+      },
       "titulo": "Vendas atribuídas ao criador",
       "entrada": "README.md",
       "codigo": "src/sales-service.js",
@@ -600,6 +653,10 @@
       "recibo": "evidencias/2026-10-09/recibos/06.json",
       "revisao_claude": "approved",
       "revisao_claude_codigo_sha": "3566be13b595e0b9480840d6aab6045db7cef39c",
+      "auditoria_2026_10_10": {
+        "veredito_codigo": "aprovado",
+        "resumo": "Sem P0/P1; código aprovado, só achados P3."
+      },
       "titulo": "Origem do cadastro no app",
       "entrada": "README.md",
       "codigo": "src/attribution.js",
@@ -707,6 +764,10 @@
       "recibo": "evidencias/2026-10-09/recibos/07.json",
       "revisao_claude": "approved",
       "revisao_claude_codigo_sha": "b95a0badf514f927d3d349892f7d85c923cda8c9",
+      "auditoria_2026_10_10": {
+        "veredito_codigo": "aprovado",
+        "resumo": "Sem P0/P1; código aprovado, só achados P3."
+      },
       "titulo": "Rastreio do produto enviado ao criador",
       "entrada": "README.md",
       "codigo": "src/domain/tracking-service.js",
@@ -808,7 +869,7 @@
         "revisoes/08-b.json"
       ],
       "testes": 27,
-      "publicacao_sha": "45533e29c2cb47493c8440dbbe5c6bfddf29926d",
+      "publicacao_sha": "eefe1a702f7fb9df0284bcf74fd271e1a5c05568",
       "url_entrega": "https://github.com/Otavio-Machado-Santos/conty-revisao-video",
       "midias_acessiveis": true,
       "recibo": "evidencias/2026-10-09/recibos/08.json",
@@ -821,6 +882,21 @@
       },
       "revisao_claude": "approved",
       "revisao_claude_codigo_sha": "7cf5c6343987f501f45f760984dbc2e126adb06e",
+      "auditoria_2026_10_10": {
+        "veredito_codigo": "aprovado",
+        "resumo": "Sem P0/P1; código aprovado, inclusive a regra das peças opcionais. P2 de comunicação: a nota registrada descrevia a regra antiga; o README avisa desde eefe1a7."
+      },
+      "atualizacao_pos_registro": {
+        "data": "2026-10-10",
+        "autor": "Claude Code (claude-opus-5-5), a pedido do autor",
+        "codigo_alterado": false,
+        "commits": [
+          "eefe1a702f7fb9df0284bcf74fd271e1a5c05568"
+        ],
+        "descricao": "O topo do README avisa que a nota registrada em 09/10 é anterior à correção 7cf5c63: peça que a campanha não exige nunca bloqueia a aprovação; a suíte tem 27 testes (a nota cita 22); o fluxo HTTP tem 29 etapas na captura e 16 no demo (a nota cita 21).",
+        "validacao": "27/27",
+        "evidencia": "README.md"
+      },
       "titulo": "Revisão de vídeo por versão",
       "entrada": "README.md",
       "codigo": "src/domain.js",
@@ -839,7 +915,7 @@
       "contract_url": "https://challenge.appconty.com/desafios/revisao-video",
       "receipt_observed_at": "2026-10-09T19:46:42.120Z",
       "http_steps": 29,
-      "verification_url": "https://github.com/Otavio-Machado-Santos/conty-revisao-video/blob/45533e29c2cb47493c8440dbbe5c6bfddf29926d/docs/verificacao-final.md",
+      "verification_url": "https://github.com/Otavio-Machado-Santos/conty-revisao-video/blob/eefe1a702f7fb9df0284bcf74fd271e1a5c05568/docs/verificacao-final.md",
       "claude_review": {
         "id": 8,
         "reviewed_sha": "7cf5c6343987f501f45f760984dbc2e126adb06e",
@@ -932,7 +1008,7 @@
           "previous_adjustment": "revisao-video: aprovar com peça obrigatória pendente dá 409 com bloqueios. Versão nova numa peça obrigatória desfaz a aprovação e a restaura depois. Aprovar uma versão antiga dá 409 stale_version. O comentário fica preso à versão. As peças exigidas são dado da campanha. Há porém um P2, que conferi pelo coordenador no código e no contrato: depois da primeira aprovação, uma peça que a campanha não pediu passa a bloquear a entrega."
         }
       },
-      "claude_review_url": "https://github.com/Otavio-Machado-Santos/conty-revisao-video/blob/45533e29c2cb47493c8440dbbe5c6bfddf29926d/docs/reviews/claude-opus55.json",
+      "claude_review_url": "https://github.com/Otavio-Machado-Santos/conty-revisao-video/blob/eefe1a702f7fb9df0284bcf74fd271e1a5c05568/docs/reviews/claude-opus55.json",
       "claude_documentation_followup": {
         "file": "docs/correcao-pecas-opcionais.md",
         "status": "updated_after_review",
@@ -953,14 +1029,30 @@
         "revisoes/09-b.json"
       ],
       "codigo_sha": "829b1bc9cf4df285c8f867cdd6166799fd862659",
-      "testes": 53,
+      "testes": 56,
       "porta_evidencia": 3009,
-      "publicacao_sha": "b71a5507f234e00d408f1f8cb821be5010e13880",
+      "publicacao_sha": "268ae54d840b9a76ce79965ed6348c73667fc16a",
       "url_entrega": "https://github.com/Otavio-Machado-Santos/conty-deteccao-views",
       "midias_acessiveis": true,
       "recibo": "evidencias/2026-10-09/recibos/09.json",
       "revisao_claude": "approved",
       "revisao_claude_codigo_sha": "829b1bc9cf4df285c8f867cdd6166799fd862659",
+      "auditoria_2026_10_10": {
+        "veredito_codigo": "ajustes_necessarios",
+        "resumo": "Sem P0/P1. P2: post recente decaindo virava suspeito, o motivo citava sinais desligados e o exemplo do README divergia da API; corrigidos em 0c73a11 e 268ae54."
+      },
+      "atualizacao_pos_registro": {
+        "data": "2026-10-10",
+        "autor": "Claude Code (claude-opus-5-5), a pedido do autor",
+        "codigo_alterado": true,
+        "commits": [
+          "0c73a119d14302d82bca753dc58d463cd04bc658",
+          "268ae54d840b9a76ce79965ed6348c73667fc16a"
+        ],
+        "descricao": "O pico abrupto passa a exigir subida e queda abruptas (≥ 4× hora a hora) com magnitude: a curva de um post recente que decai sozinho e a menção com cauda deixam de virar suspeito e ficam inconclusivas. O motivo cita só sinais acionados, narrowSpike aparece em signals e a abstenção por sinal isolado diz qual sinal pesou. O README traz a resposta real da API, uma abstenção real, a seção do que não detecta e npm run sensitivity.",
+        "validacao": "56/56; FPR 0/72, recall 30/30 e 17 inconclusivos inalterados; famílias orgânicas fora do gerador de ~380/500 suspeitos para 0; seeds 2000–4999 com 18 FP em 216.000 (regra mecânica), como antes; os três testes novos falham no classificador anterior",
+        "evidencia": "docs/evidence/sensitivity.txt"
+      },
       "titulo": "Views que não parecem humanas",
       "entrada": "README.md",
       "codigo": "src/classify.js",
@@ -973,14 +1065,14 @@
         "Testes em paralelo revelaram uma corrida na gravação dos arquivos da avaliação. A publicação passou a escrever em temporário exclusivo e renomear depois da escrita integral, com conferência dos bytes. Codex ajustou pontualmente a escrita integral e o isolamento da limpeza do teste; o resultado final passou por duas revisões e pelo Opus."
       ],
       "exemplo": "O viral orgânico seed25, com subida e queda graduais e fundo estável, não foi acusado. Um pico abrupto com concentração alta foi marcado suspeito, com motivo e sinais; casos de pouca informação puderam ficar inconclusivos. No conjunto canônico de 102 séries, houve zero falsos positivos entre 72 legítimas e detecção de 30 das 30 suspeitas. Isso valida os exemplos sintéticos, não prova fraude nem estima precisão de produção.",
-      "como": "O classificador explica a decisão com volume, razão pico/base, concentração, subida/queda, repetição e formato da rampa. Repetição baixa de fundo durante um viral suave não acusa compra. A API valida timestamps UTC e calendário, séries horárias contíguas, inteiros e soma seguros; devolve plausivel, suspeito ou inconclusivo. Um gerador com seed fixa reproduz os dados sem depender de redes sociais.",
-      "por_que": "53 testes passaram no checkout isolado. O comando reproduziu 102 séries: nenhum falso positivo entre 72 legítimas, 30/30 suspeitas detectadas e 17 abstenções. Adulterar numerador, denominador ou percentual do README faz o teste falhar, sem autoeditar a documentação. As dez etapas HTTP gravadas têm 41 verificações, incluindo o viral seed25, o pico suspeito e as entradas recusadas.",
+      "como": "O classificador explica a decisão com volume, razão pico/base, concentração, subida/queda, repetição e formato da rampa. Repetição baixa de fundo durante um viral suave não acusa compra. A API valida timestamps UTC e calendário, séries horárias contíguas, inteiros e soma seguros; devolve plausivel, suspeito ou inconclusivo. Um gerador com seed fixa reproduz os dados sem depender de redes sociais. Desde 10/10, o pico abrupto exige subida e queda abruptas com magnitude, e o motivo cita só os sinais acionados, inclusive o pico estreito.",
+      "por_que": "53 testes passaram no checkout isolado do código revisado; com os três acrescentados em 10/10, são 56. O comando reproduziu 102 séries: nenhum falso positivo entre 72 legítimas, 30/30 suspeitas detectadas e 17 abstenções. Adulterar numerador, denominador ou percentual do README faz o teste falhar, sem autoeditar a documentação. As dez etapas HTTP gravadas têm 41 verificações, incluindo o viral seed25, o pico suspeito e as entradas recusadas.",
       "iteracao": "As revisões iniciais encontraram falso positivo em baseline estável de viral orgânico e falhas de contrato HTTP, calendário, precisão da soma, limite de corpo e Host. O MiMo corrigiu esses caminhos. A revisão final reproduziu ainda uma corrida: testes paralelos liam o dataset enquanto outra avaliação o truncava. A avaliação passou a ser realmente de leitura quando solicitado, os testes usam caminhos próprios, e a publicação usa temporário exclusivo com renomeação atômica e conferência dos bytes. O teste de concorrência usa threads reais; os deltas finais ficam registrados nos pareceres. Duas suítes simultâneas expuseram depois um filtro de limpeza genérico no próprio teste; o prefixo passou a identificar o basename completo da chamada e a limpeza ficou em finally. Os ajustes pontuais de escrita integral e isolamento desse teste foram feitos por Codex, com atribuição explícita.",
-      "limites": "FPR e recall descrevem o conjunto sintético, usado no desenvolvimento. Na sensibilidade ampliada, os revisores encontraram 2 falsos positivos em 19.224 séries legítimas (267 seeds); os casos são runs diurnas repetidas que ativam o critério mecânico. Essa avaliação também é de desenvolvimento, não cega, e não deve ser confundida com o FPR canônico 0/72. Views por hora não distinguem humanos, bots, tráfego pago legítimo ou séries idênticas com certeza. O retorno é triagem explicável, sem acusação factual de fraude. Não houve integração com rede social nem deploy de produção.",
+      "limites": "FPR e recall descrevem o conjunto sintético, usado no desenvolvimento. Na sensibilidade ampliada, os revisores encontraram 2 falsos positivos em 19.224 séries legítimas (267 seeds); os casos são runs diurnas repetidas que ativam o critério mecânico. Essa avaliação também é de desenvolvimento, não cega, e não deve ser confundida com o FPR canônico 0/72. Views por hora não distinguem humanos, bots, tráfego pago legítimo ou séries idênticas com certeza. O retorno é triagem explicável, sem acusação factual de fraude. Não houve integração com rede social nem deploy de produção. Com npm run sensitivity, as seeds 2000–4999 têm 18 falsos positivos em 216.000 séries legítimas, todos pela regra mecânica. Post recente decaindo e menção com cauda ficam inconclusivos, não plausíveis.",
       "contract_url": "https://challenge.appconty.com/desafios/bots-visualizacao",
       "receipt_observed_at": "2026-10-09T21:09:49.561Z",
       "http_steps": 10,
-      "verification_url": "https://github.com/Otavio-Machado-Santos/conty-deteccao-views/blob/b71a5507f234e00d408f1f8cb821be5010e13880/docs/verificacao-final.md",
+      "verification_url": "https://github.com/Otavio-Machado-Santos/conty-deteccao-views/blob/268ae54d840b9a76ce79965ed6348c73667fc16a/docs/verificacao-final.md",
       "claude_review": {
         "id": 9,
         "reviewed_sha": "829b1bc9cf4df285c8f867cdd6166799fd862659",
@@ -1071,11 +1163,11 @@
           "previous_adjustment": null
         }
       },
-      "claude_review_url": "https://github.com/Otavio-Machado-Santos/conty-deteccao-views/blob/b71a5507f234e00d408f1f8cb821be5010e13880/docs/reviews/claude-opus55.json",
+      "claude_review_url": "https://github.com/Otavio-Machado-Santos/conty-deteccao-views/blob/268ae54d840b9a76ce79965ed6348c73667fc16a/docs/reviews/claude-opus55.json",
       "claude_documentation_followup": null
     }
   ],
-  "tests": 338,
+  "tests": 344,
   "final_independent_reviews": 27,
   "final_codex_reviews": 18,
   "final_claude_reviews": 9,
@@ -1089,8 +1181,100 @@
     "challenges_1_to_8": "Codex",
     "challenge_9": "MiMo CLI mimo-v2.6-pro; ajustes pontuais de escrita integral e isolamento da limpeza do teste, coordenação e revisões Codex",
     "additional_reviewer": "Claude Code claude-opus-5-5 com nove subagentes",
+    "independent_audit_2026_10_10": "Claude Code claude-opus-5-5 com nove subagentes",
+    "post_registration_updates": "Claude Code claude-opus-5-5, a pedido do autor, em 10/10/2026 (atividades 1, 2, 3, 8 e 9)",
     "human_code_review": false
   },
+  "independent_audit_2026_10_10": {
+    "data": "2026-10-10",
+    "executor": "Claude Code",
+    "modelo": "claude-opus-5-5",
+    "subagentes": 9,
+    "metodo": "Um subagente por atividade, clone público sem credenciais, Node 22.23.3, parecer próprio antes de ler pareceres anteriores, sondagens e mutações; o coordenador reproduziu as nove suítes e os P2.",
+    "resultado": "Nenhum P0/P1. P2 técnicos em 1 e 9; P2 de comunicação nas notas de 3 e 8; observação comum: a declaração de IA informa que não houve revisão humana do código.",
+    "ajustes_aplicados": [
+      {
+        "id": 9,
+        "ajuste": "regra do pico abrupto, motivo pelos sinais acionados, README e sensibilidade",
+        "commits": [
+          "0c73a11",
+          "268ae54"
+        ],
+        "publicado_em": "main"
+      },
+      {
+        "id": 8,
+        "ajuste": "aviso sobre a nota de 09/10 no README",
+        "commits": [
+          "eefe1a7"
+        ],
+        "publicado_em": "main"
+      },
+      {
+        "id": 3,
+        "ajuste": "ponte entre a nota de 09/10 e o README",
+        "commits": [
+          "e92a1db"
+        ],
+        "publicado_em": "main"
+      },
+      {
+        "id": 1,
+        "ajuste": "data sem offset no dia civil de São Paulo",
+        "commits": [
+          "d4e19db"
+        ],
+        "publicado_em": "PR #1 (fix/repasses)"
+      },
+      {
+        "id": 2,
+        "ajuste": "comentário-armadilha e material de outras entregas fora do PR",
+        "commits": [
+          "11a51ee"
+        ],
+        "publicado_em": "PR #1 (perf/descoberta)"
+      }
+    ],
+    "publicacao": "commits novos, avanço simples, sem force-push"
+  },
+  "post_registration_updates": [
+    {
+      "id": 1,
+      "commits": [
+        "d4e19dbabd90635dfbcc64f35d81b2be64534b21"
+      ],
+      "code_changed": true
+    },
+    {
+      "id": 2,
+      "commits": [
+        "11a51ee68bd0e42d26bac42132ba35dd88e993ff"
+      ],
+      "code_changed": false
+    },
+    {
+      "id": 3,
+      "commits": [
+        "e92a1dbf6cfc60e0cd526470af427976534dac0f"
+      ],
+      "code_changed": false
+    },
+    {
+      "id": 8,
+      "commits": [
+        "eefe1a702f7fb9df0284bcf74fd271e1a5c05568"
+      ],
+      "code_changed": false
+    },
+    {
+      "id": 9,
+      "commits": [
+        "0c73a119d14302d82bca753dc58d463cd04bc658",
+        "268ae54d840b9a76ce79965ed6348c73667fc16a"
+      ],
+      "code_changed": true
+    }
+  ],
   "claude": {
     "model": "claude-opus-5-5",
     "model_verified": true,

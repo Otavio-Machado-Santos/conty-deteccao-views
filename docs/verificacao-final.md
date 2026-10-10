@@ -43,7 +43,8 @@ O modelo foi conferido nos eventos reais da CLI. O coordenador conferiu os hashe
 
 - [Relatório HTML independente, com demanda, caminho de investigação, solução e exemplo em cada atividade](relatorio/relatorio-conty.html).
 - [Manifesto com links, hashes, contagens e limites](relatorio/relatorio-conty.json).
-- [Captura real do relatório](relatorio/evidence/screen.jpg) e [GIF da navegação e abertura do recibo](relatorio/evidence/flow.gif).
-- [Auditoria remota das entregas](relatorio/auditoria-publicacao.json) e [conferência dos pareceres Opus publicados](relatorio/auditoria-pareceres-claude.json).
+- [Auditoria independente de 10/10/2026: vereditos por atividade e correções publicadas](relatorio/auditoria-2026-10-10.json).
+- [Captura real do relatório](relatorio/evidence/screen.jpg) e [GIF da navegação e abertura do recibo](relatorio/evidence/flow.gif), ambos da versão de 09/10.
+- [Auditoria remota das entregas](relatorio/auditoria-publicacao.json) e [conferência dos pareceres Opus publicados](relatorio/auditoria-pareceres-claude.json), de 09/10.
 
-O relatório registra um snapshot dos commits publicados no momento da geração. Seus links estão fixados a esses commits e continuam válidos após esta publicação documental. Baixe o HTML e abra-o no navegador para navegar e expandir os recibos incorporados, inclusive offline. Nenhum código executável foi alterado nesta publicação.
+Atualizado em 10/10/2026 por Claude Code (`claude-opus-5-5`), a pedido do autor. O relatório passa a incluir a auditoria de 10/10, as correções publicadas depois do registro e as contagens atuais (344 testes). Seus links estão fixados aos commits publicados no momento da geração; nesta entrega, ao commit `268ae54`, anterior a esta publicação. Baixe o HTML e abra-o no navegador para navegar e expandir os recibos incorporados, inclusive offline. Esta publicação altera só documentação.
