@@ -1,0 +1,65 @@
+# Sensibilidade após o registro (10/10/2026) — Node v22.23.3
+
+$ npm run sensitivity
+=== sensitivity ===
+seeds do gerador: 0–99
+FP: 0/7200 legítimos
+suspeitos detectados: 3000/3000
+inconclusivos: 1810
+
+famílias orgânicas fora do gerador (500 séries cada):
+  post_recente: plausivel=12 suspeito=0 inconclusivo=488
+  zeros_antes_da_publicacao: plausivel=0 suspeito=0 inconclusivo=500
+  mencao_com_cauda: plausivel=0 suspeito=0 inconclusivo=500
+  rampa_2h_decaimento: plausivel=498 suspeito=0 inconclusivo=2
+  onda_subida_4h: plausivel=498 suspeito=0 inconclusivo=2
+
+Medição de sensibilidade de desenvolvimento: rótulos sintéticos, não estima produção.
+
+$ npm run sensitivity -- 2000 4999
+=== sensitivity ===
+seeds do gerador: 2000–4999
+FP: 18/216000 legítimos
+suspeitos detectados: 89996/90000
+inconclusivos: 53417
+  FP seed=2060 diurno-015 → mecanica
+  FP seed=2096 diurno-006 → mecanica
+  FP seed=2139 diurno-006 → mecanica
+  FN seed=2283 repeticao_mecanica-002 → inconclusivo/sinal_isolado
+  FP seed=2456 campanha_sustentada-001 → mecanica
+  FP seed=2641 diurno-005 → mecanica
+  FP seed=2881 diurno-011 → mecanica
+  FP seed=3040 campanha_sustentada-012 → mecanica
+  FP seed=3248 campanha_sustentada-010 → mecanica
+  FP seed=3389 diurno-007 → mecanica
+  FP seed=3394 diurno-014 → mecanica
+  FP seed=3707 diurno-002 → mecanica
+  FN seed=3765 repeticao_mecanica-008 → inconclusivo/sinal_isolado
+  FP seed=3895 diurno-012 → mecanica
+  FP seed=4283 diurno-008 → mecanica
+  FN seed=4422 repeticao_mecanica-013 → inconclusivo/sinal_isolado
+  FP seed=4471 diurno-004 → mecanica
+  FP seed=4495 diurno-008 → mecanica
+  FP seed=4515 diurno-002 → mecanica
+  FP seed=4529 diurno-007 → mecanica
+  FP seed=4694 diurno-014 → mecanica
+  FN seed=4911 repeticao_mecanica-003 → inconclusivo/sinal_isolado
+
+famílias orgânicas fora do gerador (500 séries cada):
+  post_recente: plausivel=12 suspeito=0 inconclusivo=488
+  zeros_antes_da_publicacao: plausivel=0 suspeito=0 inconclusivo=500
+  mencao_com_cauda: plausivel=0 suspeito=0 inconclusivo=500
+  rampa_2h_decaimento: plausivel=498 suspeito=0 inconclusivo=2
+  onda_subida_4h: plausivel=498 suspeito=0 inconclusivo=2
+
+Medição de sensibilidade de desenvolvimento: rótulos sintéticos, não estima produção.
+
+# Mesmo script contra o classificador anterior (commit cfed909), só as famílias orgânicas:
+famílias orgânicas fora do gerador (500 séries cada):
+  post_recente: plausivel=12 suspeito=388 inconclusivo=100
+  zeros_antes_da_publicacao: plausivel=0 suspeito=386 inconclusivo=114
+  mencao_com_cauda: plausivel=0 suspeito=354 inconclusivo=146
+  rampa_2h_decaimento: plausivel=498 suspeito=0 inconclusivo=2
+  onda_subida_4h: plausivel=498 suspeito=0 inconclusivo=2
+
+Medição de sensibilidade de desenvolvimento: rótulos sintéticos, não estima produção.

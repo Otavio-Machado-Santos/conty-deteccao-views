@@ -1,5 +1,6 @@
 v22.23.3
 OK scripts/evaluate.js
+OK scripts/sensitivity.js
 OK src/classify.js
 OK src/generate.js
 OK src/prng.js

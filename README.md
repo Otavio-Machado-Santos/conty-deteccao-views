@@ -4,6 +4,24 @@ Classificador explicável de séries de **views incrementais por hora**. Recebe 
 
 **Não é prova de fraude.** Séries horárias não permitem afirmar humanos ou bots com certeza. Tráfego pago legítimo, campanhas agendadas e picos orgânicos reais podem se parecer com compra. Séries idênticas são indistinguíveis por este método.
 
+## Atualização após o registro na Conty (10/10/2026)
+
+A nota registrada em 09/10 descreve a versão anterior. Mudanças desde então:
+
+- **Regra do pico abrupto:** agora exige subida **e** queda abruptas (≥ 4× hora a hora), junto com magnitude.
+  - Antes, bastava um pico estreito, e a curva de um post recente que decai sozinho virava `suspeito`.
+  - Agora esse caso vai para `inconclusivo`.
+- **Motivo:** é montado só com os sinais acionados. `narrowSpike` (pico estreito) passou a aparecer em `signals`, e a abstenção por sinal isolado diz qual sinal pesou.
+- **Métricas canônicas inalteradas:** FPR 0/72, recall 30/30, 17 inconclusivos, dataset igual byte a byte.
+- **Famílias orgânicas fora do gerador** (500 séries cada, `npm run sensitivity`):
+  - post recente: de 388 suspeitos para 0;
+  - zeros antes da publicação: de 386 para 0;
+  - menção com cauda: de 354 para 0.
+- **Testes:** são 56 (a nota cita 53). Os três novos falham no classificador anterior.
+- **Exemplos:** os do README foram regenerados a partir da API.
+
+Essas mudanças foram feitas por Claude Code (`claude-opus-5-5`) a pedido do autor, depois de uma auditoria independente feita com o mesmo modelo ([evidência](docs/evidence/sensitivity.txt)).
+
 ## Como rodar
 
 Requer Node 22 (sem dependências externas).
@@ -12,6 +30,7 @@ Requer Node 22 (sem dependências externas).
 npm start                 # API em http://127.0.0.1:3009
 npm test                  # testes (node:test)
 npm run generate:evaluate # regenera dataset e calcula FPR/matrix/recall
+npm run sensitivity       # sensibilidade fora do dataset canônico (não altera o FPR)
 ```
 
 ## Contrato da série
@@ -58,20 +77,21 @@ Request (`POST /classify`):
 }
 ```
 
-Response (resumo do JSON real devolvido por `http://127.0.0.1:3009/classify`):
+Response (resumo do JSON real devolvido por `POST /classify` em 10/10/2026; `rawMetrics`, `flags`, `thresholds` e `note` omitidos):
 
 ```json
 {
   "classification": "suspeito",
   "shape": "pico_abrupto",
-  "reason": "Pico abrupto com magnitude concentrada: largura do pico = 2h; subida = 0h; descida = 1h; maior degrau na rampa = 20×; pico 2000 vs mediana 100 → razão 20×; hora do pico = 33.4% do total; top-3 horas = 65.1%; melhor janela de 3h = 65.0%. Subida/queda curtas e concentração alta combinadas são compatíveis com compra de views — indício, não prova.",
+  "reason": "Pico abrupto: subida abrupta (maior fator de subida hora a hora = 20× no índice 12); queda abrupta (maior fator de queda hora a hora = 18× no índice 14); pico estreito (região elevada de 2h com razão pico/base 20×; estreita = até 2h com razão ≥ 4×); pico alto (pico 2000 vs mediana 100 → razão 20×); concentração alta (hora do pico = 38.5% do total; top-3 horas = 75.1%; melhor janela de 3h = 75.1%). Forma: largura do pico = 2h; subida = 0h; descida = 1h; maior degrau na rampa = 20×. Salto e volta em poucas horas, com magnitude, são compatíveis com compra de views — indício, não prova.",
   "signals": {
-    "peakToBase": { "value": 20, "threshold": 8, "triggered": true, "detail": "pico 2000 vs mediana 100 → razão 20×" },
-    "abruptJump": { "value": 20, "threshold": 4, "triggered": true, "detail": "maior fator de subida hora a hora = 20× no índice 12" },
-    "abruptDrop": { "value": 18, "threshold": 4, "triggered": true, "detail": "maior fator de queda hora a hora = 18× no índice 14" },
-    "concentration": { "value": 0.3336, "top3Share": 0.6509, "threshold": 0.35, "triggered": true },
-    "exactRepetition": { "value": 1, "triggered": false },
-    "rampShape": { "value": { "spikeWidth": 2, "maxRampStep": 20 }, "triggered": false }
+    "peakToBase": {"value": 20, "threshold": 8, "triggered": true, "detail": "pico 2000 vs mediana 100 → razão 20×"},
+    "abruptJump": {"value": 20, "threshold": 4, "triggered": true, "detail": "maior fator de subida hora a hora = 20× no índice 12"},
+    "abruptDrop": {"value": 18, "threshold": 4, "triggered": true, "detail": "maior fator de queda hora a hora = 18× no índice 14"},
+    "concentration": {"value": 0.3849, "top3Share": 0.7512, "window3Share": 0.7506, "threshold": 0.35, "triggered": true, "detail": "hora do pico = 38.5% do total; top-3 horas = 75.1%; melhor janela de 3h = 75.1%"},
+    "narrowSpike": {"value": 2, "threshold": 2, "minPeakToBase": 4, "triggered": true, "detail": "região elevada de 2h com razão pico/base 20×; estreita = até 2h com razão ≥ 4×"},
+    "exactRepetition": {"value": 1, "runValue": 102, "triggered": false},
+    "rampShape": {"value": {"spikeWidth": 2, "riseHours": 0, "fallHours": 1, "maxRampStep": 20}, "triggered": false}
   },
   "disclaimer": "Resultado analítico, não prova de fraude: séries horárias de views não permitem afirmar humanos ou bots com certeza. ..."
 }
@@ -84,6 +104,7 @@ Response (resumo do JSON real devolvido por `http://127.0.0.1:3009/classify`):
 | `peakToBase` | pico ÷ mediana da série | ≥ 8× |
 | `abruptJump` / `abruptDrop` | maior fator multiplicativo hora a hora | ≥ 4× |
 | `concentration` | fração do total na hora do pico / top-3 / melhor janela de 3h | ≥ 35% / 72% / 65% |
+| `narrowSpike` | largura da região elevada com razão pico/base | até 2 h com razão ≥ 4× |
 | `exactRepetition` | maior sequência de inteiros idênticos | ≥ 4 h, valor ≥ 40, **elevada** (acima da mediana ou ≥ 50% do pico) **e representativa** (≥ 25% do total ou na região do pico) |
 | `rampShape` | largura do pico (horas acima da metade do range), degrau máximo | largura ≥ 4 h e degrau < 3,2× = rampa suave |
 
@@ -92,17 +113,18 @@ Response (resumo do JSON real devolvido por `http://127.0.0.1:3009/classify`):
 1. **Abstinência:** menos de 6 pontos, menos de 80 views no total, ou pico < 15 → `inconclusivo`.
 2. **Conflito run×rampa:** run longa de baseline (valor típico/baixo, longe do pico) durante rampa suave → `plausivel` (persistência de fundo, não ritmo de entrega).
 3. **Mecânico:** run de ≥ 4 h com o mesmo valor (≥ 40), **elevado e representativo** (ver tabela) → `suspeito`.
-4. **Pico abrupto:** (subida/queda abrupta **ou** pico curto com razão ≥ 4) **e** (razão pico/base alta **ou** concentração alta), sem rampa suave → `suspeito`.
+4. **Pico abrupto:** subida abrupta **e** queda abrupta (≥ 4× hora a hora) **e** (razão pico/base alta **ou** concentração alta), sem rampa suave → `suspeito`. Pico estreito ou com uma borda só (post recente decaindo, menção com cauda) não basta → regra 6.
 5. **Rampa suave:** região elevada larga sem degrau abrupto, ainda que com pico alto → `plausivel` (viral orgânico).
 6. **Pico/sinal isolado:** sinais parciais sem combinação → `inconclusivo` (**prefere não acusar**).
 7. **Caso comum:** diurno, campanha sustentada, tráfego estável → `plausivel`.
 
-Pico alto **sozinho** nunca leva a `suspeito`. É preciso combinar sinais de famílias diferentes (abruptez **e** magnitude/concentração, ou repetição exata elevada e representativa).
+Pico alto **sozinho** nunca leva a `suspeito`. É preciso combinar sinais de famílias diferentes (abruptez nas duas bordas **e** magnitude/concentração, ou repetição exata elevada e representativa). O motivo cita só os sinais acionados em `signals`, e um teste confere isso em 6 seeds do gerador e nos casos de referência.
 
 ## Por que distingue os exemplos
 
 - **Viral orgânico** (subida e queda graduais, largura ≥ 4 h, degraus < 3,2×): cai na regra 5, mesmo com razão pico/base de 8–15×. Baseline constante durante a rampa (run longa de valor típico, participação pequena) cai na regra 2 — **não** vira ritmo mecânico. Testes: `test/classify.test.js` ("viral orgânico … não é acusado", "regressão: viral com baseline constante", "regressão: viral seed25").
 - **Pico comprado** (base ruidosa + 1–2 h de 15–60× + volta imediata): salto e queda ≥ 4×, pico curto, concentração alta → regra 4. Teste: mesma suíte distingue os dois no mesmo assert.
+- **Post recente e menção com cauda** (a série começa no pico, ou sobe de uma vez, e decai sem queda de 4×): só uma borda é abrupta → regra 6, `inconclusivo`. Testes: "post recente decaindo do pico não é acusado" e "menção com subida abrupta e cauda sem queda abrupta não é acusada".
 - **Ritmo mecânico** (5–9 h com o mesmo inteiro **elevado**, na região do pico/platô): regra 3. Teste dedicado.
 - **Evento rápido legítimo / volume baixo:** abstenção (ver abaixo).
 
@@ -140,15 +162,37 @@ Matriz de confusão (verdade sintética × predição) — 102 séries:
 
 ### Cheque de sensibilidade multi-seed
 
-O teste "regressão: múltiplas seeds sem falso positivo nos legítimos" roda o gerador em 8 seeds (incluindo a seed 25, que continha o falso positivo orgânico) e exige: zero legítimos classificados como `suspeito` e 100% de recall dos suspeitos. Uma varredura de desenvolvimento posterior cobriu 100 seeds (0–99): 0 FP em 7200 legítimos, 3000/3000 suspeitos detectados, 1810 abstenções (`docs/evidence/development-seeds.json`). Isso é **sensibilidade sintética de desenvolvimento, não um holdout cego**: as seeds foram vistas durante a revisão, a calibração dos limiares e o gerador compartilham as mesmas hipóteses, e um FPR de 0% nesse conjunto **não estima taxa em produção**.
+O teste "regressão: múltiplas seeds sem falso positivo nos legítimos" roda o gerador em 8 seeds (incluindo a seed 25, que continha o falso positivo orgânico) e exige: zero legítimos classificados como `suspeito` e 100% de recall dos suspeitos. `npm run sensitivity` reproduz a varredura de 100 seeds (0–99): 0 FP em 7200 legítimos, 3000/3000 suspeitos detectados, 1810 abstenções. Com `npm run sensitivity -- 2000 4999` são 18 FP em 216.000 legítimos, todos pela regra mecânica, e 89.996/90.000 suspeitos detectados ([saída](docs/evidence/sensitivity.txt)). Isso é **sensibilidade sintética de desenvolvimento, não um holdout cego**: as seeds foram vistas durante a revisão, a calibração dos limiares e o gerador compartilham as mesmas hipóteses, e um FPR de 0% nesse conjunto **não estima taxa em produção**.
 
 ## Caso em que o classificador prefere não acusar
 
 Perfil `evento_rapido` (legítimo): pico moderado (~2,5–5,3× a base) em 1–3 horas, com cauda de buzz e sem lances de 4×+ nem repetição exata. Exemplo de saída:
 
-> `inconclusivo` — "Pico com sinais parciais (largura do pico = 2h; …), mas sem combinação suficiente de abruptez e concentração. Pode ser evento legítimo, campanha paga ou pico comprado: preferimos não acusar."
+> `evento_rapido-000` do dataset canônico, `inconclusivo` / `sinal_isolado` — "Sinal isolado: pico estreito (região elevada de 1h com razão pico/base 5.033×; estreita = até 2h com razão ≥ 4×). Sem combinar abruptez com magnitude, um único tipo de indicador não sustenta classificação; preferimos não acusar."
 
-Mesmo parecendo "um pico", não vira `suspeito` sem combinação de sinais. Os 5 casos `inconclusivo` desse perfil e os 12 de `baixo_volume` são a abstinência deliberada. Existe também o teste explícito de abstenção em `test/classify.test.js`.
+Mesmo parecendo "um pico", não vira `suspeito` sem combinação de sinais. Os 5 casos `inconclusivo` desse perfil e os 12 de `baixo_volume` são a abstinência deliberada. Post recente decaindo e menção com cauda também caem aqui (`pico_ambiguo`), porque falta uma das bordas abruptas. Há testes explícitos de abstenção em `test/classify.test.js`.
+
+## O que não detecta e onde erra
+
+Medido com `npm run sensitivity` e com sondagens da auditoria de 10/10/2026. Rótulos sintéticos; não estima produção.
+
+**Falsos positivos conhecidos**
+
+- Campanha sustentada ou tráfego diurno com 4 h ou mais de valores idênticos na região elevada: a regra mecânica acusa.
+  - Nas seeds 0–99 não aparece; nas seeds 2000–4999 são 18 em 216.000 legítimos (exemplo: seed 2060, `diurno-015`).
+  - Entrega perfeitamente estável é indistinguível de bot só por volume.
+
+**Não acusa** (fica `inconclusivo`, sem confirmar que é orgânico)
+
+- Post recente decaindo do pico e menção com cauda. É abstenção deliberada: sem a segunda borda abrupta, a série também pode ser compra parcial.
+- Compra que começa na primeira hora da série, só com a queda visível. Exemplo: 3000 nas duas primeiras horas e 100 depois. Fica `pico_ambiguo`.
+- Queda abrupta isolada, como um platô de 1000 que cai para 50. Fica `sinal_isolado`.
+- Repetição mecânica com ruído de ±1, por exemplo 500/501 alternando por 6 h. Fica `sinal_isolado`.
+- 4 dos 90.000 suspeitos mecânicos das seeds 2000–4999. Ficam `sinal_isolado`.
+
+**Não distingue** (fica `plausivel`)
+
+- Compra entregue com rampa suave e ruído calculado: tem a forma de viral real.
 
 ## Decisões que eu mudaria
 
@@ -159,12 +203,13 @@ Mesmo parecendo "um pico", não vira `suspeito` sem combinação de sinais. Os 5
 
 ## Nota sobre IA
 
-Implementação, testes e documentação: MiMo CLI (mimo-v2.6-pro), com ajustes pontuais Codex na escrita integral antes do rename e no isolamento da limpeza do teste. Dois agentes Codex independentes do implementador revisaram o commit `829b1bc9cf4df285c8f867cdd6166799fd862659` e liberaram a entrega após testes e sondagens próprias. Os pareceres completos estão em `docs/reviews/`. O coordenador conferiu a instalação e os testes em checkout isolado e registrou o fluxo HTTP real. Não foi realizada revisão humana do código. A validação usa dados sintéticos e ambiente local; limites e interpretações do contrato estão documentados.
+Implementação, testes e documentação: MiMo CLI (mimo-v2.6-pro), com ajustes pontuais Codex na escrita integral antes do rename e no isolamento da limpeza do teste. Dois agentes Codex independentes do implementador revisaram o commit `829b1bc9cf4df285c8f867cdd6166799fd862659` e liberaram a entrega após testes e sondagens próprias. Os pareceres completos estão em `docs/reviews/`. O coordenador conferiu a instalação e os testes em checkout isolado e registrou o fluxo HTTP real. Uma revisão adicional com Claude Opus 5.5 aprovou o commit `829b1bc`. Em 10/10/2026, após o registro, Claude Code (`claude-opus-5-5`) alterou, a pedido do autor, a regra do pico abrupto, a montagem do motivo, os testes, `scripts/sensitivity.js` e este README, depois de uma auditoria independente feita com o mesmo modelo. Não foi realizada revisão humana do código. A validação usa dados sintéticos e ambiente local; limites e interpretações do contrato estão documentados.
 
 ## Evidências
 
-- `docs/evidence/test.txt` — saída real de `npm test` (53 testes).
-- `docs/evidence/syntax-check.txt` — checagem de sintaxe dos 12 arquivos JavaScript.
+- `docs/evidence/test.txt` — saída real de `npm test` (56 testes, depois da atualização de 10/10/2026).
+- `docs/evidence/sensitivity.txt` — saída de `npm run sensitivity` (seeds 0–99 e 2000–4999, famílias orgânicas) e as mesmas famílias contra o classificador anterior.
+- `docs/evidence/syntax-check.txt` — checagem de sintaxe dos 13 arquivos JavaScript.
 - `docs/evidence/evaluation.json` — saída estruturada de `npm run generate:evaluate`.
 - `docs/evidence/evaluate.txt` — saída legível de `npm run generate:evaluate`.
 - `docs/evidence/http-regressions.txt` — regressões HTTP reais: contrato, calendário, soma, body limit (Content-Length e chunked) e host malformado.

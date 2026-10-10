@@ -10,6 +10,7 @@
   "scripts": {
     "start": "node src/server.js",
     "test": "node --test test/*.test.js",
-    "generate:evaluate": "node scripts/evaluate.js"
+    "generate:evaluate": "node scripts/evaluate.js",
+    "sensitivity": "node scripts/sensitivity.js"
   }
 }
