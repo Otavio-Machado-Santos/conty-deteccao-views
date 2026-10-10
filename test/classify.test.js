@@ -1,6 +1,6 @@
 import test from 'node:test';
 import assert from 'node:assert/strict';
-import { classify, CLASSIFICATIONS, THRESHOLDS } from '../src/classify.js';
+import { classify, CLASSIFICATIONS, THRESHOLDS, SIGNAL_LABELS } from '../src/classify.js';
 import { buildDataset, expandDatasetSeries } from '../src/generate.js';
 
 const baseStart = Date.parse('2026-01-05T00:00:00.000Z');
@@ -185,4 +185,68 @@ test('regressão: múltiplas seeds sem falso positivo nos legítimos', () => {
       );
     }
   }
+});
+
+// --- Picos orgânicos fora do gerador e coerência do motivo ---------------
+// Auditoria de 10/10/2026: um post recente começa no pico e decai sem degrau
+// de 4×; uma menção sobe de uma vez e decai devagar. Nenhum dos dois tem as
+// duas bordas abruptas de um pico comprado.
+
+function postRecente() {
+  return Array.from({ length: 48 }, (_, t) => Math.round(5000 * (t + 1) ** -0.8));
+}
+
+function mencaoComCauda() {
+  const views = [];
+  for (let i = 0; i < 48; i += 1) {
+    const tail = i < 12 ? 0 : Math.round(2400 * 0.55 ** (i - 12));
+    views.push(200 + tail + jitter(i));
+  }
+  return views;
+}
+
+test('post recente decaindo do pico não é acusado (cai em abstenção)', () => {
+  const outcome = classify(series(postRecente()));
+  assert.equal(outcome.classification, CLASSIFICATIONS.INCONCLUSIVE);
+  assert.equal(outcome.flags.abruptDrop, false);
+  assert.ok(outcome.signals.narrowSpike.triggered, 'o sinal que pesou precisa aparecer em signals');
+  assert.notEqual(outcome.classification, classify(series(picoComprado())).classification);
+});
+
+test('menção com subida abrupta e cauda sem queda abrupta não é acusada', () => {
+  const outcome = classify(series(mencaoComCauda()));
+  assert.ok(outcome.flags.abruptJump, 'a menção sobe de uma vez');
+  assert.equal(outcome.flags.abruptDrop, false);
+  assert.notEqual(outcome.classification, CLASSIFICATIONS.SUSPICIOUS);
+});
+
+test('motivo cita só sinais acionados, e o sinal que decide aparece em signals', () => {
+  const inputs = [viralOrganico(), picoComprado(), ritmoMecanico(), postRecente(), mencaoComCauda()].map(series);
+  for (const seed of [20261009, 1, 2, 3, 7, 42]) {
+    const dataset = buildDataset({ seed, clock: () => new Date(0) });
+    for (const entry of dataset.series) inputs.push(expandDatasetSeries(entry));
+  }
+  const bySignals = new Set(['pico_abrupto', 'pico_ambiguo', 'sinal_isolado', 'mecanica', 'rampa_suave']);
+  for (const input of inputs) {
+    const outcome = classify(input);
+    const reason = outcome.reason.toLowerCase();
+    for (const [key, label] of Object.entries(SIGNAL_LABELS)) {
+      if (reason.includes(label)) {
+        assert.equal(
+          outcome.signals[key]?.triggered,
+          true,
+          `motivo cita "${label}" com o sinal desligado (${outcome.shape}): ${outcome.reason}`,
+        );
+      }
+    }
+    if (bySignals.has(outcome.shape)) {
+      assert.ok(
+        Object.values(outcome.signals).some((signal) => signal.triggered),
+        `${outcome.shape} sem nenhum sinal acionado em signals`,
+      );
+    }
+  }
+  const bought = classify(series(picoComprado()));
+  assert.match(bought.reason, /subida abrupta/);
+  assert.match(bought.reason, /queda abrupta/);
 });

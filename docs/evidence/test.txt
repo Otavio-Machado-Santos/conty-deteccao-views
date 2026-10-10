@@ -6,327 +6,345 @@ TAP version 13
 # Subtest: POST /classify devolve classificação, motivo em português e sinais
 ok 1 - POST /classify devolve classificação, motivo em português e sinais
   ---
-  duration_ms: 177.003959
+  duration_ms: 22.216
   type: 'test'
   ...
 # Subtest: POST /classify distingue viral orgânico de pico comprado
 ok 2 - POST /classify distingue viral orgânico de pico comprado
   ---
-  duration_ms: 33.899709
+  duration_ms: 6.064208
   type: 'test'
   ...
 # Subtest: POST /classify rejeita série não contígua com 422 e contrato
 ok 3 - POST /classify rejeita série não contígua com 422 e contrato
   ---
-  duration_ms: 5.462875
+  duration_ms: 1.641375
   type: 'test'
   ...
 # Subtest: POST /classify com JSON inválido devolve 400
 ok 4 - POST /classify com JSON inválido devolve 400
   ---
-  duration_ms: 6.59575
+  duration_ms: 2.253916
   type: 'test'
   ...
 # Subtest: GET /health responde ok com relógio injetado
 ok 5 - GET /health responde ok com relógio injetado
   ---
-  duration_ms: 5.859083
+  duration_ms: 4.268666
   type: 'test'
   ...
 # Subtest: rota desconhecida devolve 404 com lista de rotas
 ok 6 - rota desconhecida devolve 404 com lista de rotas
   ---
-  duration_ms: 4.582708
+  duration_ms: 2.946083
   type: 'test'
   ...
 # Subtest: POST /classify valida SEMPRE o contrato {series:[...]}; corpos inválidos = 422
 ok 7 - POST /classify valida SEMPRE o contrato {series:[...]}; corpos inválidos = 422
   ---
-  duration_ms: 246.8765
+  duration_ms: 25.530041
   type: 'test'
   ...
 # Subtest: POST /classify com JSON sintaticamente inválido devolve 400
 ok 8 - POST /classify com JSON sintaticamente inválido devolve 400
   ---
-  duration_ms: 7.648167
+  duration_ms: 7.426625
   type: 'test'
   ...
 # Subtest: null literal JSON = 422 (contrato), não 400
 ok 9 - null literal JSON = 422 (contrato), não 400
   ---
-  duration_ms: 4.135042
+  duration_ms: 4.422625
   type: 'test'
   ...
 # Subtest: série válida curta ou de baixo volume ainda retorna 200/inconclusivo
 ok 10 - série válida curta ou de baixo volume ainda retorna 200/inconclusivo
   ---
-  duration_ms: 59.870375
+  duration_ms: 8.517917
   type: 'test'
   ...
 # Subtest: timestamps de calendário impossível retornam 422
 ok 11 - timestamps de calendário impossível retornam 422
   ---
-  duration_ms: 9.257292
+  duration_ms: 6.004667
   type: 'test'
   ...
 # Subtest: soma de views acima do total seguro retorna 422
 ok 12 - soma de views acima do total seguro retorna 422
   ---
-  duration_ms: 3.68375
+  duration_ms: 5.3605
   type: 'test'
   ...
 # Subtest: body acima do limite com Content-Length responde 413 JSON sem ECONNRESET
 ok 13 - body acima do limite com Content-Length responde 413 JSON sem ECONNRESET
   ---
-  duration_ms: 13.165
+  duration_ms: 10.869583
   type: 'test'
   ...
 # Subtest: body acima do limite chunked responde 413 JSON sem ECONNRESET
 ok 14 - body acima do limite chunked responde 413 JSON sem ECONNRESET
   ---
-  duration_ms: 29.466417
+  duration_ms: 11.63725
   type: 'test'
   ...
 # Subtest: GET /health continua funcionando após body oversized
 ok 15 - GET /health continua funcionando após body oversized
   ---
-  duration_ms: 24.105958
+  duration_ms: 11.628291
   type: 'test'
   ...
 # Subtest: Host malformado não derruba o processo; /health responde e segue saudável
 ok 16 - Host malformado não derruba o processo; /health responde e segue saudável
   ---
-  duration_ms: 79.148917
+  duration_ms: 53.231708
   type: 'test'
   ...
 # Subtest: viral orgânico (rampa suave) não é acusado mesmo com pico alto
 ok 17 - viral orgânico (rampa suave) não é acusado mesmo com pico alto
   ---
-  duration_ms: 6.324625
+  duration_ms: 2.266667
   type: 'test'
   ...
 # Subtest: pico comprado abrupto é suspeito e se distingue do viral
 ok 18 - pico comprado abrupto é suspeito e se distingue do viral
   ---
-  duration_ms: 1.144875
+  duration_ms: 0.389625
   type: 'test'
   ...
 # Subtest: ritmo mecânico com volume suficiente é suspeito
 ok 19 - ritmo mecânico com volume suficiente é suspeito
   ---
-  duration_ms: 0.377833
+  duration_ms: 0.321584
   type: 'test'
   ...
 # Subtest: abstém com poucos pontos horários
 ok 20 - abstém com poucos pontos horários
   ---
-  duration_ms: 0.178417
+  duration_ms: 0.079291
   type: 'test'
   ...
 # Subtest: abstém com volume total baixo
 ok 21 - abstém com volume total baixo
   ---
-  duration_ms: 0.377875
+  duration_ms: 0.110708
   type: 'test'
   ...
 # Subtest: abstém em pico isolado ambíguo (prefere não acusar)
 ok 22 - abstém em pico isolado ambíguo (prefere não acusar)
   ---
-  duration_ms: 0.633042
+  duration_ms: 0.15125
   type: 'test'
   ...
 # Subtest: classificação suspeita traz disclaimer e motivo legível
 ok 23 - classificação suspeita traz disclaimer e motivo legível
   ---
-  duration_ms: 0.92925
+  duration_ms: 0.176334
   type: 'test'
   ...
 # Subtest: valores inválidos não viram suspeito
 ok 24 - valores inválidos não viram suspeito
   ---
-  duration_ms: 0.18025
+  duration_ms: 0.264791
   type: 'test'
   ...
 # Subtest: regressão: viral com baseline constante (rampa suave) não é acusado
 ok 25 - regressão: viral com baseline constante (rampa suave) não é acusado
   ---
-  duration_ms: 0.833292
+  duration_ms: 0.366958
   type: 'test'
   ...
 # Subtest: regressão: viral seed25 (run curta de baseline) não é acusado
 ok 26 - regressão: viral seed25 (run curta de baseline) não é acusado
   ---
-  duration_ms: 15.313417
+  duration_ms: 13.7805
   type: 'test'
   ...
 # Subtest: regressão: múltiplas seeds sem falso positivo nos legítimos
 ok 27 - regressão: múltiplas seeds sem falso positivo nos legítimos
   ---
-  duration_ms: 579.507166
+  duration_ms: 121.792125
+  type: 'test'
+  ...
+# Subtest: post recente decaindo do pico não é acusado (cai em abstenção)
+ok 28 - post recente decaindo do pico não é acusado (cai em abstenção)
+  ---
+  duration_ms: 0.24275
+  type: 'test'
+  ...
+# Subtest: menção com subida abrupta e cauda sem queda abrupta não é acusada
+ok 29 - menção com subida abrupta e cauda sem queda abrupta não é acusada
+  ---
+  duration_ms: 0.116875
+  type: 'test'
+  ...
+# Subtest: motivo cita só sinais acionados, e o sinal que decide aparece em signals
+ok 30 - motivo cita só sinais acionados, e o sinal que decide aparece em signals
+  ---
+  duration_ms: 69.846583
   type: 'test'
   ...
 # Subtest: dataset é reprodutível byte a byte com a seed fixa
-ok 28 - dataset é reprodutível byte a byte com a seed fixa
+ok 31 - dataset é reprodutível byte a byte com a seed fixa
   ---
-  duration_ms: 39.261417
+  duration_ms: 26.674666
   type: 'test'
   ...
 # Subtest: dataset em disco corresponde ao payload canônico regenerado
-ok 29 - dataset em disco corresponde ao payload canônico regenerado
+ok 32 - dataset em disco corresponde ao payload canônico regenerado
   ---
-  duration_ms: 8.099375
+  duration_ms: 4.400792
   type: 'test'
   ...
 # Subtest: todo item do dataset satisfaz o contrato de série contígua
-ok 30 - todo item do dataset satisfaz o contrato de série contígua
+ok 33 - todo item do dataset satisfaz o contrato de série contígua
   ---
-  duration_ms: 5.3335
+  duration_ms: 3.714917
   type: 'test'
   ...
 # Subtest: perfis legítimos e suspeitos estão representados
-ok 31 - perfis legítimos e suspeitos estão representados
+ok 34 - perfis legítimos e suspeitos estão representados
   ---
-  duration_ms: 0.349042
+  duration_ms: 0.280041
   type: 'test'
   ...
 # Subtest: viral orgânico do dataset não é acusado; compra abrupta é
-ok 32 - viral orgânico do dataset não é acusado; compra abrupta é
+ok 35 - viral orgânico do dataset não é acusado; compra abrupta é
   ---
-  duration_ms: 1.702292
+  duration_ms: 0.909208
   type: 'test'
   ...
 # Subtest: gerar com clock injetado não altera o corpo do dataset (caminho isolado)
-ok 33 - gerar com clock injetado não altera o corpo do dataset (caminho isolado)
+ok 36 - gerar com clock injetado não altera o corpo do dataset (caminho isolado)
   ---
-  duration_ms: 101.620417
+  duration_ms: 12.317084
   type: 'test'
   ...
 # Subtest: publicação atômica com worker_threads: leitura concorrente nunca observa JSON parcial
-ok 34 - publicação atômica com worker_threads: leitura concorrente nunca observa JSON parcial
+ok 37 - publicação atômica com worker_threads: leitura concorrente nunca observa JSON parcial
   ---
-  duration_ms: 344.2425
+  duration_ms: 116.302625
   type: 'test'
   ...
 # Subtest: writeJsonAtomic remove somente o temporário próprio em falha e não toca preexistentes
-ok 35 - writeJsonAtomic remove somente o temporário próprio em falha e não toca preexistentes
+ok 38 - writeJsonAtomic remove somente o temporário próprio em falha e não toca preexistentes
   ---
-  duration_ms: 1.838584
+  duration_ms: 0.480625
   type: 'test'
   ...
 # Subtest: FPR do README bate com a medição do generate:evaluate
-ok 36 - FPR do README bate com a medição do generate:evaluate
+ok 39 - FPR do README bate com a medição do generate:evaluate
   ---
-  duration_ms: 138.86775
+  duration_ms: 34.38125
   type: 'test'
   ...
 # Subtest: avaliação grava evaluation.json coerente com o cálculo
-ok 37 - avaliação grava evaluation.json coerente com o cálculo
+ok 40 - avaliação grava evaluation.json coerente com o cálculo
   ---
-  duration_ms: 370.227458
+  duration_ms: 35.152166
   type: 'test'
   ...
 # Subtest: reprodução byte a byte é confirmada na avaliação
-ok 38 - reprodução byte a byte é confirmada na avaliação
+ok 41 - reprodução byte a byte é confirmada na avaliação
   ---
-  duration_ms: 65.933458
+  duration_ms: 31.556875
   type: 'test'
   ...
 # Subtest: runEvaluation(writeEvidence:false) é somente leitura: não altera dataset nem grava evidence/README
-ok 39 - runEvaluation(writeEvidence:false) é somente leitura: não altera dataset nem grava evidence/README
+ok 42 - runEvaluation(writeEvidence:false) é somente leitura: não altera dataset nem grava evidence/README
   ---
-  duration_ms: 53.874333
+  duration_ms: 47.311291
   type: 'test'
   ...
 # Subtest: aceita série contígua UTC com views inteiros seguros não negativos
-ok 40 - aceita série contígua UTC com views inteiros seguros não negativos
+ok 43 - aceita série contígua UTC com views inteiros seguros não negativos
   ---
-  duration_ms: 2.427792
+  duration_ms: 2.952167
   type: 'test'
   ...
 # Subtest: rejeita timestamp fora de UTC
-ok 41 - rejeita timestamp fora de UTC
+ok 44 - rejeita timestamp fora de UTC
   ---
-  duration_ms: 1.84225
+  duration_ms: 0.542875
   type: 'test'
   ...
 # Subtest: rejeita passo não horário (série não contígua)
-ok 42 - rejeita passo não horário (série não contígua)
+ok 45 - rejeita passo não horário (série não contígua)
   ---
-  duration_ms: 0.300625
+  duration_ms: 0.159167
   type: 'test'
   ...
 # Subtest: rejeita views não inteiro, negativo ou não seguro
-ok 43 - rejeita views não inteiro, negativo ou não seguro
+ok 46 - rejeita views não inteiro, negativo ou não seguro
   ---
-  duration_ms: 0.242166
+  duration_ms: 0.288375
   type: 'test'
   ...
 # Subtest: rejeita série vazia e formato inválido
-ok 44 - rejeita série vazia e formato inválido
+ok 47 - rejeita série vazia e formato inválido
   ---
-  duration_ms: 0.086291
+  duration_ms: 0.122458
   type: 'test'
   ...
 # Subtest: aceita equivalência Z e +00:00 em timestamps válidos
-ok 45 - aceita equivalência Z e +00:00 em timestamps válidos
+ok 48 - aceita equivalência Z e +00:00 em timestamps válidos
   ---
-  duration_ms: 0.419667
+  duration_ms: 0.336958
   type: 'test'
   ...
 # Subtest: rejeita calendário inexistente (fev 30, fev 29 em ano não bissexto)
-ok 46 - rejeita calendário inexistente (fev 30, fev 29 em ano não bissexto)
+ok 49 - rejeita calendário inexistente (fev 30, fev 29 em ano não bissexto)
   ---
-  duration_ms: 0.403083
+  duration_ms: 0.368083
   type: 'test'
   ...
 # Subtest: rejeita formatos não ISO e strings RFC terminadas em Z
-ok 47 - rejeita formatos não ISO e strings RFC terminadas em Z
+ok 50 - rejeita formatos não ISO e strings RFC terminadas em Z
   ---
-  duration_ms: 0.161125
+  duration_ms: 0.189083
   type: 'test'
   ...
 # Subtest: rejeita timestamps não alinhados à hora cheia
-ok 48 - rejeita timestamps não alinhados à hora cheia
+ok 51 - rejeita timestamps não alinhados à hora cheia
   ---
-  duration_ms: 0.264333
+  duration_ms: 0.496708
   type: 'test'
   ...
 # Subtest: rejeita soma de views acima do total seguro
-ok 49 - rejeita soma de views acima do total seguro
+ok 52 - rejeita soma de views acima do total seguro
   ---
-  duration_ms: 0.307667
+  duration_ms: 0.620667
   type: 'test'
   ...
 # Subtest: aceita anos de quatro dígitos abaixo de 100 sem remapeamento Date.UTC
-ok 50 - aceita anos de quatro dígitos abaixo de 100 sem remapeamento Date.UTC
+ok 53 - aceita anos de quatro dígitos abaixo de 100 sem remapeamento Date.UTC
   ---
-  duration_ms: 0.091
+  duration_ms: 0.212417
   type: 'test'
   ...
 # Subtest: bissexto de século: 1900 inválido, 2000 e 0000 válidos
-ok 51 - bissexto de século: 1900 inválido, 2000 e 0000 válidos
+ok 54 - bissexto de século: 1900 inválido, 2000 e 0000 válidos
   ---
-  duration_ms: 0.058042
+  duration_ms: 0.126708
   type: 'test'
   ...
 # Subtest: rejeita espaço anterior/posterior ao timestamp (sem trim silencioso)
-ok 52 - rejeita espaço anterior/posterior ao timestamp (sem trim silencioso)
+ok 55 - rejeita espaço anterior/posterior ao timestamp (sem trim silencioso)
   ---
-  duration_ms: 0.058875
+  duration_ms: 0.123458
   type: 'test'
   ...
 # Subtest: expandCompact gera timestamps horários contíguos a partir de start
-ok 53 - expandCompact gera timestamps horários contíguos a partir de start
+ok 56 - expandCompact gera timestamps horários contíguos a partir de start
   ---
-  duration_ms: 0.362167
+  duration_ms: 0.877291
   type: 'test'
   ...
-1..53
-# tests 53
+1..56
+# tests 56
 # suites 0
-# pass 53
+# pass 56
 # fail 0
 # cancelled 0
 # skipped 0
 # todo 0
-# duration_ms 871.785625
+# duration_ms 269.447917

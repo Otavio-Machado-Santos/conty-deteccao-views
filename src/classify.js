@@ -52,6 +52,25 @@ export const THRESHOLDS = Object.freeze({
 const DISCLAIMER =
   'Resultado analítico, não prova de fraude: séries horárias de views não permitem afirmar humanos ou bots com certeza. Tráfego pago legítimo, campanhas agendadas e picos orgânicos reais podem se parecer com compra. Séries idênticas são indistinguíveis por este método.';
 
+// Nome de cada sinal no motivo. O motivo só cita um sinal quando ele está
+// acionado em `signals`, para o texto e o JSON não se contradizerem.
+export const SIGNAL_LABELS = Object.freeze({
+  peakToBase: 'pico alto',
+  abruptJump: 'subida abrupta',
+  abruptDrop: 'queda abrupta',
+  concentration: 'concentração alta',
+  narrowSpike: 'pico estreito',
+  exactRepetition: 'repetição exata',
+  rampShape: 'rampa suave',
+});
+
+function describeTriggered(signalSummary, keys) {
+  return keys
+    .filter((key) => signalSummary[key]?.triggered)
+    .map((key) => `${SIGNAL_LABELS[key]} (${signalSummary[key].detail})`)
+    .join('; ');
+}
+
 /**
  * @param {Array<{timestamp: string|Date, views: number}>|number[]} input
  *        pontos da API ou apenas o array de views
@@ -208,7 +227,7 @@ export function classify(input, options = {}) {
       value: signals.peakToBase,
       threshold: t.HIGH_PEAK_TO_BASE,
       triggered: flags.highPeakToBase,
-      detail: `pico ${signals.peak} vs mediana ${signals.median} → razão ${signals.peakToBase}×`,
+      detail: `pico ${signals.peak} vs mediana ${signals.median}${signals.median < 1 ? ' (denominador mínimo 1)' : ''} → razão ${signals.peakToBase}×`,
     },
     abruptJump: {
       value: signals.maxRiseRatio,
@@ -229,6 +248,13 @@ export function classify(input, options = {}) {
       threshold: t.HIGH_PEAK_SHARE,
       triggered: flags.highConcentration,
       detail: `hora do pico = ${(signals.peakShare * 100).toFixed(1)}% do total; top-3 horas = ${(signals.top3Share * 100).toFixed(1)}%; melhor janela de 3h = ${(signals.window3Share * 100).toFixed(1)}%`,
+    },
+    narrowSpike: {
+      value: signals.spikeWidth,
+      threshold: t.NARROW_SPIKE_WIDTH,
+      minPeakToBase: t.NARROW_SPIKE_MIN_PEAK_TO_BASE,
+      triggered: flags.narrowSpike,
+      detail: `região elevada de ${signals.spikeWidth}h com razão pico/base ${signals.peakToBase}×; estreita = até ${t.NARROW_SPIKE_WIDTH}h com razão ≥ ${t.NARROW_SPIKE_MIN_PEAK_TO_BASE}×`,
     },
     exactRepetition: {
       value: signals.maxIdenticalRun,
@@ -261,7 +287,7 @@ export function classify(input, options = {}) {
   if (baselineRunDuringSmoothRamp && flags.smoothRamp) {
     return result(
       CLASSIFICATIONS.PLAUSIBLE,
-      `Subida e descida graduais (${signalSummary.rampShape.detail}) com razão pico/base de ${signals.peakToBase}×. A sequência de ${signals.maxIdenticalRun}h com ${signals.runValue} views está no nível de base (${(signals.runShare * 100).toFixed(1)}% do total), compatível com fundo estável durante propagação orgânica — não é ritmo de entrega mecânica. Pico alto sozinho não caracteriza compra.`,
+      `Subida e descida graduais (${signalSummary.rampShape.detail}) com razão pico/base de ${signals.peakToBase}×. A sequência de ${signals.maxIdenticalRun}h com ${signals.runValue} views está no nível de base (${(signals.runShare * 100).toFixed(1)}% do total), compatível com fundo estável durante propagação orgânica — não é ritmo de entrega mecânica. Magnitude sozinha não caracteriza compra.`,
       'rampa_suave',
       signals,
       signalSummary,
@@ -290,13 +316,22 @@ export function classify(input, options = {}) {
   const magnitudeFamily = flags.highPeakToBase || flags.highConcentration;
 
   // --- Pico abrupto comprado: exige famílias de sinais combinadas ---------
+  // As duas bordas precisam ser abruptas. Pico só estreito, ou com uma borda
+  // só, é a forma de um post recente que decai sozinho (ou de uma menção com
+  // cauda): vai para abstenção em vez de suspeito.
   if (!flags.smoothRamp && spikeFamily && magnitudeFamily) {
-    const needsBothEdges =
-      flags.narrowSpike || (flags.abruptJump && flags.abruptDrop);
+    const needsBothEdges = flags.abruptJump && flags.abruptDrop;
     if (needsBothEdges) {
+      const evidence = describeTriggered(signalSummary, [
+        'abruptJump',
+        'abruptDrop',
+        'narrowSpike',
+        'peakToBase',
+        'concentration',
+      ]);
       return result(
         CLASSIFICATIONS.SUSPICIOUS,
-        `Pico abrupto com magnitude concentrada: ${signalSummary.rampShape.detail}; ${signalSummary.peakToBase.detail}; ${signalSummary.concentration.detail}. Subida/queda curtas e concentração alta combinadas são compatíveis com compra de views — indício, não prova.`,
+        `Pico abrupto: ${evidence}. Forma: ${signalSummary.rampShape.detail}. Salto e volta em poucas horas, com magnitude, são compatíveis com compra de views — indício, não prova.`,
         'pico_abrupto',
         signals,
         signalSummary,
@@ -309,7 +344,7 @@ export function classify(input, options = {}) {
   if (flags.smoothRamp && (flags.highPeakToBase || signals.peakToBase >= t.ORGANIC_MIN_PEAK_TO_BASE)) {
     return result(
       CLASSIFICATIONS.PLAUSIBLE,
-      `Subida e descida graduais (${signalSummary.rampShape.detail}) com razão pico/base de ${signals.peakToBase}×. Forma de rampa suave é compatível com viral orgânico ou evento legítimo com propagação; pico alto sozinho não caracteriza compra.`,
+      `Subida e descida graduais (${signalSummary.rampShape.detail}) com razão pico/base de ${signals.peakToBase}×. Forma de rampa suave é compatível com viral orgânico ou evento legítimo com propagação; magnitude sozinha não caracteriza compra.`,
       'rampa_suave',
       signals,
       signalSummary,
@@ -321,7 +356,7 @@ export function classify(input, options = {}) {
   if (spikeFamily && magnitudeFamily) {
     return result(
       CLASSIFICATIONS.INCONCLUSIVE,
-      `Pico com sinais parciais (${signalSummary.rampShape.detail}; ${signalSummary.peakToBase.detail}), mas sem combinação suficiente de abruptez e concentração. Pode ser evento legítimo, campanha paga ou pico comprado: preferimos não acusar.`,
+      `Pico com sinais parciais: ${describeTriggered(signalSummary, ['abruptJump', 'abruptDrop', 'narrowSpike', 'peakToBase', 'concentration'])}. Para suspeito, a regra exige saltos de pelo menos ${t.ABRUPT_JUMP_RATIO}× na subida e na descida, junto com magnitude; essa combinação não aparece (forma: ${signalSummary.rampShape.detail}). Pode ser post recente decaindo, evento legítimo, campanha paga ou pico comprado: preferimos não acusar.`,
       'pico_ambiguo',
       signals,
       signalSummary,
@@ -332,7 +367,7 @@ export function classify(input, options = {}) {
   if (spikeFamily || magnitudeFamily) {
     return result(
       CLASSIFICATIONS.INCONCLUSIVE,
-      `Sinal isolado sem combinação (${signalSummary.rampShape.detail}; ${signalSummary.concentration.detail}). Um único indicador não sustenta classificação; preferimos não acusar.`,
+      `Sinal isolado: ${describeTriggered(signalSummary, ['abruptJump', 'abruptDrop', 'narrowSpike', 'peakToBase', 'concentration'])}. Sem combinar abruptez com magnitude, um único tipo de indicador não sustenta classificação; preferimos não acusar.`,
       'sinal_isolado',
       signals,
       signalSummary,
